@@ -4,6 +4,9 @@
 
 int main (int argc, char **argv){
 
+int x = 1;
+int y = 2;
+
 ros::init(argc,argv,"getPosition"); //node init
 
 ros::Publisher pub;
@@ -21,9 +24,9 @@ int count = 0;
 while(ros::ok()){
 
 geometry_msgs::Twist vel; 
-
-    vel.linear.x = 5;
-    vel.linear.y = 8;
+    
+    vel.linear.x = x + count;
+    vel.linear.y = y + count;
 
 
     ROS_INFO("The X linear position is  : %d", vel.linear.x);

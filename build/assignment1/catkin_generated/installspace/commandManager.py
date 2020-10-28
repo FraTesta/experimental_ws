@@ -28,6 +28,9 @@ def callbackSta(data):
 
 def callbackPos(data):
     rospy.loginfo(rospy.get_caller_id() + "I heard x: %d  y: %d", data.linear.x, data.linear.y)
+#    x = data.linear.x
+#    y = data.linear.y
+
 
 # subscriber manager    
 def commandManager():
