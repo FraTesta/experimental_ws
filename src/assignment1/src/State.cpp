@@ -12,20 +12,18 @@ ros::NodeHandle nh;
 
 pub = nh.advertise<std_msgs::String>("StateString", 100); //pub and topic init 
 
-ros::Rate loop_rate(8); // that I m going to make it randomly in the simulation phase 
-int count = 0; 
-  /**
-   * A count of how many messages we have sent. This is used to create
-   * a unique string for each message.
-   */
+ros::Rate loop_rate(1); // that I m going to make it randomly in the simulation phase 
+
+int time = 15;
 
 while(ros::ok()){
 
 std_msgs::String msg; 
 
 std::stringstream ss;
-    ss << "play " << count;
-    msg.data = ss.str();
+    //ss << "play" << count;
+    //msg.data = ss.str();
+    msg.data = "play";
 
     ROS_INFO("state detection: %s", msg.data.c_str());
 
@@ -33,8 +31,10 @@ std::stringstream ss;
 
     ros::spinOnce();
 
-    loop_rate.sleep();
-    ++count;
+    sleep(time);
+    time = rand() % 8 + 13;
+
+
 }
 
 return 0;
