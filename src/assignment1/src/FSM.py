@@ -31,17 +31,19 @@ Y = 0
 homeX = 10
 homeY = 20
 
+# 
 def decision():
     return random.choice(['goToNormal','goToSleep'])
 
+# callback for the get position subsriber
 def callbackPos(data):
     rospy.loginfo(rospy.get_caller_id() + "I heard x: %d  y: %d", data.linear.x, data.linear.y)
     global X
     X = data.linear.x
-    global y 
+    global Y 
     Y = data.linear.y    
 
-# service function
+# client function
 def navigation(x,y):
 
     rospy.wait_for_service('myNavigation')
@@ -52,7 +54,7 @@ def navigation(x,y):
     except rospy.ServiceException as e:
         print("Service call failed: %s"%e)
 
-# define state Unlocked
+# define state NORMAL
 class Normal(smach.State):
     def __init__(self):
         # initialisation function, it should not wait
@@ -65,39 +67,39 @@ class Normal(smach.State):
         
     def execute(self,userdata):
         # function called when exiting from the node, it can be blacking
-        time.sleep(5)
+        time.sleep(3)
         global X
         global Y
         
+        self.counter = random.randint(1,2)
         while not rospy.is_shutdown():  
             rospy.loginfo(rospy.get_caller_id() + 'Executing state NORMAL ')
-#       userdata.unlocked_counter_out = userdata.unlocked_counter_in + 1
             
-            if self.counter == 3:
+            if self.counter == 4:
                 return 'goToSleep'
-            self.rate.sleep()
+            time.sleep(3)
             navigation(X,Y)
 #            rospy.loginfo(rospy.get_caller_id() + 'i m going to x: %d y: %d',x, y)
 
             self.counter += 1
             
+
+        return 'goToSleep' 
         
-        return 'goToSleep' # ricordarsi che c'è il counter che non viene riazzerato
     
 
-# define state Locked
+# define state SLEEP 
 class Sleep(smach.State):
     def __init__(self):
         smach.State.__init__(self, 
                              outcomes=['goToNormal','goToSleep'],
                              input_keys=['locked_counter_in'],
                              output_keys=['locked_counter_out'])
-        self.sensor_input = 0
         self.rate = rospy.Rate(200)  # Loop at 200 Hz
 
     def execute(self, userdata):
-        # simulate that we have to get 5 data samples to compute the outcome
-        time.sleep(5)
+
+        time.sleep(random.randint(3,5))
         
         global homeX
         global homeY

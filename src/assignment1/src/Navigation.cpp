@@ -1,13 +1,20 @@
 #include "ros/ros.h"
 #include "assignment1/GoTo.h"
 
+// max dimension for the map
+#define Xmax 20
+#define Ymax 20 
+
 bool goTo(assignment1::GoTo::Request  &req,
          assignment1::GoTo::Response &res)
 {
-  ROS_INFO("Go to quest: x=%ld, y=%ld", (long int)req.x, (long int)req.y);
-  res.o = 1;
+  ROS_INFO("Go to position: x=%ld, y=%ld", (long int)req.x, (long int)req.y);
+  if((req.x <= Xmax) && (req.y <= Ymax)){
+    res.o = 0; // the location is within the map boundaries
+  }else{
+        res.o = 1; // it's not
+       }
   
-  //ROS_INFO("sending back response x: [%ld]", (char *)res.resp);
   return true;
 }
 

@@ -13,6 +13,10 @@ geometry_msgs/Twist.h
 /home/francesco/experimental_ws/src/assignment1/src/geometry_msgs/Twist.h
 sstream
 -
+stdio.h
+-
+stdlib.h
+-
 
 /opt/ros/kinetic/include/geometry_msgs/Twist.h
 string
