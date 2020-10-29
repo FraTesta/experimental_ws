@@ -1,0 +1,64 @@
+\hypertarget{Navigation_8cpp}{}\section{/home/francesco/experimental\+\_\+ws/src/assignment1/src/\+Navigation.cpp File Reference}
+\label{Navigation_8cpp}\index{/home/francesco/experimental\+\_\+ws/src/assignment1/src/\+Navigation.\+cpp@{/home/francesco/experimental\+\_\+ws/src/assignment1/src/\+Navigation.\+cpp}}
+{\ttfamily \#include \char`\"{}ros/ros.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}assignment1/\+Go\+To.\+h\char`\"{}}\\*
+Include dependency graph for Navigation.\+cpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=281pt]{Navigation_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{Navigation_8cpp_a8fd091040600c54e1b52be58d011ec30}{Xmax}~20
+\begin{DoxyCompactList}\small\item\em Max dimension of the map along the X axis. \end{DoxyCompactList}\item 
+\#define \hyperlink{Navigation_8cpp_aaf9edb39f963596bfe86fc184965dcb4}{Ymax}~20
+\begin{DoxyCompactList}\small\item\em Max dimension of the map along the Y axis. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{Navigation_8cpp_aec33b62b66fc2284fabc2001b96599af}{go\+To} (assignment1\+::\+Go\+To\+::\+Request \&req, assignment1\+::\+Go\+To\+::\+Response \&res)
+\item 
+int \hyperlink{Navigation_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{Navigation.\+cpp@{Navigation.\+cpp}!Xmax@{Xmax}}
+\index{Xmax@{Xmax}!Navigation.\+cpp@{Navigation.\+cpp}}
+\subsubsection[{\texorpdfstring{Xmax}{Xmax}}]{\setlength{\rightskip}{0pt plus 5cm}\#define Xmax~20}\hypertarget{Navigation_8cpp_a8fd091040600c54e1b52be58d011ec30}{}\label{Navigation_8cpp_a8fd091040600c54e1b52be58d011ec30}
+
+
+Max dimension of the map along the X axis. 
+
+\index{Navigation.\+cpp@{Navigation.\+cpp}!Ymax@{Ymax}}
+\index{Ymax@{Ymax}!Navigation.\+cpp@{Navigation.\+cpp}}
+\subsubsection[{\texorpdfstring{Ymax}{Ymax}}]{\setlength{\rightskip}{0pt plus 5cm}\#define Ymax~20}\hypertarget{Navigation_8cpp_aaf9edb39f963596bfe86fc184965dcb4}{}\label{Navigation_8cpp_aaf9edb39f963596bfe86fc184965dcb4}
+
+
+Max dimension of the map along the Y axis. 
+
+
+
+\subsection{Function Documentation}
+\index{Navigation.\+cpp@{Navigation.\+cpp}!go\+To@{go\+To}}
+\index{go\+To@{go\+To}!Navigation.\+cpp@{Navigation.\+cpp}}
+\subsubsection[{\texorpdfstring{go\+To(assignment1\+::\+Go\+To\+::\+Request \&req, assignment1\+::\+Go\+To\+::\+Response \&res)}{goTo(assignment1::GoTo::Request &req, assignment1::GoTo::Response &res)}}]{\setlength{\rightskip}{0pt plus 5cm}bool go\+To (
+\begin{DoxyParamCaption}
+\item[{assignment1\+::\+Go\+To\+::\+Request \&}]{req, }
+\item[{assignment1\+::\+Go\+To\+::\+Response \&}]{res}
+\end{DoxyParamCaption}
+)}\hypertarget{Navigation_8cpp_aec33b62b66fc2284fabc2001b96599af}{}\label{Navigation_8cpp_aec33b62b66fc2284fabc2001b96599af}
+\index{Navigation.\+cpp@{Navigation.\+cpp}!main@{main}}
+\index{main@{main}!Navigation.\+cpp@{Navigation.\+cpp}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$$\ast$argv)}{main(int argc, char **argv)}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}\hypertarget{Navigation_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{}\label{Navigation_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}
+\hypertarget{State_8cpp_Description}{}\subsection{Description}\label{State_8cpp_Description}
+It simulate the navigation from the current position to the position requested by the client, taking into account the dimension of a map a priori chosen \hypertarget{Navigation.cpp_INPUT}{}\subsubsection{/ O\+U\+T\+P\+UT}\label{Navigation.cpp_INPUT}
+This service takes a X and Y positon request from the \char`\"{}command manager\char`\"{} node which is the only client.
