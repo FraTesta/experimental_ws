@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['sensor_5finput',['sensor_input',['../classFSM_1_1Play.html#a8aea6272cf59d81e990b67d6b62c84ac',1,'FSM.Play.sensor_input()'],['../classFSMplay_1_1Sleep.html#a911ff4d10f330e63ac1d0c34ec2003c3',1,'FSMplay.Sleep.sensor_input()'],['../classFSMplay_1_1Play.html#a01e386e2402ae9ae8a3dcf475d8ce180',1,'FSMplay.Play.sensor_input()'],['../classstate__machine_1_1Locked.html#af607507989a4d5039974490e8abada1a',1,'state_machine.Locked.sensor_input()']]],
-  ['state',['state',['../namespaceFSM.html#a219d5c5ac08bd4c51a0f20bd27482dee',1,'FSM.state()'],['../namespaceFSMplay.html#a24209da576b0fb97aa90612ce34275dc',1,'FSMplay.state()']]]
+  ['rate',['rate',['../classcommandManager_1_1Normal.html#a32e84cf5ac08ffeb9cb1a21d4b484a32',1,'commandManager.Normal.rate()'],['../classcommandManager_1_1Sleep.html#ad1bca2bd2c57109d92089b82fafe23c1',1,'commandManager.Sleep.rate()'],['../classcommandManager_1_1Play.html#a34aba8df5dfec3560f194934b7e377ad',1,'commandManager.Play.rate()'],['../classFSM_1_1Normal.html#a99ce5b8dddfae4e6a49f4c1d292b5d83',1,'FSM.Normal.rate()'],['../classFSM_1_1Sleep.html#ae09e7c57423ebb912d192c709faa3c01',1,'FSM.Sleep.rate()'],['../classFSM_1_1Play.html#a21dea0882a6b4f29db67e50234b0f168',1,'FSM.Play.rate()']]]
 ];

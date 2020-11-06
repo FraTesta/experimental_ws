@@ -24,17 +24,27 @@ struct GoToResponse_
   typedef GoToResponse_<ContainerAllocator> Type;
 
   GoToResponse_()
-    : o(0)  {
+    : currentX(0)
+    , currentY(0)
+    , ok(false)  {
     }
   GoToResponse_(const ContainerAllocator& _alloc)
-    : o(0)  {
+    : currentX(0)
+    , currentY(0)
+    , ok(false)  {
   (void)_alloc;
     }
 
 
 
-   typedef int64_t _o_type;
-  _o_type o;
+   typedef int64_t _currentX_type;
+  _currentX_type currentX;
+
+   typedef int64_t _currentY_type;
+  _currentY_type currentY;
+
+   typedef uint8_t _ok_type;
+  _ok_type ok;
 
 
 
@@ -114,12 +124,12 @@ struct MD5Sum< ::assignment1::GoToResponse_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "0744378b98a80c5b1fe9704c7ae11cdf";
+    return "4819210509b00ca87c5a9fcfbbed08d8";
   }
 
   static const char* value(const ::assignment1::GoToResponse_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x0744378b98a80c5bULL;
-  static const uint64_t static_value2 = 0x1fe9704c7ae11cdfULL;
+  static const uint64_t static_value1 = 0x4819210509b00ca8ULL;
+  static const uint64_t static_value2 = 0x7c5a9fcfbbed08d8ULL;
 };
 
 template<class ContainerAllocator>
@@ -138,7 +148,9 @@ struct Definition< ::assignment1::GoToResponse_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "int64 o\n\
+    return "int64 currentX\n\
+int64 currentY\n\
+bool ok\n\
 \n\
 ";
   }
@@ -158,7 +170,9 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
-      stream.next(m.o);
+      stream.next(m.currentX);
+      stream.next(m.currentY);
+      stream.next(m.ok);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -177,8 +191,12 @@ struct Printer< ::assignment1::GoToResponse_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::assignment1::GoToResponse_<ContainerAllocator>& v)
   {
-    s << indent << "o: ";
-    Printer<int64_t>::stream(s, indent + "  ", v.o);
+    s << indent << "currentX: ";
+    Printer<int64_t>::stream(s, indent + "  ", v.currentX);
+    s << indent << "currentY: ";
+    Printer<int64_t>::stream(s, indent + "  ", v.currentY);
+    s << indent << "ok: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.ok);
   }
 };
 

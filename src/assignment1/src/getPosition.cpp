@@ -5,7 +5,7 @@
  */
 
 #include "ros/ros.h"
-#include "geometry_msgs/Twist.h"
+#include "geometry_msgs/Pose2D.h"
 #include <sstream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -25,22 +25,22 @@ ros::init(argc,argv,"getPosition");
 ros::Publisher pub;
 ros::NodeHandle nh;
 
-pub = nh.advertise<geometry_msgs::Twist>("Position", 1000); //pub and topic init 
+pub = nh.advertise<geometry_msgs::Pose2D>("Position", 1000); //pub and topic init 
 
 ros::Rate loop_rate(1); // that I m going to make it randomly in the simulation phase 
 
 
 while(ros::ok()){
 
-geometry_msgs::Twist vel; 
+geometry_msgs::Pose2D pose; 
     
-    vel.linear.x = x ;
-    vel.linear.y = y ;
+    pose.x = x ;
+    pose.y = y ;
 
 
     ROS_INFO("The position is x : %d and y : %d ", x,y);
 
-    pub.publish(vel);
+    pub.publish(pose);
 
     ros::spinOnce();
 

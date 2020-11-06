@@ -4,36 +4,40 @@
 \begin{DoxyCompactItemize}
 \item 
 class \hyperlink{classFSM_1_1Normal}{Normal}
-\item 
+\begin{DoxyCompactList}\small\item\em defines the N\+O\+R\+M\+AL state \end{DoxyCompactList}\item 
 class \hyperlink{classFSM_1_1Play}{Play}
-\item 
+\begin{DoxyCompactList}\small\item\em defines the P\+L\+AY state \end{DoxyCompactList}\item 
 class \hyperlink{classFSM_1_1Sleep}{Sleep}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em defines the S\+L\+E\+EP state \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 def \hyperlink{namespaceFSM_af260b27c59635079f8b07d91369570b5}{decision} ()
 \item 
 def \hyperlink{namespaceFSM_a4f42463821520598ea44b0ae6acfc327}{callback\+Pos} (data)
-\item 
+\begin{DoxyCompactList}\small\item\em callback for the get position subsriber \end{DoxyCompactList}\item 
 def \hyperlink{namespaceFSM_a3f1960947f6a0dbcf41a5a97e18876b0}{callback\+Sta} (data)
-\item 
+\begin{DoxyCompactList}\small\item\em callback for the speck\+Perception subsriber \end{DoxyCompactList}\item 
 def \hyperlink{namespaceFSM_abb847a793996f13624334054ad5eb37c}{navigation} (x, y)
-\item 
+\begin{DoxyCompactList}\small\item\em client function for navigation service \end{DoxyCompactList}\item 
 def \hyperlink{namespaceFSM_acc99b577ee61be1b7cc0e2baae140224}{main} ()
 \end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
 int \hyperlink{namespaceFSM_ad4b9b754f58d2d256867e34136aa3563}{X} = 0
-\item 
+\begin{DoxyCompactList}\small\item\em robot X position variable \end{DoxyCompactList}\item 
 int \hyperlink{namespaceFSM_a90bf96bcb08f06c46475422464d23e6e}{Y} = 0
-\item 
+\begin{DoxyCompactList}\small\item\em robot Y position variable \end{DoxyCompactList}\item 
 int \hyperlink{namespaceFSM_a303869c19d8cb03e8739fc96ee328259}{homeX} = 10
-\item 
+\begin{DoxyCompactList}\small\item\em X position of the home. \end{DoxyCompactList}\item 
 int \hyperlink{namespaceFSM_ae958f81bf7ca765a61e10c9bfa94ccdb}{homeY} = 20
-\item 
+\begin{DoxyCompactList}\small\item\em Y position of the home. \end{DoxyCompactList}\item 
 string \hyperlink{namespaceFSM_a219d5c5ac08bd4c51a0f20bd27482dee}{state} = \char`\"{}No\+Info\char`\"{}
+\begin{DoxyCompactList}\small\item\em State variable. \end{DoxyCompactList}\item 
+int \hyperlink{namespaceFSM_a6814b20fdc1749831628a098c34429bd}{personX} = 2
+\item 
+int \hyperlink{namespaceFSM_a6e4bf639ff48a2a7b79bc2fdc62d3195}{personY} = 3
 \end{DoxyCompactItemize}
 
 
@@ -45,6 +49,10 @@ string \hyperlink{namespaceFSM_a219d5c5ac08bd4c51a0f20bd27482dee}{state} = \char
 \item[{}]{data}
 \end{DoxyParamCaption}
 )}\hypertarget{namespaceFSM_a4f42463821520598ea44b0ae6acfc327}{}\label{namespaceFSM_a4f42463821520598ea44b0ae6acfc327}
+
+
+callback for the get position subsriber 
+
 \index{F\+SM@{F\+SM}!callback\+Sta@{callback\+Sta}}
 \index{callback\+Sta@{callback\+Sta}!F\+SM@{F\+SM}}
 \subsubsection[{\texorpdfstring{callback\+Sta(data)}{callbackSta(data)}}]{\setlength{\rightskip}{0pt plus 5cm}def F\+S\+M.\+callback\+Sta (
@@ -52,6 +60,10 @@ string \hyperlink{namespaceFSM_a219d5c5ac08bd4c51a0f20bd27482dee}{state} = \char
 \item[{}]{data}
 \end{DoxyParamCaption}
 )}\hypertarget{namespaceFSM_a3f1960947f6a0dbcf41a5a97e18876b0}{}\label{namespaceFSM_a3f1960947f6a0dbcf41a5a97e18876b0}
+
+
+callback for the speck\+Perception subsriber 
+
 \index{F\+SM@{F\+SM}!decision@{decision}}
 \index{decision@{decision}!F\+SM@{F\+SM}}
 \subsubsection[{\texorpdfstring{decision()}{decision()}}]{\setlength{\rightskip}{0pt plus 5cm}def F\+S\+M.\+decision (
@@ -76,19 +88,74 @@ string \hyperlink{namespaceFSM_a219d5c5ac08bd4c51a0f20bd27482dee}{state} = \char
 )}\hypertarget{namespaceFSM_abb847a793996f13624334054ad5eb37c}{}\label{namespaceFSM_abb847a793996f13624334054ad5eb37c}
 
 
+client function for navigation service 
+
+
+
 \subsection{Variable Documentation}
 \index{F\+SM@{F\+SM}!homeX@{homeX}}
 \index{homeX@{homeX}!F\+SM@{F\+SM}}
 \subsubsection[{\texorpdfstring{homeX}{homeX}}]{\setlength{\rightskip}{0pt plus 5cm}int F\+S\+M.\+homeX = 10}\hypertarget{namespaceFSM_a303869c19d8cb03e8739fc96ee328259}{}\label{namespaceFSM_a303869c19d8cb03e8739fc96ee328259}
+
+
+X position of the home. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em homeX} & here you can set the a priori X position of the house \\
+\hline
+\end{DoxyParams}
 \index{F\+SM@{F\+SM}!homeY@{homeY}}
 \index{homeY@{homeY}!F\+SM@{F\+SM}}
 \subsubsection[{\texorpdfstring{homeY}{homeY}}]{\setlength{\rightskip}{0pt plus 5cm}int F\+S\+M.\+homeY = 20}\hypertarget{namespaceFSM_ae958f81bf7ca765a61e10c9bfa94ccdb}{}\label{namespaceFSM_ae958f81bf7ca765a61e10c9bfa94ccdb}
+
+
+Y position of the home. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em homeY} & here you can set the a priori Y position of the house \\
+\hline
+\end{DoxyParams}
+\index{F\+SM@{F\+SM}!personX@{personX}}
+\index{personX@{personX}!F\+SM@{F\+SM}}
+\subsubsection[{\texorpdfstring{personX}{personX}}]{\setlength{\rightskip}{0pt plus 5cm}int F\+S\+M.\+personX = 2}\hypertarget{namespaceFSM_a6814b20fdc1749831628a098c34429bd}{}\label{namespaceFSM_a6814b20fdc1749831628a098c34429bd}
+\index{F\+SM@{F\+SM}!personY@{personY}}
+\index{personY@{personY}!F\+SM@{F\+SM}}
+\subsubsection[{\texorpdfstring{personY}{personY}}]{\setlength{\rightskip}{0pt plus 5cm}int F\+S\+M.\+personY = 3}\hypertarget{namespaceFSM_a6e4bf639ff48a2a7b79bc2fdc62d3195}{}\label{namespaceFSM_a6e4bf639ff48a2a7b79bc2fdc62d3195}
 \index{F\+SM@{F\+SM}!state@{state}}
 \index{state@{state}!F\+SM@{F\+SM}}
 \subsubsection[{\texorpdfstring{state}{state}}]{\setlength{\rightskip}{0pt plus 5cm}string F\+S\+M.\+state = \char`\"{}No\+Info\char`\"{}}\hypertarget{namespaceFSM_a219d5c5ac08bd4c51a0f20bd27482dee}{}\label{namespaceFSM_a219d5c5ac08bd4c51a0f20bd27482dee}
+
+
+State variable. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & This is the state coming from State node (that\textquotesingle{}s why is a string) and it can be ether play or No\+Info \\
+\hline
+\end{DoxyParams}
 \index{F\+SM@{F\+SM}!X@{X}}
 \index{X@{X}!F\+SM@{F\+SM}}
 \subsubsection[{\texorpdfstring{X}{X}}]{\setlength{\rightskip}{0pt plus 5cm}int F\+S\+M.\+X = 0}\hypertarget{namespaceFSM_ad4b9b754f58d2d256867e34136aa3563}{}\label{namespaceFSM_ad4b9b754f58d2d256867e34136aa3563}
+
+
+robot X position variable 
+
+
+\begin{DoxyParams}{Parameters}
+{\em X} & is the initialize X position of the robot \\
+\hline
+\end{DoxyParams}
 \index{F\+SM@{F\+SM}!Y@{Y}}
 \index{Y@{Y}!F\+SM@{F\+SM}}
 \subsubsection[{\texorpdfstring{Y}{Y}}]{\setlength{\rightskip}{0pt plus 5cm}int F\+S\+M.\+Y = 0}\hypertarget{namespaceFSM_a90bf96bcb08f06c46475422464d23e6e}{}\label{namespaceFSM_a90bf96bcb08f06c46475422464d23e6e}
+
+
+robot Y position variable 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Y} & is the initialize Y position of the robot \\
+\hline
+\end{DoxyParams}

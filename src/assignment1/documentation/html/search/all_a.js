@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['navigation',['navigation',['../namespacecommandManager.html#a39a4b5ee79aceca08d85ee68043b46ad',1,'commandManager.navigation()'],['../namespaceFSM.html#abb847a793996f13624334054ad5eb37c',1,'FSM.navigation()']]],
-  ['navigation_2ecpp',['Navigation.cpp',['../Navigation_8cpp.html',1,'']]],
-  ['normal',['Normal',['../classFSM_1_1Normal.html',1,'FSM']]],
-  ['normal',['Normal',['../classFSMplay_1_1Normal.html',1,'FSMplay']]]
+  ['personx',['personX',['../namespaceFSM.html#a6814b20fdc1749831628a098c34429bd',1,'FSM']]],
+  ['persony',['personY',['../namespaceFSM.html#a6e4bf639ff48a2a7b79bc2fdc62d3195',1,'FSM']]],
+  ['play',['Play',['../classFSM_1_1Play.html',1,'FSM']]],
+  ['play',['Play',['../classcommandManager_1_1Play.html',1,'commandManager']]]
 ];

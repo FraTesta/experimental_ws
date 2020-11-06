@@ -125,14 +125,16 @@ import struct
 
 
 class GoToResponse(genpy.Message):
-  _md5sum = "0744378b98a80c5b1fe9704c7ae11cdf"
+  _md5sum = "4819210509b00ca87c5a9fcfbbed08d8"
   _type = "assignment1/GoToResponse"
   _has_header = False  # flag to mark the presence of a Header object
-  _full_text = """int64 o
+  _full_text = """int64 currentX
+int64 currentY
+bool ok
 
 """
-  __slots__ = ['o']
-  _slot_types = ['int64']
+  __slots__ = ['currentX','currentY','ok']
+  _slot_types = ['int64','int64','bool']
 
   def __init__(self, *args, **kwds):
     """
@@ -142,7 +144,7 @@ class GoToResponse(genpy.Message):
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       o
+       currentX,currentY,ok
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -151,10 +153,16 @@ class GoToResponse(genpy.Message):
     if args or kwds:
       super(GoToResponse, self).__init__(*args, **kwds)
       # message fields cannot be None, assign default values for those that are
-      if self.o is None:
-        self.o = 0
+      if self.currentX is None:
+        self.currentX = 0
+      if self.currentY is None:
+        self.currentY = 0
+      if self.ok is None:
+        self.ok = False
     else:
-      self.o = 0
+      self.currentX = 0
+      self.currentY = 0
+      self.ok = False
 
   def _get_types(self):
     """
@@ -168,8 +176,8 @@ class GoToResponse(genpy.Message):
     :param buff: buffer, ``StringIO``
     """
     try:
-      _x = self.o
-      buff.write(_get_struct_q().pack(_x))
+      _x = self
+      buff.write(_get_struct_2qB().pack(_x.currentX, _x.currentY, _x.ok))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -181,9 +189,11 @@ class GoToResponse(genpy.Message):
     codecs.lookup_error("rosmsg").msg_type = self._type
     try:
       end = 0
+      _x = self
       start = end
-      end += 8
-      (self.o,) = _get_struct_q().unpack(str[start:end])
+      end += 17
+      (_x.currentX, _x.currentY, _x.ok,) = _get_struct_2qB().unpack(str[start:end])
+      self.ok = bool(self.ok)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -196,8 +206,8 @@ class GoToResponse(genpy.Message):
     :param numpy: numpy python module
     """
     try:
-      _x = self.o
-      buff.write(_get_struct_q().pack(_x))
+      _x = self
+      buff.write(_get_struct_2qB().pack(_x.currentX, _x.currentY, _x.ok))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -210,9 +220,11 @@ class GoToResponse(genpy.Message):
     codecs.lookup_error("rosmsg").msg_type = self._type
     try:
       end = 0
+      _x = self
       start = end
-      end += 8
-      (self.o,) = _get_struct_q().unpack(str[start:end])
+      end += 17
+      (_x.currentX, _x.currentY, _x.ok,) = _get_struct_2qB().unpack(str[start:end])
+      self.ok = bool(self.ok)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -221,14 +233,14 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_q = None
-def _get_struct_q():
-    global _struct_q
-    if _struct_q is None:
-        _struct_q = struct.Struct("<q")
-    return _struct_q
+_struct_2qB = None
+def _get_struct_2qB():
+    global _struct_2qB
+    if _struct_2qB is None:
+        _struct_2qB = struct.Struct("<2qB")
+    return _struct_2qB
 class GoTo(object):
   _type          = 'assignment1/GoTo'
-  _md5sum = '6835bdfd1be90305ffbc4f2fb8805255'
+  _md5sum = '5ec21d6e53db8f56a8468d99e5c23c5b'
   _request_class  = GoToRequest
   _response_class = GoToResponse

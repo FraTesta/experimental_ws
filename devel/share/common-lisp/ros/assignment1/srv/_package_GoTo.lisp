@@ -3,6 +3,10 @@
           X
           Y-VAL
           Y
-          O-VAL
-          O
+          CURRENTX-VAL
+          CURRENTX
+          CURRENTY-VAL
+          CURRENTY
+          OK-VAL
+          OK
 ))

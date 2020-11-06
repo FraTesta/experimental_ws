@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['fsm',['FSM',['../namespaceFSM.html',1,'']]],
-  ['fsmplay',['FSMplay',['../namespaceFSMplay.html',1,'']]]
+  ['fsm',['FSM',['../namespaceFSM.html',1,'']]]
 ];

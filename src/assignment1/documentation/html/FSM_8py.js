@@ -10,6 +10,8 @@ var FSM_8py =
     [ "navigation", "FSM_8py.html#abb847a793996f13624334054ad5eb37c", null ],
     [ "homeX", "FSM_8py.html#a303869c19d8cb03e8739fc96ee328259", null ],
     [ "homeY", "FSM_8py.html#ae958f81bf7ca765a61e10c9bfa94ccdb", null ],
+    [ "personX", "FSM_8py.html#a6814b20fdc1749831628a098c34429bd", null ],
+    [ "personY", "FSM_8py.html#a6e4bf639ff48a2a7b79bc2fdc62d3195", null ],
     [ "state", "FSM_8py.html#a219d5c5ac08bd4c51a0f20bd27482dee", null ],
     [ "X", "FSM_8py.html#ad4b9b754f58d2d256867e34136aa3563", null ],
     [ "Y", "FSM_8py.html#a90bf96bcb08f06c46475422464d23e6e", null ]

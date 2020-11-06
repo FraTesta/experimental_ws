@@ -111,22 +111,40 @@ class GoToResponse {
   constructor(initObj={}) {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
-      this.o = null;
+      this.currentX = null;
+      this.currentY = null;
+      this.ok = null;
     }
     else {
-      if (initObj.hasOwnProperty('o')) {
-        this.o = initObj.o
+      if (initObj.hasOwnProperty('currentX')) {
+        this.currentX = initObj.currentX
       }
       else {
-        this.o = 0;
+        this.currentX = 0;
+      }
+      if (initObj.hasOwnProperty('currentY')) {
+        this.currentY = initObj.currentY
+      }
+      else {
+        this.currentY = 0;
+      }
+      if (initObj.hasOwnProperty('ok')) {
+        this.ok = initObj.ok
+      }
+      else {
+        this.ok = false;
       }
     }
   }
 
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type GoToResponse
-    // Serialize message field [o]
-    bufferOffset = _serializer.int64(obj.o, buffer, bufferOffset);
+    // Serialize message field [currentX]
+    bufferOffset = _serializer.int64(obj.currentX, buffer, bufferOffset);
+    // Serialize message field [currentY]
+    bufferOffset = _serializer.int64(obj.currentY, buffer, bufferOffset);
+    // Serialize message field [ok]
+    bufferOffset = _serializer.bool(obj.ok, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -134,13 +152,17 @@ class GoToResponse {
     //deserializes a message object of type GoToResponse
     let len;
     let data = new GoToResponse(null);
-    // Deserialize message field [o]
-    data.o = _deserializer.int64(buffer, bufferOffset);
+    // Deserialize message field [currentX]
+    data.currentX = _deserializer.int64(buffer, bufferOffset);
+    // Deserialize message field [currentY]
+    data.currentY = _deserializer.int64(buffer, bufferOffset);
+    // Deserialize message field [ok]
+    data.ok = _deserializer.bool(buffer, bufferOffset);
     return data;
   }
 
   static getMessageSize(object) {
-    return 8;
+    return 17;
   }
 
   static datatype() {
@@ -150,13 +172,15 @@ class GoToResponse {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '0744378b98a80c5b1fe9704c7ae11cdf';
+    return '4819210509b00ca87c5a9fcfbbed08d8';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
-    int64 o
+    int64 currentX
+    int64 currentY
+    bool ok
     
     
     `;
@@ -168,11 +192,25 @@ class GoToResponse {
       msg = {};
     }
     const resolved = new GoToResponse(null);
-    if (msg.o !== undefined) {
-      resolved.o = msg.o;
+    if (msg.currentX !== undefined) {
+      resolved.currentX = msg.currentX;
     }
     else {
-      resolved.o = 0
+      resolved.currentX = 0
+    }
+
+    if (msg.currentY !== undefined) {
+      resolved.currentY = msg.currentY;
+    }
+    else {
+      resolved.currentY = 0
+    }
+
+    if (msg.ok !== undefined) {
+      resolved.ok = msg.ok;
+    }
+    else {
+      resolved.ok = false
     }
 
     return resolved;
@@ -182,6 +220,6 @@ class GoToResponse {
 module.exports = {
   Request: GoToRequest,
   Response: GoToResponse,
-  md5sum() { return '6835bdfd1be90305ffbc4f2fb8805255'; },
+  md5sum() { return '5ec21d6e53db8f56a8468d99e5c23c5b'; },
   datatype() { return 'assignment1/GoTo'; }
 };

@@ -1,5 +1,14 @@
 #!/usr/bin/env python
 
+## @package CommandManager
+#  This node include the subsription to State and GetPosition publishers,
+#  And implement a finite state machine 
+#  which manages the information coming from the two nodes and changes the state of the system in according to it.
+ 
+## Documentation for a function.
+#
+#  More details.
+
 from __future__ import print_function
 
 import roslib
@@ -10,60 +19,72 @@ import time
 import random
 import sys
 from std_msgs.msg import String
-from geometry_msgs.msg import Twist
+from geometry_msgs.msg import Pose2D
 
 from assignment1.srv import *
 
-# INSTALLATION
-# - create ROS package in your workspace:
-#          $ catkin_create_pkg smach_tutorial std_msgs rospy
-# - move this file to the 'smach_tutorial/scr' folder and give running permissions to it with
-#          $ chmod +x state_machine.py
-# - run the 'roscore' and then you can run the state machine with
-#          $ rosrun smach_tutorial state_machine.py
-# - install the visualiser using
-#          $ sudo apt-get install ros-kinetic-smach-viewer
-# - run the visualiser with
-#          $ sudo apt-get install ros-kinetic-smach-viewer
-
+## robot X position variable
+# @param X is the initialize X position of the robot
 X = 0  
+## robot Y position variable
+# @param Y is the initialize Y position of the robot 
 Y = 0
+## X position of the home 
+# @param homeX here you can set the a priori X position of the house
 homeX = 10
+## Y position of the home 
+# @param homeY here you can set the a priori Y position of the house
 homeY = 20
+## State variable
+# @param state This is the state coming from State node (that's why is a string) and it can be ether play or NoInfo 
 state = "NoInfo"
-# 
+
+personX = 2
+personY = 3
+
 def decision():
     return random.choice(['goToNormal','goToSleep'])
 
-# callback for the get position subsriber
+## callback for the get position subsriber
 def callbackPos(data):
-    rospy.loginfo(rospy.get_caller_id() + "I heard x: %d  y: %d", data.linear.x, data.linear.y)
+    rospy.loginfo(rospy.get_caller_id() + "I heard x: %d  y: %d", data.x, data.y)
     global X
-    X = data.linear.x
+    X = data.x
     global Y 
-    Y = data.linear.y    
+    Y = data.y    
 
-# callback for the speckPerception subsriber 
+## callback for the speckPerception subsriber 
 def callbackSta(data): 
     rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
     global state 
     state = "play"
 
-# client function for navigation service 
+## client function for navigation service 
 def navigation(x,y):
 
+    global homeX
+    global homeY
+    global personX
+    global personY
     rospy.wait_for_service('myNavigation')
     try:
         go_to = rospy.ServiceProxy('myNavigation',GoTo)
         check = go_to(x ,y)
-        if check.o == 0:
-             rospy.loginfo(rospy.get_caller_id() + "The robot is arrived")
-
-        return check.o
+        if check.ok == True:
+            if (check.currentX ==homeX) & (check.currentY ==homeY):
+                rospy.loginfo(rospy.get_caller_id() + "The robot is arrived at home" )
+            elif (check.currentX == personX) & (check.currentY == personY):
+                rospy.loginfo(rospy.get_caller_id() + "The robot is come back" )
+            else:
+                rospy.loginfo(rospy.get_caller_id() + "The robot is arrived in position x: %d , y: %d", check.currentX, check.currentY )
+             
+        else: 
+            rospy.loginfo(rospy.get_caller_id() + "The robot cannot reach that posiion")
+        return check.ok
     except rospy.ServiceException as e:
         print("Service call failed: %s"%e)
 
-# define state NORMAL
+## defines the NORMAL state
 class Normal(smach.State):
     def __init__(self):
         # initialisation function, it should not wait
@@ -97,7 +118,7 @@ class Normal(smach.State):
         
     
 
-# define state SLEEP 
+## defines the SLEEP state 
 class Sleep(smach.State):
     def __init__(self):
         smach.State.__init__(self, 
@@ -117,7 +138,7 @@ class Sleep(smach.State):
         self.rate.sleep()
         return 'goToNormal'
 
-# define state Play
+## defines the PLAY state
 class Play(smach.State):
     def __init__(self):
         smach.State.__init__(self, 
@@ -134,6 +155,7 @@ class Play(smach.State):
         global Y 
 
         navigation(X,Y)
+        navigation(personX,personY)
 
 
         rospy.loginfo(rospy.get_caller_id() + 'Executing state PLAY ')
@@ -146,7 +168,7 @@ class Play(smach.State):
 def main():
     rospy.init_node('smach_example_state_machine')
 
-    rospy.Subscriber("Position", Twist, callbackPos) # subsriber get_position 
+    rospy.Subscriber("Position", Pose2D, callbackPos) # subsriber get_position 
     rospy.Subscriber("StateString", String, callbackSta)
 
     # Create a SMACH state machine

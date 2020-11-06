@@ -4,39 +4,45 @@
 \begin{DoxyCompactItemize}
 \item 
 class \hyperlink{classFSM_1_1Normal}{F\+S\+M.\+Normal}
-\item 
+\begin{DoxyCompactList}\small\item\em defines the N\+O\+R\+M\+AL state \end{DoxyCompactList}\item 
 class \hyperlink{classFSM_1_1Sleep}{F\+S\+M.\+Sleep}
-\item 
+\begin{DoxyCompactList}\small\item\em defines the S\+L\+E\+EP state \end{DoxyCompactList}\item 
 class \hyperlink{classFSM_1_1Play}{F\+S\+M.\+Play}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em defines the P\+L\+AY state \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
  \hyperlink{namespaceFSM}{F\+SM}
-\end{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceCommandManager}{Command\+Manager}
+\begin{DoxyCompactList}\small\item\em This node include the subsription to State and Get\+Position publishers, And implement a finite state machine which manages the information coming from the two nodes and changes the state of the system in according to it. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 def \hyperlink{namespaceFSM_af260b27c59635079f8b07d91369570b5}{F\+S\+M.\+decision} ()
 \item 
 def \hyperlink{namespaceFSM_a4f42463821520598ea44b0ae6acfc327}{F\+S\+M.\+callback\+Pos} (data)
-\item 
+\begin{DoxyCompactList}\small\item\em callback for the get position subsriber \end{DoxyCompactList}\item 
 def \hyperlink{namespaceFSM_a3f1960947f6a0dbcf41a5a97e18876b0}{F\+S\+M.\+callback\+Sta} (data)
-\item 
+\begin{DoxyCompactList}\small\item\em callback for the speck\+Perception subsriber \end{DoxyCompactList}\item 
 def \hyperlink{namespaceFSM_abb847a793996f13624334054ad5eb37c}{F\+S\+M.\+navigation} (x, y)
-\item 
+\begin{DoxyCompactList}\small\item\em client function for navigation service \end{DoxyCompactList}\item 
 def \hyperlink{namespaceFSM_acc99b577ee61be1b7cc0e2baae140224}{F\+S\+M.\+main} ()
 \end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
 int \hyperlink{namespaceFSM_ad4b9b754f58d2d256867e34136aa3563}{F\+S\+M.\+X} = 0
-\item 
+\begin{DoxyCompactList}\small\item\em robot X position variable \end{DoxyCompactList}\item 
 int \hyperlink{namespaceFSM_a90bf96bcb08f06c46475422464d23e6e}{F\+S\+M.\+Y} = 0
-\item 
+\begin{DoxyCompactList}\small\item\em robot Y position variable \end{DoxyCompactList}\item 
 int \hyperlink{namespaceFSM_a303869c19d8cb03e8739fc96ee328259}{F\+S\+M.\+homeX} = 10
-\item 
+\begin{DoxyCompactList}\small\item\em X position of the home. \end{DoxyCompactList}\item 
 int \hyperlink{namespaceFSM_ae958f81bf7ca765a61e10c9bfa94ccdb}{F\+S\+M.\+homeY} = 20
-\item 
+\begin{DoxyCompactList}\small\item\em Y position of the home. \end{DoxyCompactList}\item 
 string \hyperlink{namespaceFSM_a219d5c5ac08bd4c51a0f20bd27482dee}{F\+S\+M.\+state} = \char`\"{}No\+Info\char`\"{}
+\begin{DoxyCompactList}\small\item\em State variable. \end{DoxyCompactList}\item 
+int \hyperlink{namespaceFSM_a6814b20fdc1749831628a098c34429bd}{F\+S\+M.\+personX} = 2
+\item 
+int \hyperlink{namespaceFSM_a6e4bf639ff48a2a7b79bc2fdc62d3195}{F\+S\+M.\+personY} = 3
 \end{DoxyCompactItemize}

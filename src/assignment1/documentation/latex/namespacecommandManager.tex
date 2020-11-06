@@ -1,16 +1,40 @@
 \hypertarget{namespacecommandManager}{}\section{command\+Manager Namespace Reference}
 \label{namespacecommandManager}\index{command\+Manager@{command\+Manager}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classcommandManager_1_1Normal}{Normal}
+\begin{DoxyCompactList}\small\item\em defines the N\+O\+R\+M\+AL state \end{DoxyCompactList}\item 
+class \hyperlink{classcommandManager_1_1Play}{Play}
+\begin{DoxyCompactList}\small\item\em defines the P\+L\+AY state \end{DoxyCompactList}\item 
+class \hyperlink{classcommandManager_1_1Sleep}{Sleep}
+\begin{DoxyCompactList}\small\item\em defines the S\+L\+E\+EP state \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-def \hyperlink{namespacecommandManager_a39a4b5ee79aceca08d85ee68043b46ad}{navigation} (x, y)
-\item 
-def \hyperlink{namespacecommandManager_a17f50b385bbd12f96d20b91e1fb43e93}{callback\+Sta} (data)
+def \hyperlink{namespacecommandManager_a4b8947837e5d1af29943bfcf09e748f4}{decision} ()
 \item 
 def \hyperlink{namespacecommandManager_afef8f89a2132d42ee1e538e12cca47ec}{callback\+Pos} (data)
-\item 
-def \hyperlink{namespacecommandManager_a8d76d92786169e18a31820035018c492}{command\+Manager} ()
+\begin{DoxyCompactList}\small\item\em callback for the get position subsriber \end{DoxyCompactList}\item 
+def \hyperlink{namespacecommandManager_a17f50b385bbd12f96d20b91e1fb43e93}{callback\+Sta} (data)
+\begin{DoxyCompactList}\small\item\em callback for the speck\+Perception subsriber \end{DoxyCompactList}\item 
+def \hyperlink{namespacecommandManager_a39a4b5ee79aceca08d85ee68043b46ad}{navigation} (x, y)
+\begin{DoxyCompactList}\small\item\em client function for navigation service \end{DoxyCompactList}\item 
+def \hyperlink{namespacecommandManager_ae8b570eb4bf393859bc74c9cb5fe125f}{main} ()
 \end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{namespacecommandManager_af232742df3203418fc63619d6fdbbd7d}{X} = 0
+\begin{DoxyCompactList}\small\item\em robot X position variable \end{DoxyCompactList}\item 
+int \hyperlink{namespacecommandManager_a724d5ba6dbd057b575e254a1abbb8b63}{Y} = 0
+\begin{DoxyCompactList}\small\item\em robot Y position variable \end{DoxyCompactList}\item 
+int \hyperlink{namespacecommandManager_afd4e45cbe13ed5ee1c795062ed21e184}{homeX} = 10
+\begin{DoxyCompactList}\small\item\em X position of the home. \end{DoxyCompactList}\item 
+int \hyperlink{namespacecommandManager_a9deb4aa18f5f193991dbfb07d1f8e0b3}{homeY} = 20
+\begin{DoxyCompactList}\small\item\em Y position of the home. \end{DoxyCompactList}\item 
+string \hyperlink{namespacecommandManager_ad20ad550a7350517b8e1ce3dc95e3347}{state} = \char`\"{}No\+Info\char`\"{}
+\begin{DoxyCompactList}\small\item\em State variable. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
@@ -21,6 +45,10 @@ def \hyperlink{namespacecommandManager_a8d76d92786169e18a31820035018c492}{comman
 \item[{}]{data}
 \end{DoxyParamCaption}
 )}\hypertarget{namespacecommandManager_afef8f89a2132d42ee1e538e12cca47ec}{}\label{namespacecommandManager_afef8f89a2132d42ee1e538e12cca47ec}
+
+
+callback for the get position subsriber 
+
 \index{command\+Manager@{command\+Manager}!callback\+Sta@{callback\+Sta}}
 \index{callback\+Sta@{callback\+Sta}!command\+Manager@{command\+Manager}}
 \subsubsection[{\texorpdfstring{callback\+Sta(data)}{callbackSta(data)}}]{\setlength{\rightskip}{0pt plus 5cm}def command\+Manager.\+callback\+Sta (
@@ -28,13 +56,24 @@ def \hyperlink{namespacecommandManager_a8d76d92786169e18a31820035018c492}{comman
 \item[{}]{data}
 \end{DoxyParamCaption}
 )}\hypertarget{namespacecommandManager_a17f50b385bbd12f96d20b91e1fb43e93}{}\label{namespacecommandManager_a17f50b385bbd12f96d20b91e1fb43e93}
-\index{command\+Manager@{command\+Manager}!command\+Manager@{command\+Manager}}
-\index{command\+Manager@{command\+Manager}!command\+Manager@{command\+Manager}}
-\subsubsection[{\texorpdfstring{command\+Manager()}{commandManager()}}]{\setlength{\rightskip}{0pt plus 5cm}def command\+Manager.\+command\+Manager (
+
+
+callback for the speck\+Perception subsriber 
+
+\index{command\+Manager@{command\+Manager}!decision@{decision}}
+\index{decision@{decision}!command\+Manager@{command\+Manager}}
+\subsubsection[{\texorpdfstring{decision()}{decision()}}]{\setlength{\rightskip}{0pt plus 5cm}def command\+Manager.\+decision (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}\hypertarget{namespacecommandManager_a8d76d92786169e18a31820035018c492}{}\label{namespacecommandManager_a8d76d92786169e18a31820035018c492}
+)}\hypertarget{namespacecommandManager_a4b8947837e5d1af29943bfcf09e748f4}{}\label{namespacecommandManager_a4b8947837e5d1af29943bfcf09e748f4}
+\index{command\+Manager@{command\+Manager}!main@{main}}
+\index{main@{main}!command\+Manager@{command\+Manager}}
+\subsubsection[{\texorpdfstring{main()}{main()}}]{\setlength{\rightskip}{0pt plus 5cm}def command\+Manager.\+main (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacecommandManager_ae8b570eb4bf393859bc74c9cb5fe125f}{}\label{namespacecommandManager_ae8b570eb4bf393859bc74c9cb5fe125f}
 \index{command\+Manager@{command\+Manager}!navigation@{navigation}}
 \index{navigation@{navigation}!command\+Manager@{command\+Manager}}
 \subsubsection[{\texorpdfstring{navigation(x, y)}{navigation(x, y)}}]{\setlength{\rightskip}{0pt plus 5cm}def command\+Manager.\+navigation (
@@ -43,3 +82,70 @@ def \hyperlink{namespacecommandManager_a8d76d92786169e18a31820035018c492}{comman
 \item[{}]{y}
 \end{DoxyParamCaption}
 )}\hypertarget{namespacecommandManager_a39a4b5ee79aceca08d85ee68043b46ad}{}\label{namespacecommandManager_a39a4b5ee79aceca08d85ee68043b46ad}
+
+
+client function for navigation service 
+
+
+
+\subsection{Variable Documentation}
+\index{command\+Manager@{command\+Manager}!homeX@{homeX}}
+\index{homeX@{homeX}!command\+Manager@{command\+Manager}}
+\subsubsection[{\texorpdfstring{homeX}{homeX}}]{\setlength{\rightskip}{0pt plus 5cm}int command\+Manager.\+homeX = 10}\hypertarget{namespacecommandManager_afd4e45cbe13ed5ee1c795062ed21e184}{}\label{namespacecommandManager_afd4e45cbe13ed5ee1c795062ed21e184}
+
+
+X position of the home. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em homeX} & here you can set the a priori X position of the house \\
+\hline
+\end{DoxyParams}
+\index{command\+Manager@{command\+Manager}!homeY@{homeY}}
+\index{homeY@{homeY}!command\+Manager@{command\+Manager}}
+\subsubsection[{\texorpdfstring{homeY}{homeY}}]{\setlength{\rightskip}{0pt plus 5cm}int command\+Manager.\+homeY = 20}\hypertarget{namespacecommandManager_a9deb4aa18f5f193991dbfb07d1f8e0b3}{}\label{namespacecommandManager_a9deb4aa18f5f193991dbfb07d1f8e0b3}
+
+
+Y position of the home. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em homeY} & here you can set the a priori Y position of the house \\
+\hline
+\end{DoxyParams}
+\index{command\+Manager@{command\+Manager}!state@{state}}
+\index{state@{state}!command\+Manager@{command\+Manager}}
+\subsubsection[{\texorpdfstring{state}{state}}]{\setlength{\rightskip}{0pt plus 5cm}string command\+Manager.\+state = \char`\"{}No\+Info\char`\"{}}\hypertarget{namespacecommandManager_ad20ad550a7350517b8e1ce3dc95e3347}{}\label{namespacecommandManager_ad20ad550a7350517b8e1ce3dc95e3347}
+
+
+State variable. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & This is the state coming from State node (that\textquotesingle{}s why is a string) and it can be ether play or No\+Info \\
+\hline
+\end{DoxyParams}
+\index{command\+Manager@{command\+Manager}!X@{X}}
+\index{X@{X}!command\+Manager@{command\+Manager}}
+\subsubsection[{\texorpdfstring{X}{X}}]{\setlength{\rightskip}{0pt plus 5cm}int command\+Manager.\+X = 0}\hypertarget{namespacecommandManager_af232742df3203418fc63619d6fdbbd7d}{}\label{namespacecommandManager_af232742df3203418fc63619d6fdbbd7d}
+
+
+robot X position variable 
+
+
+\begin{DoxyParams}{Parameters}
+{\em X} & is the initialize X position of the robot \\
+\hline
+\end{DoxyParams}
+\index{command\+Manager@{command\+Manager}!Y@{Y}}
+\index{Y@{Y}!command\+Manager@{command\+Manager}}
+\subsubsection[{\texorpdfstring{Y}{Y}}]{\setlength{\rightskip}{0pt plus 5cm}int command\+Manager.\+Y = 0}\hypertarget{namespacecommandManager_a724d5ba6dbd057b575e254a1abbb8b63}{}\label{namespacecommandManager_a724d5ba6dbd057b575e254a1abbb8b63}
+
+
+robot Y position variable 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Y} & is the initialize Y position of the robot \\
+\hline
+\end{DoxyParams}

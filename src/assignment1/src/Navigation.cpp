@@ -8,15 +8,18 @@
 #define Xmax 20 //!< Max dimension of the map along the X axis 
 #define Ymax 20 //!< Max dimension of the map along the Y axis 
 
+
 bool goTo(assignment1::GoTo::Request  &req,
          assignment1::GoTo::Response &res)
 {
   ROS_INFO("Go to position: x=%ld, y=%ld", (long int)req.x, (long int)req.y);
   if((req.x <= Xmax) && (req.y <= Ymax)){
      sleep(3); //which simulate the movement of the robot 
-     res.o = 0; 
+     res.ok = true;
+     res.currentX = req.x;
+     res.currentY = req.y; 
       }else{
-        res.o = 1; 
+        res.ok = false; 
        }
   
   return true;
