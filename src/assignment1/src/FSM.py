@@ -47,7 +47,7 @@ def decision():
 
 ## callback for the get position subsriber
 def callbackPos(data):
-    rospy.loginfo(rospy.get_caller_id() + "I heard x: %d  y: %d", data.x, data.y)
+#    rospy.loginfo(rospy.get_caller_id() + " I heard x: %d  y: %d", data.x, data.y)
     global X
     X = data.x
     global Y 
@@ -55,7 +55,7 @@ def callbackPos(data):
 
 ## callback for the speckPerception subsriber 
 def callbackSta(data): 
-    rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
+    rospy.loginfo(rospy.get_caller_id() + " I heard %s", data.data)
     global state 
     state = "play"
 
@@ -72,14 +72,14 @@ def navigation(x,y):
         check = go_to(x ,y)
         if check.ok == True:
             if (check.currentX ==homeX) & (check.currentY ==homeY):
-                rospy.loginfo(rospy.get_caller_id() + "The robot is arrived at home" )
+                rospy.loginfo(rospy.get_caller_id() + " The robot is arrived at home" )
             elif (check.currentX == personX) & (check.currentY == personY):
-                rospy.loginfo(rospy.get_caller_id() + "The robot is come back" )
+                rospy.loginfo(rospy.get_caller_id() + " The robot is come back to you" )
             else:
-                rospy.loginfo(rospy.get_caller_id() + "The robot is arrived in position x: %d , y: %d", check.currentX, check.currentY )
+                rospy.loginfo(rospy.get_caller_id() + " The robot is arrived in position x: %d , y: %d", check.currentX, check.currentY )
              
         else: 
-            rospy.loginfo(rospy.get_caller_id() + "The robot cannot reach that posiion")
+            rospy.loginfo(rospy.get_caller_id() + " The robot cannot reach that posiion")
         return check.ok
     except rospy.ServiceException as e:
         print("Service call failed: %s"%e)
@@ -103,7 +103,7 @@ class Normal(smach.State):
         
         self.counter = random.randint(1,2) # it determins how many movements should do the robot in NORMAL mode
         while not rospy.is_shutdown():  
-            rospy.loginfo(rospy.get_caller_id() + 'Executing state NORMAL ')
+ #           rospy.loginfo(rospy.get_caller_id() + 'Executing state NORMAL ')
             time.sleep(1)
             if state == "play":
                 state = 'noInput'
@@ -133,7 +133,7 @@ class Sleep(smach.State):
         
         global homeX
         global homeY
-        rospy.loginfo(rospy.get_caller_id() + 'Executing state SLEEP ')
+ #       rospy.loginfo(rospy.get_caller_id() + ' Executing state SLEEP ')
         navigation(homeX,homeY) # move in home position 
         self.rate.sleep()
         return 'goToNormal'
@@ -158,7 +158,7 @@ class Play(smach.State):
         navigation(personX,personY)
 
 
-        rospy.loginfo(rospy.get_caller_id() + 'Executing state PLAY ')
+ #       rospy.loginfo(rospy.get_caller_id() + ' Executing state PLAY ')
         time.sleep(3)
 
         return 'goToNormal'       

@@ -47,7 +47,7 @@ std::stringstream ss;
     ros::spinOnce();
 
     sleep(time);
-    time = rand() % 8 + 13; /// choose randomly the next time iteration
+    time = rand() % 8 + 15; /// choose randomly the next time iteration
 
 
 }

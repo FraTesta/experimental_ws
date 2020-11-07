@@ -12,7 +12,7 @@
 bool goTo(assignment1::GoTo::Request  &req,
          assignment1::GoTo::Response &res)
 {
-  ROS_INFO("Go to position: x=%ld, y=%ld", (long int)req.x, (long int)req.y);
+  ROS_INFO(" It's going into position: x=%ld, y=%ld wait...", (long int)req.x, (long int)req.y);
   if((req.x <= Xmax) && (req.y <= Ymax)){
      sleep(3); //which simulate the movement of the robot 
      res.ok = true;
@@ -37,7 +37,7 @@ int main(int argc, char **argv)
   ros::NodeHandle n;
 
   ros::ServiceServer service = n.advertiseService("myNavigation", goTo);
-  ROS_INFO("Ready to go in a new position.");
+  ROS_INFO(" Ready to go in a new position.");
   ros::spin();
 
   return 0;
