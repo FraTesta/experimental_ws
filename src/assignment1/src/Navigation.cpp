@@ -8,11 +8,27 @@
 #define Xmax 20 //!< Max dimension of the map along the X axis 
 #define Ymax 20 //!< Max dimension of the map along the Y axis 
 
+#define homeX 10
+#define homeY 20
+
+#define userX 2
+#define userY 3
+
+void printlogs(int x ,int y){
+  if((x == homeX)&&(y == homeY)){
+     ROS_INFO(" the robot is going home");
+    }else if ((x == userX)&&(y == userY)){
+      ROS_INFO(" the robot is returning to the user");
+    }else{ROS_INFO(" It's going into position: x=%ld, y=%ld wait...",x,y);
+    }
+}
+
 
 bool goTo(assignment1::GoTo::Request  &req,
          assignment1::GoTo::Response &res)
-{
-  ROS_INFO(" It's going into position: x=%ld, y=%ld wait...", (long int)req.x, (long int)req.y);
+{ 
+  //ROS_INFO(" It's going into position: x=%ld, y=%ld wait...", (long int)req.x, (long int)req.y);
+  printlogs((long int)req.x,(long int)req.y);
   if((req.x <= Xmax) && (req.y <= Ymax)){
      sleep(3); //which simulate the movement of the robot 
      res.ok = true;

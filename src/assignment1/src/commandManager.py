@@ -19,7 +19,7 @@ import time
 import random
 import sys
 from std_msgs.msg import String
-from geometry_msgs.msg import Twist
+from geometry_msgs.msg import Pose2D
 
 from assignment1.srv import *
 
@@ -39,33 +39,47 @@ homeY = 20
 # @param state This is the state coming from State node (that's why is a string) and it can be ether play or NoInfo 
 state = "NoInfo"
 
+personX = 2
+personY = 3
+
 def decision():
     return random.choice(['goToNormal','goToSleep'])
 
 ## callback for the get position subsriber
 def callbackPos(data):
-    rospy.loginfo(rospy.get_caller_id() + "I heard x: %d  y: %d", data.linear.x, data.linear.y)
+#    rospy.loginfo(rospy.get_caller_id() + " I heard x: %d  y: %d", data.x, data.y)
     global X
-    X = data.linear.x
+    X = data.x
     global Y 
-    Y = data.linear.y    
+    Y = data.y    
 
 ## callback for the speckPerception subsriber 
 def callbackSta(data): 
-    rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
+    rospy.loginfo(rospy.get_caller_id() + " I heard %s", data.data)
     global state 
     state = "play"
 
 ## client function for navigation service 
 def navigation(x,y):
 
+    global homeX
+    global homeY
+    global personX
+    global personY
     rospy.wait_for_service('myNavigation')
     try:
         go_to = rospy.ServiceProxy('myNavigation',GoTo)
         check = go_to(x ,y)
-        if check.ok == 0:
-             rospy.loginfo(rospy.get_caller_id() + "The robot is arrived")
-        
+        if check.ok == True:
+            if (check.currentX ==homeX) & (check.currentY ==homeY):
+                rospy.loginfo(rospy.get_caller_id() + " The robot is arrived at home" )
+            elif (check.currentX == personX) & (check.currentY == personY):
+                rospy.loginfo(rospy.get_caller_id() + " The robot is returned to the user" )
+            else:
+                rospy.loginfo(rospy.get_caller_id() + " The robot is arrived in position x: %d , y: %d", check.currentX, check.currentY )
+             
+        else: 
+            rospy.loginfo(rospy.get_caller_id() + " The robot cannot reach that posiion")
         return check.ok
     except rospy.ServiceException as e:
         print("Service call failed: %s"%e)
@@ -89,7 +103,7 @@ class Normal(smach.State):
         
         self.counter = random.randint(1,2) # it determins how many movements should do the robot in NORMAL mode
         while not rospy.is_shutdown():  
-            rospy.loginfo(rospy.get_caller_id() + 'Executing state NORMAL ')
+ #           rospy.loginfo(rospy.get_caller_id() + 'Executing state NORMAL ')
             time.sleep(1)
             if state == "play":
                 state = 'noInput'
@@ -119,7 +133,7 @@ class Sleep(smach.State):
         
         global homeX
         global homeY
-        rospy.loginfo(rospy.get_caller_id() + 'Executing state SLEEP ')
+ #       rospy.loginfo(rospy.get_caller_id() + ' Executing state SLEEP ')
         navigation(homeX,homeY) # move in home position 
         self.rate.sleep()
         return 'goToNormal'
@@ -132,7 +146,6 @@ class Play(smach.State):
                              input_keys=['locked_counter_in'],
                              output_keys=['locked_counter_out'])
         
-        self.sensor_input = 0
         self.rate = rospy.Rate(200)  # Loop at 200 Hz
 
     def execute(self, userdata):
@@ -141,9 +154,10 @@ class Play(smach.State):
         global Y 
 
         navigation(X,Y)
+        navigation(personX,personY)
 
 
-        rospy.loginfo(rospy.get_caller_id() + 'Executing state PLAY ')
+ #       rospy.loginfo(rospy.get_caller_id() + ' Executing state PLAY ')
         time.sleep(3)
 
         return 'goToNormal'       
@@ -153,7 +167,7 @@ class Play(smach.State):
 def main():
     rospy.init_node('smach_example_state_machine')
 
-    rospy.Subscriber("Position", Twist, callbackPos) # subsriber get_position 
+    rospy.Subscriber("Position", Pose2D, callbackPos) # subsriber get_position 
     rospy.Subscriber("StateString", String, callbackSta)
 
     # Create a SMACH state machine

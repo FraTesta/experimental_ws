@@ -2,7 +2,7 @@
 
     <node name = "speakPerception" pkg="assignment1" type="speakPerception" />
     <node name = "getPosition" pkg="assignment1" type="getPosition" />
-    <node name = "commandManager" pkg="assignment1" type="FSM.py" output = "screen" />
+    <node name = "commandManager" pkg="assignment1" type="commandManager.py" output = "screen" />
     <node name = "navigation" pkg="assignment1" type="Navigation" output = "screen" />
 
 
