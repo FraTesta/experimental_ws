@@ -39,13 +39,19 @@ homeY = 20
 # @param state This is the state coming from State node (that's why is a string) and it can be ether play or NoInfo 
 state = "NoInfo"
 
+## User Position X
+# @param personX it represents the x position of the user
 personX = 2
+## User Position Y
+# @param personX it represents the x position of the user
 personY = 3
 
+## This function chose randomly the next state of the FSM
 def decision():
     return random.choice(['goToNormal','goToSleep'])
 
-## callback for the get position subsriber
+## This callback function for the get position subsriber. 
+# It recives a geometry_msgs/2DPose message which contains a X and Y position from the getPosition node
 def callbackPos(data):
 #    rospy.loginfo(rospy.get_caller_id() + " I heard x: %d  y: %d", data.x, data.y)
     global X
@@ -53,13 +59,15 @@ def callbackPos(data):
     global Y 
     Y = data.y    
 
-## callback for the speckPerception subsriber 
+## Callback function for the speckPerception subsriber.
+# Which recives a string from   
 def callbackSta(data): 
     rospy.loginfo(rospy.get_caller_id() + " I heard %s", data.data)
     global state 
     state = "play"
 
-## client function for navigation service 
+## Client function for the Navigation service which makes a request to go in X and Y position and menages the Navigation service responses.
+#  It prints some log messages which communicate to the user the position in which the robot has arrived or if cannot reach that position. 
 def navigation(x,y):
 
     global homeX
@@ -84,10 +92,14 @@ def navigation(x,y):
     except rospy.ServiceException as e:
         print("Service call failed: %s"%e)
 
-## defines the NORMAL state
+## This class defines the NORMAL state of the FSM. 
+# At each execution it randomly chooses how many movements the robot will make and put this number in the counter variable.
+# Then there is a while loop which checks:
+# - If there is a "play" message, then the FSM must go in PLAY state 
+# - If it has been iterated as many times as the counter variable then it goes in SLEEP state
+# Otherwise it make a rquest to the Navigation node to go in X and Y position
 class Normal(smach.State):
     def __init__(self):
-        # initialisation function, it should not wait
         smach.State.__init__(self, 
                              outcomes=['goToNormal','goToSleep','goToPlay'],
                              input_keys=['unlocked_counter_in'],
@@ -101,9 +113,8 @@ class Normal(smach.State):
         global Y
         global state
         
-        self.counter = random.randint(1,2) # it determins how many movements should do the robot in NORMAL mode
+        self.counter = random.randint(1,2) 
         while not rospy.is_shutdown():  
- #           rospy.loginfo(rospy.get_caller_id() + 'Executing state NORMAL ')
             time.sleep(1)
             if state == "play":
                 state = 'noInput'
@@ -118,7 +129,9 @@ class Normal(smach.State):
         
     
 
-## defines the SLEEP state 
+## It defines the SLEEP state which sleeps for a random period of time.
+# Then it makes a request to the Navigation service to go to the home location.
+# Finally it returns in the NORMAL state
 class Sleep(smach.State):
     def __init__(self):
         smach.State.__init__(self, 
@@ -133,12 +146,12 @@ class Sleep(smach.State):
         
         global homeX
         global homeY
- #       rospy.loginfo(rospy.get_caller_id() + ' Executing state SLEEP ')
-        navigation(homeX,homeY) # move in home position 
+        navigation(homeX,homeY) 
         self.rate.sleep()
         return 'goToNormal'
 
-## defines the PLAY state
+## Class that defines the PLAY state. 
+# It move the robot in X Y location and then asks to go back to the user.
 class Play(smach.State):
     def __init__(self):
         smach.State.__init__(self, 
@@ -146,18 +159,14 @@ class Play(smach.State):
                              input_keys=['locked_counter_in'],
                              output_keys=['locked_counter_out'])
         
-        self.rate = rospy.Rate(200)  # Loop at 200 Hz
+        self.rate = rospy.Rate(200)  
 
     def execute(self, userdata):
-        # simulate that we have to get 5 data samples to compute the outcome
         global X
         global Y 
 
         navigation(X,Y)
         navigation(personX,personY)
-
-
- #       rospy.loginfo(rospy.get_caller_id() + ' Executing state PLAY ')
         time.sleep(3)
 
         return 'goToNormal'       
@@ -195,14 +204,11 @@ def main():
                                           'unlocked_counter_out':'sm_counter'})
 
 
-    # Create and start the introspection server for visualization
     sis = smach_ros.IntrospectionServer('server_name', sm, '/SM_ROOT')
     sis.start()
 
-    # Execute the state machine
     outcome = sm.execute()
 
-    # Wait for ctrl-c to stop the application
     rospy.spin()
     sis.stop()
 

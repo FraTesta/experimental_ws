@@ -1,16 +1,18 @@
 /*!
- * \section Description
+ * \section Main_Description
  * This node publishes a random position which will be used from the command manager node.
  * In practice it simulates the pointing gesture from the user and the random travel in NORMAL mode as well.
+ * @param x is an integer which represents the X position that is randomly chosen at each iteration.
+ * @param y is an integer which represents the Y position that is randomly chosen at each iteration
+ * @param pose is a geometry_msgs/Pose2D message in which we put the two previous values
  */
+
 
 #include "ros/ros.h"
 #include "geometry_msgs/Pose2D.h"
 #include <sstream>
 #include <stdio.h>
 #include <stdlib.h>
-
-
 
 int main (int argc, char **argv){
 
