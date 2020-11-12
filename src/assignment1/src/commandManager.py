@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 
-## @package CommandManager
-#  This node include the subsription to State and GetPosition publishers,
+## @file commandManager.py
+#  This node includes the subsription to State and GetPosition publishers,
 #  And implement a finite state machine 
-#  which manages the information coming from the two nodes and changes the state of the system in according to it.
+#  which manages the information coming from the two publisher and changes the state of the system in according to them.
+# \see getPosition.cpp
+# \see Navigation.cpp
+# \see State.cpp
  
-## Documentation for a function.
-#
-#  More details.
 
 from __future__ import print_function
 
@@ -101,9 +101,7 @@ def navigation(x,y):
 class Normal(smach.State):
     def __init__(self):
         smach.State.__init__(self, 
-                             outcomes=['goToNormal','goToSleep','goToPlay'],
-                             input_keys=['unlocked_counter_in'],
-                             output_keys=['unlocked_counter_out'])
+                             outcomes=['goToNormal','goToSleep','goToPlay'])
         self.rate = rospy.Rate(1)  # Loop at 200 Hz
         self.counter = 0
         
@@ -135,9 +133,7 @@ class Normal(smach.State):
 class Sleep(smach.State):
     def __init__(self):
         smach.State.__init__(self, 
-                             outcomes=['goToNormal','goToSleep'],
-                             input_keys=['locked_counter_in'],
-                             output_keys=['locked_counter_out'])
+                             outcomes=['goToNormal','goToSleep'])
         self.rate = rospy.Rate(200)  # Loop at 200 Hz
 
     def execute(self, userdata):
@@ -155,9 +151,7 @@ class Sleep(smach.State):
 class Play(smach.State):
     def __init__(self):
         smach.State.__init__(self, 
-                             outcomes=['goToNormal','goToPlay'],
-                             input_keys=['locked_counter_in'],
-                             output_keys=['locked_counter_out'])
+                             outcomes=['goToNormal','goToPlay'])
         
         self.rate = rospy.Rate(200)  
 
@@ -189,19 +183,13 @@ def main():
         smach.StateMachine.add('NORMAL', Normal(), 
                                transitions={'goToSleep':'SLEEP', 
                                             'goToPlay':'PLAY',
-                                            'goToNormal':'NORMAL'},
-                               remapping={'locked_counter_in':'sm_counter', 
-                                          'locked_counter_out':'sm_counter'})
+                                            'goToNormal':'NORMAL'})
         smach.StateMachine.add('SLEEP', Sleep(), 
                                transitions={'goToSleep':'SLEEP', 
-                                            'goToNormal':'NORMAL'},
-                               remapping={'unlocked_counter_in':'sm_counter',
-                                          'unlocked_counter_out':'sm_counter'})
+                                            'goToNormal':'NORMAL'})
         smach.StateMachine.add('PLAY', Play(), 
                                transitions={'goToNormal':'NORMAL',
-                                            'goToPlay':'PLAY'},
-                               remapping={'unlocked_counter_in':'sm_counter',
-                                          'unlocked_counter_out':'sm_counter'})
+                                            'goToPlay':'PLAY'})
 
 
     sis = smach_ros.IntrospectionServer('server_name', sm, '/SM_ROOT')

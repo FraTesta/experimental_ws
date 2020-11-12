@@ -1,9 +1,11 @@
 # Assignment 1
 ## Indrodution
 This is the first assignment of experimental robotics course which consists of developing a basic software architecture that simulates a robotic dog.
-This robot is able to receive position indicated via laser pointer and then reach such position if and only if the user pronounces the word _play_ first. This mode of operation is called __PLAY__ mode . The robot can also work in two other different modes when it doesn't recive any  _play_ command, which are: 
+This robot is able to receive position indicated via laser pointer and then reach such position if and only if the user pronounces the word _play_ first. This mode of operation is called __PLAY__ mode . The robot can also work in two other different modes in case it doesn't recive any  _play_ command, which are: 
 - __NORMAL__ mode where the robot moves in random positions.
 - __SLEEP__ mode, the robot goes home and sleeps for some time.
+
+Please notice that in the _Documentation_ foulder you will find the doxygen documentation of the whole code.
 ## Software Architecture and System's Features
 This software architecture uses three ROS nodes and one service.
 * __speakPerception__ is a ROS node which publishes a string "play" at random time. So it simulates a person saying the word _play_.
@@ -13,9 +15,20 @@ This software architecture uses three ROS nodes and one service.
    It was chosen to mearge these two fitures since in this phase of the procject it's not yet required to implement a node dedicated to the reception and pre-processing of laser pointer data. So in order to avoid basically writing the same code twice, it was chosen to put them in the same node .
 * __Navigation__ is the only service in the architecture and it has several purposes:
    1. Receives an x y position as request representing the goal position.
-   2. Checks if the requested position is actually reachable (for istance if this position is inside the map).
-   3. Simulates robot navigation just by letting time pass.
-   4. Returns a response which contains the current x y position of the robot and a bool variable representing if the robot can really reach the position or not (true or false).
+   2. Checks if the requested position is actually reachable (for istance if that position is inside the map).
+   3. Simulates robot navigation simply by letting time pass.
+   4. Returns a response which contains the current x y position of the robot and a bool variable representing if the robot can really reach the position or not (true or false). 
+
+In the _srv_ directory you can find the definition of the requests and responses of the service, indicated as folows:
+```
+int64 x
+int64 y
+---
+int64 currentX
+int64 currentY
+bool ok
+```
+Where _x_ and _y_ represent the target position of the navigation. While _currentX_ and _currentY_ communicate the current position and _ok_ is simply a check variable that tells to the system if the goal position has been reached correctly or if it is actually reachable.
 * __commandManager__ is the core node , that manages information from the two previous publishers and implements a _Finite State Machine_ which manages the three possible states (__PLAY__,__NORMAL__ and __SLEEP__). Finally in according to them it makes some requests to the _Navigation_ service in order to move the robot. 
 It should be noted that this node continuously receives positions from the _getPosition_ node, but simply ignores such information when ther robot is in a finite state where those data are not needed.
 
@@ -44,7 +57,16 @@ $ sudo apt-get install ros-kinetic-smach-viewer
 ```
 Of coure it's also required to make a _catkin_make_ in your _ROS_ workspace
 ### File list
-In this package you can find in the _src_ directory containg the three nodes file and the service. In the _launch_ directory has been defined several launch files to test the system (_assignment1.launch_ launches every components of the system). _srv_ directory contains the definition of the only service of the architecture. Finally you can find three _bash command file_ usefull to test the system avoiding to digit long terminals commands :
+In this package you can find in the _src_ directory containg the three nodes file and the service:
+- __Sate.cpp__ _speakPerception node
+- __getPosition.cpp__ getPosition node
+- __Navigation.cpp__ Navigation service
+ __commandManager.py__ commandManager node
+
+In the _launch_ directory has been defined several launch files to test the system (_assignment1.launch_ launches every components of the system). 
+
+_srv_ directory contains the definition of the only service of the architecture. 
+Finally you can find three _bash command file_ usefull to test the system avoiding to digit long terminals commands :
 - __run_sys.sh__ allows to launch all componets of the system without the _getPosition_node
 - __run_gesPosition.sh__ launches only the _getPosition_ node
 - __run_impossiblePosition.sh__  just publishes on the _Position_ topic a position messagge which is out of the map. This is usefull to test the response of the system in case the user points a position which is not reachable from the robot.    
@@ -53,7 +75,7 @@ In this package you can find in the _src_ directory containg the three nodes fil
 ## Usage
 First of all __remeber to source your workspace in every terminal you will use.__
 
-If wou want to run the whole project just type:
+If wou want to run the whole project type:
 ```
 $ roslaunch assignment1 assignment1.launch
 ```
@@ -62,8 +84,8 @@ Remeber that you can check the current state of the _FSM_ typing :
 $ rosrun smach_viewer smach_viewer.py
 ```
 However in the terminal you can see the following logs:
-- __It's going into position x = .. and y = ..__ which is actually a log of the _Navigation_ node 
-- __The robot is arrived at..__ 
+- __It's going into position...__ which is actually a log of the _Navigation_ node 
+- __The robot is arrived at...__ 
 - __I heard _play___ which means that the _commandManager_ has recived a string _play_ from the _speakPerception_ node
 
 All the software components have been developed trying to simulate a possible real usege of this system, using many random variables for: process execution times, positions generated and commands given by the user. However, executables dedicated to testing some features of the project have been added.
@@ -99,7 +121,9 @@ As already mentioned there are some position which currently must be configured 
 - _Map_:  was defined simply with two parameters indicating the maximum dimension along the x and y axes (__Xmax__ and __Ymax__ in the _Navigation_ code) which is sufficent since it is just a 2D map . No obstacles have been added since it was not required to implement an obstacle avoidance algorithm. 
 
 Regarding the _FSM_ was necessary to add some constraints which consist of : 
-When ther robot is in a SLEEP mode it cannot do anything utill the sleeptime is over. So even if the _commandManager_ recives a _play_ command from the _speackPerception_ publisher it could not go to _PLAY_ mode. Another limitation is that currently is not possible to remain in the _PLAY_ state without first returning to the NORMAL state (for istance sending a _play_ string from _speakPerception_).
+When ther robot is in a SLEEP mode it cannot do anything utill the sleeptime is over. So even if the _commandManager_ recives a _play_ command from the _speackPerception_ publisher it could not go to _PLAY_ mode, but as soon as the _commandManager_ returns to the _NORMAL_ state then the _PLAY_ state will be immediately executed.
+
+ Another limitation is that currently is not possible to remain in the _PLAY_ state without first returning to the NORMAL state (for istance sending a _play_ string from _speakPerception_).
 
 ### Possible improvements:
 - Improve the _getPosition_ node with a drive which is really able to percive pointing gesture positions. And maybe move the currently random postion generator in the _commandManager_ node for maintaining the random navigation fiture. 

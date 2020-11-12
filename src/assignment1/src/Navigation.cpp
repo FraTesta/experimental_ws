@@ -1,4 +1,11 @@
-
+ /*!
+ * @file Navigation.cpp
+ * @section Description
+ * \brief It simulate the navigation from the current position to the position requested by the client, taking into account the dimension of a map a priori chosen 
+ * \subsection input/output
+ * This service takes a X and Y positon request from the "command manager" node which is the only client.
+ * \see commandManager.py
+ */
 
 #include "ros/ros.h"
 #include "assignment1/GoTo.h"
@@ -22,9 +29,9 @@ void printlogs(int x ,int y){
   ///  \section printlogs
   /// It's a simple function that, based on the requested x y position, generates a log in the terminal
   if((x == homeX)&&(y == homeY)){
-     ROS_INFO(" the robot is going home");
+     ROS_INFO(" The robot is going home, wait...");
     }else if ((x == userX)&&(y == userY)){
-      ROS_INFO(" the robot is returning to the user");
+      ROS_INFO(" The robot is returning to the user, wait...");
     }else{ROS_INFO(" It's going into position: x=%ld, y=%ld wait...",x,y);
     }
 }
@@ -56,12 +63,6 @@ bool goTo(assignment1::GoTo::Request  &req,
 
 int main(int argc, char **argv)
 {
-     /*!
- * \section Main_Description
- * It simulate the navigation from the current position to the position requested by the client, taking into account the dimension of a map a priori chosen 
- * \subsection input/output
- * This service takes a X and Y positon request from the "command manager" node which is the only client.
- */
 
   ros::init(argc, argv, "Navigation_server"); //node init
   ros::NodeHandle n;
