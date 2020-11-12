@@ -1,8 +1,0 @@
-prefix=/home/francesco/experimental_ws/install
-
-Name: Assignment1
-Description: Description of Assignment1
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: geometry_msgs roscpp rospy std_msgs

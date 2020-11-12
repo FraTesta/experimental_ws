@@ -1,2 +1,0 @@
-assignment1
--DCATKIN_DEVEL_PREFIX=/home/francesco/experimental_ws/devel -DCMAKE_INSTALL_PREFIX=/home/francesco/experimental_ws/install -G Unix Makefiles
