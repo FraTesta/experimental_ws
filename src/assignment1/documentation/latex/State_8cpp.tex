@@ -1,5 +1,10 @@
 \hypertarget{State_8cpp}{}\section{/home/francesco/experimental\+\_\+ws/src/assignment1/src/\+State.cpp File Reference}
 \label{State_8cpp}\index{/home/francesco/experimental\+\_\+ws/src/assignment1/src/\+State.\+cpp@{/home/francesco/experimental\+\_\+ws/src/assignment1/src/\+State.\+cpp}}
+
+
+This code generates a R\+OS publisher node which publishes a string \textquotesingle{}play\textquotesingle{}, using a std\+\_\+msgs/\+String, on the topic Sate\+String each iteration which is defined by the time variable.  
+
+
 {\ttfamily \#include \char`\"{}ros/ros.\+h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}std\+\_\+msgs/\+String.\+h\char`\"{}}\\*
 {\ttfamily \#include $<$sstream$>$}\\*
@@ -17,6 +22,20 @@ int \hyperlink{State_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, ch
 \end{DoxyCompactItemize}
 
 
+\subsection{Detailed Description}
+This code generates a R\+OS publisher node which publishes a string \textquotesingle{}play\textquotesingle{}, using a std\+\_\+msgs/\+String, on the topic Sate\+String each iteration which is defined by the time variable. 
+
+\hypertarget{State_8cpp_Description}{}\subsection{Description}\label{State_8cpp_Description}
+
+\begin{DoxyParams}{Parameters}
+{\em time} & represents the waiting time before generating another \textquotesingle{}play\textquotesingle{} message that is randomly generated at each iteration to simulate a user. It is initialized at 15 \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{commandManager_8py}{command\+Manager.\+py} 
+\end{DoxySeeAlso}
+
+
 \subsection{Function Documentation}
 \index{State.\+cpp@{State.\+cpp}!main@{main}}
 \index{main@{main}!State.\+cpp@{State.\+cpp}}
@@ -26,7 +45,3 @@ int \hyperlink{State_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, ch
 \item[{char $\ast$$\ast$}]{argv}
 \end{DoxyParamCaption}
 )}\hypertarget{State_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{}\label{State_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}
-\hypertarget{State_8cpp_Description}{}\subsection{Description}\label{State_8cpp_Description}
-This code generates a R\+OS node which is also a publisher. It publishes a string \textquotesingle{}play\textquotesingle{} on the topic Sate\+String. initialization of the variable which will randomly choose how often to generate a \textquotesingle{}play\textquotesingle{} message
-
-choose randomly the next time iteration 

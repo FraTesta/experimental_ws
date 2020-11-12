@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['pyexample',['pyexample',['../namespacepyexample.html',1,'']]]
+  ['cpp',['cpp',['../namespaceNavigation_1_1cpp.html',1,'Navigation']]],
+  ['navigation',['Navigation',['../namespaceNavigation.html',1,'']]]
 ];

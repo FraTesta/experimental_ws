@@ -114,21 +114,17 @@ $(document).ready(function(){initNavTree('classcommandManager_1_1Normal.html',''
 </div><!--header-->
 <div class="contents">
 
-<p>defines the NORMAL state  
+<p>This class defines the NORMAL state of the <a class="el" href="namespaceFSM.html">FSM</a>.  
  <a href="classcommandManager_1_1Normal.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for commandManager.Normal:</div>
 <div class="dyncontent">
 <div class="center"><img src="classcommandManager_1_1Normal__inherit__graph.png" border="0" usemap="#commandManager_8Normal_inherit__map" alt="Inheritance graph"/></div>
-<map name="commandManager_8Normal_inherit__map" id="commandManager_8Normal_inherit__map">
-</map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for commandManager.Normal:</div>
 <div class="dyncontent">
 <div class="center"><img src="classcommandManager_1_1Normal__coll__graph.png" border="0" usemap="#commandManager_8Normal_coll__map" alt="Collaboration graph"/></div>
-<map name="commandManager_8Normal_coll__map" id="commandManager_8Normal_coll__map">
-</map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -146,7 +142,11 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a5ebc9e1cc3847edb576acedd01487023"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>defines the NORMAL state </p>
+<div class="textblock"><p>This class defines the NORMAL state of the <a class="el" href="namespaceFSM.html">FSM</a>. </p>
+<p>At each execution it randomly chooses how many movements the robot will make and put this number in the counter variable. Then there is a while loop which checks:</p><ul>
+<li>If there is a "play" message, then the <a class="el" href="namespaceFSM.html">FSM</a> must go in PLAY state</li>
+<li>If it has been iterated as many times as the counter variable then it goes in SLEEP state Otherwise it make a rquest to the Navigation node to go in X and Y position </li>
+</ul>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="abda69ab53b7d84c2c0c577dcf26f3823"></a>
 <div class="memitem">

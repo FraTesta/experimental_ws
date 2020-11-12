@@ -112,39 +112,40 @@ $(document).ready(function(){initNavTree('commandManager_8py.html','');});
 <div class="title">commandManager.py File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>This node includes the subsription to State and GetPosition publishers, And implement a finite state machine which manages the information coming from the two nodes and changes the state of the system in according to them.  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommandManager_1_1Normal.html">commandManager.Normal</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">defines the NORMAL state  <a href="classcommandManager_1_1Normal.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This class defines the NORMAL state of the <a class="el" href="namespaceFSM.html">FSM</a>.  <a href="classcommandManager_1_1Normal.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommandManager_1_1Sleep.html">commandManager.Sleep</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">defines the SLEEP state  <a href="classcommandManager_1_1Sleep.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">It defines the SLEEP state which sleeps for a random period of time.  <a href="classcommandManager_1_1Sleep.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommandManager_1_1Play.html">commandManager.Play</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">defines the PLAY state  <a href="classcommandManager_1_1Play.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that defines the PLAY state.  <a href="classcommandManager_1_1Play.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespacecommandManager"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecommandManager.html">commandManager</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:namespaceCommandManager"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceCommandManager.html">CommandManager</a></td></tr>
-<tr class="memdesc:namespaceCommandManager"><td class="mdescLeft">&#160;</td><td class="mdescRight">This node include the subsription to State and GetPosition publishers, And implement a finite state machine which manages the information coming from the two nodes and changes the state of the system in according to it. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a4b8947837e5d1af29943bfcf09e748f4"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecommandManager.html#a4b8947837e5d1af29943bfcf09e748f4">commandManager.decision</a> ()</td></tr>
+<tr class="memdesc:a4b8947837e5d1af29943bfcf09e748f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function chose randomly the next state of the <a class="el" href="namespaceFSM.html">FSM</a>.  <a href="namespacecommandManager.html#a4b8947837e5d1af29943bfcf09e748f4">More...</a><br /></td></tr>
 <tr class="separator:a4b8947837e5d1af29943bfcf09e748f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afef8f89a2132d42ee1e538e12cca47ec"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecommandManager.html#afef8f89a2132d42ee1e538e12cca47ec">commandManager.callbackPos</a> (data)</td></tr>
-<tr class="memdesc:afef8f89a2132d42ee1e538e12cca47ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback for the get position subsriber  <a href="namespacecommandManager.html#afef8f89a2132d42ee1e538e12cca47ec">More...</a><br /></td></tr>
+<tr class="memdesc:afef8f89a2132d42ee1e538e12cca47ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">This callback function for the get position subsriber.  <a href="namespacecommandManager.html#afef8f89a2132d42ee1e538e12cca47ec">More...</a><br /></td></tr>
 <tr class="separator:afef8f89a2132d42ee1e538e12cca47ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17f50b385bbd12f96d20b91e1fb43e93"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecommandManager.html#a17f50b385bbd12f96d20b91e1fb43e93">commandManager.callbackSta</a> (data)</td></tr>
-<tr class="memdesc:a17f50b385bbd12f96d20b91e1fb43e93"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback for the speckPerception subsriber  <a href="namespacecommandManager.html#a17f50b385bbd12f96d20b91e1fb43e93">More...</a><br /></td></tr>
+<tr class="memdesc:a17f50b385bbd12f96d20b91e1fb43e93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function for the speckPerception subsriber.  <a href="namespacecommandManager.html#a17f50b385bbd12f96d20b91e1fb43e93">More...</a><br /></td></tr>
 <tr class="separator:a17f50b385bbd12f96d20b91e1fb43e93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39a4b5ee79aceca08d85ee68043b46ad"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecommandManager.html#a39a4b5ee79aceca08d85ee68043b46ad">commandManager.navigation</a> (x, y)</td></tr>
-<tr class="memdesc:a39a4b5ee79aceca08d85ee68043b46ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">client function for navigation service  <a href="namespacecommandManager.html#a39a4b5ee79aceca08d85ee68043b46ad">More...</a><br /></td></tr>
+<tr class="memdesc:a39a4b5ee79aceca08d85ee68043b46ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Client function for the Navigation service which makes a request to go in X and Y position and menages the Navigation service responses.  <a href="namespacecommandManager.html#a39a4b5ee79aceca08d85ee68043b46ad">More...</a><br /></td></tr>
 <tr class="separator:a39a4b5ee79aceca08d85ee68043b46ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8b570eb4bf393859bc74c9cb5fe125f"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecommandManager.html#ae8b570eb4bf393859bc74c9cb5fe125f">commandManager.main</a> ()</td></tr>
 <tr class="separator:ae8b570eb4bf393859bc74c9cb5fe125f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -166,8 +167,21 @@ Variables</h2></td></tr>
 <tr class="memitem:ad20ad550a7350517b8e1ce3dc95e3347"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecommandManager.html#ad20ad550a7350517b8e1ce3dc95e3347">commandManager.state</a> = &quot;NoInfo&quot;</td></tr>
 <tr class="memdesc:ad20ad550a7350517b8e1ce3dc95e3347"><td class="mdescLeft">&#160;</td><td class="mdescRight">State variable.  <a href="namespacecommandManager.html#ad20ad550a7350517b8e1ce3dc95e3347">More...</a><br /></td></tr>
 <tr class="separator:ad20ad550a7350517b8e1ce3dc95e3347"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6884642ee072d436560aca2420d14d62"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecommandManager.html#a6884642ee072d436560aca2420d14d62">commandManager.personX</a> = 2</td></tr>
+<tr class="memdesc:a6884642ee072d436560aca2420d14d62"><td class="mdescLeft">&#160;</td><td class="mdescRight">User Position X.  <a href="namespacecommandManager.html#a6884642ee072d436560aca2420d14d62">More...</a><br /></td></tr>
+<tr class="separator:a6884642ee072d436560aca2420d14d62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a765b4c6755570fef5702e26fede7b8e6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecommandManager.html#a765b4c6755570fef5702e26fede7b8e6">commandManager.personY</a> = 3</td></tr>
+<tr class="memdesc:a765b4c6755570fef5702e26fede7b8e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">User Position Y.  <a href="namespacecommandManager.html#a765b4c6755570fef5702e26fede7b8e6">More...</a><br /></td></tr>
+<tr class="separator:a765b4c6755570fef5702e26fede7b8e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This node includes the subsription to State and GetPosition publishers, And implement a finite state machine which manages the information coming from the two nodes and changes the state of the system in according to them. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="getPosition_8cpp.html" title="This node publishes a random position which will be used from the command manager node ...">getPosition.cpp</a> </dd>
+<dd>
+<a class="el" href="Navigation_8cpp.html" title="It simulate the navigation from the current position to the position requested by the client...">Navigation.cpp</a> </dd>
+<dd>
+<a class="el" href="State_8cpp.html" title="This code generates a ROS publisher node which publishes a string &#39;play&#39;, using a std_msgs/String...">State.cpp</a> </dd></dl>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

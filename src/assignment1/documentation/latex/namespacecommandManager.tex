@@ -4,22 +4,22 @@
 \begin{DoxyCompactItemize}
 \item 
 class \hyperlink{classcommandManager_1_1Normal}{Normal}
-\begin{DoxyCompactList}\small\item\em defines the N\+O\+R\+M\+AL state \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em This class defines the N\+O\+R\+M\+AL state of the \hyperlink{namespaceFSM}{F\+SM}. \end{DoxyCompactList}\item 
 class \hyperlink{classcommandManager_1_1Play}{Play}
-\begin{DoxyCompactList}\small\item\em defines the P\+L\+AY state \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Class that defines the P\+L\+AY state. \end{DoxyCompactList}\item 
 class \hyperlink{classcommandManager_1_1Sleep}{Sleep}
-\begin{DoxyCompactList}\small\item\em defines the S\+L\+E\+EP state \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em It defines the S\+L\+E\+EP state which sleeps for a random period of time. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 def \hyperlink{namespacecommandManager_a4b8947837e5d1af29943bfcf09e748f4}{decision} ()
-\item 
+\begin{DoxyCompactList}\small\item\em This function chose randomly the next state of the \hyperlink{namespaceFSM}{F\+SM}. \end{DoxyCompactList}\item 
 def \hyperlink{namespacecommandManager_afef8f89a2132d42ee1e538e12cca47ec}{callback\+Pos} (data)
-\begin{DoxyCompactList}\small\item\em callback for the get position subsriber \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em This callback function for the get position subsriber. \end{DoxyCompactList}\item 
 def \hyperlink{namespacecommandManager_a17f50b385bbd12f96d20b91e1fb43e93}{callback\+Sta} (data)
-\begin{DoxyCompactList}\small\item\em callback for the speck\+Perception subsriber \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Callback function for the speck\+Perception subsriber. \end{DoxyCompactList}\item 
 def \hyperlink{namespacecommandManager_a39a4b5ee79aceca08d85ee68043b46ad}{navigation} (x, y)
-\begin{DoxyCompactList}\small\item\em client function for navigation service \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Client function for the Navigation service which makes a request to go in X and Y position and menages the Navigation service responses. \end{DoxyCompactList}\item 
 def \hyperlink{namespacecommandManager_ae8b570eb4bf393859bc74c9cb5fe125f}{main} ()
 \end{DoxyCompactItemize}
 \subsection*{Variables}
@@ -34,7 +34,11 @@ int \hyperlink{namespacecommandManager_afd4e45cbe13ed5ee1c795062ed21e184}{homeX}
 int \hyperlink{namespacecommandManager_a9deb4aa18f5f193991dbfb07d1f8e0b3}{homeY} = 20
 \begin{DoxyCompactList}\small\item\em Y position of the home. \end{DoxyCompactList}\item 
 string \hyperlink{namespacecommandManager_ad20ad550a7350517b8e1ce3dc95e3347}{state} = \char`\"{}No\+Info\char`\"{}
-\begin{DoxyCompactList}\small\item\em State variable. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em State variable. \end{DoxyCompactList}\item 
+int \hyperlink{namespacecommandManager_a6884642ee072d436560aca2420d14d62}{personX} = 2
+\begin{DoxyCompactList}\small\item\em User Position X. \end{DoxyCompactList}\item 
+int \hyperlink{namespacecommandManager_a765b4c6755570fef5702e26fede7b8e6}{personY} = 3
+\begin{DoxyCompactList}\small\item\em User Position Y. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
@@ -47,9 +51,9 @@ string \hyperlink{namespacecommandManager_ad20ad550a7350517b8e1ce3dc95e3347}{sta
 )}\hypertarget{namespacecommandManager_afef8f89a2132d42ee1e538e12cca47ec}{}\label{namespacecommandManager_afef8f89a2132d42ee1e538e12cca47ec}
 
 
-callback for the get position subsriber 
+This callback function for the get position subsriber. 
 
-\index{command\+Manager@{command\+Manager}!callback\+Sta@{callback\+Sta}}
+It recives a geometry\+\_\+msgs/2\+D\+Pose message which contains a X and Y position from the get\+Position node \index{command\+Manager@{command\+Manager}!callback\+Sta@{callback\+Sta}}
 \index{callback\+Sta@{callback\+Sta}!command\+Manager@{command\+Manager}}
 \subsubsection[{\texorpdfstring{callback\+Sta(data)}{callbackSta(data)}}]{\setlength{\rightskip}{0pt plus 5cm}def command\+Manager.\+callback\+Sta (
 \begin{DoxyParamCaption}
@@ -58,15 +62,19 @@ callback for the get position subsriber
 )}\hypertarget{namespacecommandManager_a17f50b385bbd12f96d20b91e1fb43e93}{}\label{namespacecommandManager_a17f50b385bbd12f96d20b91e1fb43e93}
 
 
-callback for the speck\+Perception subsriber 
+Callback function for the speck\+Perception subsriber. 
 
-\index{command\+Manager@{command\+Manager}!decision@{decision}}
+Which recives a string from \index{command\+Manager@{command\+Manager}!decision@{decision}}
 \index{decision@{decision}!command\+Manager@{command\+Manager}}
 \subsubsection[{\texorpdfstring{decision()}{decision()}}]{\setlength{\rightskip}{0pt plus 5cm}def command\+Manager.\+decision (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
 )}\hypertarget{namespacecommandManager_a4b8947837e5d1af29943bfcf09e748f4}{}\label{namespacecommandManager_a4b8947837e5d1af29943bfcf09e748f4}
+
+
+This function chose randomly the next state of the \hyperlink{namespaceFSM}{F\+SM}. 
+
 \index{command\+Manager@{command\+Manager}!main@{main}}
 \index{main@{main}!command\+Manager@{command\+Manager}}
 \subsubsection[{\texorpdfstring{main()}{main()}}]{\setlength{\rightskip}{0pt plus 5cm}def command\+Manager.\+main (
@@ -84,9 +92,9 @@ callback for the speck\+Perception subsriber
 )}\hypertarget{namespacecommandManager_a39a4b5ee79aceca08d85ee68043b46ad}{}\label{namespacecommandManager_a39a4b5ee79aceca08d85ee68043b46ad}
 
 
-client function for navigation service 
+Client function for the Navigation service which makes a request to go in X and Y position and menages the Navigation service responses. 
 
-
+It prints some log messages which communicate to the user the position in which the robot has arrived or if cannot reach that position. 
 
 \subsection{Variable Documentation}
 \index{command\+Manager@{command\+Manager}!homeX@{homeX}}
@@ -111,6 +119,30 @@ Y position of the home.
 
 \begin{DoxyParams}{Parameters}
 {\em homeY} & here you can set the a priori Y position of the house \\
+\hline
+\end{DoxyParams}
+\index{command\+Manager@{command\+Manager}!personX@{personX}}
+\index{personX@{personX}!command\+Manager@{command\+Manager}}
+\subsubsection[{\texorpdfstring{personX}{personX}}]{\setlength{\rightskip}{0pt plus 5cm}int command\+Manager.\+personX = 2}\hypertarget{namespacecommandManager_a6884642ee072d436560aca2420d14d62}{}\label{namespacecommandManager_a6884642ee072d436560aca2420d14d62}
+
+
+User Position X. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em personX} & it represents the x position of the user \\
+\hline
+\end{DoxyParams}
+\index{command\+Manager@{command\+Manager}!personY@{personY}}
+\index{personY@{personY}!command\+Manager@{command\+Manager}}
+\subsubsection[{\texorpdfstring{personY}{personY}}]{\setlength{\rightskip}{0pt plus 5cm}int command\+Manager.\+personY = 3}\hypertarget{namespacecommandManager_a765b4c6755570fef5702e26fede7b8e6}{}\label{namespacecommandManager_a765b4c6755570fef5702e26fede7b8e6}
+
+
+User Position Y. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em personX} & it represents the x position of the user \\
 \hline
 \end{DoxyParams}
 \index{command\+Manager@{command\+Manager}!state@{state}}

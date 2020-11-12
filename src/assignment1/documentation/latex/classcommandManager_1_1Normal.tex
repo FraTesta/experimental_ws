@@ -2,13 +2,12 @@
 \label{classcommandManager_1_1Normal}\index{command\+Manager.\+Normal@{command\+Manager.\+Normal}}
 
 
-defines the N\+O\+R\+M\+AL state  
+This class defines the N\+O\+R\+M\+AL state of the \hyperlink{namespaceFSM}{F\+SM}.  
 
 
 
 
-Inheritance diagram for command\+Manager.\+Normal\+:
-\nopagebreak
+Inheritance diagram for command\+Manager.\+Normal\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -17,8 +16,7 @@ Inheritance diagram for command\+Manager.\+Normal\+:
 \end{figure}
 
 
-Collaboration diagram for command\+Manager.\+Normal\+:
-\nopagebreak
+Collaboration diagram for command\+Manager.\+Normal\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -42,7 +40,13 @@ def \hyperlink{classcommandManager_1_1Normal_ae95451bab37e817557988c7190bb33bd}{
 
 
 \subsection{Detailed Description}
-defines the N\+O\+R\+M\+AL state 
+This class defines the N\+O\+R\+M\+AL state of the \hyperlink{namespaceFSM}{F\+SM}. 
+
+At each execution it randomly chooses how many movements the robot will make and put this number in the counter variable. Then there is a while loop which checks\+:
+\begin{DoxyItemize}
+\item If there is a \char`\"{}play\char`\"{} message, then the \hyperlink{namespaceFSM}{F\+SM} must go in P\+L\+AY state
+\item If it has been iterated as many times as the counter variable then it goes in S\+L\+E\+EP state Otherwise it make a rquest to the Navigation node to go in X and Y position 
+\end{DoxyItemize}
 
 \subsection{Constructor \& Destructor Documentation}
 \index{command\+Manager\+::\+Normal@{command\+Manager\+::\+Normal}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}

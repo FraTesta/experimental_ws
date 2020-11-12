@@ -109,6 +109,9 @@ $(document).ready(function(){initNavTree('State_8cpp.html','');});
 <div class="title">State.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>This code generates a ROS publisher node which publishes a string 'play', using a std_msgs/String, on the topic SateString each iteration which is defined by the time variable.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;ros/ros.h&quot;</code><br />
 <code>#include &quot;std_msgs/String.h&quot;</code><br />
 <code>#include &lt;sstream&gt;</code><br />
@@ -123,7 +126,18 @@ Functions</h2></td></tr>
 <tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="State_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
 <tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This code generates a ROS publisher node which publishes a string 'play', using a std_msgs/String, on the topic SateString each iteration which is defined by the time variable. </p>
+<h1><a class="anchor" id="Description"></a>
+Description</h1>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">time</td><td>represents the waiting time before generating another 'play' message that is randomly generated at each iteration to simulate a user. It is initialized at 15 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="commandManager_8py.html" title="This node includes the subsription to State and GetPosition publishers, And implement a finite state ...">commandManager.py</a> </dd></dl>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a class="anchor" id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
 <div class="memitem">
 <div class="memproto">
@@ -147,11 +161,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<h1><a class="anchor" id="Description"></a>
-Description</h1>
-<p>This code generates a ROS node which is also a publisher. It publishes a string 'play' on the topic SateString. </p>
-<p>initialization of the variable which will randomly choose how often to generate a 'play' message</p>
-<p>choose randomly the next time iteration </p>
 
 </div>
 </div>

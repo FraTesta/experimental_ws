@@ -1,32 +1,35 @@
 \hypertarget{commandManager_8py}{}\section{/home/francesco/experimental\+\_\+ws/src/assignment1/src/command\+Manager.py File Reference}
 \label{commandManager_8py}\index{/home/francesco/experimental\+\_\+ws/src/assignment1/src/command\+Manager.\+py@{/home/francesco/experimental\+\_\+ws/src/assignment1/src/command\+Manager.\+py}}
+
+
+This node includes the subsription to State and Get\+Position publishers, And implement a finite state machine which manages the information coming from the two nodes and changes the state of the system in according to them.  
+
+
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 class \hyperlink{classcommandManager_1_1Normal}{command\+Manager.\+Normal}
-\begin{DoxyCompactList}\small\item\em defines the N\+O\+R\+M\+AL state \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em This class defines the N\+O\+R\+M\+AL state of the \hyperlink{namespaceFSM}{F\+SM}. \end{DoxyCompactList}\item 
 class \hyperlink{classcommandManager_1_1Sleep}{command\+Manager.\+Sleep}
-\begin{DoxyCompactList}\small\item\em defines the S\+L\+E\+EP state \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em It defines the S\+L\+E\+EP state which sleeps for a random period of time. \end{DoxyCompactList}\item 
 class \hyperlink{classcommandManager_1_1Play}{command\+Manager.\+Play}
-\begin{DoxyCompactList}\small\item\em defines the P\+L\+AY state \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Class that defines the P\+L\+AY state. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
  \hyperlink{namespacecommandManager}{command\+Manager}
-\item 
- \hyperlink{namespaceCommandManager}{Command\+Manager}
-\begin{DoxyCompactList}\small\item\em This node include the subsription to State and Get\+Position publishers, And implement a finite state machine which manages the information coming from the two nodes and changes the state of the system in according to it. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 def \hyperlink{namespacecommandManager_a4b8947837e5d1af29943bfcf09e748f4}{command\+Manager.\+decision} ()
-\item 
+\begin{DoxyCompactList}\small\item\em This function chose randomly the next state of the \hyperlink{namespaceFSM}{F\+SM}. \end{DoxyCompactList}\item 
 def \hyperlink{namespacecommandManager_afef8f89a2132d42ee1e538e12cca47ec}{command\+Manager.\+callback\+Pos} (data)
-\begin{DoxyCompactList}\small\item\em callback for the get position subsriber \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em This callback function for the get position subsriber. \end{DoxyCompactList}\item 
 def \hyperlink{namespacecommandManager_a17f50b385bbd12f96d20b91e1fb43e93}{command\+Manager.\+callback\+Sta} (data)
-\begin{DoxyCompactList}\small\item\em callback for the speck\+Perception subsriber \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Callback function for the speck\+Perception subsriber. \end{DoxyCompactList}\item 
 def \hyperlink{namespacecommandManager_a39a4b5ee79aceca08d85ee68043b46ad}{command\+Manager.\+navigation} (x, y)
-\begin{DoxyCompactList}\small\item\em client function for navigation service \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Client function for the Navigation service which makes a request to go in X and Y position and menages the Navigation service responses. \end{DoxyCompactList}\item 
 def \hyperlink{namespacecommandManager_ae8b570eb4bf393859bc74c9cb5fe125f}{command\+Manager.\+main} ()
 \end{DoxyCompactItemize}
 \subsection*{Variables}
@@ -41,4 +44,20 @@ int \hyperlink{namespacecommandManager_afd4e45cbe13ed5ee1c795062ed21e184}{comman
 int \hyperlink{namespacecommandManager_a9deb4aa18f5f193991dbfb07d1f8e0b3}{command\+Manager.\+homeY} = 20
 \begin{DoxyCompactList}\small\item\em Y position of the home. \end{DoxyCompactList}\item 
 string \hyperlink{namespacecommandManager_ad20ad550a7350517b8e1ce3dc95e3347}{command\+Manager.\+state} = \char`\"{}No\+Info\char`\"{}
-\begin{DoxyCompactList}\small\item\em State variable. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em State variable. \end{DoxyCompactList}\item 
+int \hyperlink{namespacecommandManager_a6884642ee072d436560aca2420d14d62}{command\+Manager.\+personX} = 2
+\begin{DoxyCompactList}\small\item\em User Position X. \end{DoxyCompactList}\item 
+int \hyperlink{namespacecommandManager_a765b4c6755570fef5702e26fede7b8e6}{command\+Manager.\+personY} = 3
+\begin{DoxyCompactList}\small\item\em User Position Y. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This node includes the subsription to State and Get\+Position publishers, And implement a finite state machine which manages the information coming from the two nodes and changes the state of the system in according to them. 
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{getPosition_8cpp}{get\+Position.\+cpp} 
+
+\hyperlink{Navigation_8cpp}{Navigation.\+cpp} 
+
+\hyperlink{State_8cpp}{State.\+cpp} 
+\end{DoxySeeAlso}

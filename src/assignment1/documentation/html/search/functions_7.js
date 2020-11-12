@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['user_5faction',['user_action',['../namespacestate__machine.html#afaa99f0eebff6571a958fcc827c6a367',1,'state_machine']]]
+  ['printlogs',['printlogs',['../Navigation_8cpp.html#af65e9546a3cb9c4f867fbc597d5dc3cd',1,'Navigation.cpp']]]
 ];

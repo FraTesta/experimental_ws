@@ -109,8 +109,11 @@ $(document).ready(function(){initNavTree('getPosition_8cpp.html','');});
 <div class="title">getPosition.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>This node publishes a random position which will be used from the command manager node . In practice it simulates the pointing gesture from the user and the random travel in NORMAL mode as well.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;ros/ros.h&quot;</code><br />
-<code>#include &quot;geometry_msgs/Twist.h&quot;</code><br />
+<code>#include &quot;geometry_msgs/Pose2D.h&quot;</code><br />
 <code>#include &lt;sstream&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
@@ -125,7 +128,20 @@ Functions</h2></td></tr>
 <tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="getPosition_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
 <tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This node publishes a random position which will be used from the command manager node . In practice it simulates the pointing gesture from the user and the random travel in NORMAL mode as well. </p>
+<h1><a class="anchor" id="Description"></a>
+Description</h1>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>is an integer which represents the X position that is randomly chosen at each iteration. </td></tr>
+    <tr><td class="paramname">y</td><td>is an integer which represents the Y position that is randomly chosen at each iteration </td></tr>
+    <tr><td class="paramname">pose</td><td>is a geometry_msgs/Pose2D message in which we put the two previous values </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="commandManager_8py.html" title="This node includes the subsription to State and GetPosition publishers, And implement a finite state ...">commandManager.py</a> </dd></dl>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a class="anchor" id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
 <div class="memitem">
 <div class="memproto">
@@ -149,9 +165,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<h1><a class="anchor" id="Description"></a>
-Description</h1>
-<p>This node publishes a random position which will be used from the command manager node. In practice it simulates the pointing gesture from the user and the random travel in NORMAL mode as well. </p>
 
 </div>
 </div>

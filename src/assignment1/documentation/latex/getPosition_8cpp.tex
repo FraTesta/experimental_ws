@@ -1,7 +1,12 @@
 \hypertarget{getPosition_8cpp}{}\section{/home/francesco/experimental\+\_\+ws/src/assignment1/src/get\+Position.cpp File Reference}
 \label{getPosition_8cpp}\index{/home/francesco/experimental\+\_\+ws/src/assignment1/src/get\+Position.\+cpp@{/home/francesco/experimental\+\_\+ws/src/assignment1/src/get\+Position.\+cpp}}
+
+
+This node publishes a random position which will be used from the command manager node . In practice it simulates the pointing gesture from the user and the random travel in N\+O\+R\+M\+AL mode as well.  
+
+
 {\ttfamily \#include \char`\"{}ros/ros.\+h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}geometry\+\_\+msgs/\+Twist.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}geometry\+\_\+msgs/\+Pose2\+D.\+h\char`\"{}}\\*
 {\ttfamily \#include $<$sstream$>$}\\*
 {\ttfamily \#include $<$stdio.\+h$>$}\\*
 {\ttfamily \#include $<$stdlib.\+h$>$}\\*
@@ -19,6 +24,24 @@ int \hyperlink{getPosition_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int ar
 \end{DoxyCompactItemize}
 
 
+\subsection{Detailed Description}
+This node publishes a random position which will be used from the command manager node . In practice it simulates the pointing gesture from the user and the random travel in N\+O\+R\+M\+AL mode as well. 
+
+\hypertarget{State_8cpp_Description}{}\subsection{Description}\label{State_8cpp_Description}
+
+\begin{DoxyParams}{Parameters}
+{\em x} & is an integer which represents the X position that is randomly chosen at each iteration. \\
+\hline
+{\em y} & is an integer which represents the Y position that is randomly chosen at each iteration \\
+\hline
+{\em pose} & is a geometry\+\_\+msgs/\+Pose2D message in which we put the two previous values \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{commandManager_8py}{command\+Manager.\+py} 
+\end{DoxySeeAlso}
+
+
 \subsection{Function Documentation}
 \index{get\+Position.\+cpp@{get\+Position.\+cpp}!main@{main}}
 \index{main@{main}!get\+Position.\+cpp@{get\+Position.\+cpp}}
@@ -28,5 +51,3 @@ int \hyperlink{getPosition_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int ar
 \item[{char $\ast$$\ast$}]{argv}
 \end{DoxyParamCaption}
 )}\hypertarget{getPosition_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{}\label{getPosition_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}
-\hypertarget{State_8cpp_Description}{}\subsection{Description}\label{State_8cpp_Description}
-This node publishes a random position which will be used from the command manager node. In practice it simulates the pointing gesture from the user and the random travel in N\+O\+R\+M\+AL mode as well. 

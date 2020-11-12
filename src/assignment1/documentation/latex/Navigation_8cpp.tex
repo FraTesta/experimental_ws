@@ -1,5 +1,10 @@
 \hypertarget{Navigation_8cpp}{}\section{/home/francesco/experimental\+\_\+ws/src/assignment1/src/\+Navigation.cpp File Reference}
 \label{Navigation_8cpp}\index{/home/francesco/experimental\+\_\+ws/src/assignment1/src/\+Navigation.\+cpp@{/home/francesco/experimental\+\_\+ws/src/assignment1/src/\+Navigation.\+cpp}}
+
+
+It simulate the navigation from the current position to the position requested by the client, taking into account the dimension of a map a priori chosen.  
+
+
 {\ttfamily \#include \char`\"{}ros/ros.\+h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}assignment1/\+Go\+To.\+h\char`\"{}}\\*
 Include dependency graph for Navigation.\+cpp\+:\nopagebreak
@@ -15,9 +20,19 @@ Include dependency graph for Navigation.\+cpp\+:\nopagebreak
 \#define \hyperlink{Navigation_8cpp_a8fd091040600c54e1b52be58d011ec30}{Xmax}~20
 \begin{DoxyCompactList}\small\item\em Max dimension of the map along the X axis. \end{DoxyCompactList}\item 
 \#define \hyperlink{Navigation_8cpp_aaf9edb39f963596bfe86fc184965dcb4}{Ymax}~20
-\begin{DoxyCompactList}\small\item\em Max dimension of the map along the Y axis. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Max dimension of the map along the Y axis. \end{DoxyCompactList}\item 
+\#define \hyperlink{Navigation_8cpp_a5e4cd1e773df9db61c1e224bc0872541}{homeX}~10
+\begin{DoxyCompactList}\small\item\em X position of the House. \end{DoxyCompactList}\item 
+\#define \hyperlink{Navigation_8cpp_af67938dd7cf91798c19150a38a90ddc8}{homeY}~20
+\begin{DoxyCompactList}\small\item\em Y position of the House. \end{DoxyCompactList}\item 
+\#define \hyperlink{Navigation_8cpp_a8cf66cab74089248cafe85e0ce12d9b3}{userX}~2
+\begin{DoxyCompactList}\small\item\em X position of the user. \end{DoxyCompactList}\item 
+\#define \hyperlink{Navigation_8cpp_abe6819b706873d83c9bd09343b28097f}{userY}~3
+\begin{DoxyCompactList}\small\item\em Y position of the user. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
+\item 
+void \hyperlink{Navigation_8cpp_af65e9546a3cb9c4f867fbc597d5dc3cd}{printlogs} (int x, int y)
 \item 
 bool \hyperlink{Navigation_8cpp_aec33b62b66fc2284fabc2001b96599af}{go\+To} (assignment1\+::\+Go\+To\+::\+Request \&req, assignment1\+::\+Go\+To\+::\+Response \&res)
 \item 
@@ -25,7 +40,45 @@ int \hyperlink{Navigation_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int arg
 \end{DoxyCompactItemize}
 
 
+\subsection{Detailed Description}
+It simulate the navigation from the current position to the position requested by the client, taking into account the dimension of a map a priori chosen. 
+
+\hypertarget{State_8cpp_Description}{}\subsection{Description}\label{State_8cpp_Description}
+\hypertarget{_}{}\subsubsection{}\label{_}
+This service takes a X and Y positon request from the \char`\"{}command manager\char`\"{} node which is the only client. \begin{DoxySeeAlso}{See also}
+\hyperlink{commandManager_8py}{command\+Manager.\+py} 
+\end{DoxySeeAlso}
+
+
 \subsection{Macro Definition Documentation}
+\index{Navigation.\+cpp@{Navigation.\+cpp}!homeX@{homeX}}
+\index{homeX@{homeX}!Navigation.\+cpp@{Navigation.\+cpp}}
+\subsubsection[{\texorpdfstring{homeX}{homeX}}]{\setlength{\rightskip}{0pt plus 5cm}\#define homeX~10}\hypertarget{Navigation_8cpp_a5e4cd1e773df9db61c1e224bc0872541}{}\label{Navigation_8cpp_a5e4cd1e773df9db61c1e224bc0872541}
+
+
+X position of the House. 
+
+\index{Navigation.\+cpp@{Navigation.\+cpp}!homeY@{homeY}}
+\index{homeY@{homeY}!Navigation.\+cpp@{Navigation.\+cpp}}
+\subsubsection[{\texorpdfstring{homeY}{homeY}}]{\setlength{\rightskip}{0pt plus 5cm}\#define homeY~20}\hypertarget{Navigation_8cpp_af67938dd7cf91798c19150a38a90ddc8}{}\label{Navigation_8cpp_af67938dd7cf91798c19150a38a90ddc8}
+
+
+Y position of the House. 
+
+\index{Navigation.\+cpp@{Navigation.\+cpp}!userX@{userX}}
+\index{userX@{userX}!Navigation.\+cpp@{Navigation.\+cpp}}
+\subsubsection[{\texorpdfstring{userX}{userX}}]{\setlength{\rightskip}{0pt plus 5cm}\#define userX~2}\hypertarget{Navigation_8cpp_a8cf66cab74089248cafe85e0ce12d9b3}{}\label{Navigation_8cpp_a8cf66cab74089248cafe85e0ce12d9b3}
+
+
+X position of the user. 
+
+\index{Navigation.\+cpp@{Navigation.\+cpp}!userY@{userY}}
+\index{userY@{userY}!Navigation.\+cpp@{Navigation.\+cpp}}
+\subsubsection[{\texorpdfstring{userY}{userY}}]{\setlength{\rightskip}{0pt plus 5cm}\#define userY~3}\hypertarget{Navigation_8cpp_abe6819b706873d83c9bd09343b28097f}{}\label{Navigation_8cpp_abe6819b706873d83c9bd09343b28097f}
+
+
+Y position of the user. 
+
 \index{Navigation.\+cpp@{Navigation.\+cpp}!Xmax@{Xmax}}
 \index{Xmax@{Xmax}!Navigation.\+cpp@{Navigation.\+cpp}}
 \subsubsection[{\texorpdfstring{Xmax}{Xmax}}]{\setlength{\rightskip}{0pt plus 5cm}\#define Xmax~20}\hypertarget{Navigation_8cpp_a8fd091040600c54e1b52be58d011ec30}{}\label{Navigation_8cpp_a8fd091040600c54e1b52be58d011ec30}
@@ -51,7 +104,8 @@ Max dimension of the map along the Y axis.
 \item[{assignment1\+::\+Go\+To\+::\+Response \&}]{res}
 \end{DoxyParamCaption}
 )}\hypertarget{Navigation_8cpp_aec33b62b66fc2284fabc2001b96599af}{}\label{Navigation_8cpp_aec33b62b66fc2284fabc2001b96599af}
-\index{Navigation.\+cpp@{Navigation.\+cpp}!main@{main}}
+\hypertarget{Navigation.cpp_goTo}{}\subsection{go\+To}\label{Navigation.cpp_goTo}
+This is the serve function which menages the requests from clients. It checks if the target position is within the map predefined by the parameters Xmax and Ymax if it is inside then it simulates the navigation simply waiting 3 seconds after which it assigns the request values to the response and sets to true the check variable. Otherwise it assigns false to the check variable\index{Navigation.\+cpp@{Navigation.\+cpp}!main@{main}}
 \index{main@{main}!Navigation.\+cpp@{Navigation.\+cpp}}
 \subsubsection[{\texorpdfstring{main(int argc, char $\ast$$\ast$argv)}{main(int argc, char **argv)}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
 \begin{DoxyParamCaption}
@@ -59,6 +113,13 @@ Max dimension of the map along the Y axis.
 \item[{char $\ast$$\ast$}]{argv}
 \end{DoxyParamCaption}
 )}\hypertarget{Navigation_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{}\label{Navigation_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}
-\hypertarget{State_8cpp_Description}{}\subsection{Description}\label{State_8cpp_Description}
-It simulate the navigation from the current position to the position requested by the client, taking into account the dimension of a map a priori chosen \hypertarget{Navigation.cpp_INPUT}{}\subsubsection{/ O\+U\+T\+P\+UT}\label{Navigation.cpp_INPUT}
-This service takes a X and Y positon request from the \char`\"{}command manager\char`\"{} node which is the only client.
+\index{Navigation.\+cpp@{Navigation.\+cpp}!printlogs@{printlogs}}
+\index{printlogs@{printlogs}!Navigation.\+cpp@{Navigation.\+cpp}}
+\subsubsection[{\texorpdfstring{printlogs(int x, int y)}{printlogs(int x, int y)}}]{\setlength{\rightskip}{0pt plus 5cm}void printlogs (
+\begin{DoxyParamCaption}
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}\hypertarget{Navigation_8cpp_af65e9546a3cb9c4f867fbc597d5dc3cd}{}\label{Navigation_8cpp_af65e9546a3cb9c4f867fbc597d5dc3cd}
+\hypertarget{Navigation.cpp_printlogs}{}\subsection{printlogs}\label{Navigation.cpp_printlogs}
+It\textquotesingle{}s a simple function that, based on the requested x y position, generates a log in the terminal 

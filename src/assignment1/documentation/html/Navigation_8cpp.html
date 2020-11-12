@@ -110,6 +110,9 @@ $(document).ready(function(){initNavTree('Navigation_8cpp.html','');});
 <div class="title">Navigation.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>It simulate the navigation from the current position to the position requested by the client, taking into account the dimension of a map a priori chosen.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;ros/ros.h&quot;</code><br />
 <code>#include &quot;assignment1/GoTo.h&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
@@ -126,15 +129,92 @@ Macros</h2></td></tr>
 <tr class="memitem:aaf9edb39f963596bfe86fc184965dcb4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Navigation_8cpp.html#aaf9edb39f963596bfe86fc184965dcb4">Ymax</a>&#160;&#160;&#160;20</td></tr>
 <tr class="memdesc:aaf9edb39f963596bfe86fc184965dcb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Max dimension of the map along the Y axis.  <a href="#aaf9edb39f963596bfe86fc184965dcb4">More...</a><br /></td></tr>
 <tr class="separator:aaf9edb39f963596bfe86fc184965dcb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e4cd1e773df9db61c1e224bc0872541"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Navigation_8cpp.html#a5e4cd1e773df9db61c1e224bc0872541">homeX</a>&#160;&#160;&#160;10</td></tr>
+<tr class="memdesc:a5e4cd1e773df9db61c1e224bc0872541"><td class="mdescLeft">&#160;</td><td class="mdescRight">X position of the House.  <a href="#a5e4cd1e773df9db61c1e224bc0872541">More...</a><br /></td></tr>
+<tr class="separator:a5e4cd1e773df9db61c1e224bc0872541"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af67938dd7cf91798c19150a38a90ddc8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Navigation_8cpp.html#af67938dd7cf91798c19150a38a90ddc8">homeY</a>&#160;&#160;&#160;20</td></tr>
+<tr class="memdesc:af67938dd7cf91798c19150a38a90ddc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Y position of the House.  <a href="#af67938dd7cf91798c19150a38a90ddc8">More...</a><br /></td></tr>
+<tr class="separator:af67938dd7cf91798c19150a38a90ddc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cf66cab74089248cafe85e0ce12d9b3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Navigation_8cpp.html#a8cf66cab74089248cafe85e0ce12d9b3">userX</a>&#160;&#160;&#160;2</td></tr>
+<tr class="memdesc:a8cf66cab74089248cafe85e0ce12d9b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">X position of the user.  <a href="#a8cf66cab74089248cafe85e0ce12d9b3">More...</a><br /></td></tr>
+<tr class="separator:a8cf66cab74089248cafe85e0ce12d9b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe6819b706873d83c9bd09343b28097f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Navigation_8cpp.html#abe6819b706873d83c9bd09343b28097f">userY</a>&#160;&#160;&#160;3</td></tr>
+<tr class="memdesc:abe6819b706873d83c9bd09343b28097f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Y position of the user.  <a href="#abe6819b706873d83c9bd09343b28097f">More...</a><br /></td></tr>
+<tr class="separator:abe6819b706873d83c9bd09343b28097f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:af65e9546a3cb9c4f867fbc597d5dc3cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Navigation_8cpp.html#af65e9546a3cb9c4f867fbc597d5dc3cd">printlogs</a> (int x, int y)</td></tr>
+<tr class="separator:af65e9546a3cb9c4f867fbc597d5dc3cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec33b62b66fc2284fabc2001b96599af"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Navigation_8cpp.html#aec33b62b66fc2284fabc2001b96599af">goTo</a> (assignment1::GoTo::Request &amp;req, assignment1::GoTo::Response &amp;res)</td></tr>
 <tr class="separator:aec33b62b66fc2284fabc2001b96599af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Navigation_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
 <tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>It simulate the navigation from the current position to the position requested by the client, taking into account the dimension of a map a priori chosen. </p>
+<h1><a class="anchor" id="Description"></a>
+Description</h1>
+<h2><a class="anchor" id=""></a>
+</h2>
+<p>This service takes a X and Y positon request from the "command manager" node which is the only client. </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="commandManager_8py.html" title="This node includes the subsription to State and GetPosition publishers, And implement a finite state ...">commandManager.py</a> </dd></dl>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a class="anchor" id="a5e4cd1e773df9db61c1e224bc0872541"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define homeX&#160;&#160;&#160;10</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>X position of the House. </p>
+
+</div>
+</div>
+<a class="anchor" id="af67938dd7cf91798c19150a38a90ddc8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define homeY&#160;&#160;&#160;20</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Y position of the House. </p>
+
+</div>
+</div>
+<a class="anchor" id="a8cf66cab74089248cafe85e0ce12d9b3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define userX&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>X position of the user. </p>
+
+</div>
+</div>
+<a class="anchor" id="abe6819b706873d83c9bd09343b28097f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define userY&#160;&#160;&#160;3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Y position of the user. </p>
+
+</div>
+</div>
 <a class="anchor" id="a8fd091040600c54e1b52be58d011ec30"></a>
 <div class="memitem">
 <div class="memproto">
@@ -187,6 +267,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<h1><a class="anchor" id="goTo"></a>
+goTo</h1>
+<p>This is the serve function which menages the requests from clients. It checks if the target position is within the map predefined by the parameters Xmax and Ymax if it is inside then it simulates the navigation simply waiting 3 seconds after which it assigns the request values to the response and sets to true the check variable. Otherwise it assigns false to the check variable</p>
 
 </div>
 </div>
@@ -213,12 +296,35 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<h1><a class="anchor" id="Description"></a>
-Description</h1>
-<p>It simulate the navigation from the current position to the position requested by the client, taking into account the dimension of a map a priori chosen </p>
-<h2><a class="anchor" id="INPUT"></a>
-/ OUTPUT</h2>
-<p>This service takes a X and Y positon request from the "command manager" node which is the only client.</p>
+
+</div>
+</div>
+<a class="anchor" id="af65e9546a3cb9c4f867fbc597d5dc3cd"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void printlogs </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<h1><a class="anchor" id="printlogs"></a>
+printlogs</h1>
+<p>It's a simple function that, based on the requested x y position, generates a log in the terminal </p>
 
 </div>
 </div>

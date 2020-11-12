@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['ymax',['Ymax',['../Navigation_8cpp.html#aaf9edb39f963596bfe86fc184965dcb4',1,'Navigation.cpp']]]
+  ['userx',['userX',['../Navigation_8cpp.html#a8cf66cab74089248cafe85e0ce12d9b3',1,'Navigation.cpp']]],
+  ['usery',['userY',['../Navigation_8cpp.html#abe6819b706873d83c9bd09343b28097f',1,'Navigation.cpp']]]
 ];
