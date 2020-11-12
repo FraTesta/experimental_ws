@@ -5,7 +5,7 @@ Therfore you can simply clone the repository and digit :
 ```
 $ catkin_make
 ```
-in order to build the workspace.
+in order to build the workspace. Or clone just a specific package using its path.
 
 The repository contains also a _.gitignore_ file.
 ## Contacts
