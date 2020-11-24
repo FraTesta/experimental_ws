@@ -1,0 +1,9 @@
+<launch>
+
+    <node name = "speakPerception" pkg="assignment2" type="speakPerception2" />
+    <node name = "getPosition" pkg="assignment2" type="getPosition2" />
+    <node name = "commandManager" pkg="assignment2" type="commandManager.py" output = "screen" />
+    <node name = "navigation" pkg="assignment2" type="Navigation2" output = "screen" />
+
+
+</launch>
