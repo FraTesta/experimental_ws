@@ -2,8 +2,8 @@
 <robot name="robotDog" xmlns:xacro="https://www.ros.org/wiki/xacro" >
     
 
- <xacro:include filename="$(find robot1_description)/urdf/materials.xacro" />
- <xacro:include filename="$(find robot1_description)/urdf/cameraArm.gazebo" />
+ <xacro:include filename="$(find assignment2)/urdf/materials.xacro" />
+ <xacro:include filename="$(find assignment2)/urdf/robotDog.gazebo" />
  <xacro:property name="camera_link" value="0.05" /> <!-- Size of square 'camera' box -->
  <xacro:property name="neck_length" value="0.15" />
 
@@ -250,9 +250,6 @@
 		<mechanicalInterface>1</mechanicalInterface>
 	</actuator>
 </transmission>
-
-
-
 
 
 </robot>

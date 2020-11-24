@@ -11,6 +11,7 @@
 #include "assignment1/GoTo.h"
 
 
+
 /// Max dimension of the map along the X axis 
 #define Xmax 20
 /// Max dimension of the map along the Y axis 
