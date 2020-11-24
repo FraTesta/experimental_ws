@@ -12,6 +12,40 @@
                 iyy="${mass*(3*r*r+l*l)/12}" iyz = "0" izz="${mass*(r*r)/2}" /> 
  </xacro:macro>
 
+ <xacro:macro name="link_ear" params="name">
+   <link name="${name}">
+            <inertial>
+              <mass value="0.2"/>
+              <origin rpy="0 0 0" xyz="0 0 0"/>
+              <inertia ixx="0.000526666666667" ixy="0" ixz="0" iyy="0.000526666666667" iyz="0" izz="0.001"/>
+            </inertial>
+            <collision name="${name}_collision">
+              <origin rpy="0 0 1.5708" xyz="0 0 0"/>
+              <geometry>
+                <box size="0.034 0.05 0.03"/>
+              </geometry>
+            </collision>
+            <visual name="${name}_visual">
+              <origin rpy="0 0 0" xyz="0 0 0"/>
+              <geometry>
+                <box size="0.034 0.05 0.03"/>
+              </geometry>
+		<material name="blue" />
+            </visual>
+        </link>
+ </xacro:macro> 
+
+    <xacro:macro name="joint_ear" params="name child origin_xyz">
+      <joint name="${name}" type="fixed">
+        <origin rpy="0 0 0" xyz="${origin_xyz}"/>
+        <child link="${child}"/>
+        <parent link="head_link"/>
+        <axis rpy="0 0 0" xyz="0 0 1"/>
+        <limit effort="10000" velocity="1000"/>
+        <joint_properties damping="1.0" friction="1.0"/>
+      </joint>
+    </xacro:macro>
+
     <xacro:macro name="link_wheel" params="name">
         <link name="${name}">
             <inertial>
@@ -45,7 +79,7 @@
       </joint>
     </xacro:macro>
 
-
+<!-- base link  -->
   
   <link name="base_link">
     <!-- pose and inertial -->
@@ -130,7 +164,7 @@
   <joint name="neck_joint" type="fixed">
   	<axis xyz="0 0 1"/>
   	<limit effort="1000.0" lower="-3.14" upper="3.14" velocity="0.2"/>
-  	<origin rpy="0 0 0" xyz="0 0 0.035"/> <!-- half the height of the base link -->
+  	<origin rpy="0 0 0" xyz="0.15 0 0.035"/> <!-- half the height of the base link -->
   	<parent link="base_link"/>
   	<child link="neck_link"/>
   </joint>
@@ -144,13 +178,13 @@
   		<inertia ixx="0.000010279" ixy="0" ixz="0" iyy="0.000010279" iyz="0" izz="0.000007225"/>
   	</inertial>
   	<collision>
-  	  <origin xyz="0 0 0.04" rpy="0 0 1.57"/> <!-- frame moved to the base of the head -->
+  	  <origin xyz="0 0 0.04" rpy="0 0 0"/> <!-- frame moved to the base of the head -->
       <geometry>
         <box size="0.034 0.2 0.08"/>
       </geometry>
   	</collision>
   	<visual>
-  	  <origin xyz="0 0 0.04" rpy="0 0 1.57"/> <!-- frame moved to the base of the head -->
+  	  <origin xyz="0 0 0.04" rpy="0 0 0"/> <!-- frame moved to the base of the head -->
       <geometry>
         <box size="0.034 0.2 0.08"/>
       </geometry>
@@ -192,10 +226,17 @@
 
   <joint name="camera_joint" type="fixed">
     <axis xyz="0 1 0" />
-    <origin xyz="0 0.017 0.04" rpy="0 0 1.5708"/>
+    <origin xyz="0 0.017 0.04" rpy="0 0 0"/>
     <parent link="head_link"/>
     <child link="camera_link"/>
   </joint>
+
+<!-- hears definition -->
+
+  <xacro:link_ear name="link_right_ear" />
+  <xacro:link_ear name="link_left_ear" />
+  <xacro:joint_ear name="joint_right_ear"  child="link_right_ear"  origin_xyz="0 0.08 0.08"  />
+  <xacro:joint_ear name="joint_left_ear"   child="link_left_ear"   origin_xyz="0 -0.08 0.08"  />
 
 <!-- transmission -->
 
@@ -209,6 +250,7 @@
 		<mechanicalInterface>1</mechanicalInterface>
 	</actuator>
 </transmission>
+
 
 
 

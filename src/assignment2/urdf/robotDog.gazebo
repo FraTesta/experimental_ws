@@ -1,5 +1,6 @@
 <?xml version="1.0" ?>
 <robot name="robotDog" xmlns:xacro="https://www.ros.org/wiki/xacro" >
+
 <gazebo reference="base_link">
     <material>Gazebo/Orange</material>
   </gazebo>
@@ -8,9 +9,6 @@
   </gazebo>
   <gazebo reference="link_right_wheel">
     <material>Gazebo/Blue</material>
-  </gazebo>
-  <gazebo reference="arm_base_link">
-    <material>Gazebo/Red</material>
   </gazebo>
 
   <gazebo reference="neck_link">
@@ -21,7 +19,15 @@
     <material>Gazebo/Red</material>
   </gazebo>
 
+    <gazebo reference="link_right_ear">
+    <material>Gazebo/Blue</material>
+  </gazebo>
 
+        <gazebo reference="link_right_ear">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+ 
+ 
 
 
   <gazebo reference="head_joint">
