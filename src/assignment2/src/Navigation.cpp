@@ -8,7 +8,14 @@
  */
 
 #include "ros/ros.h"
-#include "assignment1/GoTo.h"
+#include "assignment2/GoTo.h"
+
+/// Library necessary to use Twists ROS messages
+#include "geometry_msgs/Twist.h"
+/// Library necessary to use Odometry ROS messages
+#include "nav_msgs/Odometry.h"
+
+#include <iostream>
 
 
 
@@ -25,6 +32,7 @@
 /// Y position of the user
 #define userY 3 
 
+ros::Publisher pub;
 
 void printlogs(int x ,int y){
   ///  \section printlogs
@@ -38,8 +46,8 @@ void printlogs(int x ,int y){
 }
 
 
-bool goTo(assignment1::GoTo::Request  &req,
-         assignment1::GoTo::Response &res)
+bool goTo(assignment2::GoTo::Request  &req,
+         assignment2::GoTo::Response &res)
 { 
   /*!
 * \section goTo
@@ -48,11 +56,17 @@ bool goTo(assignment1::GoTo::Request  &req,
 * if it is inside then it simulates the navigation simply waiting 3 seconds after which it assigns the request values to the response and sets to true the check variable.
 * Otherwise it assigns false to the check variable 
 */ 
-
+  geometry_msgs::Twist vel;
+        
   printlogs((long int)req.x,(long int)req.y);
   if((req.x <= Xmax) && (req.y <= Ymax)){
      sleep(3); //which simulate the movement of the robot 
      res.ok = true;
+     
+     vel.linear.x = req.x;
+     vel.angular.z= req.y;
+     pub.publish(vel);
+
      res.currentX = req.x;
      res.currentY = req.y; 
       }else{
@@ -67,7 +81,9 @@ int main(int argc, char **argv)
 
   ros::init(argc, argv, "Navigation_server"); //node init
   ros::NodeHandle n;
-
+  /// @param pub Publisher to send velocity commands on the topic cmd_vel
+  pub = n.advertise<geometry_msgs::Twist>("cmd_vel", 5);
+  
   ros::ServiceServer service = n.advertiseService("myNavigation", goTo);
   ROS_INFO(" Ready to go in a new position.");
   ros::spin();

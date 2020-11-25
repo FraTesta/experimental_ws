@@ -19,9 +19,10 @@ import time
 import random
 import sys
 from std_msgs.msg import String
-from geometry_msgs.msg import Pose2D
+from geometry_msgs.msg import Twist
+from nav_msgs.msg import Odometry
 
-from assignment1.srv import *
+from assignment2.srv import *
 
 ## robot X position variable
 # @param X is the initialize X position of the robot
@@ -31,20 +32,22 @@ X = 0
 Y = 0
 ## X position of the home 
 # @param homeX here you can set the a priori X position of the house
-homeX = 10
+homeX = 0.2
 ## Y position of the home 
 # @param homeY here you can set the a priori Y position of the house
-homeY = 20
+homeY = 0
 ## State variable
 # @param state This is the state coming from State node (that's why is a string) and it can be ether play or NoInfo 
 state = "NoInfo"
 
+
+
 ## User Position X
 # @param personX it represents the x position of the user
-personX = 2
+personX = 0.2
 ## User Position Y
 # @param personX it represents the x position of the user
-personY = 3
+personY = 0
 
 ## This function chose randomly the next state of the FSM
 def decision():
@@ -55,9 +58,9 @@ def decision():
 def callbackPos(data):
 #    rospy.loginfo(rospy.get_caller_id() + " I heard x: %d  y: %d", data.x, data.y)
     global X
-    X = data.x
+    X = data.linear.x
     global Y 
-    Y = data.y    
+    Y = data.angular.z    
 
 ## Callback function for the speckPerception subsriber.
 # Which recives a string from   
@@ -66,38 +69,18 @@ def callbackSta(data):
     global state 
     state = "play"
 
-## Client function for the Navigation service which makes a request to go in X and Y position and menages the Navigation service responses.
-#  It prints some log messages which communicate to the user the position in which the robot has arrived or if cannot reach that position. 
-def navigation(x,y):
+## def randMToN(double M, double N):
+##    return M + (rand() / ( RAND_MAX / (N-M) ) ) 
+def navigation():
+    pub = rospy.Publisher('odom',Odometry,queue_size = 10)
+    rate = rospy.Rate(10)
+    od = Odometry()
+    #vel_msg.linear.x = 0.2
+    #vel_msg.angular.z = 0.1
+    
+    pub.publish(vel_msg)
 
-    global homeX
-    global homeY
-    global personX
-    global personY
-    rospy.wait_for_service('myNavigation')
-    try:
-        go_to = rospy.ServiceProxy('myNavigation',GoTo)
-        check = go_to(x ,y)
-        if check.ok == True:
-            if (check.currentX ==homeX) & (check.currentY ==homeY):
-                rospy.loginfo(rospy.get_caller_id() + " The robot is arrived at home" )
-            elif (check.currentX == personX) & (check.currentY == personY):
-                rospy.loginfo(rospy.get_caller_id() + " The robot is returned to the user" )
-            else:
-                rospy.loginfo(rospy.get_caller_id() + " The robot is arrived in position x: %d , y: %d", check.currentX, check.currentY )
-             
-        else: 
-            rospy.loginfo(rospy.get_caller_id() + " The robot cannot reach that posiion")
-        return check.ok
-    except rospy.ServiceException as e:
-        print("Service call failed: %s"%e)
 
-## This class defines the NORMAL state of the FSM. 
-# At each execution it randomly chooses how many movements the robot will make and put this number in the counter variable.
-# Then there is a while loop which checks:
-# - If there is a "play" message, then the FSM must go in PLAY state 
-# - If it has been iterated as many times as the counter variable then it goes in SLEEP state
-# Otherwise it make a rquest to the Navigation node to go in X and Y position
 class Normal(smach.State):
     def __init__(self):
         smach.State.__init__(self, 
@@ -107,8 +90,6 @@ class Normal(smach.State):
         
     def execute(self,userdata):
 
-        global X
-        global Y
         global state
         
         self.counter = random.randint(1,2) 
@@ -119,7 +100,7 @@ class Normal(smach.State):
                 return 'goToPlay'
             if self.counter == 4:
                 return 'goToSleep'           
-            navigation(X,Y) # request for the service to move in X and Y position
+            navigation() # request for the service to move in X and Y position
 
             self.counter += 1
             
@@ -142,7 +123,9 @@ class Sleep(smach.State):
         
         global homeX
         global homeY
-        navigation(homeX,homeY) 
+        #navigation() 
+        rospy.loginfo("I m in SLEEP mode")
+        time.sleep(3)
         self.rate.sleep()
         return 'goToNormal'
 
@@ -159,8 +142,7 @@ class Play(smach.State):
         global X
         global Y 
 
-        navigation(X,Y)
-        navigation(personX,personY)
+        rospy.loginfo("I m in PLAY mode")
         time.sleep(3)
 
         return 'goToNormal'       
@@ -170,7 +152,7 @@ class Play(smach.State):
 def main():
     rospy.init_node('smach_example_state_machine')
 
-    rospy.Subscriber("Position", Pose2D, callbackPos) # subsriber get_position 
+    rospy.Subscriber("Random_vel", Twist, callbackPos) # subsriber get_position 
     rospy.Subscriber("StateString", String, callbackSta)
 
     # Create a SMACH state machine

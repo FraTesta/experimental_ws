@@ -11,17 +11,16 @@
 
 
 #include "ros/ros.h"
-#include "geometry_msgs/Pose2D.h"
+#include "geometry_msgs/Twist.h"
 #include <sstream>
 #include <stdio.h>
 #include <stdlib.h>
+#include <iostream>
+
+double randMToN(double M, double N)
+{     return M + (rand() / ( RAND_MAX / (N-M) ) ) ; }
 
 int main (int argc, char **argv){
-
-    
-    int x = rand() % 15; 
-    int y = rand() % 15; 
-
 
 
 ros::init(argc,argv,"getPosition"); 
@@ -29,29 +28,26 @@ ros::init(argc,argv,"getPosition");
 ros::Publisher pub;
 ros::NodeHandle nh;
 
-pub = nh.advertise<geometry_msgs::Pose2D>("Position", 1000); //pub and topic init 
+//pub = nh.advertise<geometry_msgs::Pose2D>("Position", 1000); //pub and topic init 
+pub = nh.advertise<geometry_msgs::Twist>("Random_vel", 5);
 
 ros::Rate loop_rate(1); // that I m going to make it randomly in the simulation phase 
 
 
 while(ros::ok()){
 
-geometry_msgs::Pose2D pose; 
-    
-    pose.x = x ;
-    pose.y = y ;
+    geometry_msgs::Twist vel;
+    vel.linear.x = randMToN(-0.2, 0.2);
+    vel.angular.z= randMToN(-0.2, 0.2);
+    pub.publish(vel);
 
 
-    ROS_INFO("The position is x : %d and y : %d ", x,y);
-
-    pub.publish(pose);
+    ROS_INFO("The vel is : %d and the angular vel is: %d ", vel.linear.x, vel.angular.z);
 
     ros::spinOnce();
-
+    sleep(100);
     loop_rate.sleep();
    
-    x = rand() % 15;
-    y = rand() % 15;
 
 }
 

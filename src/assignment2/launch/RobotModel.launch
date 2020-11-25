@@ -17,8 +17,5 @@
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
 	args="-urdf -model robot1 -param robot_description -z 0.05"/> 
 	
-    <node name = "speakPerception" pkg="assignment2" type="speakPerception2" />
-    <node name = "getPosition" pkg="assignment2" type="getPosition2" />
-    <node name = "commandManager" pkg="assignment2" type="commandManager.py" output = "screen" />
 
 </launch>
