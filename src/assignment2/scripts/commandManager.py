@@ -18,9 +18,13 @@ import smach_ros
 import time
 import random
 import sys
+import motion_plan.msg
+import actionlib
+import actionlib_tutorials.msg
 from std_msgs.msg import String
 from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
+
 
 from assignment2.srv import *
 
@@ -49,18 +53,14 @@ personX = 0.2
 # @param personX it represents the x position of the user
 personY = 0
 
+##init action client for Navigation action server
+client = actionlib.SimpleActionClient('/reaching_goal', motion_plan.msg.PlanningAction)
+# AATTT ho messo wait server nel main
+
 ## This function chose randomly the next state of the FSM
 def decision():
     return random.choice(['goToNormal','goToSleep'])
-
-## This callback function for the get position subsriber. 
-# It recives a geometry_msgs/2DPose message which contains a X and Y position from the getPosition node
-def callbackPos(data):
-#    rospy.loginfo(rospy.get_caller_id() + " I heard x: %d  y: %d", data.x, data.y)
-    global X
-    X = data.linear.x
-    global Y 
-    Y = data.angular.z    
+ 
 
 ## Callback function for the speckPerception subsriber.
 # Which recives a string from   
@@ -69,16 +69,9 @@ def callbackSta(data):
     global state 
     state = "play"
 
-## def randMToN(double M, double N):
-##    return M + (rand() / ( RAND_MAX / (N-M) ) ) 
-def navigation():
-    pub = rospy.Publisher('odom',Odometry,queue_size = 10)
-    rate = rospy.Rate(10)
-    od = Odometry()
-    #vel_msg.linear.x = 0.2
-    #vel_msg.angular.z = 0.1
-    
-    pub.publish(vel_msg)
+ def randMToN(double M, double N):
+    return M + (rand() / ( RAND_MAX / (N-M) ) ) 
+
 
 
 class Normal(smach.State):
@@ -93,6 +86,10 @@ class Normal(smach.State):
         global state
         
         self.counter = random.randint(1,2) 
+        # Creates a goal to send to the action server.
+        goal = motion_plan.msg.PlanningGoal()
+        goal.target_pose.pose.position.x = 3
+        goal.target_pose.pose.position.y = 5
         while not rospy.is_shutdown():  
             time.sleep(1)
             if state == "play":
@@ -100,7 +97,11 @@ class Normal(smach.State):
                 return 'goToPlay'
             if self.counter == 4:
                 return 'goToSleep'           
-            navigation() # request for the service to move in X and Y position
+            #navigation() # request for the service to move in X and Y position
+	    client.send_goal(goal)
+            client.wait_for_result()
+#            result = client.result()
+#            rospy.loginfo("I m arrived at x = %f y = %f", )
 
             self.counter += 1
             
@@ -154,6 +155,7 @@ def main():
 
     rospy.Subscriber("Random_vel", Twist, callbackPos) # subsriber get_position 
     rospy.Subscriber("StateString", String, callbackSta)
+    client.wait_for_server()
 
     # Create a SMACH state machine
     sm = smach.StateMachine(outcomes=['container_interface'])

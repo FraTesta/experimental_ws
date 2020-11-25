@@ -18,7 +18,8 @@
 	args="-urdf -model robot1 -param robot_description -z 0.05"/> 
 	
     <node name = "speakPerception" pkg="assignment2" type="speakPerception2" />
-    <node name = "getPosition" pkg="assignment2" type="getPosition2" />
+    <node name = "navigation_action" pkg="assignment2" type="navigation_action.py"/>
     <node name = "commandManager" pkg="assignment2" type="commandManager.py" output = "screen" />
+    
 
 </launch>
