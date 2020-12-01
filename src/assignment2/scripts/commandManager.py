@@ -21,6 +21,7 @@ import sys
 import motion_plan.msg
 import actionlib
 import actionlib_tutorials.msg
+import random 
 from std_msgs.msg import String
 from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
@@ -69,11 +70,6 @@ def callbackSta(data):
     global state 
     state = "play"
 
- def randMToN(double M, double N):
-    return M + (rand() / ( RAND_MAX / (N-M) ) ) 
-
-
-
 class Normal(smach.State):
     def __init__(self):
         smach.State.__init__(self, 
@@ -88,21 +84,23 @@ class Normal(smach.State):
         self.counter = random.randint(1,2) 
         # Creates a goal to send to the action server.
         goal = motion_plan.msg.PlanningGoal()
-        goal.target_pose.pose.position.x = 3
-        goal.target_pose.pose.position.y = 5
+
         while not rospy.is_shutdown():  
-            time.sleep(1)
+
             if state == "play":
                 state = 'noInput'
                 return 'goToPlay'
             if self.counter == 4:
                 return 'goToSleep'           
             #navigation() # request for the service to move in X and Y position
+            goal.target_pose.pose.position.x = random.randrange(1,5,1)
+            goal.target_pose.pose.position.y = random.randrange(1,5,1)
 	    client.send_goal(goal)
             client.wait_for_result()
 #            result = client.result()
-#            rospy.loginfo("I m arrived at x = %f y = %f", )
-
+#            rospy.loginfo("I m arrived at x = %f y = %f", result)
+#           add possible print message ,for goal reached 
+            time.sleep(4)
             self.counter += 1
             
         return 'goToSleep' 
@@ -153,7 +151,6 @@ class Play(smach.State):
 def main():
     rospy.init_node('smach_example_state_machine')
 
-    rospy.Subscriber("Random_vel", Twist, callbackPos) # subsriber get_position 
     rospy.Subscriber("StateString", String, callbackSta)
     client.wait_for_server()
 

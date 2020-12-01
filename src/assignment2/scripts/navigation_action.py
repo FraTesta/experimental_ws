@@ -130,7 +130,7 @@ def done():
     twist_msg.angular.z = 0
     pub.publish(twist_msg)
 
-# callback of the action server 
+## callback of the action server 
 def planning(goal):
     
     # initialization (forse da non fare nel mio)
