@@ -55,7 +55,7 @@ personX = 0.2
 personY = 0
 
 ##init action client for Navigation action server
-client = actionlib.SimpleActionClient('/reaching_goal', motion_plan.msg.PlanningAction)
+client = actionlib.SimpleActionClient('/robot_reaching_goal', motion_plan.msg.PlanningAction)
 # AATTT ho messo wait server nel main
 
 ## This function chose randomly the next state of the FSM
@@ -116,15 +116,17 @@ class Sleep(smach.State):
                              outcomes=['goToNormal','goToSleep'])
         self.rate = rospy.Rate(200)  # Loop at 200 Hz
 
-    def execute(self, userdata):
-
-        time.sleep(random.randint(1,4))
-        
+    def execute(self, userdata):       
         global homeX
         global homeY
-        #navigation() 
+
         rospy.loginfo("I m in SLEEP mode")
-        time.sleep(3)
+        goal = motion_plan.msg.PlanningGoal()
+        goal.target_pose.pose.position.x = homeX
+        goal.target_pose.pose.position.y = homeY
+        client.send_goal(goal)
+        client.wait_for_result()       
+        time.sleep(random.randint(3,6))
         self.rate.sleep()
         return 'goToNormal'
 

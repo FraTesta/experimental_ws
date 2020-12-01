@@ -8,18 +8,24 @@ project(assignment2)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  geometry_msgs
+
   roscpp
   rospy
-  std_msgs
-  message_generation
   actionlib_msgs
   actionlib
+  cv_bridge
+  image_transport
+  sensor_msgs
+  geometry_msgs
+  nav_msgs
+  std_msgs
+  message_generation
+  tf
 )
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
-
+find_package (OpenCV REQUIRED)
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
@@ -111,7 +117,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES assignment1
-  CATKIN_DEPENDS geometry_msgs roscpp rospy std_msgs
+  CATKIN_DEPENDS geometry_msgs roscpp rospy std_msgs OpenCv
 #  DEPENDS system_lib
 )
 
@@ -175,7 +181,7 @@ include_directories(
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
  catkin_install_python(PROGRAMS 
-   scripts/commandManager.py scripts/navigation_action.py
+   scripts/commandManager.py scripts/navigation_action.py scripts/go_to_point_ball.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
 
