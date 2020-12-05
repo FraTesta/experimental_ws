@@ -10,16 +10,16 @@ import actionlib
 import actionlib.msg
 import motion_plan.msg
 
-# robot state variables
+## robot state variables
 position_ = Point()
 pose_ = Pose()
 yaw_ = 0
-# machine state
+## machine state
 state_ = 0
-# goal
+## goal
 desired_position_ = Point()
 desired_position_.z = 0
-# parameters
+## parameters
 yaw_precision_ = math.pi / 9  # +/- 20 degree allowed
 yaw_precision_2_ = math.pi / 90  # +/- 2 degree allowed
 dist_precision_ = 0.1
@@ -29,13 +29,13 @@ ub_a = 0.6
 lb_a = -0.5
 ub_d = 0.6
 
-# publisher
+## publisher
 pub = None
 
-# action_server
+## action_server
 act_s = None
 
-# callbacks
+## callbacks
 
 
 def clbk_odom(msg):
@@ -197,7 +197,7 @@ def main():
     rospy.init_node('go_to_point')
     pub = rospy.Publisher('/robotDog/cmd_vel', Twist, queue_size=1)
     sub_odom = rospy.Subscriber('/robotDog/odom', Odometry, clbk_odom)
-    #creaxione action server (che sara il mio navigaiton)
+    #creazione action server (che sara il mio navigaiton)
     #  parameters : name, dove prendere il file action, callback function (planning ) 
     
     act_s = actionlib.SimpleActionServer(

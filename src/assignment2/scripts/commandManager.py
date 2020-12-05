@@ -25,6 +25,7 @@ import random
 from std_msgs.msg import String
 from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
+from assignment2.msg import Ball_state
 
 
 from assignment2.srv import *
@@ -37,10 +38,10 @@ X = 0
 Y = 0
 ## X position of the home 
 # @param homeX here you can set the a priori X position of the house
-homeX = 0.2
+homeX = -5
 ## Y position of the home 
 # @param homeY here you can set the a priori Y position of the house
-homeY = 0
+homeY = 7
 ## State variable
 # @param state This is the state coming from State node (that's why is a string) and it can be ether play or NoInfo 
 state = "NoInfo"
@@ -63,12 +64,12 @@ def decision():
     return random.choice(['goToNormal','goToSleep'])
  
 
-## Callback function for the speckPerception subsriber.
-# Which recives a string from   
-def callbackSta(data): 
-    rospy.loginfo(rospy.get_caller_id() + " I heard %s", data.data)
-    global state 
-    state = "play"
+## Callback function for the ballDetection subsriber.
+# Which recives and handle a ball_state msg   
+def callbackBall(data):
+    rospy,loginfo("ball detected ")
+    global state, X, Y
+    state = data.ball_state 
 
 class Normal(smach.State):
     def __init__(self):
@@ -152,8 +153,8 @@ class Play(smach.State):
         
 def main():
     rospy.init_node('smach_example_state_machine')
-
-    rospy.Subscriber("StateString", String, callbackSta)
+     
+    rospy.Subscriber("ball_vel",Ball_state, callbackBall)
     client.wait_for_server()
 
     # Create a SMACH state machine

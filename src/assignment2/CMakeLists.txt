@@ -8,7 +8,6 @@ project(assignment2)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-
   roscpp
   rospy
   actionlib_msgs
@@ -57,18 +56,18 @@ find_package (OpenCV REQUIRED)
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
-#   Message1.msg
+ add_message_files(
+   FILES
+   Ball_state.msg
 #   Message2.msg
-# )
+ )
 
 ## Generate services in the 'srv' folder
- add_service_files(
-   FILES
-   GoTo.srv
+# add_service_files(
+#   FILES
+#   GoTo.srv
 #   Service2.srv
- )
+# )
 
 ## Generate actions in the 'action' folder
  add_action_files(
@@ -117,7 +116,7 @@ find_package (OpenCV REQUIRED)
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES assignment1
-  CATKIN_DEPENDS geometry_msgs roscpp rospy std_msgs OpenCv
+  CATKIN_DEPENDS geometry_msgs roscpp rospy std_msgs OpenCv message_runtime
 #  DEPENDS system_lib
 )
 
@@ -153,24 +152,20 @@ include_directories(
 ## e.g. "rosrun someones_pkg node" instead of "rosrun someones_pkg someones_pkg_node"
 # set_target_properties(${PROJECT_NAME}_node PROPERTIES OUTPUT_NAME node PREFIX "")
 
- add_executable(speakPerception2 src/State.cpp)
+
  add_executable(getPosition2 src/getPosition.cpp)
- add_executable(Navigation2 src/Navigation.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
- target_link_libraries(speakPerception2 
-   ${catkin_LIBRARIES}
- )
+
+ 
  target_link_libraries(getPosition2
    ${catkin_LIBRARIES}
  )
-  target_link_libraries(Navigation2
-   ${catkin_LIBRARIES}
- )
+
 #############
 ## Install ##
 #############
@@ -181,7 +176,7 @@ include_directories(
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
  catkin_install_python(PROGRAMS 
-   scripts/commandManager.py scripts/navigation_action.py scripts/go_to_point_ball.py
+   scripts/commandManager.py scripts/navigation_action.py scripts/go_to_point_ball.py scripts/ballDetection.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
 
