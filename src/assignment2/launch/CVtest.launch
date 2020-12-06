@@ -77,8 +77,7 @@
 
    <node name="controller_spawner" pkg="controller_manager" type="spawner" output="screen" args="--namespace=/robotDog
         joint_state_controller
-        joint_position_controller
-        joint_camera_support_position_controller
+        joint_head_controller
 
         --shutdown-timeout 3">
     </node>
