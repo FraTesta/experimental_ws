@@ -44,7 +44,7 @@ homeX = -5
 homeY = 7
 ## State variable
 # @param state This is the state coming from State node (that's why is a string) and it can be ether play or NoInfo 
-state = "NoInfo"
+state = False
 
 
 
@@ -67,9 +67,9 @@ def decision():
 ## Callback function for the ballDetection subsriber.
 # Which recives and handle a ball_state msg   
 def callbackBall(data):
-    rospy,loginfo("ball detected ")
-    global state, X, Y
-    state = data.ball_state 
+    rospy.loginfo("Ball detected !!!")
+    global state
+    state = data.ballDetected 
 
 class Normal(smach.State):
     def __init__(self):
@@ -88,8 +88,8 @@ class Normal(smach.State):
 
         while not rospy.is_shutdown():  
 
-            if state == "play":
-                state = 'noInput'
+            if state == True:
+                state = False
                 return 'goToPlay'
             if self.counter == 4:
                 return 'goToSleep'           
@@ -154,7 +154,7 @@ class Play(smach.State):
 def main():
     rospy.init_node('smach_example_state_machine')
      
-    rospy.Subscriber("ball_vel",Ball_state, callbackBall)
+    rospy.Subscriber("ball_state",Ball_state, callbackBall)
     client.wait_for_server()
 
     # Create a SMACH state machine

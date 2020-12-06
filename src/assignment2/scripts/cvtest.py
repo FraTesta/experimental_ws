@@ -80,11 +80,13 @@ class image_feature:
             ((x, y), radius) = cv2.minEnclosingCircle(c)
             M = cv2.moments(c)
             center = (int(M["m10"] / M["m00"]), int(M["m01"] / M["m00"]))
+	    rospy.loginfo("ball detected but with a small radiuous")
 
             # only proceed if the radius meets a minimum size
             if radius > 10:
                 # draw the circle and centroid on the frame,
                 # then update the list of tracked points
+		rospy.loginfo("I see a ball")
                 cv2.circle(image_np, (int(x), int(y)), int(radius),
                            (0, 255, 255), 2)
                 cv2.circle(image_np, center, 5, (0, 0, 255), -1)

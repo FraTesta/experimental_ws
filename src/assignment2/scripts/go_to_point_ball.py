@@ -143,9 +143,9 @@ def planning(goal):
 def main():
     global pub, active_, act_s, pubz
     rospy.init_node('go_to_point')
-    pub = rospy.Publisher('/ball/cmd_vel', Twist, queue_size=1)
+    pub = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
     pubz = rospy.Publisher('/gazebo/set_link_state', LinkState, queue_size=1)
-    sub_odom = rospy.Subscriber('/ball/odom', Odometry, clbk_odom)
+    sub_odom = rospy.Subscriber('/odom', Odometry, clbk_odom)
     act_s = actionlib.SimpleActionServer(
         '/ball_reaching_goal', exp_assignment2.msg.PlanningAction, planning, auto_start=False)
     act_s.start()

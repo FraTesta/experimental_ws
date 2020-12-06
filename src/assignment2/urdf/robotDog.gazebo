@@ -23,7 +23,7 @@
     <material>Gazebo/Blue</material>
   </gazebo>
 
-        <gazebo reference="link_right_ear">
+        <gazebo reference="link_left_ear">
     <material>Gazebo/Blue</material>
   </gazebo>
  
