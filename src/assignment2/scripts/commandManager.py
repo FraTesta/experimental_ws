@@ -23,6 +23,7 @@ import actionlib
 import actionlib_tutorials.msg
 import random 
 from std_msgs.msg import String
+from std_msgs.msg import Float64
 from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
 from assignment2.msg import Ball_state
@@ -44,7 +45,7 @@ homeX = -5
 homeY = 7
 ## State variable
 # @param state This is the state coming from State node (that's why is a string) and it can be ether play or NoInfo 
-state = False
+ballDetected = False
 
 
 
@@ -67,20 +68,21 @@ def decision():
 ## Callback function for the ballDetection subsriber.
 # Which recives and handle a ball_state msg   
 def callbackBall(data):
-    rospy.loginfo("Ball detected !!!")
-    global state
-    state = data.ballDetected 
+    global ballDetected
+    ballDetected = data.ballDetected 
 
 class Normal(smach.State):
     def __init__(self):
         smach.State.__init__(self, 
                              outcomes=['goToNormal','goToSleep','goToPlay'])
         self.rate = rospy.Rate(1)  # Loop at 200 Hz
+	## @param joint_pub to move the head of the robot 
+        self.joint_pub = rospy.Publisher("joint_head_controller/command",Float64,queue_size=1)
         self.counter = 0
         
     def execute(self,userdata):
 
-        global state
+        global ballDetected
         
         self.counter = random.randint(1,2) 
         # Creates a goal to send to the action server.
@@ -88,16 +90,22 @@ class Normal(smach.State):
 
         while not rospy.is_shutdown():  
 
-            if state == True:
-                state = False
+            if ballDetected == True:
+		rospy.loginfo("Ball detected")
                 return 'goToPlay'
             if self.counter == 4:
                 return 'goToSleep'           
-            #navigation() # request for the service to move in X and Y position
+            # request for the service to move in X and Y position
             goal.target_pose.pose.position.x = random.randrange(1,5,1)
             goal.target_pose.pose.position.y = random.randrange(1,5,1)
 	    client.send_goal(goal)
-            client.wait_for_result()
+	    ## check if a ball is detected, Then interrupt the action sever request (sembra inutile )
+	    if ballDetected == True:
+                rospy.loginfo("Ball detected , current action interrupt")
+	        client.cancel_all_goals()
+                return 'goToPlay'
+            else: 
+                client.wait_for_result()
 #            result = client.result()
 #            rospy.loginfo("I m arrived at x = %f y = %f", result)
 #           add possible print message ,for goal reached 
@@ -141,14 +149,19 @@ class Play(smach.State):
         self.rate = rospy.Rate(200)  
 
     def execute(self, userdata):
-        global X
-        global Y 
 
         rospy.loginfo("I m in PLAY mode")
-        time.sleep(3)
-
-        return 'goToNormal'       
-
+        # try to find the ball
+	self.joint_pub.publish(1.57)
+        self.joint_pub.publish(-1.57)
+        time.sleep(1)
+        self.joint_pub.publish(0)
+        time.sleep(2)
+	while True:
+             if(ballDetected == False):   
+                return 'goToNormal' 
+	     time.sleep(3)      
+	
 
         
 def main():

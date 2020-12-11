@@ -1,9 +1,11 @@
 #! /usr/bin/env python
 # import ros stuff
 import rospy
+import time
 from sensor_msgs.msg import LaserScan
 from geometry_msgs.msg import Twist, Point, Pose
 from nav_msgs.msg import Odometry
+from std_msgs.msg import Float64
 from tf import transformations
 import math
 import actionlib
@@ -35,9 +37,11 @@ pub = None
 ## action_server
 act_s = None
 
+## Publisher
+## @param joint_pub it allows to move the head of the robot 
+joint_pub = rospy.Publisher("joint_head_controller/command",Float64,queue_size=1)
+
 ## callbacks
-
-
 def clbk_odom(msg):
     global position_
     global pose_
@@ -171,6 +175,9 @@ def planning(goal):
             # go straight untill the desired position is reached
         elif state_ == 1:
             feedback.stat = "Angle aligned"
+	    # to keep robot head straight after moving
+	    time.sleep(1) 
+            joint_pub.publish(0) 
             feedback.position = pose_
             act_s.publish_feedback(feedback)
             # call tha go_straight_ahead to reach the desired position 
