@@ -46,6 +46,7 @@ homeY = 7
 ## State variable
 # @param state This is the state coming from State node (that's why is a string) and it can be ether play or NoInfo 
 ballDetected = False
+ballCheck = False
 
 
 
@@ -69,7 +70,11 @@ def decision():
 # Which recives and handle a ball_state msg   
 def callbackBall(data):
     global ballDetected
-    ballDetected = data.ballDetected 
+    currentBallDetected = data.ballDetected
+    if ballDetected == True and ballCheck == False:
+	ballCheck = True
+        rospy.loginfo("Ball detected , current action interrupt")
+	client.cancel_all_goals() 
 
 class Normal(smach.State):
     def __init__(self):
@@ -92,6 +97,7 @@ class Normal(smach.State):
 
             if ballDetected == True:
 		rospy.loginfo("Ball detected")
+		#client.cancel_goal()
                 return 'goToPlay'
             if self.counter == 4:
                 return 'goToSleep'           
@@ -99,13 +105,7 @@ class Normal(smach.State):
             goal.target_pose.pose.position.x = random.randrange(1,5,1)
             goal.target_pose.pose.position.y = random.randrange(1,5,1)
 	    client.send_goal(goal)
-	    ## check if a ball is detected, Then interrupt the action sever request (sembra inutile )
-	    if ballDetected == True:
-                rospy.loginfo("Ball detected , current action interrupt")
-	        client.cancel_all_goals()
-                return 'goToPlay'
-            else: 
-                client.wait_for_result()
+            client.wait_for_result()
 #            result = client.result()
 #            rospy.loginfo("I m arrived at x = %f y = %f", result)
 #           add possible print message ,for goal reached 
@@ -134,6 +134,7 @@ class Sleep(smach.State):
         goal.target_pose.pose.position.x = homeX
         goal.target_pose.pose.position.y = homeY
         client.send_goal(goal)
+
         client.wait_for_result()       
         time.sleep(random.randint(3,6))
         self.rate.sleep()
@@ -151,14 +152,10 @@ class Play(smach.State):
     def execute(self, userdata):
 
         rospy.loginfo("I m in PLAY mode")
-        # try to find the ball
-	self.joint_pub.publish(1.57)
-        self.joint_pub.publish(-1.57)
-        time.sleep(1)
-        self.joint_pub.publish(0)
-        time.sleep(2)
+
 	while True:
-             if(ballDetected == False):   
+             if(ballDetected == False): 
+		ballCheck = False
                 return 'goToNormal' 
 	     time.sleep(3)      
 	

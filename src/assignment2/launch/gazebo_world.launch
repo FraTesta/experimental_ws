@@ -64,6 +64,15 @@
         <node name = "ballDetection" pkg="assignment2" type="ballDetection.py" />  
         <node name = "navigation_action" pkg="assignment2" type="navigation_action.py"/>
         <node name = "commandManager" pkg="assignment2" type="commandManager.py" output = "screen" />
+
+        <rosparam file="$(find assignment2)/config/motor_robot_dog.yaml" command="load" ns="/robotDog" />
+
+	   <node name="controller_spawner" pkg="controller_manager" type="spawner" output="screen" args="--namespace=/robotDog
+		joint_state_controller
+		joint_head_controller
+
+		--shutdown-timeout 3">
+	    </node>
   </group>
 <!-- ball -->  
   <group ns="$(arg ns2)">
