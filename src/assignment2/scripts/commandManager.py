@@ -22,21 +22,16 @@ import motion_plan.msg
 import actionlib
 import actionlib_tutorials.msg
 import random 
+
 from std_msgs.msg import String
 from std_msgs.msg import Float64
 from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
 from assignment2.msg import Ball_state
+from assignment2.msg import HeadState
 
 
-from assignment2.srv import *
 
-## robot X position variable
-# @param X is the initialize X position of the robot
-X = 0  
-## robot Y position variable
-# @param Y is the initialize Y position of the robot 
-Y = 0
 ## X position of the home 
 # @param homeX here you can set the a priori X position of the house
 homeX = -5
@@ -47,11 +42,13 @@ homeY = 7
 # @param state This is the state coming from State node (that's why is a string) and it can be ether play or NoInfo 
 ballDetected = False
 ballCheck = False
+ballReached = False
 
 
 ##init action client for Navigation action server
 client = actionlib.SimpleActionClient('/robot_reaching_goal', motion_plan.msg.PlanningAction)
 # AATTT ho messo wait server nel main
+
 
 ## This function chose randomly the next state of the FSM
 def decision():
@@ -61,8 +58,10 @@ def decision():
 ## Callback function for the ballDetection subsriber.
 # Which recives and handle a ball_state msg   
 def callbackBall(data):
-    global ballDetected, ballCheck
+    global ballDetected, ballCheck, ballReached
     ballDetected = data.ballDetected
+    ballReached = data.ballReached
+    rospy.loginfo("Ciaoone ")
     if ballDetected == True and ballCheck == False:
 	ballCheck = True
         rospy.loginfo("Ball detected !, current action interrupt")
@@ -86,9 +85,8 @@ class Normal(smach.State):
 
         while not rospy.is_shutdown():  
 
-            if ballCheck == True:
+            if ballCheck == True and ballDetected == True:
 		rospy.loginfo("Start to track the ball")
-		#client.cancel_goal()
                 return 'goToPlay'
             if self.counter == 4:
                 return 'goToSleep'           
@@ -101,7 +99,8 @@ class Normal(smach.State):
 	    client.send_goal(goal)
             client.wait_for_result()
 	    rospy.loginfo("Goal reached")
-            time.sleep(4)
+            time.sleep(2)
+	    self.rate.sleep()
             self.counter += 1
             
         return 'goToSleep' 
@@ -140,7 +139,9 @@ class Play(smach.State):
         smach.State.__init__(self, 
                              outcomes=['goToNormal','goToPlay'])
         
-        self.rate = rospy.Rate(200)  
+        self.rate = rospy.Rate(200)
+	self.joint_pub = rospy.Publisher("joint_head_controller/command",Float64,queue_size=1)  
+	self.headState = rospy.Publisher("head_state",HeadState, queue_size = 1)
 
     def execute(self, userdata):
 
@@ -151,12 +152,25 @@ class Play(smach.State):
 		ballCheck = False
 		rospy.loginfo("Ball lost")
                 return 'goToNormal' 
+	     if(ballReached == True):
+                rospy.loginfo("ball reached !!!")
+		self.joint_pub.publish(0.785398) 
+		time.sleep(5)
+		self.joint_pub.publish(-0.785398)
+		time.sleep(5)
+		self.joint_pub.publish(0)
+		time.sleep(5)
+		rospy.loginfo("Finito di muovere la testa ")
+		headMsg = HeadState()
+		headMsg.HeadMotionStop = True
+		self.headState.publish(headMsg) 
+                
 	     time.sleep(3)      
 	
 
         
 def main():
-    rospy.init_node('smach_example_state_machine')
+    rospy.init_node('smach_state_machine')
      
     rospy.Subscriber("ball_state",Ball_state, callbackBall)
     client.wait_for_server()

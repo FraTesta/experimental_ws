@@ -61,7 +61,7 @@
   <group ns="$(arg ns1)">
   	<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" 
 	args="-urdf -model $(arg ns1) -param robot_description -x -5 -y 7 -Y 3.14 -z 0.05"/>
-        <node name = "ballDetection" pkg="assignment2" type="ballDetection.py" />  
+        <node name = "ballDetection" pkg="assignment2" type="ballDetection.py" output="screen"/>  
         <node name = "navigation_action" pkg="assignment2" type="navigation_action.py"/>
         <node name = "commandManager" pkg="assignment2" type="commandManager.py" output = "screen" />
 

@@ -59,7 +59,7 @@ find_package (OpenCV REQUIRED)
  add_message_files(
    FILES
    Ball_state.msg
-#   Message2.msg
+   HeadState.msg
  )
 
 ## Generate services in the 'srv' folder
@@ -153,7 +153,6 @@ include_directories(
 # set_target_properties(${PROJECT_NAME}_node PROPERTIES OUTPUT_NAME node PREFIX "")
 
 
- add_executable(getPosition2 src/getPosition.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
@@ -161,10 +160,6 @@ include_directories(
 
 ## Specify libraries to link a library or executable target against
 
- 
- target_link_libraries(getPosition2
-   ${catkin_LIBRARIES}
- )
 
 #############
 ## Install ##

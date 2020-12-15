@@ -22,6 +22,7 @@ from sensor_msgs.msg import CompressedImage
 from geometry_msgs.msg import Twist
 from std_msgs.msg import Float64
 from assignment2.msg import Ball_state
+from assignment2.msg import HeadState
 
 VERBOSE = False
 
@@ -40,7 +41,7 @@ class image_feature:
         self.ball_state_pub = rospy.Publisher("ball_state",Ball_state, queue_size=1)
 
      ## @param joint_pub to move the head of the robot 
-        self.joint_pub = rospy.Publisher("joint_head_controller/command",Float64,queue_size=1)
+ #       self.joint_pub = rospy.Publisher("joint_head_controller/command",Float64,queue_size=1)
 
      ## @param vel_pub to move the whole robot 
         self.vel_pub = rospy.Publisher("cmd_vel",Twist, queue_size=1)
@@ -50,8 +51,13 @@ class image_feature:
         self.camera_sub = rospy.Subscriber("camera1/image_raw/compressed",
                                            CompressedImage, self.callback,  queue_size=1)
 
+	self.head_state_pub = rospy.Subscriber("head_state",HeadState, self.HeadStateCallback, queue_size = 1)
+
 	## @stop it's a stop condition when the robot is too close to the goal 
-	self.stop = False
+	self.headState = True
+
+    def HeadStateCallback(self, data): 
+	self.headState = data.HeadMotionStop
 
     def callback(self, ros_data):
         '''Callback function of subscribed topic. 
@@ -99,32 +105,32 @@ class image_feature:
                 cv2.circle(image_np, center, 5, (0, 0, 255), -1)
                 
                 msg = Ball_state()
-                msg.ballDetected = True 		        
+                msg.ballDetected = True 
+#		msg.ballReached = False		        
                 self.ball_state_pub.publish(msg)
 		# check if the robot is reached the object 
 
-        	if self.stop == False: 
-			
-                	vel = Twist()
-                	# 400 is the center of the image 
-                	vel.angular.z = -0.002*(center[0]-400)
+        	 
+		if self.headState == True:	
+			rospy.loginfo("ball detected !!! start moving ") 
+		        vel = Twist()
+		        # 400 is the center of the image 
+		        vel.angular.z = -0.002*(center[0]-400)
 			# 100 is the radius that we want see in the image, which represent the desired disatance from the object 
-                	vel.linear.x = -0.01*(radius-130)
-                	self.vel_pub.publish(vel)
-			if radius > 129:
-				self.stop = True
-		else:
-			self.joint_pub.publish(0.785398) 
-			time.sleep(5)
-			self.joint_pub.publish(-0.785398)
-			time.sleep(5)
-			self.joint_pub.publish(0)
-			time.sleep(5)
-			self.stop = False
+		        vel.linear.x = -0.01*(radius-150)
+		        self.vel_pub.publish(vel)
+			if (radius>=149) :
+				rospy.loginfo("BallDetection : ball reached!!")
+				self.headState = False
+				msg.ballReached = True			
+				self.ball_state_pub.publish(msg) 
+
+			
 
         else:
 	     msg = Ball_state()
              msg.ballDetected = False 
+	     msg.ballReached = False
              self.ball_state_pub.publish(msg)
             
 
