@@ -49,14 +49,6 @@ ballDetected = False
 ballCheck = False
 
 
-
-## User Position X
-# @param personX it represents the x position of the user
-personX = 0.2
-## User Position Y
-# @param personX it represents the x position of the user
-personY = 0
-
 ##init action client for Navigation action server
 client = actionlib.SimpleActionClient('/robot_reaching_goal', motion_plan.msg.PlanningAction)
 # AATTT ho messo wait server nel main
@@ -69,11 +61,11 @@ def decision():
 ## Callback function for the ballDetection subsriber.
 # Which recives and handle a ball_state msg   
 def callbackBall(data):
-    global ballDetected
-    currentBallDetected = data.ballDetected
+    global ballDetected, ballCheck
+    ballDetected = data.ballDetected
     if ballDetected == True and ballCheck == False:
 	ballCheck = True
-        rospy.loginfo("Ball detected , current action interrupt")
+        rospy.loginfo("Ball detected !, current action interrupt")
 	client.cancel_all_goals() 
 
 class Normal(smach.State):
@@ -82,7 +74,6 @@ class Normal(smach.State):
                              outcomes=['goToNormal','goToSleep','goToPlay'])
         self.rate = rospy.Rate(1)  # Loop at 200 Hz
 	## @param joint_pub to move the head of the robot 
-        self.joint_pub = rospy.Publisher("joint_head_controller/command",Float64,queue_size=1)
         self.counter = 0
         
     def execute(self,userdata):
@@ -95,20 +86,21 @@ class Normal(smach.State):
 
         while not rospy.is_shutdown():  
 
-            if ballDetected == True:
-		rospy.loginfo("Ball detected")
+            if ballCheck == True:
+		rospy.loginfo("Start to track the ball")
 		#client.cancel_goal()
                 return 'goToPlay'
             if self.counter == 4:
                 return 'goToSleep'           
             # request for the service to move in X and Y position
-            goal.target_pose.pose.position.x = random.randrange(1,5,1)
-            goal.target_pose.pose.position.y = random.randrange(1,5,1)
+	    xRandomGoal = random.randrange(1,5,1)
+	    yRandomGoal = random.randrange(1,5,1)
+	    rospy.loginfo("I'm going to position x = %d y = %d", xRandomGoal, yRandomGoal)
+            goal.target_pose.pose.position.x = xRandomGoal
+            goal.target_pose.pose.position.y = yRandomGoal
 	    client.send_goal(goal)
             client.wait_for_result()
-#            result = client.result()
-#            rospy.loginfo("I m arrived at x = %f y = %f", result)
-#           add possible print message ,for goal reached 
+	    rospy.loginfo("Goal reached")
             time.sleep(4)
             self.counter += 1
             
@@ -136,6 +128,7 @@ class Sleep(smach.State):
         client.send_goal(goal)
 
         client.wait_for_result()       
+	rospy.loginfo("Home reached")
         time.sleep(random.randint(3,6))
         self.rate.sleep()
         return 'goToNormal'
@@ -156,6 +149,7 @@ class Play(smach.State):
 	while True:
              if(ballDetected == False): 
 		ballCheck = False
+		rospy.loginfo("Ball lost")
                 return 'goToNormal' 
 	     time.sleep(3)      
 	

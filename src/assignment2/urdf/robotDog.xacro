@@ -183,7 +183,7 @@
 
     <link name="head_link">
   	<inertial>
-  		<mass value="0.0025"/>
+  		<mass value="0.025"/>
   		<origin xyz="0 0 0" rpy="0 0 0" />
   		<xacro:box_inertia mass="0.025" w="0.2" h="0.08" d="0.034"/>
   	</inertial>
