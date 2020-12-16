@@ -53,12 +53,17 @@ class image_feature:
 
 	self.head_state_pub = rospy.Subscriber("head_state",HeadState, self.HeadStateCallback, queue_size = 1)
 
-	## @stop it's a stop condition when the robot is too close to the goal 
+	## @headState to check if the head is in the upright position
 	self.headState = True
 
+	## @ballReached variable that says whether the robot has reached the ball
+	self.ballReached = False 
+
+	## Callback function to update the headState  
     def HeadStateCallback(self, data): 
 	self.headState = data.HeadMotionStop
 
+	## Callback of the camera_sub subsriber which implements the whole CV algorithm  
     def callback(self, ros_data):
         '''Callback function of subscribed topic. 
         Here images get converted and features detected'''
@@ -105,24 +110,27 @@ class image_feature:
                 cv2.circle(image_np, center, 5, (0, 0, 255), -1)
                 
                 msg = Ball_state()
-                msg.ballDetected = True 
-#		msg.ballReached = False		        
+                msg.ballDetected = True
+		msg.ballReached = self.ballReached 
+	        
                 self.ball_state_pub.publish(msg)
 		# check if the robot is reached the object 
 
         	 
 		if self.headState == True:	
-			rospy.loginfo("ball detected !!! start moving ") 
+			rospy.loginfo("BallDtection: ball detected !!! start moving ") 
 		        vel = Twist()
 		        # 400 is the center of the image 
 		        vel.angular.z = -0.002*(center[0]-400)
 			# 100 is the radius that we want see in the image, which represent the desired disatance from the object 
 		        vel.linear.x = -0.01*(radius-150)
 		        self.vel_pub.publish(vel)
+			self.ballReached = False 
 			if (radius>=149) :
 				rospy.loginfo("BallDetection : ball reached!!")
 				self.headState = False
-				msg.ballReached = True			
+				self.ballReached = True 
+				msg.ballReached = self.ballReached		
 				self.ball_state_pub.publish(msg) 
 
 			
@@ -130,7 +138,6 @@ class image_feature:
         else:
 	     msg = Ball_state()
              msg.ballDetected = False 
-	     msg.ballReached = False
              self.ball_state_pub.publish(msg)
             
 

@@ -61,8 +61,9 @@ def callbackBall(data):
     global ballDetected, ballCheck, ballReached
     ballDetected = data.ballDetected
     ballReached = data.ballReached
-    rospy.loginfo("Ciaoone ")
+    rospy.loginfo( ballCheck)
     if ballDetected == True and ballCheck == False:
+	rospy.loginfo("I'm updating the ballCheck value")
 	ballCheck = True
         rospy.loginfo("Ball detected !, current action interrupt")
 	client.cancel_all_goals() 
@@ -146,6 +147,7 @@ class Play(smach.State):
     def execute(self, userdata):
 
         rospy.loginfo("I m in PLAY mode")
+	global ballDetected, ballCheck, ballReached
 
 	while True:
              if(ballDetected == False): 
