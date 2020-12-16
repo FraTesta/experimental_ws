@@ -1,0 +1,111 @@
+\hypertarget{namespacecommandManager}{}\section{command\+Manager Namespace Reference}
+\label{namespacecommandManager}\index{command\+Manager@{command\+Manager}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classcommandManager_1_1Normal}{Normal}
+\item 
+class \hyperlink{classcommandManager_1_1Play}{Play}
+\item 
+class \hyperlink{classcommandManager_1_1Sleep}{Sleep}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespacecommandManager_a4b8947837e5d1af29943bfcf09e748f4}{decision} ()
+\begin{DoxyCompactList}\small\item\em This function chose randomly the next state of the F\+SM. \end{DoxyCompactList}\item 
+def \hyperlink{namespacecommandManager_a161f6f7da030b1c4e9091675ca6ff398}{callback\+Ball} (data)
+\item 
+def \hyperlink{namespacecommandManager_ae8b570eb4bf393859bc74c9cb5fe125f}{main} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{namespacecommandManager_afd4e45cbe13ed5ee1c795062ed21e184}{homeX} = -\/5
+\begin{DoxyCompactList}\small\item\em X position of the home Here you can set the a priori X position of the house. \end{DoxyCompactList}\item 
+int \hyperlink{namespacecommandManager_a9deb4aa18f5f193991dbfb07d1f8e0b3}{homeY} = 7
+\begin{DoxyCompactList}\small\item\em Y position of the home Here you can set the a priori Y position of the house. \end{DoxyCompactList}\item 
+bool \hyperlink{namespacecommandManager_a4ed98b9d98c0860f84ddfa04bb3c5930}{ball\+Detected} = False
+\begin{DoxyCompactList}\small\item\em State variables Variable to check whether the \hyperlink{namespaceballDetection}{ball\+Detection} node has detected a ball. \end{DoxyCompactList}\item 
+bool \hyperlink{namespacecommandManager_a98d638b22b400e4c4bce2f95e8f69363}{ball\+Check} = False
+\begin{DoxyCompactList}\small\item\em Control variable to avoid false readings. \end{DoxyCompactList}\item 
+bool \hyperlink{namespacecommandManager_a2addbd14eb79fa7c8751337f7a27067b}{ball\+Reached} = False
+\begin{DoxyCompactList}\small\item\em Variable that communicates whether the robot has reached the ball. \end{DoxyCompactList}\item 
+\hyperlink{namespacecommandManager_ad81f5cdd9bf18b67989c77a2329b9e28}{client} = actionlib.\+Simple\+Action\+Client(\textquotesingle{}robot\+\_\+reaching\+\_\+goal\textquotesingle{}, motion\+\_\+plan.\+msg.\+Planning\+Action)
+\begin{DoxyCompactList}\small\item\em Action client for Navigation action server. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{command\+Manager@{command\+Manager}!callback\+Ball@{callback\+Ball}}
+\index{callback\+Ball@{callback\+Ball}!command\+Manager@{command\+Manager}}
+\subsubsection[{\texorpdfstring{callback\+Ball(data)}{callbackBall(data)}}]{\setlength{\rightskip}{0pt plus 5cm}def command\+Manager.\+callback\+Ball (
+\begin{DoxyParamCaption}
+\item[{}]{data}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacecommandManager_a161f6f7da030b1c4e9091675ca6ff398}{}\label{namespacecommandManager_a161f6f7da030b1c4e9091675ca6ff398}
+\begin{DoxyVerb}Callback function for the ballDetection subsriber.
+Which recives and handle a ball_state msg. It update the local variable and each time it receives a msg that a ball is detected after some time, interrupts any
+action server goal. So that the robot stops and switchs into the PLAY state \end{DoxyVerb}
+ \index{command\+Manager@{command\+Manager}!decision@{decision}}
+\index{decision@{decision}!command\+Manager@{command\+Manager}}
+\subsubsection[{\texorpdfstring{decision()}{decision()}}]{\setlength{\rightskip}{0pt plus 5cm}def command\+Manager.\+decision (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacecommandManager_a4b8947837e5d1af29943bfcf09e748f4}{}\label{namespacecommandManager_a4b8947837e5d1af29943bfcf09e748f4}
+
+
+This function chose randomly the next state of the F\+SM. 
+
+\index{command\+Manager@{command\+Manager}!main@{main}}
+\index{main@{main}!command\+Manager@{command\+Manager}}
+\subsubsection[{\texorpdfstring{main()}{main()}}]{\setlength{\rightskip}{0pt plus 5cm}def command\+Manager.\+main (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacecommandManager_ae8b570eb4bf393859bc74c9cb5fe125f}{}\label{namespacecommandManager_ae8b570eb4bf393859bc74c9cb5fe125f}
+
+
+\subsection{Variable Documentation}
+\index{command\+Manager@{command\+Manager}!ball\+Check@{ball\+Check}}
+\index{ball\+Check@{ball\+Check}!command\+Manager@{command\+Manager}}
+\subsubsection[{\texorpdfstring{ball\+Check}{ballCheck}}]{\setlength{\rightskip}{0pt plus 5cm}bool command\+Manager.\+ball\+Check = False}\hypertarget{namespacecommandManager_a98d638b22b400e4c4bce2f95e8f69363}{}\label{namespacecommandManager_a98d638b22b400e4c4bce2f95e8f69363}
+
+
+Control variable to avoid false readings. 
+
+\index{command\+Manager@{command\+Manager}!ball\+Detected@{ball\+Detected}}
+\index{ball\+Detected@{ball\+Detected}!command\+Manager@{command\+Manager}}
+\subsubsection[{\texorpdfstring{ball\+Detected}{ballDetected}}]{\setlength{\rightskip}{0pt plus 5cm}bool command\+Manager.\+ball\+Detected = False}\hypertarget{namespacecommandManager_a4ed98b9d98c0860f84ddfa04bb3c5930}{}\label{namespacecommandManager_a4ed98b9d98c0860f84ddfa04bb3c5930}
+
+
+State variables Variable to check whether the \hyperlink{namespaceballDetection}{ball\+Detection} node has detected a ball. 
+
+\index{command\+Manager@{command\+Manager}!ball\+Reached@{ball\+Reached}}
+\index{ball\+Reached@{ball\+Reached}!command\+Manager@{command\+Manager}}
+\subsubsection[{\texorpdfstring{ball\+Reached}{ballReached}}]{\setlength{\rightskip}{0pt plus 5cm}bool command\+Manager.\+ball\+Reached = False}\hypertarget{namespacecommandManager_a2addbd14eb79fa7c8751337f7a27067b}{}\label{namespacecommandManager_a2addbd14eb79fa7c8751337f7a27067b}
+
+
+Variable that communicates whether the robot has reached the ball. 
+
+\index{command\+Manager@{command\+Manager}!client@{client}}
+\index{client@{client}!command\+Manager@{command\+Manager}}
+\subsubsection[{\texorpdfstring{client}{client}}]{\setlength{\rightskip}{0pt plus 5cm}command\+Manager.\+client = actionlib.\+Simple\+Action\+Client(\textquotesingle{}robot\+\_\+reaching\+\_\+goal\textquotesingle{}, motion\+\_\+plan.\+msg.\+Planning\+Action)}\hypertarget{namespacecommandManager_ad81f5cdd9bf18b67989c77a2329b9e28}{}\label{namespacecommandManager_ad81f5cdd9bf18b67989c77a2329b9e28}
+
+
+Action client for Navigation action server. 
+
+\index{command\+Manager@{command\+Manager}!homeX@{homeX}}
+\index{homeX@{homeX}!command\+Manager@{command\+Manager}}
+\subsubsection[{\texorpdfstring{homeX}{homeX}}]{\setlength{\rightskip}{0pt plus 5cm}int command\+Manager.\+homeX = -\/5}\hypertarget{namespacecommandManager_afd4e45cbe13ed5ee1c795062ed21e184}{}\label{namespacecommandManager_afd4e45cbe13ed5ee1c795062ed21e184}
+
+
+X position of the home Here you can set the a priori X position of the house. 
+
+\index{command\+Manager@{command\+Manager}!homeY@{homeY}}
+\index{homeY@{homeY}!command\+Manager@{command\+Manager}}
+\subsubsection[{\texorpdfstring{homeY}{homeY}}]{\setlength{\rightskip}{0pt plus 5cm}int command\+Manager.\+homeY = 7}\hypertarget{namespacecommandManager_a9deb4aa18f5f193991dbfb07d1f8e0b3}{}\label{namespacecommandManager_a9deb4aa18f5f193991dbfb07d1f8e0b3}
+
+
+Y position of the home Here you can set the a priori Y position of the house. 
+

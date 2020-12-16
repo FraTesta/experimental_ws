@@ -1,0 +1,230 @@
+\hypertarget{classballDetection_1_1image__feature}{}\section{ball\+Detection.\+image\+\_\+feature Class Reference}
+\label{classballDetection_1_1image__feature}\index{ball\+Detection.\+image\+\_\+feature@{ball\+Detection.\+image\+\_\+feature}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classballDetection_1_1image__feature_a2de14dc8844b7778faaae3f1abc06064}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self)
+\item 
+def \hyperlink{classballDetection_1_1image__feature_a7943b65b893b102334cb17c7bd3a1776}{Head\+State\+Callback} (self, data)
+\item 
+def \hyperlink{classballDetection_1_1image__feature_a7a61e6b57cc0b58d4ae4ca531fa8bbd0}{callback} (self, ros\+\_\+data)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classballDetection_1_1image__feature_a7873b5a7def0a26beb3bb7d08d51d5fe}{image\+\_\+pub}
+\begin{DoxyCompactList}\small\item\em Publisher that send the processed and compressed images. \end{DoxyCompactList}\item 
+\hyperlink{classballDetection_1_1image__feature_a5fa76faf1ca73df49668bbfbd6359ca6}{ball\+\_\+state\+\_\+pub}
+\begin{DoxyCompactList}\small\item\em Publisher for send to the command manager information reguarding the ball and the corraction to apply to the robot. \end{DoxyCompactList}\item 
+\hyperlink{classballDetection_1_1image__feature_a5097b180a748b724b36f9f77deddd703}{vel\+\_\+pub}
+\begin{DoxyCompactList}\small\item\em Publisher to move the robot. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classballDetection_1_1image__feature_ae58b2d15e5dc42eec2d49c6373f8e90b}{camera\+\_\+sub}
+\begin{DoxyCompactList}\small\item\em To get the compressed images from the camera. \end{DoxyCompactList}\item 
+\hyperlink{classballDetection_1_1image__feature_ac7ef080bc4849ca6a0fd93d6a4427381}{callback}
+\item 
+\hyperlink{classballDetection_1_1image__feature_a85c33da670bc2705900afcfa12cb2f66}{queue\+\_\+size}
+\item 
+\hyperlink{classballDetection_1_1image__feature_a90bb9d5a57637e7cef2ff093778b3182}{head\+\_\+state\+\_\+sub}
+\begin{DoxyCompactList}\small\item\em Subscriber to the head\+\_\+state topic to know when the command manager has finished moving his head. \end{DoxyCompactList}\item 
+\hyperlink{classballDetection_1_1image__feature_a17e637dcbb2639eab5dfefd9eccfb7d5}{Head\+State\+Callback}
+\item 
+\hyperlink{classballDetection_1_1image__feature_ac4aef32147d5a7ab2a5702b96d123ca5}{head\+State}
+\begin{DoxyCompactList}\small\item\em Variable to check if the head is in the upright position. \end{DoxyCompactList}\item 
+\hyperlink{classballDetection_1_1image__feature_ae7733d80f1a59b84036b204c44f1d594}{ball\+Reached}
+\begin{DoxyCompactList}\small\item\em Variable that says whether the robot has reached the ball. \end{DoxyCompactList}\item 
+tuple \hyperlink{classballDetection_1_1image__feature_a2b1d1abdc4e93d6a6eba6ba40f5a3f77}{green\+Lower} = (50, 50, 20)
+\begin{DoxyCompactList}\small\item\em set colours bound \end{DoxyCompactList}\item 
+tuple \hyperlink{classballDetection_1_1image__feature_a0a37e51a267a8f2e81abbbad3c120122}{green\+Upper} = (70, 255, 255)
+\item 
+\hyperlink{classballDetection_1_1image__feature_a192f6fe52f2e6067fac63cf7af3bebda}{blurred} = cv2.\+Gaussian\+Blur(image\+\_\+np, (11, 11), 0)
+\item 
+\hyperlink{classballDetection_1_1image__feature_a86c8b7e7581075179dea815950abb95f}{hsv} = cv2.\+cvt\+Color(\hyperlink{classballDetection_1_1image__feature_a192f6fe52f2e6067fac63cf7af3bebda}{blurred}, cv2.\+C\+O\+L\+O\+R\+\_\+\+B\+G\+R2\+H\+SV)
+\item 
+\hyperlink{classballDetection_1_1image__feature_ad659708b5d3ba7904aa0d4330266d41c}{mask} = cv2.\+in\+Range(\hyperlink{classballDetection_1_1image__feature_a86c8b7e7581075179dea815950abb95f}{hsv}, \hyperlink{classballDetection_1_1image__feature_a2b1d1abdc4e93d6a6eba6ba40f5a3f77}{green\+Lower}, \hyperlink{classballDetection_1_1image__feature_a0a37e51a267a8f2e81abbbad3c120122}{green\+Upper})
+\item 
+\hyperlink{classballDetection_1_1image__feature_a13f936766fe3bbfe466d4bef773bb4f9}{cnts}
+\item 
+\hyperlink{classballDetection_1_1image__feature_a3b6a3451dbb6f3643346969ea9af3670}{center} = None
+\item 
+\hyperlink{classballDetection_1_1image__feature_a0ffd02f437ce41c517d2c870c059739b}{c} = max(\hyperlink{classballDetection_1_1image__feature_a13f936766fe3bbfe466d4bef773bb4f9}{cnts}, key=cv2.\+contour\+Area)
+\item 
+\hyperlink{classballDetection_1_1image__feature_a370e9015a86097812e323a9e18607c04}{radius}
+\item 
+\hyperlink{classballDetection_1_1image__feature_a45bb9e555b09541234f1724df7424e90}{M} = cv2.\+moments(\hyperlink{classballDetection_1_1image__feature_a0ffd02f437ce41c517d2c870c059739b}{c})
+\item 
+tuple \hyperlink{classballDetection_1_1image__feature_a7decaea2748c245d5940ea2f267a4cfc}{center} = (int(\hyperlink{classballDetection_1_1image__feature_a45bb9e555b09541234f1724df7424e90}{M}\mbox{[}\char`\"{}m10\char`\"{}\mbox{]} / M\mbox{[}\char`\"{}m00\char`\"{}\mbox{]}), int(\hyperlink{classballDetection_1_1image__feature_a45bb9e555b09541234f1724df7424e90}{M}\mbox{[}\char`\"{}m01\char`\"{}\mbox{]} / M\mbox{[}\char`\"{}m00\char`\"{}\mbox{]}))
+\item 
+\hyperlink{classballDetection_1_1image__feature_a3217e5c3695187fcf57a71915908e2fa}{msg} = Ball\+\_\+state()
+\item 
+\hyperlink{classballDetection_1_1image__feature_a60c51ba153ca9be2cb0231850f9a06bb}{ball\+Detected}
+\begin{DoxyCompactList}\small\item\em Field of the R\+OS msg Ball\+\_\+state. \end{DoxyCompactList}\item 
+\hyperlink{classballDetection_1_1image__feature_a871d6d1a252f9af8acb9695a52d2a465}{vel} = Twist()
+\item 
+\hyperlink{classballDetection_1_1image__feature_aae155697ae683625f463cb1839364095}{z}
+\item 
+\hyperlink{classballDetection_1_1image__feature_aaaf308b2b30ca2a20253d5e7ec3007b6}{x}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+(self)}{__init__(self)}}]{\setlength{\rightskip}{0pt plus 5cm}def ball\+Detection.\+image\+\_\+feature.\+\_\+\+\_\+init\+\_\+\+\_\+ (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\hypertarget{classballDetection_1_1image__feature_a2de14dc8844b7778faaae3f1abc06064}{}\label{classballDetection_1_1image__feature_a2de14dc8844b7778faaae3f1abc06064}
+\begin{DoxyVerb}Initialize ros publisher, ros subscriber\end{DoxyVerb}
+ 
+
+\subsection{Member Function Documentation}
+\index{ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}!callback@{callback}}
+\index{callback@{callback}!ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{callback(self, ros\+\_\+data)}{callback(self, ros_data)}}]{\setlength{\rightskip}{0pt plus 5cm}def ball\+Detection.\+image\+\_\+feature.\+callback (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{ros\+\_\+data}
+\end{DoxyParamCaption}
+)}\hypertarget{classballDetection_1_1image__feature_a7a61e6b57cc0b58d4ae4ca531fa8bbd0}{}\label{classballDetection_1_1image__feature_a7a61e6b57cc0b58d4ae4ca531fa8bbd0}
+\begin{DoxyVerb}Callback function of subscribed "camera_sub" topic which implements 
+the whole Computer Vision algorithm  \end{DoxyVerb}
+ \index{ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}!Head\+State\+Callback@{Head\+State\+Callback}}
+\index{Head\+State\+Callback@{Head\+State\+Callback}!ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{Head\+State\+Callback(self, data)}{HeadStateCallback(self, data)}}]{\setlength{\rightskip}{0pt plus 5cm}def ball\+Detection.\+image\+\_\+feature.\+Head\+State\+Callback (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{data}
+\end{DoxyParamCaption}
+)}\hypertarget{classballDetection_1_1image__feature_a7943b65b893b102334cb17c7bd3a1776}{}\label{classballDetection_1_1image__feature_a7943b65b893b102334cb17c7bd3a1776}
+\begin{DoxyVerb}Callback function of subscribed "head_state" topic.
+     This function updates the "headState" value\end{DoxyVerb}
+ 
+
+\subsection{Member Data Documentation}
+\index{ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}!ball\+\_\+state\+\_\+pub@{ball\+\_\+state\+\_\+pub}}
+\index{ball\+\_\+state\+\_\+pub@{ball\+\_\+state\+\_\+pub}!ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{ball\+\_\+state\+\_\+pub}{ball_state_pub}}]{\setlength{\rightskip}{0pt plus 5cm}ball\+Detection.\+image\+\_\+feature.\+ball\+\_\+state\+\_\+pub}\hypertarget{classballDetection_1_1image__feature_a5fa76faf1ca73df49668bbfbd6359ca6}{}\label{classballDetection_1_1image__feature_a5fa76faf1ca73df49668bbfbd6359ca6}
+
+
+Publisher for send to the command manager information reguarding the ball and the corraction to apply to the robot. 
+
+\index{ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}!ball\+Detected@{ball\+Detected}}
+\index{ball\+Detected@{ball\+Detected}!ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{ball\+Detected}{ballDetected}}]{\setlength{\rightskip}{0pt plus 5cm}ball\+Detection.\+image\+\_\+feature.\+ball\+Detected\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classballDetection_1_1image__feature_a60c51ba153ca9be2cb0231850f9a06bb}{}\label{classballDetection_1_1image__feature_a60c51ba153ca9be2cb0231850f9a06bb}
+
+
+Field of the R\+OS msg Ball\+\_\+state. 
+
+\index{ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}!ball\+Reached@{ball\+Reached}}
+\index{ball\+Reached@{ball\+Reached}!ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{ball\+Reached}{ballReached}}]{\setlength{\rightskip}{0pt plus 5cm}ball\+Detection.\+image\+\_\+feature.\+ball\+Reached\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classballDetection_1_1image__feature_ae7733d80f1a59b84036b204c44f1d594}{}\label{classballDetection_1_1image__feature_ae7733d80f1a59b84036b204c44f1d594}
+
+
+Variable that says whether the robot has reached the ball. 
+
+\index{ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}!blurred@{blurred}}
+\index{blurred@{blurred}!ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{blurred}{blurred}}]{\setlength{\rightskip}{0pt plus 5cm}ball\+Detection.\+image\+\_\+feature.\+blurred = cv2.\+Gaussian\+Blur(image\+\_\+np, (11, 11), 0)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classballDetection_1_1image__feature_a192f6fe52f2e6067fac63cf7af3bebda}{}\label{classballDetection_1_1image__feature_a192f6fe52f2e6067fac63cf7af3bebda}
+\index{ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}!c@{c}}
+\index{c@{c}!ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{c}{c}}]{\setlength{\rightskip}{0pt plus 5cm}ball\+Detection.\+image\+\_\+feature.\+c = max({\bf cnts}, key=cv2.\+contour\+Area)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classballDetection_1_1image__feature_a0ffd02f437ce41c517d2c870c059739b}{}\label{classballDetection_1_1image__feature_a0ffd02f437ce41c517d2c870c059739b}
+\index{ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}!callback@{callback}}
+\index{callback@{callback}!ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{callback}{callback}}]{\setlength{\rightskip}{0pt plus 5cm}ball\+Detection.\+image\+\_\+feature.\+callback\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classballDetection_1_1image__feature_ac7ef080bc4849ca6a0fd93d6a4427381}{}\label{classballDetection_1_1image__feature_ac7ef080bc4849ca6a0fd93d6a4427381}
+\index{ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}!camera\+\_\+sub@{camera\+\_\+sub}}
+\index{camera\+\_\+sub@{camera\+\_\+sub}!ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{camera\+\_\+sub}{camera_sub}}]{\setlength{\rightskip}{0pt plus 5cm}ball\+Detection.\+image\+\_\+feature.\+camera\+\_\+sub\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classballDetection_1_1image__feature_ae58b2d15e5dc42eec2d49c6373f8e90b}{}\label{classballDetection_1_1image__feature_ae58b2d15e5dc42eec2d49c6373f8e90b}
+
+
+To get the compressed images from the camera. 
+
+\index{ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}!center@{center}}
+\index{center@{center}!ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{center}{center}}]{\setlength{\rightskip}{0pt plus 5cm}ball\+Detection.\+image\+\_\+feature.\+center = None\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classballDetection_1_1image__feature_a3b6a3451dbb6f3643346969ea9af3670}{}\label{classballDetection_1_1image__feature_a3b6a3451dbb6f3643346969ea9af3670}
+\index{ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}!center@{center}}
+\index{center@{center}!ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{center}{center}}]{\setlength{\rightskip}{0pt plus 5cm}tuple ball\+Detection.\+image\+\_\+feature.\+center = (int({\bf M}\mbox{[}\char`\"{}m10\char`\"{}\mbox{]} / M\mbox{[}\char`\"{}m00\char`\"{}\mbox{]}), int({\bf M}\mbox{[}\char`\"{}m01\char`\"{}\mbox{]} / M\mbox{[}\char`\"{}m00\char`\"{}\mbox{]}))\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classballDetection_1_1image__feature_a7decaea2748c245d5940ea2f267a4cfc}{}\label{classballDetection_1_1image__feature_a7decaea2748c245d5940ea2f267a4cfc}
+\index{ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}!cnts@{cnts}}
+\index{cnts@{cnts}!ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{cnts}{cnts}}]{\setlength{\rightskip}{0pt plus 5cm}ball\+Detection.\+image\+\_\+feature.\+cnts\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classballDetection_1_1image__feature_a13f936766fe3bbfe466d4bef773bb4f9}{}\label{classballDetection_1_1image__feature_a13f936766fe3bbfe466d4bef773bb4f9}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+1 = cv2.findContours(mask.copy(), cv2.RETR\_EXTERNAL,
+2                                 cv2.CHAIN\_APPROX\_SIMPLE)
+\end{DoxyCode}
+\index{ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}!green\+Lower@{green\+Lower}}
+\index{green\+Lower@{green\+Lower}!ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{green\+Lower}{greenLower}}]{\setlength{\rightskip}{0pt plus 5cm}tuple ball\+Detection.\+image\+\_\+feature.\+green\+Lower = (50, 50, 20)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classballDetection_1_1image__feature_a2b1d1abdc4e93d6a6eba6ba40f5a3f77}{}\label{classballDetection_1_1image__feature_a2b1d1abdc4e93d6a6eba6ba40f5a3f77}
+
+
+set colours bound 
+
+\index{ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}!green\+Upper@{green\+Upper}}
+\index{green\+Upper@{green\+Upper}!ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{green\+Upper}{greenUpper}}]{\setlength{\rightskip}{0pt plus 5cm}tuple ball\+Detection.\+image\+\_\+feature.\+green\+Upper = (70, 255, 255)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classballDetection_1_1image__feature_a0a37e51a267a8f2e81abbbad3c120122}{}\label{classballDetection_1_1image__feature_a0a37e51a267a8f2e81abbbad3c120122}
+\index{ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}!head\+\_\+state\+\_\+sub@{head\+\_\+state\+\_\+sub}}
+\index{head\+\_\+state\+\_\+sub@{head\+\_\+state\+\_\+sub}!ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{head\+\_\+state\+\_\+sub}{head_state_sub}}]{\setlength{\rightskip}{0pt plus 5cm}ball\+Detection.\+image\+\_\+feature.\+head\+\_\+state\+\_\+sub\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classballDetection_1_1image__feature_a90bb9d5a57637e7cef2ff093778b3182}{}\label{classballDetection_1_1image__feature_a90bb9d5a57637e7cef2ff093778b3182}
+
+
+Subscriber to the head\+\_\+state topic to know when the command manager has finished moving his head. 
+
+\index{ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}!head\+State@{head\+State}}
+\index{head\+State@{head\+State}!ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{head\+State}{headState}}]{\setlength{\rightskip}{0pt plus 5cm}ball\+Detection.\+image\+\_\+feature.\+head\+State\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classballDetection_1_1image__feature_ac4aef32147d5a7ab2a5702b96d123ca5}{}\label{classballDetection_1_1image__feature_ac4aef32147d5a7ab2a5702b96d123ca5}
+
+
+Variable to check if the head is in the upright position. 
+
+\index{ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}!Head\+State\+Callback@{Head\+State\+Callback}}
+\index{Head\+State\+Callback@{Head\+State\+Callback}!ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{Head\+State\+Callback}{HeadStateCallback}}]{\setlength{\rightskip}{0pt plus 5cm}ball\+Detection.\+image\+\_\+feature.\+Head\+State\+Callback\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classballDetection_1_1image__feature_a17e637dcbb2639eab5dfefd9eccfb7d5}{}\label{classballDetection_1_1image__feature_a17e637dcbb2639eab5dfefd9eccfb7d5}
+\index{ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}!hsv@{hsv}}
+\index{hsv@{hsv}!ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{hsv}{hsv}}]{\setlength{\rightskip}{0pt plus 5cm}ball\+Detection.\+image\+\_\+feature.\+hsv = cv2.\+cvt\+Color({\bf blurred}, cv2.\+C\+O\+L\+O\+R\+\_\+\+B\+G\+R2\+H\+SV)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classballDetection_1_1image__feature_a86c8b7e7581075179dea815950abb95f}{}\label{classballDetection_1_1image__feature_a86c8b7e7581075179dea815950abb95f}
+\index{ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}!image\+\_\+pub@{image\+\_\+pub}}
+\index{image\+\_\+pub@{image\+\_\+pub}!ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{image\+\_\+pub}{image_pub}}]{\setlength{\rightskip}{0pt plus 5cm}ball\+Detection.\+image\+\_\+feature.\+image\+\_\+pub}\hypertarget{classballDetection_1_1image__feature_a7873b5a7def0a26beb3bb7d08d51d5fe}{}\label{classballDetection_1_1image__feature_a7873b5a7def0a26beb3bb7d08d51d5fe}
+
+
+Publisher that send the processed and compressed images. 
+
+\index{ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}!M@{M}}
+\index{M@{M}!ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{M}{M}}]{\setlength{\rightskip}{0pt plus 5cm}ball\+Detection.\+image\+\_\+feature.\+M = cv2.\+moments({\bf c})\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classballDetection_1_1image__feature_a45bb9e555b09541234f1724df7424e90}{}\label{classballDetection_1_1image__feature_a45bb9e555b09541234f1724df7424e90}
+\index{ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}!mask@{mask}}
+\index{mask@{mask}!ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{mask}{mask}}]{\setlength{\rightskip}{0pt plus 5cm}ball\+Detection.\+image\+\_\+feature.\+mask = cv2.\+in\+Range({\bf hsv}, {\bf green\+Lower}, {\bf green\+Upper})\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classballDetection_1_1image__feature_ad659708b5d3ba7904aa0d4330266d41c}{}\label{classballDetection_1_1image__feature_ad659708b5d3ba7904aa0d4330266d41c}
+\index{ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}!msg@{msg}}
+\index{msg@{msg}!ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{msg}{msg}}]{\setlength{\rightskip}{0pt plus 5cm}ball\+Detection.\+image\+\_\+feature.\+msg = Ball\+\_\+state()\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classballDetection_1_1image__feature_a3217e5c3695187fcf57a71915908e2fa}{}\label{classballDetection_1_1image__feature_a3217e5c3695187fcf57a71915908e2fa}
+\index{ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}!queue\+\_\+size@{queue\+\_\+size}}
+\index{queue\+\_\+size@{queue\+\_\+size}!ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{queue\+\_\+size}{queue_size}}]{\setlength{\rightskip}{0pt plus 5cm}ball\+Detection.\+image\+\_\+feature.\+queue\+\_\+size\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classballDetection_1_1image__feature_a85c33da670bc2705900afcfa12cb2f66}{}\label{classballDetection_1_1image__feature_a85c33da670bc2705900afcfa12cb2f66}
+\index{ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}!radius@{radius}}
+\index{radius@{radius}!ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{radius}{radius}}]{\setlength{\rightskip}{0pt plus 5cm}ball\+Detection.\+image\+\_\+feature.\+radius\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classballDetection_1_1image__feature_a370e9015a86097812e323a9e18607c04}{}\label{classballDetection_1_1image__feature_a370e9015a86097812e323a9e18607c04}
+\index{ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}!vel@{vel}}
+\index{vel@{vel}!ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{vel}{vel}}]{\setlength{\rightskip}{0pt plus 5cm}ball\+Detection.\+image\+\_\+feature.\+vel = Twist()\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classballDetection_1_1image__feature_a871d6d1a252f9af8acb9695a52d2a465}{}\label{classballDetection_1_1image__feature_a871d6d1a252f9af8acb9695a52d2a465}
+\index{ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}!vel\+\_\+pub@{vel\+\_\+pub}}
+\index{vel\+\_\+pub@{vel\+\_\+pub}!ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{vel\+\_\+pub}{vel_pub}}]{\setlength{\rightskip}{0pt plus 5cm}ball\+Detection.\+image\+\_\+feature.\+vel\+\_\+pub}\hypertarget{classballDetection_1_1image__feature_a5097b180a748b724b36f9f77deddd703}{}\label{classballDetection_1_1image__feature_a5097b180a748b724b36f9f77deddd703}
+
+
+Publisher to move the robot. 
+
+\index{ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}!x@{x}}
+\index{x@{x}!ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{x}{x}}]{\setlength{\rightskip}{0pt plus 5cm}ball\+Detection.\+image\+\_\+feature.\+x\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classballDetection_1_1image__feature_aaaf308b2b30ca2a20253d5e7ec3007b6}{}\label{classballDetection_1_1image__feature_aaaf308b2b30ca2a20253d5e7ec3007b6}
+\index{ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}!z@{z}}
+\index{z@{z}!ball\+Detection\+::image\+\_\+feature@{ball\+Detection\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{z}{z}}]{\setlength{\rightskip}{0pt plus 5cm}ball\+Detection.\+image\+\_\+feature.\+z\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classballDetection_1_1image__feature_aae155697ae683625f463cb1839364095}{}\label{classballDetection_1_1image__feature_aae155697ae683625f463cb1839364095}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/experimental\+\_\+ws/experimental\+\_\+ws/src/assignment2/scripts/\hyperlink{ballDetection_8py}{ball\+Detection.\+py}\end{DoxyCompactItemize}

@@ -202,13 +202,12 @@ def planning(goal):
 def main():
     global pub, active_, act_s
     rospy.init_node('go_to_point')
-    pub = rospy.Publisher('/robotDog/cmd_vel', Twist, queue_size=1)
-    sub_odom = rospy.Subscriber('/robotDog/odom', Odometry, clbk_odom)
-    #creazione action server (che sara il mio navigaiton)
-    #  parameters : name, dove prendere il file action, callback function (planning ) 
+    pub = rospy.Publisher('cmd_vel', Twist, queue_size=1)
+    sub_odom = rospy.Subscriber('odom', Odometry, clbk_odom)
+
     
     act_s = actionlib.SimpleActionServer(
-        '/robot_reaching_goal', motion_plan.msg.PlanningAction, planning, auto_start=False)
+        'robot_reaching_goal', motion_plan.msg.PlanningAction, planning, auto_start=False)
     act_s.start()
 
     rate = rospy.Rate(20)

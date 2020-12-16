@@ -1,0 +1,63 @@
+\hypertarget{navigation__action_8py}{}\section{/home/experimental\+\_\+ws/experimental\+\_\+ws/src/assignment2/scripts/navigation\+\_\+action.py File Reference}
+\label{navigation__action_8py}\index{/home/experimental\+\_\+ws/experimental\+\_\+ws/src/assignment2/scripts/navigation\+\_\+action.\+py@{/home/experimental\+\_\+ws/experimental\+\_\+ws/src/assignment2/scripts/navigation\+\_\+action.\+py}}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespacenavigation__action}{navigation\+\_\+action}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespacenavigation__action_a5843780136ed9def4e6c383d936ba03a}{navigation\+\_\+action.\+clbk\+\_\+odom} (msg)
+\begin{DoxyCompactList}\small\item\em callbacks \end{DoxyCompactList}\item 
+def \hyperlink{namespacenavigation__action_a6d442ed74e58d2364dc836bf9070e294}{navigation\+\_\+action.\+change\+\_\+state} (state)
+\item 
+def \hyperlink{namespacenavigation__action_a3d7bfdf0b3a4ceae6de2da2a2ca9216b}{navigation\+\_\+action.\+normalize\+\_\+angle} (angle)
+\item 
+def \hyperlink{namespacenavigation__action_a66a81926b4ce0cf801c2a1e947dd2405}{navigation\+\_\+action.\+fix\+\_\+yaw} (des\+\_\+pos)
+\item 
+def \hyperlink{namespacenavigation__action_a5984663372b3695a8566d9ab2b149728}{navigation\+\_\+action.\+go\+\_\+straight\+\_\+ahead} (des\+\_\+pos)
+\item 
+def \hyperlink{namespacenavigation__action_a05d5b3c910a9327eceb1628bb0696e40}{navigation\+\_\+action.\+done} ()
+\item 
+def \hyperlink{namespacenavigation__action_a2b437adab0003dc13c8703a505ba0640}{navigation\+\_\+action.\+planning} (goal)
+\begin{DoxyCompactList}\small\item\em callback of the action server \end{DoxyCompactList}\item 
+def \hyperlink{namespacenavigation__action_a2203bb3f38935f8a73b3ef443dd4eec1}{navigation\+\_\+action.\+main} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespacenavigation__action_aa53bb3e42cba75b4faece7677fdf8b1d}{navigation\+\_\+action.\+position\+\_\+} = Point()
+\begin{DoxyCompactList}\small\item\em robot state variables \end{DoxyCompactList}\item 
+\hyperlink{namespacenavigation__action_ad906a8ccc8be8e7aac7662be3092c3b7}{navigation\+\_\+action.\+pose\+\_\+} = Pose()
+\item 
+int \hyperlink{namespacenavigation__action_aa356f2a5947d276649face9801529b11}{navigation\+\_\+action.\+yaw\+\_\+} = 0
+\item 
+int \hyperlink{namespacenavigation__action_ac6656a4827fb720e3c7a7224940626d2}{navigation\+\_\+action.\+state\+\_\+} = 0
+\begin{DoxyCompactList}\small\item\em machine state \end{DoxyCompactList}\item 
+\hyperlink{namespacenavigation__action_a7ce69adc83a1ee3d37d5e3c6e0e72e32}{navigation\+\_\+action.\+desired\+\_\+position\+\_\+} = Point()
+\begin{DoxyCompactList}\small\item\em goal \end{DoxyCompactList}\item 
+\hyperlink{namespacenavigation__action_a5258daa88a84ac3fae37a796753c3a6f}{navigation\+\_\+action.\+z}
+\item 
+int \hyperlink{namespacenavigation__action_a405244594bb4eea456e03e5b095d3869}{navigation\+\_\+action.\+yaw\+\_\+precision\+\_\+} = math.\+pi/9
+\begin{DoxyCompactList}\small\item\em parameters \end{DoxyCompactList}\item 
+int \hyperlink{namespacenavigation__action_a8ff0e6466c43c2a149fb09b9678d56bf}{navigation\+\_\+action.\+yaw\+\_\+precision\+\_\+2\+\_\+} = math.\+pi/90
+\item 
+float \hyperlink{namespacenavigation__action_ae84ae6794723578c0bda3eb07d0f1387}{navigation\+\_\+action.\+dist\+\_\+precision\+\_\+} = 0.\+1
+\item 
+float \hyperlink{namespacenavigation__action_a88d77c73344c091f0e27e30f34b149cc}{navigation\+\_\+action.\+kp\+\_\+a} = 3.\+0
+\item 
+float \hyperlink{namespacenavigation__action_a34478a1ef79cccac170cae8f045a4018}{navigation\+\_\+action.\+kp\+\_\+d} = 0.\+2
+\begin{DoxyCompactList}\small\item\em In R\+OS Noetic, it may be necessary to change the sign of this proportional controller. \end{DoxyCompactList}\item 
+float \hyperlink{namespacenavigation__action_a2949c425c74dfbe48d976545b4f4db9d}{navigation\+\_\+action.\+ub\+\_\+a} = 0.\+6
+\item 
+float \hyperlink{namespacenavigation__action_aa1239a696c81960bbb147a15f3f3bd87}{navigation\+\_\+action.\+lb\+\_\+a} = -\/0.\+5
+\item 
+float \hyperlink{namespacenavigation__action_aad75661fd33d72b125133a1898175d4b}{navigation\+\_\+action.\+ub\+\_\+d} = 0.\+6
+\item 
+\hyperlink{namespacenavigation__action_a534f03fffb29fa18e1e2f01c2e99ac90}{navigation\+\_\+action.\+pub} = None
+\begin{DoxyCompactList}\small\item\em publisher \end{DoxyCompactList}\item 
+\hyperlink{namespacenavigation__action_a0ff6186f4b199de2bb1fff9bdd2ad110}{navigation\+\_\+action.\+act\+\_\+s} = None
+\begin{DoxyCompactList}\small\item\em action\+\_\+server \end{DoxyCompactList}\item 
+\hyperlink{namespacenavigation__action_a0d7ef71fc2d73b266e305aaca8a1330a}{navigation\+\_\+action.\+joint\+\_\+pub} = rospy.\+Publisher(\char`\"{}joint\+\_\+head\+\_\+controller/command\char`\"{},Float64,queue\+\_\+size=1)
+\begin{DoxyCompactList}\small\item\em Publisher. \end{DoxyCompactList}\end{DoxyCompactItemize}

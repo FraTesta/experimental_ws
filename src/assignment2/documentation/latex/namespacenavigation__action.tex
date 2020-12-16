@@ -1,0 +1,216 @@
+\hypertarget{namespacenavigation__action}{}\section{navigation\+\_\+action Namespace Reference}
+\label{namespacenavigation__action}\index{navigation\+\_\+action@{navigation\+\_\+action}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespacenavigation__action_a5843780136ed9def4e6c383d936ba03a}{clbk\+\_\+odom} (msg)
+\begin{DoxyCompactList}\small\item\em callbacks \end{DoxyCompactList}\item 
+def \hyperlink{namespacenavigation__action_a6d442ed74e58d2364dc836bf9070e294}{change\+\_\+state} (state)
+\item 
+def \hyperlink{namespacenavigation__action_a3d7bfdf0b3a4ceae6de2da2a2ca9216b}{normalize\+\_\+angle} (angle)
+\item 
+def \hyperlink{namespacenavigation__action_a66a81926b4ce0cf801c2a1e947dd2405}{fix\+\_\+yaw} (des\+\_\+pos)
+\item 
+def \hyperlink{namespacenavigation__action_a5984663372b3695a8566d9ab2b149728}{go\+\_\+straight\+\_\+ahead} (des\+\_\+pos)
+\item 
+def \hyperlink{namespacenavigation__action_a05d5b3c910a9327eceb1628bb0696e40}{done} ()
+\item 
+def \hyperlink{namespacenavigation__action_a2b437adab0003dc13c8703a505ba0640}{planning} (goal)
+\begin{DoxyCompactList}\small\item\em callback of the action server \end{DoxyCompactList}\item 
+def \hyperlink{namespacenavigation__action_a2203bb3f38935f8a73b3ef443dd4eec1}{main} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespacenavigation__action_aa53bb3e42cba75b4faece7677fdf8b1d}{position\+\_\+} = Point()
+\begin{DoxyCompactList}\small\item\em robot state variables \end{DoxyCompactList}\item 
+\hyperlink{namespacenavigation__action_ad906a8ccc8be8e7aac7662be3092c3b7}{pose\+\_\+} = Pose()
+\item 
+int \hyperlink{namespacenavigation__action_aa356f2a5947d276649face9801529b11}{yaw\+\_\+} = 0
+\item 
+int \hyperlink{namespacenavigation__action_ac6656a4827fb720e3c7a7224940626d2}{state\+\_\+} = 0
+\begin{DoxyCompactList}\small\item\em machine state \end{DoxyCompactList}\item 
+\hyperlink{namespacenavigation__action_a7ce69adc83a1ee3d37d5e3c6e0e72e32}{desired\+\_\+position\+\_\+} = Point()
+\begin{DoxyCompactList}\small\item\em goal \end{DoxyCompactList}\item 
+\hyperlink{namespacenavigation__action_a5258daa88a84ac3fae37a796753c3a6f}{z}
+\item 
+int \hyperlink{namespacenavigation__action_a405244594bb4eea456e03e5b095d3869}{yaw\+\_\+precision\+\_\+} = math.\+pi/9
+\begin{DoxyCompactList}\small\item\em parameters \end{DoxyCompactList}\item 
+int \hyperlink{namespacenavigation__action_a8ff0e6466c43c2a149fb09b9678d56bf}{yaw\+\_\+precision\+\_\+2\+\_\+} = math.\+pi/90
+\item 
+float \hyperlink{namespacenavigation__action_ae84ae6794723578c0bda3eb07d0f1387}{dist\+\_\+precision\+\_\+} = 0.\+1
+\item 
+float \hyperlink{namespacenavigation__action_a88d77c73344c091f0e27e30f34b149cc}{kp\+\_\+a} = 3.\+0
+\item 
+float \hyperlink{namespacenavigation__action_a34478a1ef79cccac170cae8f045a4018}{kp\+\_\+d} = 0.\+2
+\begin{DoxyCompactList}\small\item\em In R\+OS Noetic, it may be necessary to change the sign of this proportional controller. \end{DoxyCompactList}\item 
+float \hyperlink{namespacenavigation__action_a2949c425c74dfbe48d976545b4f4db9d}{ub\+\_\+a} = 0.\+6
+\item 
+float \hyperlink{namespacenavigation__action_aa1239a696c81960bbb147a15f3f3bd87}{lb\+\_\+a} = -\/0.\+5
+\item 
+float \hyperlink{namespacenavigation__action_aad75661fd33d72b125133a1898175d4b}{ub\+\_\+d} = 0.\+6
+\item 
+\hyperlink{namespacenavigation__action_a534f03fffb29fa18e1e2f01c2e99ac90}{pub} = None
+\begin{DoxyCompactList}\small\item\em publisher \end{DoxyCompactList}\item 
+\hyperlink{namespacenavigation__action_a0ff6186f4b199de2bb1fff9bdd2ad110}{act\+\_\+s} = None
+\begin{DoxyCompactList}\small\item\em action\+\_\+server \end{DoxyCompactList}\item 
+\hyperlink{namespacenavigation__action_a0d7ef71fc2d73b266e305aaca8a1330a}{joint\+\_\+pub} = rospy.\+Publisher(\char`\"{}joint\+\_\+head\+\_\+controller/command\char`\"{},Float64,queue\+\_\+size=1)
+\begin{DoxyCompactList}\small\item\em Publisher. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{navigation\+\_\+action@{navigation\+\_\+action}!change\+\_\+state@{change\+\_\+state}}
+\index{change\+\_\+state@{change\+\_\+state}!navigation\+\_\+action@{navigation\+\_\+action}}
+\subsubsection[{\texorpdfstring{change\+\_\+state(state)}{change_state(state)}}]{\setlength{\rightskip}{0pt plus 5cm}def navigation\+\_\+action.\+change\+\_\+state (
+\begin{DoxyParamCaption}
+\item[{}]{state}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacenavigation__action_a6d442ed74e58d2364dc836bf9070e294}{}\label{namespacenavigation__action_a6d442ed74e58d2364dc836bf9070e294}
+\index{navigation\+\_\+action@{navigation\+\_\+action}!clbk\+\_\+odom@{clbk\+\_\+odom}}
+\index{clbk\+\_\+odom@{clbk\+\_\+odom}!navigation\+\_\+action@{navigation\+\_\+action}}
+\subsubsection[{\texorpdfstring{clbk\+\_\+odom(msg)}{clbk_odom(msg)}}]{\setlength{\rightskip}{0pt plus 5cm}def navigation\+\_\+action.\+clbk\+\_\+odom (
+\begin{DoxyParamCaption}
+\item[{}]{msg}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacenavigation__action_a5843780136ed9def4e6c383d936ba03a}{}\label{namespacenavigation__action_a5843780136ed9def4e6c383d936ba03a}
+
+
+callbacks 
+
+\index{navigation\+\_\+action@{navigation\+\_\+action}!done@{done}}
+\index{done@{done}!navigation\+\_\+action@{navigation\+\_\+action}}
+\subsubsection[{\texorpdfstring{done()}{done()}}]{\setlength{\rightskip}{0pt plus 5cm}def navigation\+\_\+action.\+done (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacenavigation__action_a05d5b3c910a9327eceb1628bb0696e40}{}\label{namespacenavigation__action_a05d5b3c910a9327eceb1628bb0696e40}
+\index{navigation\+\_\+action@{navigation\+\_\+action}!fix\+\_\+yaw@{fix\+\_\+yaw}}
+\index{fix\+\_\+yaw@{fix\+\_\+yaw}!navigation\+\_\+action@{navigation\+\_\+action}}
+\subsubsection[{\texorpdfstring{fix\+\_\+yaw(des\+\_\+pos)}{fix_yaw(des_pos)}}]{\setlength{\rightskip}{0pt plus 5cm}def navigation\+\_\+action.\+fix\+\_\+yaw (
+\begin{DoxyParamCaption}
+\item[{}]{des\+\_\+pos}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacenavigation__action_a66a81926b4ce0cf801c2a1e947dd2405}{}\label{namespacenavigation__action_a66a81926b4ce0cf801c2a1e947dd2405}
+\index{navigation\+\_\+action@{navigation\+\_\+action}!go\+\_\+straight\+\_\+ahead@{go\+\_\+straight\+\_\+ahead}}
+\index{go\+\_\+straight\+\_\+ahead@{go\+\_\+straight\+\_\+ahead}!navigation\+\_\+action@{navigation\+\_\+action}}
+\subsubsection[{\texorpdfstring{go\+\_\+straight\+\_\+ahead(des\+\_\+pos)}{go_straight_ahead(des_pos)}}]{\setlength{\rightskip}{0pt plus 5cm}def navigation\+\_\+action.\+go\+\_\+straight\+\_\+ahead (
+\begin{DoxyParamCaption}
+\item[{}]{des\+\_\+pos}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacenavigation__action_a5984663372b3695a8566d9ab2b149728}{}\label{namespacenavigation__action_a5984663372b3695a8566d9ab2b149728}
+\index{navigation\+\_\+action@{navigation\+\_\+action}!main@{main}}
+\index{main@{main}!navigation\+\_\+action@{navigation\+\_\+action}}
+\subsubsection[{\texorpdfstring{main()}{main()}}]{\setlength{\rightskip}{0pt plus 5cm}def navigation\+\_\+action.\+main (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacenavigation__action_a2203bb3f38935f8a73b3ef443dd4eec1}{}\label{namespacenavigation__action_a2203bb3f38935f8a73b3ef443dd4eec1}
+\index{navigation\+\_\+action@{navigation\+\_\+action}!normalize\+\_\+angle@{normalize\+\_\+angle}}
+\index{normalize\+\_\+angle@{normalize\+\_\+angle}!navigation\+\_\+action@{navigation\+\_\+action}}
+\subsubsection[{\texorpdfstring{normalize\+\_\+angle(angle)}{normalize_angle(angle)}}]{\setlength{\rightskip}{0pt plus 5cm}def navigation\+\_\+action.\+normalize\+\_\+angle (
+\begin{DoxyParamCaption}
+\item[{}]{angle}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacenavigation__action_a3d7bfdf0b3a4ceae6de2da2a2ca9216b}{}\label{namespacenavigation__action_a3d7bfdf0b3a4ceae6de2da2a2ca9216b}
+\index{navigation\+\_\+action@{navigation\+\_\+action}!planning@{planning}}
+\index{planning@{planning}!navigation\+\_\+action@{navigation\+\_\+action}}
+\subsubsection[{\texorpdfstring{planning(goal)}{planning(goal)}}]{\setlength{\rightskip}{0pt plus 5cm}def navigation\+\_\+action.\+planning (
+\begin{DoxyParamCaption}
+\item[{}]{goal}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacenavigation__action_a2b437adab0003dc13c8703a505ba0640}{}\label{namespacenavigation__action_a2b437adab0003dc13c8703a505ba0640}
+
+
+callback of the action server 
+
+
+
+\subsection{Variable Documentation}
+\index{navigation\+\_\+action@{navigation\+\_\+action}!act\+\_\+s@{act\+\_\+s}}
+\index{act\+\_\+s@{act\+\_\+s}!navigation\+\_\+action@{navigation\+\_\+action}}
+\subsubsection[{\texorpdfstring{act\+\_\+s}{act_s}}]{\setlength{\rightskip}{0pt plus 5cm}navigation\+\_\+action.\+act\+\_\+s = None}\hypertarget{namespacenavigation__action_a0ff6186f4b199de2bb1fff9bdd2ad110}{}\label{namespacenavigation__action_a0ff6186f4b199de2bb1fff9bdd2ad110}
+
+
+action\+\_\+server 
+
+\index{navigation\+\_\+action@{navigation\+\_\+action}!desired\+\_\+position\+\_\+@{desired\+\_\+position\+\_\+}}
+\index{desired\+\_\+position\+\_\+@{desired\+\_\+position\+\_\+}!navigation\+\_\+action@{navigation\+\_\+action}}
+\subsubsection[{\texorpdfstring{desired\+\_\+position\+\_\+}{desired_position_}}]{\setlength{\rightskip}{0pt plus 5cm}navigation\+\_\+action.\+desired\+\_\+position\+\_\+ = Point()}\hypertarget{namespacenavigation__action_a7ce69adc83a1ee3d37d5e3c6e0e72e32}{}\label{namespacenavigation__action_a7ce69adc83a1ee3d37d5e3c6e0e72e32}
+
+
+goal 
+
+\index{navigation\+\_\+action@{navigation\+\_\+action}!dist\+\_\+precision\+\_\+@{dist\+\_\+precision\+\_\+}}
+\index{dist\+\_\+precision\+\_\+@{dist\+\_\+precision\+\_\+}!navigation\+\_\+action@{navigation\+\_\+action}}
+\subsubsection[{\texorpdfstring{dist\+\_\+precision\+\_\+}{dist_precision_}}]{\setlength{\rightskip}{0pt plus 5cm}float navigation\+\_\+action.\+dist\+\_\+precision\+\_\+ = 0.\+1}\hypertarget{namespacenavigation__action_ae84ae6794723578c0bda3eb07d0f1387}{}\label{namespacenavigation__action_ae84ae6794723578c0bda3eb07d0f1387}
+\index{navigation\+\_\+action@{navigation\+\_\+action}!joint\+\_\+pub@{joint\+\_\+pub}}
+\index{joint\+\_\+pub@{joint\+\_\+pub}!navigation\+\_\+action@{navigation\+\_\+action}}
+\subsubsection[{\texorpdfstring{joint\+\_\+pub}{joint_pub}}]{\setlength{\rightskip}{0pt plus 5cm}navigation\+\_\+action.\+joint\+\_\+pub = rospy.\+Publisher(\char`\"{}joint\+\_\+head\+\_\+controller/command\char`\"{},Float64,queue\+\_\+size=1)}\hypertarget{namespacenavigation__action_a0d7ef71fc2d73b266e305aaca8a1330a}{}\label{namespacenavigation__action_a0d7ef71fc2d73b266e305aaca8a1330a}
+
+
+Publisher. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em joint\+\_\+pub} & it allows to move the head of the robot \\
+\hline
+\end{DoxyParams}
+\index{navigation\+\_\+action@{navigation\+\_\+action}!kp\+\_\+a@{kp\+\_\+a}}
+\index{kp\+\_\+a@{kp\+\_\+a}!navigation\+\_\+action@{navigation\+\_\+action}}
+\subsubsection[{\texorpdfstring{kp\+\_\+a}{kp_a}}]{\setlength{\rightskip}{0pt plus 5cm}float navigation\+\_\+action.\+kp\+\_\+a = 3.\+0}\hypertarget{namespacenavigation__action_a88d77c73344c091f0e27e30f34b149cc}{}\label{namespacenavigation__action_a88d77c73344c091f0e27e30f34b149cc}
+\index{navigation\+\_\+action@{navigation\+\_\+action}!kp\+\_\+d@{kp\+\_\+d}}
+\index{kp\+\_\+d@{kp\+\_\+d}!navigation\+\_\+action@{navigation\+\_\+action}}
+\subsubsection[{\texorpdfstring{kp\+\_\+d}{kp_d}}]{\setlength{\rightskip}{0pt plus 5cm}float navigation\+\_\+action.\+kp\+\_\+d = 0.\+2}\hypertarget{namespacenavigation__action_a34478a1ef79cccac170cae8f045a4018}{}\label{namespacenavigation__action_a34478a1ef79cccac170cae8f045a4018}
+
+
+In R\+OS Noetic, it may be necessary to change the sign of this proportional controller. 
+
+\index{navigation\+\_\+action@{navigation\+\_\+action}!lb\+\_\+a@{lb\+\_\+a}}
+\index{lb\+\_\+a@{lb\+\_\+a}!navigation\+\_\+action@{navigation\+\_\+action}}
+\subsubsection[{\texorpdfstring{lb\+\_\+a}{lb_a}}]{\setlength{\rightskip}{0pt plus 5cm}float navigation\+\_\+action.\+lb\+\_\+a = -\/0.\+5}\hypertarget{namespacenavigation__action_aa1239a696c81960bbb147a15f3f3bd87}{}\label{namespacenavigation__action_aa1239a696c81960bbb147a15f3f3bd87}
+\index{navigation\+\_\+action@{navigation\+\_\+action}!pose\+\_\+@{pose\+\_\+}}
+\index{pose\+\_\+@{pose\+\_\+}!navigation\+\_\+action@{navigation\+\_\+action}}
+\subsubsection[{\texorpdfstring{pose\+\_\+}{pose_}}]{\setlength{\rightskip}{0pt plus 5cm}navigation\+\_\+action.\+pose\+\_\+ = Pose()}\hypertarget{namespacenavigation__action_ad906a8ccc8be8e7aac7662be3092c3b7}{}\label{namespacenavigation__action_ad906a8ccc8be8e7aac7662be3092c3b7}
+\index{navigation\+\_\+action@{navigation\+\_\+action}!position\+\_\+@{position\+\_\+}}
+\index{position\+\_\+@{position\+\_\+}!navigation\+\_\+action@{navigation\+\_\+action}}
+\subsubsection[{\texorpdfstring{position\+\_\+}{position_}}]{\setlength{\rightskip}{0pt plus 5cm}navigation\+\_\+action.\+position\+\_\+ = Point()}\hypertarget{namespacenavigation__action_aa53bb3e42cba75b4faece7677fdf8b1d}{}\label{namespacenavigation__action_aa53bb3e42cba75b4faece7677fdf8b1d}
+
+
+robot state variables 
+
+\index{navigation\+\_\+action@{navigation\+\_\+action}!pub@{pub}}
+\index{pub@{pub}!navigation\+\_\+action@{navigation\+\_\+action}}
+\subsubsection[{\texorpdfstring{pub}{pub}}]{\setlength{\rightskip}{0pt plus 5cm}navigation\+\_\+action.\+pub = None}\hypertarget{namespacenavigation__action_a534f03fffb29fa18e1e2f01c2e99ac90}{}\label{namespacenavigation__action_a534f03fffb29fa18e1e2f01c2e99ac90}
+
+
+publisher 
+
+\index{navigation\+\_\+action@{navigation\+\_\+action}!state\+\_\+@{state\+\_\+}}
+\index{state\+\_\+@{state\+\_\+}!navigation\+\_\+action@{navigation\+\_\+action}}
+\subsubsection[{\texorpdfstring{state\+\_\+}{state_}}]{\setlength{\rightskip}{0pt plus 5cm}int navigation\+\_\+action.\+state\+\_\+ = 0}\hypertarget{namespacenavigation__action_ac6656a4827fb720e3c7a7224940626d2}{}\label{namespacenavigation__action_ac6656a4827fb720e3c7a7224940626d2}
+
+
+machine state 
+
+\index{navigation\+\_\+action@{navigation\+\_\+action}!ub\+\_\+a@{ub\+\_\+a}}
+\index{ub\+\_\+a@{ub\+\_\+a}!navigation\+\_\+action@{navigation\+\_\+action}}
+\subsubsection[{\texorpdfstring{ub\+\_\+a}{ub_a}}]{\setlength{\rightskip}{0pt plus 5cm}float navigation\+\_\+action.\+ub\+\_\+a = 0.\+6}\hypertarget{namespacenavigation__action_a2949c425c74dfbe48d976545b4f4db9d}{}\label{namespacenavigation__action_a2949c425c74dfbe48d976545b4f4db9d}
+\index{navigation\+\_\+action@{navigation\+\_\+action}!ub\+\_\+d@{ub\+\_\+d}}
+\index{ub\+\_\+d@{ub\+\_\+d}!navigation\+\_\+action@{navigation\+\_\+action}}
+\subsubsection[{\texorpdfstring{ub\+\_\+d}{ub_d}}]{\setlength{\rightskip}{0pt plus 5cm}float navigation\+\_\+action.\+ub\+\_\+d = 0.\+6}\hypertarget{namespacenavigation__action_aad75661fd33d72b125133a1898175d4b}{}\label{namespacenavigation__action_aad75661fd33d72b125133a1898175d4b}
+\index{navigation\+\_\+action@{navigation\+\_\+action}!yaw\+\_\+@{yaw\+\_\+}}
+\index{yaw\+\_\+@{yaw\+\_\+}!navigation\+\_\+action@{navigation\+\_\+action}}
+\subsubsection[{\texorpdfstring{yaw\+\_\+}{yaw_}}]{\setlength{\rightskip}{0pt plus 5cm}int navigation\+\_\+action.\+yaw\+\_\+ = 0}\hypertarget{namespacenavigation__action_aa356f2a5947d276649face9801529b11}{}\label{namespacenavigation__action_aa356f2a5947d276649face9801529b11}
+\index{navigation\+\_\+action@{navigation\+\_\+action}!yaw\+\_\+precision\+\_\+@{yaw\+\_\+precision\+\_\+}}
+\index{yaw\+\_\+precision\+\_\+@{yaw\+\_\+precision\+\_\+}!navigation\+\_\+action@{navigation\+\_\+action}}
+\subsubsection[{\texorpdfstring{yaw\+\_\+precision\+\_\+}{yaw_precision_}}]{\setlength{\rightskip}{0pt plus 5cm}int navigation\+\_\+action.\+yaw\+\_\+precision\+\_\+ = math.\+pi/9}\hypertarget{namespacenavigation__action_a405244594bb4eea456e03e5b095d3869}{}\label{namespacenavigation__action_a405244594bb4eea456e03e5b095d3869}
+
+
+parameters 
+
+\index{navigation\+\_\+action@{navigation\+\_\+action}!yaw\+\_\+precision\+\_\+2\+\_\+@{yaw\+\_\+precision\+\_\+2\+\_\+}}
+\index{yaw\+\_\+precision\+\_\+2\+\_\+@{yaw\+\_\+precision\+\_\+2\+\_\+}!navigation\+\_\+action@{navigation\+\_\+action}}
+\subsubsection[{\texorpdfstring{yaw\+\_\+precision\+\_\+2\+\_\+}{yaw_precision_2_}}]{\setlength{\rightskip}{0pt plus 5cm}int navigation\+\_\+action.\+yaw\+\_\+precision\+\_\+2\+\_\+ = math.\+pi/90}\hypertarget{namespacenavigation__action_a8ff0e6466c43c2a149fb09b9678d56bf}{}\label{namespacenavigation__action_a8ff0e6466c43c2a149fb09b9678d56bf}
+\index{navigation\+\_\+action@{navigation\+\_\+action}!z@{z}}
+\index{z@{z}!navigation\+\_\+action@{navigation\+\_\+action}}
+\subsubsection[{\texorpdfstring{z}{z}}]{\setlength{\rightskip}{0pt plus 5cm}navigation\+\_\+action.\+z}\hypertarget{namespacenavigation__action_a5258daa88a84ac3fae37a796753c3a6f}{}\label{namespacenavigation__action_a5258daa88a84ac3fae37a796753c3a6f}

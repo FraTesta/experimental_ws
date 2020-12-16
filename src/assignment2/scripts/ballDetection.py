@@ -27,46 +27,45 @@ from assignment2.msg import HeadState
 VERBOSE = False
 
 
+
 class image_feature:
 
     def __init__(self):
         '''Initialize ros publisher, ros subscriber'''
-     ## initialize the node 
         rospy.init_node('ballDetection', anonymous=True)
-     ## topic where we publish
-     ## @param image_pub publisher that send the processed and compressed images 
+     # topic where we publish
+        ## Publisher that send the processed and compressed images 
         self.image_pub = rospy.Publisher("/output/image_raw/compressed",
                                          CompressedImage, queue_size=1)
-     ## @param vel_pub pub for send to the command manager information reguarding the ball and the corraction to       		##apply to the robot 
-        self.ball_state_pub = rospy.Publisher("ball_state",Ball_state, queue_size=1)
+        ## Publisher for send to the command manager information  reguarding the ball and the corraction to apply to the robot 
+        self.ball_state_pub = rospy.Publisher("ball_state",Ball_state,queue_size=1)
 
-     ## @param joint_pub to move the head of the robot 
- #       self.joint_pub = rospy.Publisher("joint_head_controller/command",Float64,queue_size=1)
 
-     ## @param vel_pub to move the whole robot 
+        ## Publisher to move the robot 
         self.vel_pub = rospy.Publisher("cmd_vel",Twist, queue_size=1)
 
-        ## subscribed Topic
-	### @param subsriber to get the compressed images from the camera  
-        self.camera_sub = rospy.Subscriber("camera1/image_raw/compressed",
-                                           CompressedImage, self.callback,  queue_size=1)
+        # subscribed Topic
+	## To get the compressed images from the camera  
+        self.camera_sub = rospy.Subscriber("camera1/image_raw/compressed", CompressedImage, self.callback, queue_size=1)
 
-	self.head_state_pub = rospy.Subscriber("head_state",HeadState, self.HeadStateCallback, queue_size = 1)
+	### Subscriber to the head_state topic to know when the command manager has finished moving his head
+	self.head_state_sub = rospy.Subscriber("head_state",HeadState, self.HeadStateCallback, queue_size = 1)
 
-	## @headState to check if the head is in the upright position
+	## Variable to check if the head is in the upright position
 	self.headState = True
 
-	## @ballReached variable that says whether the robot has reached the ball
+	## Variable that says whether the robot has reached the ball
 	self.ballReached = False 
 
-	## Callback function to update the headState  
+
     def HeadStateCallback(self, data): 
+        '''Callback function of subscribed "head_state" topic.
+	 This function updates the "headState" value'''
 	self.headState = data.HeadMotionStop
 
-	## Callback of the camera_sub subsriber which implements the whole CV algorithm  
     def callback(self, ros_data):
-        '''Callback function of subscribed topic. 
-        Here images get converted and features detected'''
+        '''Callback function of subscribed "camera_sub" topic which implements 
+        the whole Computer Vision algorithm  '''
         if VERBOSE:
             print ('received image of type: "%s"' % ros_data.format)
 
@@ -89,7 +88,7 @@ class image_feature:
                                 cv2.CHAIN_APPROX_SIMPLE)
         cnts = imutils.grab_contours(cnts)
         center = None
-        ## only proceed if at least one contour was found
+        # only proceed if at least one contour was found
 
         # fare l else che metta il messaggio ObjDet = false
         if len(cnts) > 0:
@@ -110,6 +109,7 @@ class image_feature:
                 cv2.circle(image_np, center, 5, (0, 0, 255), -1)
                 
                 msg = Ball_state()
+		## Field of the ROS msg Ball_state 
                 msg.ballDetected = True
 		msg.ballReached = self.ballReached 
 	        
@@ -126,7 +126,8 @@ class image_feature:
 		        vel.linear.x = -0.01*(radius-150)
 		        self.vel_pub.publish(vel)
 			self.ballReached = False 
-			if (radius>=149) :
+			
+			if (radius>=148) and abs(center[0]-400)<5: #Condition for considering the ball as reached
 				rospy.loginfo("BallDetection : ball reached!!")
 				self.headState = False
 				self.ballReached = True 

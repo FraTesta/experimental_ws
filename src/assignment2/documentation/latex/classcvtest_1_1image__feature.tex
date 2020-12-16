@@ -1,0 +1,213 @@
+\hypertarget{classcvtest_1_1image__feature}{}\section{cvtest.\+image\+\_\+feature Class Reference}
+\label{classcvtest_1_1image__feature}\index{cvtest.\+image\+\_\+feature@{cvtest.\+image\+\_\+feature}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classcvtest_1_1image__feature_a8300aca8e0b2bc58a3a170be90158834}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self)
+\item 
+def \hyperlink{classcvtest_1_1image__feature_a7cbc351faa6f06da94020226fffabe7f}{callback} (self, ros\+\_\+data)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcvtest_1_1image__feature_a534a9df53a4263a7a4b28e0033b520d6}{image\+\_\+pub}
+\begin{DoxyCompactList}\small\item\em initialize the node \end{DoxyCompactList}\item 
+\hyperlink{classcvtest_1_1image__feature_ab403e0a9a287776c122a37bf00d70d4f}{ball\+\_\+state\+\_\+pub}
+\item 
+\hyperlink{classcvtest_1_1image__feature_a6099e7721ccd9571b2d1f94962479e21}{joint\+\_\+pub}
+\item 
+\hyperlink{classcvtest_1_1image__feature_a375ac203248e8ffb540b38714b6e1bca}{vel\+\_\+pub}
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcvtest_1_1image__feature_ad3e0bf357335dc4e45dacfc8cc6d89f0}{camera\+\_\+sub}
+\item 
+\hyperlink{classcvtest_1_1image__feature_a4e12423b98aa2b60b41f8594c1d6e99b}{callback}
+\item 
+\hyperlink{classcvtest_1_1image__feature_ae255c3c1c25d111c82a82e5bd02a5187}{queue\+\_\+size}
+\item 
+\hyperlink{classcvtest_1_1image__feature_aa42e53c028a74773c1e574909f709919}{stop}
+\begin{DoxyCompactList}\small\item\em it\textquotesingle{}s a stop condition when the robot is too close to the goal \end{DoxyCompactList}\item 
+tuple \hyperlink{classcvtest_1_1image__feature_aa26cd5e97c9f095fcffe440718a19770}{green\+Lower} = (50, 50, 20)
+\begin{DoxyCompactList}\small\item\em set colours bound \end{DoxyCompactList}\item 
+tuple \hyperlink{classcvtest_1_1image__feature_a1e044a4137c5a99ee987abf14da300c8}{green\+Upper} = (70, 255, 255)
+\item 
+\hyperlink{classcvtest_1_1image__feature_a85ee0bae4a9441fe6aebf107058843db}{blurred} = cv2.\+Gaussian\+Blur(image\+\_\+np, (11, 11), 0)
+\item 
+\hyperlink{classcvtest_1_1image__feature_ab2a73c5df818816ebbb06235e4bab1a9}{hsv} = cv2.\+cvt\+Color(\hyperlink{classcvtest_1_1image__feature_a85ee0bae4a9441fe6aebf107058843db}{blurred}, cv2.\+C\+O\+L\+O\+R\+\_\+\+B\+G\+R2\+H\+SV)
+\item 
+\hyperlink{classcvtest_1_1image__feature_a40f58b7123cfe0573aa79c3831ff3f6a}{mask} = cv2.\+in\+Range(\hyperlink{classcvtest_1_1image__feature_ab2a73c5df818816ebbb06235e4bab1a9}{hsv}, \hyperlink{classcvtest_1_1image__feature_aa26cd5e97c9f095fcffe440718a19770}{green\+Lower}, \hyperlink{classcvtest_1_1image__feature_a1e044a4137c5a99ee987abf14da300c8}{green\+Upper})
+\item 
+\hyperlink{classcvtest_1_1image__feature_aa27ede44db1c89ea7519de78a7b762ac}{cnts}
+\item 
+\hyperlink{classcvtest_1_1image__feature_a9522bc98855a5dbdf4515845eb787c76}{center} = None
+\item 
+\hyperlink{classcvtest_1_1image__feature_a1293e76127df14d91e3abd546415d7f3}{c} = max(\hyperlink{classcvtest_1_1image__feature_aa27ede44db1c89ea7519de78a7b762ac}{cnts}, key=cv2.\+contour\+Area)
+\begin{DoxyCompactList}\small\item\em only proceed if at least one contour was found \end{DoxyCompactList}\item 
+\hyperlink{classcvtest_1_1image__feature_a2797d7a001d5b19a8afcc094863a0421}{radius}
+\item 
+\hyperlink{classcvtest_1_1image__feature_a0affcc52451defb08bf591514f2b2c64}{M} = cv2.\+moments(\hyperlink{classcvtest_1_1image__feature_a1293e76127df14d91e3abd546415d7f3}{c})
+\item 
+tuple \hyperlink{classcvtest_1_1image__feature_a2ae34db381b06abd2545e21c6f7cc2b0}{center} = (int(\hyperlink{classcvtest_1_1image__feature_a0affcc52451defb08bf591514f2b2c64}{M}\mbox{[}\char`\"{}m10\char`\"{}\mbox{]} / M\mbox{[}\char`\"{}m00\char`\"{}\mbox{]}), int(\hyperlink{classcvtest_1_1image__feature_a0affcc52451defb08bf591514f2b2c64}{M}\mbox{[}\char`\"{}m01\char`\"{}\mbox{]} / M\mbox{[}\char`\"{}m00\char`\"{}\mbox{]}))
+\item 
+\hyperlink{classcvtest_1_1image__feature_ad2980a48f7e0a2dc184f8bfa6dee1e8c}{msg} = Ball\+\_\+state()
+\item 
+\hyperlink{classcvtest_1_1image__feature_af899715bd474bd282df372479b5c1f74}{ball\+Detected}
+\item 
+\hyperlink{classcvtest_1_1image__feature_a75da95bdcce4310326a15c631ce7ba55}{vel} = Twist()
+\item 
+\hyperlink{classcvtest_1_1image__feature_ad4621c94d0673c73f05da9f2c5c1d405}{z}
+\item 
+\hyperlink{classcvtest_1_1image__feature_a81375475ba17a89b219d6627ab1b88f7}{x}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+(self)}{__init__(self)}}]{\setlength{\rightskip}{0pt plus 5cm}def cvtest.\+image\+\_\+feature.\+\_\+\+\_\+init\+\_\+\+\_\+ (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\hypertarget{classcvtest_1_1image__feature_a8300aca8e0b2bc58a3a170be90158834}{}\label{classcvtest_1_1image__feature_a8300aca8e0b2bc58a3a170be90158834}
+\begin{DoxyVerb}Initialize ros publisher, ros subscriber\end{DoxyVerb}
+ 
+
+\subsection{Member Function Documentation}
+\index{cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}!callback@{callback}}
+\index{callback@{callback}!cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{callback(self, ros\+\_\+data)}{callback(self, ros_data)}}]{\setlength{\rightskip}{0pt plus 5cm}def cvtest.\+image\+\_\+feature.\+callback (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{ros\+\_\+data}
+\end{DoxyParamCaption}
+)}\hypertarget{classcvtest_1_1image__feature_a7cbc351faa6f06da94020226fffabe7f}{}\label{classcvtest_1_1image__feature_a7cbc351faa6f06da94020226fffabe7f}
+\begin{DoxyVerb}Callback function of subscribed topic. 
+Here images get converted and features detected\end{DoxyVerb}
+ 
+
+\subsection{Member Data Documentation}
+\index{cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}!ball\+\_\+state\+\_\+pub@{ball\+\_\+state\+\_\+pub}}
+\index{ball\+\_\+state\+\_\+pub@{ball\+\_\+state\+\_\+pub}!cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{ball\+\_\+state\+\_\+pub}{ball_state_pub}}]{\setlength{\rightskip}{0pt plus 5cm}cvtest.\+image\+\_\+feature.\+ball\+\_\+state\+\_\+pub}\hypertarget{classcvtest_1_1image__feature_ab403e0a9a287776c122a37bf00d70d4f}{}\label{classcvtest_1_1image__feature_ab403e0a9a287776c122a37bf00d70d4f}
+
+\begin{DoxyParams}{Parameters}
+{\em vel\+\_\+pub} & pub for send to the command manager information reguarding the ball and the corraction to \#\#apply to the robot \\
+\hline
+\end{DoxyParams}
+\index{cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}!ball\+Detected@{ball\+Detected}}
+\index{ball\+Detected@{ball\+Detected}!cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{ball\+Detected}{ballDetected}}]{\setlength{\rightskip}{0pt plus 5cm}cvtest.\+image\+\_\+feature.\+ball\+Detected\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcvtest_1_1image__feature_af899715bd474bd282df372479b5c1f74}{}\label{classcvtest_1_1image__feature_af899715bd474bd282df372479b5c1f74}
+\index{cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}!blurred@{blurred}}
+\index{blurred@{blurred}!cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{blurred}{blurred}}]{\setlength{\rightskip}{0pt plus 5cm}cvtest.\+image\+\_\+feature.\+blurred = cv2.\+Gaussian\+Blur(image\+\_\+np, (11, 11), 0)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcvtest_1_1image__feature_a85ee0bae4a9441fe6aebf107058843db}{}\label{classcvtest_1_1image__feature_a85ee0bae4a9441fe6aebf107058843db}
+\index{cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}!c@{c}}
+\index{c@{c}!cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{c}{c}}]{\setlength{\rightskip}{0pt plus 5cm}cvtest.\+image\+\_\+feature.\+c = max({\bf cnts}, key=cv2.\+contour\+Area)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcvtest_1_1image__feature_a1293e76127df14d91e3abd546415d7f3}{}\label{classcvtest_1_1image__feature_a1293e76127df14d91e3abd546415d7f3}
+
+
+only proceed if at least one contour was found 
+
+\index{cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}!callback@{callback}}
+\index{callback@{callback}!cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{callback}{callback}}]{\setlength{\rightskip}{0pt plus 5cm}cvtest.\+image\+\_\+feature.\+callback\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcvtest_1_1image__feature_a4e12423b98aa2b60b41f8594c1d6e99b}{}\label{classcvtest_1_1image__feature_a4e12423b98aa2b60b41f8594c1d6e99b}
+\index{cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}!camera\+\_\+sub@{camera\+\_\+sub}}
+\index{camera\+\_\+sub@{camera\+\_\+sub}!cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{camera\+\_\+sub}{camera_sub}}]{\setlength{\rightskip}{0pt plus 5cm}cvtest.\+image\+\_\+feature.\+camera\+\_\+sub\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcvtest_1_1image__feature_ad3e0bf357335dc4e45dacfc8cc6d89f0}{}\label{classcvtest_1_1image__feature_ad3e0bf357335dc4e45dacfc8cc6d89f0}
+
+\begin{DoxyParams}{Parameters}
+{\em subsriber} & to get the compressed images from the camera \\
+\hline
+\end{DoxyParams}
+\index{cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}!center@{center}}
+\index{center@{center}!cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{center}{center}}]{\setlength{\rightskip}{0pt plus 5cm}cvtest.\+image\+\_\+feature.\+center = None\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcvtest_1_1image__feature_a9522bc98855a5dbdf4515845eb787c76}{}\label{classcvtest_1_1image__feature_a9522bc98855a5dbdf4515845eb787c76}
+\index{cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}!center@{center}}
+\index{center@{center}!cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{center}{center}}]{\setlength{\rightskip}{0pt plus 5cm}tuple cvtest.\+image\+\_\+feature.\+center = (int({\bf M}\mbox{[}\char`\"{}m10\char`\"{}\mbox{]} / M\mbox{[}\char`\"{}m00\char`\"{}\mbox{]}), int({\bf M}\mbox{[}\char`\"{}m01\char`\"{}\mbox{]} / M\mbox{[}\char`\"{}m00\char`\"{}\mbox{]}))\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcvtest_1_1image__feature_a2ae34db381b06abd2545e21c6f7cc2b0}{}\label{classcvtest_1_1image__feature_a2ae34db381b06abd2545e21c6f7cc2b0}
+\index{cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}!cnts@{cnts}}
+\index{cnts@{cnts}!cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{cnts}{cnts}}]{\setlength{\rightskip}{0pt plus 5cm}cvtest.\+image\+\_\+feature.\+cnts\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcvtest_1_1image__feature_aa27ede44db1c89ea7519de78a7b762ac}{}\label{classcvtest_1_1image__feature_aa27ede44db1c89ea7519de78a7b762ac}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+1 = cv2.findContours(mask.copy(), cv2.RETR\_EXTERNAL,
+2                                 cv2.CHAIN\_APPROX\_SIMPLE)
+\end{DoxyCode}
+\index{cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}!green\+Lower@{green\+Lower}}
+\index{green\+Lower@{green\+Lower}!cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{green\+Lower}{greenLower}}]{\setlength{\rightskip}{0pt plus 5cm}tuple cvtest.\+image\+\_\+feature.\+green\+Lower = (50, 50, 20)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcvtest_1_1image__feature_aa26cd5e97c9f095fcffe440718a19770}{}\label{classcvtest_1_1image__feature_aa26cd5e97c9f095fcffe440718a19770}
+
+
+set colours bound 
+
+\index{cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}!green\+Upper@{green\+Upper}}
+\index{green\+Upper@{green\+Upper}!cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{green\+Upper}{greenUpper}}]{\setlength{\rightskip}{0pt plus 5cm}tuple cvtest.\+image\+\_\+feature.\+green\+Upper = (70, 255, 255)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcvtest_1_1image__feature_a1e044a4137c5a99ee987abf14da300c8}{}\label{classcvtest_1_1image__feature_a1e044a4137c5a99ee987abf14da300c8}
+\index{cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}!hsv@{hsv}}
+\index{hsv@{hsv}!cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{hsv}{hsv}}]{\setlength{\rightskip}{0pt plus 5cm}cvtest.\+image\+\_\+feature.\+hsv = cv2.\+cvt\+Color({\bf blurred}, cv2.\+C\+O\+L\+O\+R\+\_\+\+B\+G\+R2\+H\+SV)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcvtest_1_1image__feature_ab2a73c5df818816ebbb06235e4bab1a9}{}\label{classcvtest_1_1image__feature_ab2a73c5df818816ebbb06235e4bab1a9}
+\index{cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}!image\+\_\+pub@{image\+\_\+pub}}
+\index{image\+\_\+pub@{image\+\_\+pub}!cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{image\+\_\+pub}{image_pub}}]{\setlength{\rightskip}{0pt plus 5cm}cvtest.\+image\+\_\+feature.\+image\+\_\+pub}\hypertarget{classcvtest_1_1image__feature_a534a9df53a4263a7a4b28e0033b520d6}{}\label{classcvtest_1_1image__feature_a534a9df53a4263a7a4b28e0033b520d6}
+
+
+initialize the node 
+
+topic where we publish 
+\begin{DoxyParams}{Parameters}
+{\em image\+\_\+pub} & publisher that send the processed and compressed images \\
+\hline
+\end{DoxyParams}
+\index{cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}!joint\+\_\+pub@{joint\+\_\+pub}}
+\index{joint\+\_\+pub@{joint\+\_\+pub}!cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{joint\+\_\+pub}{joint_pub}}]{\setlength{\rightskip}{0pt plus 5cm}cvtest.\+image\+\_\+feature.\+joint\+\_\+pub}\hypertarget{classcvtest_1_1image__feature_a6099e7721ccd9571b2d1f94962479e21}{}\label{classcvtest_1_1image__feature_a6099e7721ccd9571b2d1f94962479e21}
+
+\begin{DoxyParams}{Parameters}
+{\em joint\+\_\+pub} & to move the head of the robot \\
+\hline
+\end{DoxyParams}
+\index{cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}!M@{M}}
+\index{M@{M}!cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{M}{M}}]{\setlength{\rightskip}{0pt plus 5cm}cvtest.\+image\+\_\+feature.\+M = cv2.\+moments({\bf c})\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcvtest_1_1image__feature_a0affcc52451defb08bf591514f2b2c64}{}\label{classcvtest_1_1image__feature_a0affcc52451defb08bf591514f2b2c64}
+\index{cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}!mask@{mask}}
+\index{mask@{mask}!cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{mask}{mask}}]{\setlength{\rightskip}{0pt plus 5cm}cvtest.\+image\+\_\+feature.\+mask = cv2.\+in\+Range({\bf hsv}, {\bf green\+Lower}, {\bf green\+Upper})\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcvtest_1_1image__feature_a40f58b7123cfe0573aa79c3831ff3f6a}{}\label{classcvtest_1_1image__feature_a40f58b7123cfe0573aa79c3831ff3f6a}
+\index{cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}!msg@{msg}}
+\index{msg@{msg}!cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{msg}{msg}}]{\setlength{\rightskip}{0pt plus 5cm}cvtest.\+image\+\_\+feature.\+msg = Ball\+\_\+state()\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcvtest_1_1image__feature_ad2980a48f7e0a2dc184f8bfa6dee1e8c}{}\label{classcvtest_1_1image__feature_ad2980a48f7e0a2dc184f8bfa6dee1e8c}
+\index{cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}!queue\+\_\+size@{queue\+\_\+size}}
+\index{queue\+\_\+size@{queue\+\_\+size}!cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{queue\+\_\+size}{queue_size}}]{\setlength{\rightskip}{0pt plus 5cm}cvtest.\+image\+\_\+feature.\+queue\+\_\+size\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcvtest_1_1image__feature_ae255c3c1c25d111c82a82e5bd02a5187}{}\label{classcvtest_1_1image__feature_ae255c3c1c25d111c82a82e5bd02a5187}
+\index{cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}!radius@{radius}}
+\index{radius@{radius}!cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{radius}{radius}}]{\setlength{\rightskip}{0pt plus 5cm}cvtest.\+image\+\_\+feature.\+radius\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcvtest_1_1image__feature_a2797d7a001d5b19a8afcc094863a0421}{}\label{classcvtest_1_1image__feature_a2797d7a001d5b19a8afcc094863a0421}
+\index{cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}!stop@{stop}}
+\index{stop@{stop}!cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{stop}{stop}}]{\setlength{\rightskip}{0pt plus 5cm}cvtest.\+image\+\_\+feature.\+stop\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcvtest_1_1image__feature_aa42e53c028a74773c1e574909f709919}{}\label{classcvtest_1_1image__feature_aa42e53c028a74773c1e574909f709919}
+
+
+it\textquotesingle{}s a stop condition when the robot is too close to the goal 
+
+\index{cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}!vel@{vel}}
+\index{vel@{vel}!cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{vel}{vel}}]{\setlength{\rightskip}{0pt plus 5cm}cvtest.\+image\+\_\+feature.\+vel = Twist()\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcvtest_1_1image__feature_a75da95bdcce4310326a15c631ce7ba55}{}\label{classcvtest_1_1image__feature_a75da95bdcce4310326a15c631ce7ba55}
+\index{cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}!vel\+\_\+pub@{vel\+\_\+pub}}
+\index{vel\+\_\+pub@{vel\+\_\+pub}!cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{vel\+\_\+pub}{vel_pub}}]{\setlength{\rightskip}{0pt plus 5cm}cvtest.\+image\+\_\+feature.\+vel\+\_\+pub}\hypertarget{classcvtest_1_1image__feature_a375ac203248e8ffb540b38714b6e1bca}{}\label{classcvtest_1_1image__feature_a375ac203248e8ffb540b38714b6e1bca}
+
+\begin{DoxyParams}{Parameters}
+{\em vel\+\_\+pub} & to move the whole robot \\
+\hline
+\end{DoxyParams}
+\index{cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}!x@{x}}
+\index{x@{x}!cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{x}{x}}]{\setlength{\rightskip}{0pt plus 5cm}cvtest.\+image\+\_\+feature.\+x\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcvtest_1_1image__feature_a81375475ba17a89b219d6627ab1b88f7}{}\label{classcvtest_1_1image__feature_a81375475ba17a89b219d6627ab1b88f7}
+\index{cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}!z@{z}}
+\index{z@{z}!cvtest\+::image\+\_\+feature@{cvtest\+::image\+\_\+feature}}
+\subsubsection[{\texorpdfstring{z}{z}}]{\setlength{\rightskip}{0pt plus 5cm}cvtest.\+image\+\_\+feature.\+z\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcvtest_1_1image__feature_ad4621c94d0673c73f05da9f2c5c1d405}{}\label{classcvtest_1_1image__feature_ad4621c94d0673c73f05da9f2c5c1d405}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/experimental\+\_\+ws/experimental\+\_\+ws/src/assignment2/scripts/\hyperlink{cvtest_8py}{cvtest.\+py}\end{DoxyCompactItemize}

@@ -33,20 +33,22 @@ from assignment2.msg import HeadState
 
 
 ## X position of the home 
-# @param homeX here you can set the a priori X position of the house
+# Here you can set the a priori X position of the house
 homeX = -5
 ## Y position of the home 
-# @param homeY here you can set the a priori Y position of the house
+# Here you can set the a priori Y position of the house
 homeY = 7
-## State variable
-# @param state This is the state coming from State node (that's why is a string) and it can be ether play or NoInfo 
+## State variables
+## Variable to check whether the ballDetection node has detected a ball 
 ballDetected = False
+## Control variable to avoid false readings
 ballCheck = False
+## Variable that communicates whether the robot has reached the ball
 ballReached = False
 
 
-##init action client for Navigation action server
-client = actionlib.SimpleActionClient('/robot_reaching_goal', motion_plan.msg.PlanningAction)
+##Action client for Navigation action server
+client = actionlib.SimpleActionClient('robot_reaching_goal', motion_plan.msg.PlanningAction)
 # AATTT ho messo wait server nel main
 
 
@@ -55,25 +57,29 @@ def decision():
     return random.choice(['goToNormal','goToSleep'])
  
 
-## Callback function for the ballDetection subsriber.
-# Which recives and handle a ball_state msg   
+## 
 def callbackBall(data):
+    '''Callback function for the ballDetection subsriber.
+    Which recives and handle a ball_state msg. It update the local variable and each time it receives a msg that a ball is detected after some time, interrupts any
+    action server goal. So that the robot stops and switchs into the PLAY state '''
     global ballDetected, ballCheck, ballReached
     ballDetected = data.ballDetected
     ballReached = data.ballReached
-    rospy.loginfo( ballCheck)
+#    rospy.loginfo( ballCheck)
     if ballDetected == True and ballCheck == False:
-	rospy.loginfo("I'm updating the ballCheck value")
 	ballCheck = True
-        rospy.loginfo("Ball detected !, current action interrupt")
+        rospy.loginfo("Ball detected !!, current action interrupt")
 	client.cancel_all_goals() 
 
 class Normal(smach.State):
+    '''This class defines the NORMAL state of the FSM. In particular It sends random position to the navigation_action server
+    and it checks whether a ball is detected in order to move to PLAY state.
+    Otherwise after some iterations it goes in SLEEP mode '''
     def __init__(self):
         smach.State.__init__(self, 
                              outcomes=['goToNormal','goToSleep','goToPlay'])
         self.rate = rospy.Rate(1)  # Loop at 200 Hz
-	## @param joint_pub to move the head of the robot 
+	## Counter variable to check the number of iteration of the NORMAL state in order to move to SLEEP state after a certain number 
         self.counter = 0
         
     def execute(self,userdata):
@@ -108,10 +114,11 @@ class Normal(smach.State):
         
     
 
-## It defines the SLEEP state which sleeps for a random period of time.
-# Then it makes a request to the Navigation service to go to the home location.
-# Finally it returns in the NORMAL state
+
 class Sleep(smach.State):
+    '''It defines the SLEEP state which sleeps for a random period of time.
+    Then it makes a request to the Navigation service to go to the home location.
+    Finally it returns in the NORMAL state'''
     def __init__(self):
         smach.State.__init__(self, 
                              outcomes=['goToNormal','goToSleep'])
@@ -130,12 +137,13 @@ class Sleep(smach.State):
         client.wait_for_result()       
 	rospy.loginfo("Home reached")
         time.sleep(random.randint(3,6))
-        self.rate.sleep()
+#        self.rate.sleep()
         return 'goToNormal'
 
-## Class that defines the PLAY state. 
-# It move the robot in X Y location and then asks to go back to the user.
+
 class Play(smach.State):
+    '''Class that defines the PLAY state. 
+     It move the robot in X Y location and then asks to go back to the user.'''
     def __init__(self):
         smach.State.__init__(self, 
                              outcomes=['goToNormal','goToPlay'])
