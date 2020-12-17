@@ -77,7 +77,7 @@
 <!-- ball -->  
   <group ns="$(arg ns2)">
   	<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" 
-	args="-urdf -model $(arg ns2) -param ball_description -x -7 -y 6 -z -1"/>
+	args="-urdf -model $(arg ns2) -param ball_description -x 0 -y -5 -z -1"/>
 	<node name="position_server" pkg="assignment2" type="go_to_point_ball.py"/>
   </group>
 

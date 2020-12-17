@@ -242,12 +242,12 @@
   </joint>
 
 <!-- hears definition -->
-<!--
+
   <xacro:link_ear name="link_right_ear" />
   <xacro:link_ear name="link_left_ear" />
   <xacro:joint_ear name="joint_right_ear"  child="link_right_ear"  origin_xyz="0 0.08 0.08"  />
   <xacro:joint_ear name="joint_left_ear"   child="link_left_ear"   origin_xyz="0 -0.08 0.08"  />
--->
+
 <!-- transmission -->
 
 <transmission name="head_joint_trans">
