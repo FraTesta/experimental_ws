@@ -82,12 +82,16 @@ There are also some executable files to easily move the ball to certain position
 - _ballPosition2.sh_ moves the ball in position x = -5 and y = 3.
 - _ballPosition3.sh_ moves the ball in posotion x= -4 and y = -1
 - _BallOff.sh_ put the ball under the ground of the world, in order to test when the ball disappears. 
+
+
 Finally you can launch _test.launch_ file which moves the ball in random position in order to stress the system. It also make dessapear the ball after some time. You will see that the robot overturns if the ball hits it but I think it is quite normal behavior.
  
 ## System's limitation and possible improvements
 There are some problems related to the velocities sent by the _ballDetection_ node to the robot. In particular, if the ball suddenly moves towards the robot, then high speed commands might be applied to the motors causing the robot to overturn.
 This should be easily solved by implementing a simple PID controller with the appropriate. parameters to be applied to the differential driver motors of the robot.
 Moreover sometimes the robot takes a some time to understand that the goal is actuallt reached, but it is quite rare that this happens and in any case after some corrections the robot realizes it.
+
+
 Finally another problem is that the robot always keeps its head straight when moving in the NORMAL and in SLEEP state. This makes his ability to detect the ball rather limited.So a possible future improvements may be Implent a feature that allows the robot to look around while it is in NORMAL and SLEEP mode, in order to improve its ability of detecting rhe ball. So a possible future improvements may be Implent a feature that allows the robot to look around while it is in NORMAL and SLEEP mode, in order to improve its ability of detecting rhe ball.
 ## Contacts
 Francesco Testa francesco.testa.ge@gmail.com
