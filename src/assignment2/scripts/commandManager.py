@@ -98,11 +98,10 @@ class Normal(smach.State):
             if self.counter == 4:
                 return 'goToSleep'           
             # request for the service to move in X and Y position
-	    xRandomGoal = random.randrange(1,5,1)
-	    yRandomGoal = random.randrange(1,5,1)
-	    rospy.loginfo("I'm going to position x = %d y = %d", xRandomGoal, yRandomGoal)
-            goal.target_pose.pose.position.x = xRandomGoal
-            goal.target_pose.pose.position.y = yRandomGoal
+	    
+            goal.target_pose.pose.position.x = random.randint(-7,7)
+            goal.target_pose.pose.position.y = random.randint(-7,7)
+	    rospy.loginfo("I'm going to position x = %d y = %d", goal.target_pose.pose.position.x, goal.target_pose.pose.position.y)
 	    client.send_goal(goal)
             client.wait_for_result()
 	    rospy.loginfo("Goal reached")
