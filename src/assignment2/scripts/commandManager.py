@@ -52,9 +52,6 @@ client = actionlib.SimpleActionClient('robot_reaching_goal', motion_plan.msg.Pla
 # AATTT ho messo wait server nel main
 
 
-## This function chose randomly the next state of the FSM
-def decision():
-    return random.choice(['goToNormal','goToSleep'])
  
 
 ## 

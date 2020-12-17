@@ -117,12 +117,12 @@ class image_feature:
 		# check if the robot is reached the object 
 
         	 
-		if self.headState == True:	
+		if self.headState == True: # if the head is not moving 	
 			rospy.loginfo("BallDtection: ball detected !!! start moving ") 
 		        vel = Twist()
 		        # 400 is the center of the image 
 		        vel.angular.z = -0.002*(center[0]-400)
-			# 100 is the radius that we want see in the image, which represent the desired disatance from the object 
+			# 150 is the radius that we want see in the image, which represent the desired disatance from the object 
 		        vel.linear.x = -0.01*(radius-150)
 		        self.vel_pub.publish(vel)
 			self.ballReached = False 

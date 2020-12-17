@@ -58,14 +58,28 @@
   <node name="urdf_spawner_human1" pkg="gazebo_ros" type="spawn_model" respawn="false" 
         args="-urdf -model human1 -param human_description1 -x -7 -y 7 -z 0.34 -R 0 -P 0 -Y 0"/>
 <!-- robot -->
+  <group ns="$(arg ns1)">
+  	<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" 
+	args="-urdf -model $(arg ns1) -param robot_description -x -5 -y 7 -Y 3.14 -z 0.05"/>
+        <node name = "ballDetection" pkg="assignment2" type="ballDetection.py" output="screen"/>  
+        <node name = "navigation_action" pkg="assignment2" type="navigation_action.py"/>
+        <node name = "commandManager" pkg="assignment2" type="commandManager.py" output = "screen" />
 
+        <rosparam file="$(find assignment2)/config/motor_robot_dog.yaml" command="load" ns="/robotDog" />
 
+	   <node name="controller_spawner" pkg="controller_manager" type="spawner" args="--namespace=/robotDog
+		joint_state_controller
+		joint_head_controller
+
+		--shutdown-timeout 3">
+	    </node>
+  </group>
 <!-- ball -->  
   <group ns="$(arg ns2)">
   	<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" 
-	args="-urdf -model $(arg ns2) -param ball_description -x -7 -y 6 -z -1"/>
+	args="-urdf -model $(arg ns2) -param ball_description -x -5 -y -1 -z -1"/>
 	<node name="position_server" pkg="assignment2" type="go_to_point_ball.py"/>
-	<node name="random_ball_pos" pkg="assignment2" type="randBallPos.py"/> 
+        <node name="random_ball_pos" pkg="assignment2" type="randBallPos.py"/>
   </group>
 
 

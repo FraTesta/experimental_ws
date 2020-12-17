@@ -12,7 +12,7 @@ Basically the second assignment requires to implement a real robot model to be u
   The _robotDog.gazebo_ contains the definitions of the camera plugin and the differential driver plugin which allows to control the robot wheels. 
 In the _urdf_ directory there is also the model description of the ball and the human (which has no active function).  
 ## Software Architecture and System's Features
- Of course the software architecture has been updated mainly by replacing the previous ROS service dedicated to navigation, with an action server (_navigation_action_ sever ) capable of moving the robot within the Gazebo simulation. Finally the _getPosition_ and _speakPerception_ nodes have been replaced by a new ROS node dedicated to the detection and the tracking of the ball called _ballDetection_.
+ Of course the software architecture has been updated, mainly by replacing the previous ROS service dedicated to navigation, with an action server (_navigation_action_ sever ) capable of moving the robot within the Gazebo simulation. Finally the _getPosition_ and _speakPerception_ nodes have been replaced by a new ROS node dedicated to the detection and the tracking of the ball, called _ballDetection_.
  You can launch the project 
  ```
  $ roslaunch assignment2 gazebo_world.launch
@@ -32,6 +32,11 @@ In the _urdf_ directory there is also the model description of the ball and the 
 3. When the robot's movements are finished, the _commandManager_ send a _head_state_ message to the _ballDetection_ node, in order to start chasing the ball again, utill the ball is visible.
 #### Architectural choices
 It was chosen to split the features of the _PLAY_ state as explained in the previous points, in order to keep the ball detection continuous and without interruptions. In particular if we stop the loop of ball detection in the _ballDetection_ node, to turn the head of the robot, then the images freeze. After the head movements the images suddenly update, causing abrupt position corrections or the stalling of the robot. Morover this choice improve the synchronization between the two nodes. Another possible solution was to dedicate just one node only for ball detection and another node for ball tracking. This may be reasonable but it increase the number of nodes and so worsening system performance. 
+
+#### Ball tracking 
+  As we said the _ballDetection_ node implements some computer vision features, provided by the openCV library. In particular allows the node to find the center of a green ball and then draw a cricle around it. 
+  Those informations are used to compute the velocities that should apply to the robot motors in order to reach the ball. So the radius of the circle is used to compute the distance from the ball, for instance if the radius is small, this means that the ball is still far away. While the center is used to correct the yaw of the robot which will try to keep the center of ball in the center of the camera images. 
+  If the radius of the ball is greater than a certain value and the center of the ball minus the center of the width of the image is close to 0, than we can consider the ball as reached. This is the condition behind the implementation of the PLAY state. 
 
  ## Installation 
  In order to use this package please install:
@@ -61,19 +66,23 @@ It is also necessary to have installed _ROS kinetic_ and _Gazebo 7_ correctly.
  - __launch__: contains some launch files:
            1. _Gazebo_world.launch_ run the complete project instantiating the world and the robot, while the ball is hidden below the map. Therefore the robot will start in the NORMAL state until the ball is placed on its floor and detected. 
            2. _Robot_model.launch_ launches just the robot model without any other control nodes.
+           3. _test.launch_ runs also a node dedicated to move the ball in random positions, so it's very nice to test the system
 - __msg__: contains the _ball_state.msg_ and _head_state.msg_ custom messages.
 - __scripts__: holds the code of the following nodes:
             1. _ballDetection.py_ implements the computer vision algorithm able to detect and track the ball.
             2. _commandManager.py_ is the core the project since it define the FSM.
             3. _navigation_action.py_ is a action server that allows the robot to move in a cartain position that is set as goal.
-            4. _go_to_point_ball.py_ is another action server dedicated to the movement of the ball
+            4. _go_to_point_ball.py_ is another action server dedicated to the movement of the ball.
+            5. _randBallPos.py_ action client to move the ball in random positions.
 - __urdf__: floder that contains the definition of all models used by the Gazebo simulation
 - __world__: contains the model of the world used in the Gazebo simulation
 #### Exectuables for testing
 There are also some executable files to easily move the ball to certain positions, without having to publish those positions via shell commands when you test the project:
-- _BallPostion1.sh_ moves the ball in position x = 1 and y = 1.
-- _BallPostion2.sh_ moves the ball in position x = -5 and y = 3.
+- _ballPosition1.sh_ moves the ball in position x = 1 and y = 1.
+- _ballPosition2.sh_ moves the ball in position x = -5 and y = 3.
+- _ballPosition3.sh_ moves the ball in posotion x= -4 and y = -1
 - _BallOff.sh_ put the ball under the ground of the world, in order to test when the ball disappears. 
+Finally you can launch _test.launch_ file which moves the ball in random position in order to stress the system. It also make dessapear the ball after some time. You will see that the robot overturns if the ball hits it but I think it is quite normal behavior.
  
 ## System's limitation and possible improvements
 There are some problems related to the velocities sent by the _ballDetection_ node to the robot. In particular, if the ball suddenly moves towards the robot, then high speed commands might be applied to the motors causing the robot to overturn.
