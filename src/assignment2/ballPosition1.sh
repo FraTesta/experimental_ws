@@ -1,5 +1,5 @@
 #!/bin/bash
-rostopic pub /ball/reaching_goal/goal exp_assignment2/PlanningActionGoal "header:
+rostopic pub /ball/reaching_goal/goal assignment2/PlanningActionGoal "header:
   seq: 0
   stamp:
     secs: 0
