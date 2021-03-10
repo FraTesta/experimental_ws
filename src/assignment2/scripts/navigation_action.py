@@ -10,7 +10,7 @@ from tf import transformations
 import math
 import actionlib
 import actionlib.msg
-import motion_plan.msg
+import assignment2.msg
 
 ## robot state variables
 position_ = Point()
@@ -152,8 +152,8 @@ def planning(goal):
     success = True
     
     # initialize feeddback and result as motion_plan messages which is pretty standard  
-    feedback = motion_plan.msg.PlanningFeedback()
-    result = motion_plan.msg.PlanningResult()
+    feedback = assignment2.msg.PlanningFeedback()
+    result = assignment2.msg.PlanningResult()
 
     # while loop to reach the goal 
     while not rospy.is_shutdown():
@@ -207,7 +207,7 @@ def main():
 
     
     act_s = actionlib.SimpleActionServer(
-        'robot_reaching_goal', motion_plan.msg.PlanningAction, planning, auto_start=False)
+        'robot_reaching_goal', assignment2.msg.PlanningAction, planning, auto_start=False)
     act_s.start()
 
     rate = rospy.Rate(20)

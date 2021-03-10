@@ -51,9 +51,9 @@
 	
   <arg name="ns2" value="ball"/> 
 	 <param name="$(arg ns2)/ball_description" 
-	 command="$(find xacro)/xacro --inorder $(find exp_assignment2)/urdf/ball.xacro" />
+	 command="$(find xacro)/xacro --inorder $(find assignment2)/urdf/ball.xacro" />
 	
-	 <param name="human_description1" textfile="$(find exp_assignment2)/urdf/human.urdf" />
+	 <param name="human_description1" textfile="$(find assignment2)/urdf/human.urdf" />
       
   <node name="urdf_spawner_human1" pkg="gazebo_ros" type="spawn_model" respawn="false" 
         args="-urdf -model human1 -param human_description1 -x -7 -y 7 -z 0.34 -R 0 -P 0 -Y 0"/>

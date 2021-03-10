@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="ball">
-<xacro:include filename="$(find exp_assignment2)/urdf/ball.gazebo"/>
+<xacro:include filename="$(find assignment2)/urdf/ball.gazebo"/>
 	
   <material name="black">
     <color rgba="0.0 0.0 0.0 1.0"/>

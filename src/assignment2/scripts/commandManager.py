@@ -18,7 +18,7 @@ import smach_ros
 import time
 import random
 import sys
-import motion_plan.msg
+import assignment2.msg
 import actionlib
 import actionlib_tutorials.msg
 import random 
@@ -48,7 +48,7 @@ ballReached = False
 
 
 ##Action client for Navigation action server
-client = actionlib.SimpleActionClient('robot_reaching_goal', motion_plan.msg.PlanningAction)
+client = actionlib.SimpleActionClient('robot_reaching_goal', assignment2.msg.PlanningAction)
 # AATTT ho messo wait server nel main
 
 
@@ -85,7 +85,7 @@ class Normal(smach.State):
         
         self.counter = random.randint(1,2) 
         # Creates a goal to send to the action server.
-        goal = motion_plan.msg.PlanningGoal()
+        goal = assignment2.msg.PlanningGoal()
 
         while not rospy.is_shutdown():  
 
@@ -125,7 +125,7 @@ class Sleep(smach.State):
         global homeY
 
         rospy.loginfo("I m in SLEEP mode")
-        goal = motion_plan.msg.PlanningGoal()
+        goal = assignment2.msg.PlanningGoal()
         goal.target_pose.pose.position.x = homeX
         goal.target_pose.pose.position.y = homeY
         client.send_goal(goal)
