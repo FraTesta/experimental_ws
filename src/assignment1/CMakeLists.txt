@@ -148,6 +148,9 @@ include_directories(
  add_executable(getPosition src/getPosition.cpp)
  add_executable(Navigation src/Navigation.cpp)
 
+add_dependencies(Navigation assignment1_gencpp)
+add_dependencies(getPosition assignment1_gencpp)
+
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
