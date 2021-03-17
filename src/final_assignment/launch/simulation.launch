@@ -30,6 +30,7 @@
   <arg unless="$(arg debug)" name="script_type" value="gzserver"/>
   <arg     if="$(arg debug)" name="script_type" value="debug"/>
 
+
   <!-- start gazebo server-->
   <group if="$(arg use_clock_frequency)">
     <param name="gazebo/pub_clock_frequency" value="$(arg pub_clock_frequency)" />
@@ -43,8 +44,15 @@
   </group>
   
    <param name="human_description1" textfile="$(find final_assignment)/urdf/human.urdf" />
+
+  <arg name="model" default="$(find final_assignment)/urdf/robotDog.xacro" />
+  <!-- Load the URDF into the ROS Parameter Server -->
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
       
   <node name="urdf_spawner_human1" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
         args="-urdf -model human1 -param human_description1 -x -6 -y 8.5 -z 0.34 -R 0 -P 0 -Y -0.75"/>
+
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+	args="-urdf -model robot1 -param robot_description -x -5 -y 7 -z 0.05"/> 
 
 </launch>

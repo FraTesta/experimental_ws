@@ -12,12 +12,15 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   #message_generation
+  sensor_msgs
+  cv_bridge
+  image_transport
   tf
 )
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
-
+find_package (OpenCV REQUIRED)
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
@@ -110,6 +113,7 @@ catkin_package(
 #  LIBRARIES final_assignment
 #  CATKIN_DEPENDS roscpp rospy
 #  DEPENDS system_lib
+   CATKIN_DEPENDS roscpp rospy OpenCv 
 )
 
 ###########
@@ -162,10 +166,10 @@ include_directories(
 
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
-# install(PROGRAMS
-#   scripts/my_python_script
-#   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
+ install(PROGRAMS
+   scripts/roomsDetection.py
+   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+ )
 
 ## Mark executables and/or libraries for installation
 # install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_node
