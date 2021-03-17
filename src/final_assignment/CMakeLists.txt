@@ -10,6 +10,9 @@ project(final_assignment)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
+  std_msgs
+  #message_generation
+  tf
 )
 
 ## System dependencies are found with CMake's conventions
@@ -69,8 +72,9 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate added messages and services with any dependencies listed here
 # generate_messages(
 #   DEPENDENCIES
-#   std_msgs  # Or other packages containing msgs
-# )
+#   geometry_msgs
+#   std_msgs  
+#)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
