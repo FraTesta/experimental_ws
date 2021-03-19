@@ -16,12 +16,19 @@ import rospy
 
 from sensor_msgs.msg import CompressedImage 
 
+ROOMS = [ 
+    {'name':"LeavingRoom",'colour': "blue", "x":"", "y":""},
+    {'name':"BedRoom",'colour':"red","x":"","y":""}
+]
+
+
+
 class roomDetector():
     def __init__(self):
 	'''Initialize ros publisher, ros subscriber'''
         rospy.init_node('roomsDetection', anonymous=True)
 
-        self.detectedRooms = ["Red", "Room2"]
+        self.COLORS_VISITED = []
         # Subsriber to get the compressed images from the camera
         self.camera_sub = rospy.Subscriber("camera1/image_raw/compressed", CompressedImage, self.find_ball, queue_size=1)
 
@@ -64,26 +71,44 @@ class roomDetector():
 	x = self.ball_detect(blackLower, blackUpper, image_np)
         if x == True:
             rospy.loginfo("black ball detected ")
+            if "black" not in self.COLORS_VISITED:
+                print("New room detected!!!")
+                self.COLORS_VISITED.append("black")
         # red test 
 	x = self.ball_detect(redLower, redUpper, image_np)
         if x == True:
             rospy.loginfo("red ball detected")
+            if "red" not in self.COLORS_VISITED:
+                print("New room detected!!!")
+                self.COLORS_VISITED.append("red")
         # yellow test
 	x = self.ball_detect(yellowLower, yellowUpper, image_np)
         if x == True:
             rospy.loginfo("yellow ball detected")
+            if "yellow" not in self.COLORS_VISITED:
+                print("New room detected!!!")
+                self.COLORS_VISITED.append("yellow")
         # green test
 	x = self.ball_detect(greenLower, greenUpper, image_np)
         if x == True:
             rospy.loginfo("green ball detected")
+            if "green" not in self.COLORS_VISITED:
+                print("New room detected!!!")
+                self.COLORS_VISITED.append("green")
         # blue test
 	x = self.ball_detect(blueLower, blueUpper, image_np)
         if x == True:
             rospy.loginfo("blue ball detected")
+            if "blue" not in self.COLORS_VISITED:
+                print("New room detected!!!")
+                self.COLORS_VISITED.append("blue")
         # magenta test
 	x = self.ball_detect(magentaLower, magentaUpper, image_np)
         if x == True:
             rospy.loginfo("magenta ball detected")
+            if "magenta" not in self.COLORS_VISITED:
+                print("New room detected!!!")
+                self.COLORS_VISITED.append("magenta")
 
 def main(args):
     rd = roomDetector()
