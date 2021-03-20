@@ -1,0 +1,9 @@
+# Goal
+string color
+---
+# Result
+int32 x
+int32 y
+---
+# Feedback
+string state

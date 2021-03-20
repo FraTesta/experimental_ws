@@ -12,7 +12,9 @@
 	<node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" /> 
         <node name="rviz" pkg="rviz" type="rviz" args="-d $(find urdf_tutorial)/urdf.rviz" />
 
-	<node name="roomsDetection" pkg="final_assignment" type="roomsDetection.py" output="screen"/>
+	<node name="roomsDetection" pkg="final_assignment" type="roomsDetection.py" />
+
+	<node name="provatf" pkg="final_assignment" type="provatf.py" output="screen"/>
 
 	<!--
 	<include file="$(find gazebo_ros)/launch/empty_world.launch"> 
