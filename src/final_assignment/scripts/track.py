@@ -143,6 +143,11 @@ class TrackAction(object): # forse ci va il goal
 				rospy.loginfo("BallDetection : ball reached!!")
                 self.result.x = position_.x
                 self.result.y = position_.y
+		rospy.loginfo("the current robot position is:")
+		rospy.loginfo(self.result.x)
+		rospy.loginfo(self.result.y)
+		self.act_s.set_succeeded(self.result)
+		#return null
 
         else:
             rospy.loginfo("Ball not found")
