@@ -66,18 +66,19 @@ find_package (OpenCV REQUIRED)
 # )
 
 ## Generate actions in the 'action' folder
-# add_action_files(
-#   FILES
-#   Action1.action
+ add_action_files(
+   FILES
+   trackBall.action
 #   Action2.action
-# )
+ )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   geometry_msgs
-#   std_msgs  
-#)
+ generate_messages(
+   DEPENDENCIES
+   geometry_msgs
+   std_msgs  
+   actionlib_msgs
+)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -167,7 +168,7 @@ include_directories(
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
  install(PROGRAMS
-   scripts/roomsDetection.py scripts/provatf.py
+   scripts/roomsDetection.py scripts/provatf.py scripts/track.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
 
