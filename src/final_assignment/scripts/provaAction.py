@@ -20,15 +20,15 @@ def main():
     goal.color = "blue"
     client = actionlib.SimpleActionClient('robot_reach_room', final_assignment.msg.trackBallAction)
     rospy.loginfo("client created ")
-    while not rospy.is_shutdown():  
-        client.send_goal(goal)
-	rospy.loginfo("goal sent")
-        client.wait_for_result()
-	rospy.loginfo("goal recived")
-        result = client.get_result()
-        rospy.loginfo("la posizione attuale e':")
-        rospy.loginfo(result.x)
-        rospy.loginfo(result.y)
+    
+    client.send_goal(goal)
+    rospy.loginfo("goal sent")
+    client.wait_for_result()
+    rospy.loginfo("goal recived")
+    result = client.get_result()
+    rospy.loginfo("la posizione attuale e':")
+    rospy.loginfo(result.x)
+    rospy.loginfo(result.y)
 
 if __name__ == "__main__":
     main()

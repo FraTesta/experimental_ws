@@ -72,18 +72,24 @@ def clbk_odom(msg):
 class TrackAction(object): # forse ci va il goal
     feedback = final_assignment.msg.trackBallFeedback()
     result = final_assignment.msg.trackBallResult()
+    
     ## Publisher to move the robot 
     
     def __init__(self, name):
         self.actionName = name
         self.act_s = actionlib.SimpleActionServer('robot_reach_room', final_assignment.msg.trackBallAction, self.track, auto_start=False)
         self.act_s.start()
-        self.vel_pub = rospy.Publisher("cmd_vel",Twist, queue_size=1)
+	self.vel_pub = rospy.Publisher("cmd_vel",Twist, queue_size=1)
+	rate = rospy.Rate(20)
+
+    	while not rospy.is_shutdown():
+        	rate.sleep()
         # posso mettere qui volendo il sub scriber ad odom 
 
 
     def reach_ball(self, ros_image):
         global position_, pose_
+	
         #### direct conversion to CV2 ####
         ## @param image_np is the image decompressed and converted in OpendCv
         np_arr = np.fromstring(ros_image.data, np.uint8)
@@ -136,35 +142,50 @@ class TrackAction(object): # forse ci va il goal
 		        # 400 is the center of the image 
 		vel.angular.z = -0.002*(center[0]-400)
 			    # 150 is the radius that we want see in the image, which represent the desired disatance from the object 
-		vel.linear.x = -0.01*(radius-150)
+		vel.linear.x = -0.005*(radius-150)
 		self.vel_pub.publish(vel)
 
                 if (radius>=148) and abs(center[0]-400)<5: #Condition for considering the ball as reached
-				rospy.loginfo("BallDetection : ball reached!!")
-                self.result.x = position_.x
-                self.result.y = position_.y
-		rospy.loginfo("the current robot position is:")
-		rospy.loginfo(self.result.x)
-		rospy.loginfo(self.result.y)
-		self.act_s.set_succeeded(self.result)
-		#return null
+			rospy.loginfo("BallDetection : ball reached!!")
+                	self.result.x = position_.x
+                	self.result.y = position_.y
+			rospy.loginfo("the current robot position is:")
+			rospy.loginfo(self.result.x)
+			rospy.loginfo(self.result.y)
+			self.act_s.set_succeeded(self.result)
+			# unregister from the camera topic in order to stop to track the ball
+			self.camera_sub.unregister()
+			self.state = 1
+			#break
 
         else:
             rospy.loginfo("Ball not found")
+
+    def done(self):
+	twist_msg = Twist()
+    	twist_msg.linear.x = 0
+    	twist_msg.angular.z = 0
+	self.vel_pub.publish(twist_msg)
         
     def track(self, goal):
         self.color = goal.color
+	rospy.loginfo("Action server created ")
         # crate the subscriber to camera1 in order to recive and handle the images
-        camera_sub = rospy.Subscriber("camera1/image_raw/compressed", CompressedImage, self.reach_ball, queue_size=1)
+        self.camera_sub = rospy.Subscriber("camera1/image_raw/compressed", CompressedImage, self.reach_ball, queue_size=1)
         
+	self.state = 0
         while not rospy.is_shutdown():
             if self.act_s.is_preempt_requested():
                 rospy.loginfo('Goal was preempted')
                 self.act_s.set_preempted()
                 success = False
                 break
-            else:
+            elif self.state == 0:
                 self.feedback = "Reaching the ball"
+	    elif self.state == 1:
+		rospy.loginfo("goal reached!")
+		self.done()
+		break
 
 
 
@@ -177,10 +198,7 @@ def main():
 
     track = TrackAction('TrackAction')
 
-    rate = rospy.Rate(20)
 
-    while not rospy.is_shutdown():
-        rate.sleep()
 
 if __name__ == '__main__':
     main()
