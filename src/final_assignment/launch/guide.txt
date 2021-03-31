@@ -1,0 +1,2 @@
+simulation.launch = launch the original simulation environment
+roboMode.launch = launchs the robot in the simulation environment and currently launchs also the roomDetection code and the trovatf

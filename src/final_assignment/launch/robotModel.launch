@@ -1,20 +1,17 @@
 <?xml version="1.0"?>
 <launch>
-	
+	<!-- simulation -->
 	<include file="$(find final_assignment)/launch/simulation.launch"></include>
+	<!-- SLAM algo: gmapping -->
+	<include file="$(find final_assignment)/launch/gmapping.launch"></include>
+	<!-- Navigation algo: move base -->
+	<include file="$(find final_assignment)/launch/move_base.launch"></include>
 
-  <arg name="model" default="$(find final_assignment)/urdf/robotDog.xacro" />
-  <!-- Load the URDF into the ROS Parameter Server -->
-  <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
-	
-	<param name="use_gui" value="True"/>
-    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node>
-	<node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" /> 
-        <node name="rviz" pkg="rviz" type="rviz" args="-d $(find urdf_tutorial)/urdf.rviz" />
+	<!-- node to notify new rooms -->
+	<!-- <node name="roomsDetection" pkg="final_assignment" type="roomsDetection.py" /> -->
+	<node name="commandManager" pkg="planning" type="commandManager.py" output="screen" />
 
-	<node name="roomsDetection" pkg="final_assignment" type="roomsDetection.py" />
 
-	<node name="provatf" pkg="final_assignment" type="provatf.py" output="screen"/>
 
 	<!--
 	<include file="$(find gazebo_ros)/launch/empty_world.launch"> 
