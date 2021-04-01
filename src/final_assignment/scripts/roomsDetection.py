@@ -15,11 +15,7 @@ import roslib
 import rospy
 
 from sensor_msgs.msg import CompressedImage 
-
-ROOMS = [ 
-    {'name':"LeavingRoom",'colour': "blue", "x":"", "y":""},
-    {'name':"BedRoom",'colour':"red","x":"","y":""}
-]
+from std_msgs.msg import String
 
 
 
@@ -31,8 +27,10 @@ class roomDetector():
         self.COLORS_VISITED = []
         # Subsriber to get the compressed images from the camera
         self.camera_sub = rospy.Subscriber("camera1/image_raw/compressed", CompressedImage, self.find_ball, queue_size=1)
+        self.newRoomPub = rospy.Publisher('newRoom', String, queue_size=10)
+	self.rate = rospy.Rate(1)
 
-
+    # returns True when a ball is detected
     def ball_detect(self, hsv_min, hsv_max, image_np):
         blurred = cv2.GaussianBlur(image_np, (11, 11), 0)
         hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
@@ -68,51 +66,59 @@ class roomDetector():
         magentaUpper = (150, 255, 255)
 
         # black test
-	x = self.ball_detect(blackLower, blackUpper, image_np)
-        if x == True:
+	ball = self.ball_detect(blackLower, blackUpper, image_np)
+        if ball == True:
             rospy.loginfo("black ball detected ")
             if "black" not in self.COLORS_VISITED:
-                print("New room detected!!!")
+                rospy.loginfo("New room detected!!!")
                 self.COLORS_VISITED.append("black")
+                self.newRoomPub.publish("black")
         # red test 
-	x = self.ball_detect(redLower, redUpper, image_np)
-        if x == True:
+	ball = self.ball_detect(redLower, redUpper, image_np)
+        if ball == True:
             rospy.loginfo("red ball detected")
             if "red" not in self.COLORS_VISITED:
-                print("New room detected!!!")
+                rospy.loginfo("New room detected!!!")
                 self.COLORS_VISITED.append("red")
+                self.newRoomPub.publish("red")
         # yellow test
-	x = self.ball_detect(yellowLower, yellowUpper, image_np)
-        if x == True:
+	ball = self.ball_detect(yellowLower, yellowUpper, image_np)
+        if ball == True:
             rospy.loginfo("yellow ball detected")
             if "yellow" not in self.COLORS_VISITED:
-                print("New room detected!!!")
+                rospy.loginfo("New room detected!!!")
                 self.COLORS_VISITED.append("yellow")
+                self.newRoomPub.publish("yellow")
         # green test
-	x = self.ball_detect(greenLower, greenUpper, image_np)
-        if x == True:
+	ball = self.ball_detect(greenLower, greenUpper, image_np)
+        if ball == True:
             rospy.loginfo("green ball detected")
             if "green" not in self.COLORS_VISITED:
-                print("New room detected!!!")
+                rospy.loginfo("New room detected!!!")
                 self.COLORS_VISITED.append("green")
+                self.newRoomPub.publish("green")
         # blue test
-	x = self.ball_detect(blueLower, blueUpper, image_np)
-        if x == True:
+	ball = self.ball_detect(blueLower, blueUpper, image_np)
+        if ball == True:
             rospy.loginfo("blue ball detected")
             if "blue" not in self.COLORS_VISITED:
-                print("New room detected!!!")
+                rospy.loginfo("New room detected!!!")
                 self.COLORS_VISITED.append("blue")
+                self.newRoomPub.publish("blue")
         # magenta test
-	x = self.ball_detect(magentaLower, magentaUpper, image_np)
-        if x == True:
+	ball = self.ball_detect(magentaLower, magentaUpper, image_np)
+        if ball == True:
             rospy.loginfo("magenta ball detected")
             if "magenta" not in self.COLORS_VISITED:
-                print("New room detected!!!")
+                rospy.loginfo("New room detected!!!")
                 self.COLORS_VISITED.append("magenta")
+                self.newRoomPub.publish("magenta")
+	self.rate.sleep()
 
 def main(args):
-    rd = roomDetector()
+    
     try:
+        rd = roomDetector()
         rospy.spin()
     except KeyboardInterrupt:
         print ("Shutting down ROS Image feature detector module")
@@ -120,4 +126,3 @@ def main(args):
 
 if __name__ == '__main__':
     main(sys.argv)
-

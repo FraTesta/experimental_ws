@@ -77,7 +77,7 @@ class TrackAction(object): # forse ci va il goal
     
     def __init__(self, name):
         self.actionName = name
-        self.act_s = actionlib.SimpleActionServer('robot_reach_room', final_assignment.msg.trackBallAction, self.track, auto_start=False)
+        self.act_s = actionlib.SimpleActionServer('trackAction', final_assignment.msg.trackBallAction, self.track, auto_start=False)
         self.act_s.start()
 	self.vel_pub = rospy.Publisher("cmd_vel",Twist, queue_size=1)
 	rate = rospy.Rate(20)

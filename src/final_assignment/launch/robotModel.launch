@@ -8,19 +8,19 @@
 	<include file="$(find final_assignment)/launch/move_base.launch"></include>
 
 	<!-- node to notify new rooms -->
-	<!-- <node name="roomsDetection" pkg="final_assignment" type="roomsDetection.py" /> -->
-	<node name="commandManager" pkg="planning" type="commandManager.py" output="screen" />
+	<node name="roomsDetection" pkg="final_assignment" type="roomsDetection.py" />
+	<node name="commandManager" pkg="final_assignment" type="commandManager.py" output="screen" /> 
+	<!--<node name="cmd_smach" pkg="final_assignment" type="cmd_smach.py" output="screen" /> -->
+	<node name="track" pkg="final_assignment" type="track.py"  />
+
+	<arg name="use_rviz" default="false" />
+
+  <group if="$(arg use_rviz)">
+       <node name="rviz" pkg="rviz" type="rviz" args="-d $(find final_assignment)/config/sim.rviz" />
+  </group>
+	
 
 
-
-	<!--
-	<include file="$(find gazebo_ros)/launch/empty_world.launch"> 
-    <arg name="paused" value="true"/>
-  </include> -->
-  
-  <!--
-  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
-	args="-urdf -model robot1 -param robot_description -z 0.05"/>  -->
 
 
 

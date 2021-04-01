@@ -44,9 +44,6 @@ NEW_TR = False
 ## init move_base client 
 client = actionlib.SimpleActionClient('move_base',MoveBaseAction)
 
-# init the environment 
-rooms = Rooms()
-
 
 
 def UIcallback(data):
@@ -56,12 +53,10 @@ def UIcallback(data):
         client.cancel_all_goals()
         PLAY = True
 
-    elif data.data.startswith("GoTo"):
+    else:
         NEW_TR = True
         TARGET_ROOM = data.data
-        rospy.loginfo("I recived the desired room: %s", TARGET_ROOM)
-    else:
-	rospy.logerr("[Syntax Error] the sent msg is wrong")
+        print("I recived the desired room: %s", TARGET_ROOM)
 
 
 def newRoomDetected(color):
@@ -80,8 +75,8 @@ def newRoomDetected(color):
         rospy.signal_shutdown("Action server not available!")
     else:
         rospy.loginfo("Goal execution done!!!!")
-        result = client.get_result()
-        rospy.loginfo("la posizione attuale e':")
+	result = client.get_result()
+	rospy.loginfo("la posizione attuale e':")
     	rospy.loginfo(result.x)
     	rospy.loginfo(result.y)
 
@@ -94,7 +89,9 @@ class Normal(smach.State):
     Otherwise after some iterations it goes in SLEEP mode '''
     def __init__(self):
         smach.State.__init__(self, 
-                             outcomes=['goToNormal','goToSleep','goToPlay'])
+                             outcomes=['goToNormal','goToSleep','goToPlay'],
+                             input_keys=['rooms_in'], # msg in input 
+                             output_keys=['rooms_out']) # msg in output)
 
         ## init move_base goal 
         self.goal = MoveBaseGoal()
@@ -106,7 +103,7 @@ class Normal(smach.State):
         self.counter = 0
         
     def execute(self,userdata):
-        global PLAY, client
+        global PLAY
         
         while not rospy.is_shutdown():  
 
@@ -147,7 +144,9 @@ class Sleep(smach.State):
     Finally it returns in the NORMAL state'''
     def __init__(self):
         smach.State.__init__(self, 
-                             outcomes=['goToNormal','goToSleep']) 
+                             outcomes=['goToNormal','goToSleep'],
+                             input_keys=['rooms_in'], # msg in input 
+                             output_keys=['rooms_out']) # msg in output)
                              
         self.rate = rospy.Rate(200)  # Loop at 200 Hz
 
@@ -169,7 +168,9 @@ class Play(smach.State):
      It move the robot in X Y location and then asks to go back to the user.'''
     def __init__(self):
         smach.State.__init__(self, 
-                             outcomes=['goToNormal','goToPlay'])
+                             outcomes=['goToNormal','goToPlay'],
+                             input_keys=['rooms_in'], # msg in input 
+                             output_keys=['rooms_out']) # msg in output))
         
         self.rate = rospy.Rate(200)
         self.counter = 0
@@ -178,48 +179,39 @@ class Play(smach.State):
     def execute(self, userdata):
 
         rospy.loginfo("I m in PLAY mode")
-	global PLAY, rooms
+	global TARGET_ROOM, PLAY, NEW_TR
 
-        
+        rospy.loginfo(userdata.rooms_in.ROOMS[0]['name'])
 
         # go to the person
-        #userdata.rooms_in.go_to_room("Home")
-        rooms.go_to_room("Home")
-	rospy.loginfo("Home Reached!!!!")
+        userdata.rooms_in.go_to_room("Home")
 
         while not rospy.is_shutdown():
-	    # we need to update them at each iteration 
-	    global TARGET_ROOM, NEW_TR
 
-            if self.counter <= 5:
+            if self.counter <= 3:
                 if NEW_TR == True:
                                         
-                    if TARGET_ROOM.startswith("GoTo"):
-                        TARGET_ROOM = TARGET_ROOM.strip("GoTo ")
+                    if msg.startswith("GoTo"):
+                        TARGET_ROOM = msg.strip("GoTo ")
                         
-                        if not rooms.go_to_room(TARGET_ROOM):
-                            rospy.loginfo("That room has not yet been visited")                   
+                        if not userdata.rooms_in.go_to_room(TARGET_ROOM):
+                            print("that room has not yet been visited")                   
 
                     else:
                         rospy.logerr("[Sintax Error] no GoTo command typed!")
 
                     # wait a few seconds 
-                    time.sleep(1)
-		    rospy.loginfo("homecoming...")
+                    time.sleep(3)
                     # comebak to the person 
-                    rooms.go_to_room("Home")
-		    rospy.loginfo("Home Reached!!!!")
-		    NEW_TR = False
+                    userdata.rooms_in.go_to_room("Home")
                 
-	        # wait a few seconds 
-                time.sleep(3)
-		rospy.loginfo("wait-..........")
-               	self.counter += 1
-                
-	    else:
-		self.counter = 0
-            	PLAY = False
-            	return 'goToNormal'
+
+                rate.sleep()
+                NEW_TR = False
+
+            PLAY = False
+            userdata.rooms_out = userdata.rooms_in
+            return 'goToNormal'
 
 
 
@@ -238,11 +230,12 @@ def main():
         # Subscriber to the newRoom topic 
         #newRoomSub = rospy.Subscriber("newRoom", String, newRoomDetected)
 
-
+        # init the environment 
+        rooms = Rooms()
         
         # Create a SMACH state machine
         sm = smach.StateMachine(outcomes=['init'])
-    
+        sm.userdata.connector = rooms
 
         # Open the container
         with sm:
@@ -250,13 +243,19 @@ def main():
             smach.StateMachine.add('NORMAL', Normal(), 
                                 transitions={'goToSleep':'SLEEP', 
                                                 'goToPlay':'PLAY',
-                                                'goToNormal':'NORMAL'})
+                                                'goToNormal':'NORMAL'},
+                                    remapping={'rooms_in':'connector', 
+                                            'rooms_out':'connector'})
             smach.StateMachine.add('SLEEP', Sleep(), 
                                 transitions={'goToSleep':'SLEEP', 
-                                                'goToNormal':'NORMAL'})
+                                                'goToNormal':'NORMAL'},
+                                    remapping={'rooms_in':'connector', 
+                                            'rooms_out':'connector'})
             smach.StateMachine.add('PLAY', Play(), 
                                 transitions={'goToNormal':'NORMAL',
-                                                'goToPlay':'PLAY'})
+                                                'goToPlay':'PLAY'},
+                                    remapping={'rooms_in':'connector', 
+                                            'rooms_out':'connector'})
 
 
         sis = smach_ros.IntrospectionServer('server_name', sm, '/SM_ROOT')
