@@ -50,10 +50,11 @@ rooms = Rooms()
 
 
 def UIcallback(data):
-    global PLAY, TARGET_ROOM, NEW_TR, client
+    global PLAY, TARGET_ROOM, NEW_TR, rooms , client
     if data.data == "play" or data.data == "Play":
         rospy.loginfo("Recived a 'play' request...stop every move_base goal!!")
         client.cancel_all_goals()
+
         PLAY = True
 
     elif data.data.startswith("GoTo"):
@@ -85,6 +86,29 @@ def newRoomDetected(color):
     	rospy.loginfo(result.x)
     	rospy.loginfo(result.y)
 
+def move_base_go_to(x, y):
+    global client
+    ## init move_base goal 
+    goal = MoveBaseGoal()
+    ## set the goal as a random position 
+    goal.target_pose.header.frame_id = "map"
+    goal.target_pose.header.stamp = rospy.Time.now()
+    goal.target_pose.pose.position.x = x
+    goal.target_pose.pose.position.y = y
+    goal.target_pose.pose.orientation.w = 1.0
+
+    rospy.loginfo("I'm going to position x = %d y = %d", x, y)
+    
+    client.send_goal(goal)
+    wait = client.wait_for_result()
+    
+    if not wait:
+        rospy.logerr("Action server not available!")
+        rospy.signal_shutdown("Action server not available!")
+    else:
+        rospy.loginfo("Goal reached!!!!")
+
+    
 
  
 
@@ -96,10 +120,6 @@ class Normal(smach.State):
         smach.State.__init__(self, 
                              outcomes=['goToNormal','goToSleep','goToPlay'])
 
-        ## init move_base goal 
-        self.goal = MoveBaseGoal()
-        self.goal.target_pose.header.frame_id = "map"
-        self.goal.target_pose.header.stamp = rospy.Time.now()
 
         self.rate = rospy.Rate(1)  # Loop at 200 Hz
 	## Counter variable to check the number of iteration of the NORMAL state in order to move to SLEEP state after a certain number 
@@ -107,33 +127,21 @@ class Normal(smach.State):
         
     def execute(self,userdata):
         global PLAY, client
+	rospy.loginfo("I m in NORMAL state")
+	time.sleep(3)
         
         while not rospy.is_shutdown():  
 
             if PLAY == True:
                 return 'goToPlay'
             if self.counter == 4:
-                return 'goToSleep'           
+                return 'goToSleep'  
+
+	    move_base_go_to(-1, 4)
+
             # move in a random position using move_base
-
-
-
-
-            ## set the goal as a random position 
-            self.goal.target_pose.pose.position.x = random.randint(-5,5)
-            self.goal.target_pose.pose.position.y = random.randint(-5,5)
-	    self.goal.target_pose.pose.orientation.w = 1.0
-
-            rospy.loginfo("I'm going to position x = %d y = %d", self.goal.target_pose.pose.position.x, 	    self.goal.target_pose.pose.position.y)
-            client.send_goal(self.goal)
-            wait = client.wait_for_result()
-            if not wait:
-                rospy.logerr("Action server not available!")
-                rospy.signal_shutdown("Action server not available!")
-            else:
-                rospy.loginfo("Goal execution done!!!!")
-
-	        self.rate.sleep()
+            move_base_go_to(random.randint(-5,5), random.randint(-5,5))
+            self.rate.sleep()
             self.counter += 1
             
         return 'goToSleep' 
@@ -170,22 +178,25 @@ class Play(smach.State):
     def __init__(self):
         smach.State.__init__(self, 
                              outcomes=['goToNormal','goToPlay'])
-        
+
         self.rate = rospy.Rate(200)
         self.counter = 0
 	    
 
     def execute(self, userdata):
 
-        rospy.loginfo("I m in PLAY mode")
-	global PLAY, rooms
+        rospy.logdebug("I m in PLAY mode")
+	global PLAY, rooms 
 
         
 
         # go to the person
         #userdata.rooms_in.go_to_room("Home")
-        rooms.go_to_room("Home")
+        position = rooms.get_room_position("Home")
+        # go to Home position 
+        move_base_go_to(position[0], position[1])	
 	rospy.loginfo("Home Reached!!!!")
+        
 
         while not rospy.is_shutdown():
 	    # we need to update them at each iteration 
@@ -196,9 +207,13 @@ class Play(smach.State):
                                         
                     if TARGET_ROOM.startswith("GoTo"):
                         TARGET_ROOM = TARGET_ROOM.strip("GoTo ")
+
+                        position = rooms.get_room_position(TARGET_ROOM)
                         
-                        if not rooms.go_to_room(TARGET_ROOM):
-                            rospy.loginfo("That room has not yet been visited")                   
+                        if not position:
+                            rospy.loginfo("That room has not yet been visited")  
+                        else:
+                            move_base_go_to(position[0], position[1])                 
 
                     else:
                         rospy.logerr("[Sintax Error] no GoTo command typed!")
@@ -207,7 +222,8 @@ class Play(smach.State):
                     time.sleep(1)
 		    rospy.loginfo("homecoming...")
                     # comebak to the person 
-                    rooms.go_to_room("Home")
+                    position = rooms.get_room_position("Home")
+                    move_base_go_to(position[0], position[1])
 		    rospy.loginfo("Home Reached!!!!")
 		    NEW_TR = False
                 
@@ -228,7 +244,7 @@ class Play(smach.State):
         
 def main():
     
-    global client
+    #global client
     try:
         rospy.init_node('commandManager')
         # move_base client

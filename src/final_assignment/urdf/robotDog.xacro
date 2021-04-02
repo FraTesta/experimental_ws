@@ -85,7 +85,7 @@
       <joint name="${name}" type="continuous">
         <origin rpy="0 0 0" xyz="${origin_xyz}"/>
         <child link="${child}"/>
-        <parent link="base_link"/>
+        <parent link="link_chassis"/>
         <axis rpy="0 0 0" xyz="0 1 0"/>
         <limit effort="10000" velocity="1000"/>
         <joint_properties damping="1.0" friction="1.0"/>
@@ -94,7 +94,7 @@
 
 <!-- _______________base link____________________  -->
   
-  <link name="base_link">
+  <link name="link_chassis">
     <!-- pose and inertial -->
     <pose>0 0 0.1 0 0 0</pose>
     
@@ -180,7 +180,7 @@
   	<axis xyz="0 0 1"/>
   	<limit effort="1000.0" lower="-3.14" upper="3.14" velocity="0.2"/>
   	<origin rpy="0 0 0" xyz="0.15 0 0.035"/> <!-- half the height of the base link -->
-  	<parent link="base_link"/>
+  	<parent link="link_chassis"/>
   	<child link="neck_link"/>
   </joint>
 
@@ -293,7 +293,7 @@
   <joint name="hokuyo_joint" type="fixed">
 	    <axis xyz="0 1 0" />
 	    <origin xyz="0.27 0 0.025" rpy="0 0 0"/>
-	    <parent link="base_link"/>
+	    <parent link="link_chassis"/>
 	    <child link="hokuyo_link"/> 
 	 </joint>
 

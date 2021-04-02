@@ -17,34 +17,20 @@ class Rooms():
         {'name':"Home",'color':"","x":-5,"y":7, 'detected':True}
         ]
 
+
+
     
 # check if the room contained in msg is already visited, if so then the robot will move to that position 
-    def go_to_room(self, target_room):
-        #print(self.ROOMS)
-        client = actionlib.SimpleActionClient('move_base',MoveBaseAction)
-        client.wait_for_server()
-
-        goal = MoveBaseGoal()
-        goal.target_pose.header.frame_id = "map"
-        goal.target_pose.header.stamp = rospy.Time.now()
+    def get_room_position(self, target_room):
+        
         
         for room in self.ROOMS:
             if target_room == room['name']:
                 if room['detected'] == True :
-                    # go to the room position using the move_base action server
-                    goal.target_pose.pose.position.x = room["x"]
-                    goal.target_pose.pose.position.y = room["y"]
-                    goal.target_pose.pose.orientation.w = 1.0
-                    # send goal to move_base 
-                    client.send_goal(goal)
-                    wait = client.wait_for_result()
-                    if not wait:
-                        rospy.logerr("Action server not available!")
-                        rospy.signal_shutdown("Action server not available!")
-                    else:
-                        rospy.loginfo("Room reached: ",room['name'] )
+                    print("Such room is already visited!!!")
 
-                    return True
+
+                    return [room["x"], room["y"]]
         
         return False
 
@@ -55,6 +41,29 @@ class Rooms():
                 room['detected'] = True
                 room['x'] = x
                 room['y'] = y
+
+    def go_to_position(self, x, y):
+        goal = MoveBaseGoal()
+        goal.target_pose.header.frame_id = "map"
+        goal.target_pose.header.stamp = rospy.Time.now()
+        goal.target_pose.pose.position.x = x
+        goal.target_pose.pose.position.y = y
+        goal.target_pose.pose.orientation.w = 1.0
+        # send goal to move_base 
+        self.client.send_goal(goal)
+        wait = self.client.wait_for_result()
+        if not wait:
+            rospy.logerr("Action server not available!")
+            rospy.signal_shutdown("Action server not available!")
+            return False
+        else:
+            rospy.loginfo("Room reached!!!!")
+            return True
+
+    def stop_moving(self):
+        self.client.cancel_all_goals()
+
+
     
 
 

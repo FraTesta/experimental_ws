@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <robot name="robotDog" xmlns:xacro="https://www.ros.org/wiki/xacro" >
 
-<gazebo reference="base_link">
+<gazebo reference="link_chassis">
     <material>Gazebo/Orange</material>
   </gazebo>
   <gazebo reference="link_left_wheel">
@@ -31,12 +31,7 @@
     <material>Gazebo/Green</material>
   </gazebo>
  
- 
 
-<!--
-  <gazebo reference="head_joint">
-    <provideFeedback>true</provideFeedback>
-</gazebo>  -->
 
 
 <!-- The ft_sensor plugin   
@@ -62,7 +57,7 @@
       <commandTopic>cmd_vel</commandTopic>
       <odometryTopic>odom</odometryTopic>
       <odometryFrame>odom</odometryFrame>
-      <robotBaseFrame>base_link</robotBaseFrame>
+      <robotBaseFrame>link_chassis</robotBaseFrame>
       <rosDebugLevel>na</rosDebugLevel>
       <publishWheelTF>true</publishWheelTF>
       <publishWheelJointState>true</publishWheelJointState>

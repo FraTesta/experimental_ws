@@ -10,20 +10,19 @@ def UI():
 
     while not rospy.is_shutdown():
 	msg = raw_input("Type 'Play' to switch in the PLAY mode:")
+	if msg == 'Play' or msg == 'play':
+        	pub.publish(msg)
+        	rate.sleep()
+        	msg = raw_input("Please enter the room that you want to go (GoTo roomName): ")
+        	rospy.loginfo("wait ...")
+        	pub.publish(msg)
+        	time.sleep(5)
+    else:
+        rospy.logerr("[Syntax Error] please enter 'play' or 'Play'")
 	
-
-   	pub.publish(msg)
 	
-	rate.sleep()
-        msg = raw_input("Please enter the room that you want to go (GoTo roomName): ")
-	rospy.loginfo("wait ...")
-        pub.publish(msg)
-	time.sleep(3)
             
-	 
 	
-        
-
 
 if __name__ == "__main__":
     try:
