@@ -14,7 +14,7 @@ class Rooms():
         {'name':"Kitchen",'color': "yellow", "x":0, "y":0, 'detected':False},
         {'name':"BathRoom",'color': "orange", "x":0, "y":0, 'detected':False},
         {'name':"BedRoom",'color':"black","x":0,"y":0, 'detected':False},
-        {'name':"Home",'color':"","x":-5,"y":7, 'detected':True}
+        {'name':"Home",'color':"","x": -5,"y":7, 'detected':True}
         ]
 
 

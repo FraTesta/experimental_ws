@@ -47,6 +47,11 @@ client = actionlib.SimpleActionClient('move_base',MoveBaseAction)
 # init the environment 
 rooms = Rooms()
 
+# new room detected 
+NEW_ROOM = False
+# color of the detected ball 
+COLOR_ROOM = "None"
+
 
 
 def UIcallback(data):
@@ -67,24 +72,10 @@ def UIcallback(data):
 
 def newRoomDetected(color):
     rospy.loginfo("[CmdMg] reach a new ball, start track it !")
-    goal = trackBallGoal()
-    goal.color = color.data
+    NEW_ROOM = True 
+    COLOR_ROOM = color.data
+    client.cancel_all_goals()
 
-    client = actionlib.SimpleActionClient('trackAction',trackBallAction)
-    client.wait_for_server()
-    rospy.loginfo("Track client creato")
-
-    client.send_goal(goal)
-    wait = client.wait_for_result()
-    if not wait:
-        rospy.logerr("Action server not available!")
-        rospy.signal_shutdown("Action server not available!")
-    else:
-        rospy.loginfo("Goal execution done!!!!")
-        result = client.get_result()
-        rospy.loginfo("la posizione attuale e':")
-    	rospy.loginfo(result.x)
-    	rospy.loginfo(result.y)
 
 def move_base_go_to(x, y):
     global client
@@ -95,7 +86,10 @@ def move_base_go_to(x, y):
     goal.target_pose.header.stamp = rospy.Time.now()
     goal.target_pose.pose.position.x = x
     goal.target_pose.pose.position.y = y
-    goal.target_pose.pose.orientation.w = 1.0
+    goal.target_pose.pose.orientation.x = 0
+    goal.target_pose.pose.orientation.y = 0
+    goal.target_pose.pose.orientation.z = 0
+    goal.target_pose.pose.orientation.w = 2.0
 
     rospy.loginfo("I'm going to position x = %d y = %d", x, y)
     
@@ -126,9 +120,9 @@ class Normal(smach.State):
         self.counter = 0
         
     def execute(self,userdata):
-        global PLAY, client
+        global PLAY, client, NEW_ROOM
 	rospy.loginfo("I m in NORMAL state")
-	time.sleep(3)
+	time.sleep(4)
         
         while not rospy.is_shutdown():  
 
@@ -136,8 +130,10 @@ class Normal(smach.State):
                 return 'goToPlay'
             if self.counter == 4:
                 return 'goToSleep'  
+            if NEW_ROOM == True:
+                return 'goToTrack'
 
-	    move_base_go_to(-1, 4)
+	    #move_base_go_to(-1, 7)
 
             # move in a random position using move_base
             move_base_go_to(random.randint(-5,5), random.randint(-5,5))
@@ -237,6 +233,41 @@ class Play(smach.State):
             	PLAY = False
             	return 'goToNormal'
 
+class Track(smach.State):
+    '''Class that defines the PLAY state. 
+     It move the robot in X Y location and then asks to go back to the user.'''
+    def __init__(self):
+        smach.State.__init__(self, 
+                             outcomes=['goToNormal','goToTrack'])
+
+    def execute(self, userdata):
+        global rooms, NEW_ROOM, COLOR_ROOM
+
+        goal = trackBallGoal()
+        goal.color = COLOR_ROOM
+
+        trackClient = actionlib.SimpleActionClient('trackAction',trackBallAction)
+        trackClient.wait_for_server()
+        rospy.loginfo("Track client creato")
+
+        trackClient.send_goal(goal)
+        wait = trackClient.wait_for_result()
+        if not wait:
+            rospy.logerr("Action server not available!")
+            rospy.signal_shutdown("Action server not available!")
+            NEW_ROOM = False
+            return "goToNormal"
+        else:
+            rospy.loginfo("Goal execution done!!!!")
+            result = trackClient.get_result()
+            rospy.loginfo("la posizione attuale e':")
+            rospy.loginfo(result.x)
+            rospy.loginfo(result.y)
+            NEW_ROOM = False
+            return "goToNormal"
+            
+       
+
 
 
 	
@@ -252,9 +283,8 @@ def main():
         # Subscriber to the UIchatter topic
         UIsubscriber = rospy.Subscriber("UIchatter", String, UIcallback)
         # Subscriber to the newRoom topic 
-        #newRoomSub = rospy.Subscriber("newRoom", String, newRoomDetected)
-
-
+        newRoomSub = rospy.Subscriber("newRoom", String, newRoomDetected)
+        
         
         # Create a SMACH state machine
         sm = smach.StateMachine(outcomes=['init'])
@@ -273,6 +303,9 @@ def main():
             smach.StateMachine.add('PLAY', Play(), 
                                 transitions={'goToNormal':'NORMAL',
                                                 'goToPlay':'PLAY'})
+            smach.StateMachine.add('TRACK', Track(), 
+                                transitions={'goToNormal':'NORMAL',
+                                                'goToTrack':'TRACK'})
 
 
         sis = smach_ros.IntrospectionServer('server_name', sm, '/SM_ROOT')

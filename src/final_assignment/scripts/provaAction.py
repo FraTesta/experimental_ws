@@ -1,34 +1,56 @@
 #!/usr/bin/env python
+rom __future__ import print_function
+
 import roslib
 import rospy
+import smach
+import smach_ros
+import time
+import random
+import sys
+import random 
 
-# Ros Messages
-from sensor_msgs.msg import CompressedImage
-from geometry_msgs.msg import Twist, Point, Pose
+from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
+from std_msgs.msg import String
+from Rooms import Rooms
+
+import smach_msgs.msg 
+
+client = actionlib.SimpleActionClient('move_base',MoveBaseAction)
+client.wait_for_server()
+
 
 # Action Server 
 import actionlib
 import actionlib.msg
-import final_assignment.msg
+from final_assignment.msg import trackBallGoal, trackBallAction
+def move_base_go_to(x, y):
+    global client
+    ## init move_base goal 
+    goal = MoveBaseGoal()
+    ## set the goal as a random position 
+    goal.target_pose.header.frame_id = "map"
+    goal.target_pose.header.stamp = rospy.Time.now()
+    goal.target_pose.pose.position.x = x
+    goal.target_pose.pose.position.y = y
+    goal.target_pose.pose.orientation.w = 1.0
 
-
-def main():
-    rospy.init_node('provaAction')
-
-    goal = final_assignment.msg.trackBallGoal()
-
-    goal.color = "blue"
-    client = actionlib.SimpleActionClient('robot_reach_room', final_assignment.msg.trackBallAction)
-    rospy.loginfo("client created ")
+    rospy.loginfo("I'm going to position x = %d y = %d", x, y)
     
     client.send_goal(goal)
-    rospy.loginfo("goal sent")
-    client.wait_for_result()
-    rospy.loginfo("goal recived")
-    result = client.get_result()
-    rospy.loginfo("la posizione attuale e':")
-    rospy.loginfo(result.x)
-    rospy.loginfo(result.y)
+    wait = client.wait_for_result()
+    
+    if not wait:
+        rospy.logerr("Action server not available!")
+        rospy.signal_shutdown("Action server not available!")
+    else:
+        rospy.loginfo("Goal reached!!!!")
 
-if __name__ == "__main__":
+def main():
+    time.sleep(6)
+    move_base_go_to(-1,-1)
+    time.sleep(3)
+    move_base_go_to(-1, 3)
+
+if __name__ == '__main__':
     main()
