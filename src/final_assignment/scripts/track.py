@@ -20,6 +20,7 @@ import rospy
 # Ros Messages
 from sensor_msgs.msg import CompressedImage
 from geometry_msgs.msg import Twist, Point, Pose
+from nav_msgs.msg import Odometry
 
 # Action Server 
 import actionlib
@@ -45,6 +46,7 @@ magentaUpper = (150, 255, 255)
 
 position_ = Point()
 pose_ = Pose()
+
 
 ## Odom sub callback
 def clbk_odom(msg):
@@ -76,13 +78,16 @@ class TrackAction(object): # forse ci va il goal
     
     def __init__(self, name):
         self.actionName = name
-        self.act_s = actionlib.SimpleActionServer('trackAction', final_assignment.msg.trackBallAction, track, auto_start=False)
+        self.act_s = actionlib.SimpleActionServer('trackAction', final_assignment.msg.trackBallAction, self.track, auto_start=False)
         self.act_s.start()
         self.vel_pub = rospy.Publisher("cmd_vel",Twist, queue_size=1)
         # posso mettere qui volendo il sub scriber ad odom 
+	self.success = False
+	# To abort the mission if for a certain time it doesn't find the ball
+	self.unfound_ball_counter = 0
 
 
-    def reach_ball(self):
+    def reach_ball(self, ros_image):
         global position_, pose_
         #### direct conversion to CV2 ####
         ## @param image_np is the image decompressed and converted in OpendCv
@@ -93,17 +98,17 @@ class TrackAction(object): # forse ci va il goal
         hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
 
         # Apply the proper color mask
-        if color == "black":
+        if self.color == "black":
             mask = cv2.inRange(hsv, blackLower, blackUpper)
-        elif color == "red":
+        elif self.color == "red":
             mask = cv2.inRange(hsv, redLower, redUpper)
-        elif color == "yellow":
+        elif self.color == "yellow":
             mask = cv2.inRange(hsv, yellowLower, yellowUpper)
-        elif color == "green":
+        elif self.color == "green":
             mask = cv2.inRange(hsv, greenLower, greenUpper)
-        elif color == "blue":
+        elif self.color == "blue":
             mask = cv2.inRange(hsv, blueLower, blueUpper)
-        elif color == "magenta":
+        elif self.color == "magenta":
             mask = cv2.inRange(hsv, magentaLower, magentaUpper)
         
         mask = cv2.erode(mask, None, iterations=2)
@@ -133,33 +138,50 @@ class TrackAction(object): # forse ci va il goal
 
                 # Setting the velocities to be applied to the robot
                 vel = Twist()
-		        # 400 is the center of the image 
-		        vel.angular.z = -0.002*(center[0]-400)
-			    # 150 is the radius that we want see in the image, which represent the desired disatance from the object 
-		        vel.linear.x = -0.01*(radius-150)
-		        self.vel_pub.publish(vel)
+		# 400 is the center of the image 
+		vel.angular.z = -0.002*(center[0]-400)
+		 # 150 is the radius that we want see in the image, which represent the desired disatance from the object 
+		vel.linear.x = -0.01*(radius-150)
+		self.vel_pub.publish(vel)
 
                 if (radius>=148) and abs(center[0]-400)<5: #Condition for considering the ball as reached
 				rospy.loginfo("BallDetection : ball reached!!")
-                self.result.x = position_.x
-                self.result.y = position_.y
+                		self.result.x = position_.x
+                		self.result.y = position_.y
+				self.act_s.set_succeeded(result)
+				success = True
 
         else:
             rospy.loginfo("Ball not found")
+	    vel = Twist()
+	    if self.unfound_ball_counter <= 2:
+                 vel.angular.z = 1.5 
+	    elif self.unfound_ball_counter > 2:
+                 vel.angular.z = -1.5
+	    elif self.unfound_ball_counter == 5:
+		 rospy.loginfo("Robot is unable to find the ball ")
+		 self.act_s.set_preempted()
+                  
+	    self.unfound_ball_counter += 1
+	    
         
     def track(self, goal):
-        color = goal.color
+        self.color = goal.color
         # crate the subscriber to camera1 in order to recive and handle the images
         camera_sub = rospy.Subscriber("camera1/image_raw/compressed", CompressedImage, self.reach_ball, queue_size=1)
+	# Odom sub to get and save the robot position when it reachs the ball 
+        sub_odom = rospy.Subscriber('odom', Odometry, clbk_odom)  
         
-        while not rospy.is_shutdown():
+        while not self.success:
             if self.act_s.is_preempt_requested():
                 rospy.loginfo('Goal was preempted')
                 self.act_s.set_preempted()
-                success = False
+                self.success = False
                 break
-            elif:
-                self.feedback = "Reaching the ball"
+            else:
+                self.feedback = "Reaching the ball..."
+	    
+		
 
 
 
@@ -167,8 +189,8 @@ class TrackAction(object): # forse ci va il goal
 def main():
     try:
         rospy.init_node('Track')
-        # Odom sub to get and save the robot position when it reachs the ball 
-        sub_odom = rospy.Subscriber('map', Odometry, clbk_odom)  # forse perchè è quello su cui si basa l'action server 
+        
+	# forse perche e quello su cui si basa l action server 
 
         track = TrackAction('TrackAction')
 

@@ -32,32 +32,35 @@ import actionlib
 import actionlib.msg
 from final_assignment.msg import trackBallGoal, trackBallAction
 
-# Flag which notify when the user types 'play'
+# Flags and global variables 
+
+## Flag which notify when the user types 'play'
 PLAY = False
-
-# Contains the desired room entered by the user 
+## Contains the desired room entered by the user 
 TARGET_ROOM = "None"
-
-# Flag which notify when the command manager recives a new target room
+## Flag which notify when the command manager recives a new target room
 NEW_TR = False
+## new room detected 
+NEW_ROOM = False
+## Random position generation flag
+RANDOM = True 
+## color of the detected ball 
+COLOR_ROOM = "None"
 
-## init move_base client 
+## init the move_base client 
 client = actionlib.SimpleActionClient('move_base',MoveBaseAction)
 
-# init the environment 
+## init the rooms environment 
 rooms = Rooms()
 
-# new room detected 
-NEW_ROOM = False
-# color of the detected ball 
-COLOR_ROOM = "None"
+
 
 
 
 def UIcallback(data):
     global PLAY, TARGET_ROOM, NEW_TR, rooms , client
     if data.data == "play" or data.data == "Play":
-        rospy.loginfo("Recived a 'play' request...stop every move_base goal!!")
+        rospy.loginfo("[CommandManager] Recived a 'play' request!")
         client.cancel_all_goals()
 
         PLAY = True
@@ -65,13 +68,14 @@ def UIcallback(data):
     elif data.data.startswith("GoTo"):
         NEW_TR = True
         TARGET_ROOM = data.data
-        rospy.loginfo("I recived the desired room: %s", TARGET_ROOM)
+        rospy.loginfo("[CommandManager] I recived the desired room whose color is: %s", TARGET_ROOM)
     else:
 	rospy.logerr("[Syntax Error] the sent msg is wrong")
 
 
 def newRoomDetected(color):
-    rospy.loginfo("[CmdMg] reach a new ball, start track it !")
+    global NEW_ROOM, COLOR_ROOM, client
+    rospy.loginfo("[CommandManager] reach a new ball of color %s, start track it !", color.data)
     NEW_ROOM = True 
     COLOR_ROOM = color.data
     client.cancel_all_goals()
@@ -91,7 +95,7 @@ def move_base_go_to(x, y):
     goal.target_pose.pose.orientation.z = 0
     goal.target_pose.pose.orientation.w = 2.0
 
-    rospy.loginfo("I'm going to position x = %d y = %d", x, y)
+    rospy.loginfo("[CommandManager] I'm going to position x = %d y = %d", x, y)
     
     client.send_goal(goal)
     wait = client.wait_for_result()
@@ -100,7 +104,7 @@ def move_base_go_to(x, y):
         rospy.logerr("Action server not available!")
         rospy.signal_shutdown("Action server not available!")
     else:
-        rospy.loginfo("Goal reached!!!!")
+        rospy.loginfo("[CommandManager] [Move Base] Goal reached!!!!")
 
     
 
@@ -112,7 +116,7 @@ class Normal(smach.State):
     Otherwise after some iterations it goes in SLEEP mode '''
     def __init__(self):
         smach.State.__init__(self, 
-                             outcomes=['goToNormal','goToSleep','goToPlay'])
+                             outcomes=['goToNormal','goToSleep','goToPlay','goToTrack'])
 
 
         self.rate = rospy.Rate(1)  # Loop at 200 Hz
@@ -121,24 +125,27 @@ class Normal(smach.State):
         
     def execute(self,userdata):
         global PLAY, client, NEW_ROOM
-	rospy.loginfo("I m in NORMAL state")
+	rospy.loginfo("***********************************")
+	rospy.loginfo("[CommandManager] I m in NORMAL state")
 	time.sleep(4)
         
         while not rospy.is_shutdown():  
 
             if PLAY == True:
                 return 'goToPlay'
-            if self.counter == 4:
+            elif self.counter == 4:
                 return 'goToSleep'  
-            if NEW_ROOM == True:
+            elif NEW_ROOM == True:
                 return 'goToTrack'
+	    else:
+	        #move_base_go_to(-2, 8)
 
-	    #move_base_go_to(-1, 7)
-
-            # move in a random position using move_base
-            move_base_go_to(random.randint(-5,5), random.randint(-5,5))
-            self.rate.sleep()
-            self.counter += 1
+                # move in a random position using move_base
+	        rospy.loginfo("[CommandManager] generate a new random goal position")
+                move_base_go_to(random.randint(-5,5), random.randint(-5,5))
+                self.rate.sleep()
+		time.sleep(2)
+                self.counter += 1
             
         return 'goToSleep' 
         
@@ -156,11 +163,12 @@ class Sleep(smach.State):
         self.rate = rospy.Rate(200)  # Loop at 200 Hz
 
     def execute(self, userdata): 
-        rospy.loginfo("I m in SLEEP mode")
+	rospy.loginfo("***********************************")
+        rospy.loginfo("[CommandManager] I m in SLEEP mode")
         # comeback to home      
         userdata.rooms_in.go_to_room("Home")
      
-	rospy.loginfo("Home reached")
+	rospy.loginfo("[CommandManager] Home reached")
         # sleep for a random time period
         time.sleep(random.randint(3,6))
 #        self.rate.sleep()
@@ -180,8 +188,8 @@ class Play(smach.State):
 	    
 
     def execute(self, userdata):
-
-        rospy.logdebug("I m in PLAY mode")
+	rospy.loginfo("***********************************")
+        rospy.logdebug("[CommandManager] I m in PLAY mode")
 	global PLAY, rooms 
 
         
@@ -191,7 +199,7 @@ class Play(smach.State):
         position = rooms.get_room_position("Home")
         # go to Home position 
         move_base_go_to(position[0], position[1])	
-	rospy.loginfo("Home Reached!!!!")
+	rospy.loginfo("[CommandManager] Home Reached!!!!")
         
 
         while not rospy.is_shutdown():
@@ -207,7 +215,7 @@ class Play(smach.State):
                         position = rooms.get_room_position(TARGET_ROOM)
                         
                         if not position:
-                            rospy.loginfo("That room has not yet been visited")  
+                            rospy.loginfo("[CommandManager] That room has not yet been visited")  
                         else:
                             move_base_go_to(position[0], position[1])                 
 
@@ -216,16 +224,16 @@ class Play(smach.State):
 
                     # wait a few seconds 
                     time.sleep(1)
-		    rospy.loginfo("homecoming...")
+		    rospy.loginfo("[CommandManager] Homecoming...")
                     # comebak to the person 
                     position = rooms.get_room_position("Home")
                     move_base_go_to(position[0], position[1])
-		    rospy.loginfo("Home Reached!!!!")
+		    rospy.loginfo("[CommandManager] Home Reached!!!!")
 		    NEW_TR = False
                 
 	        # wait a few seconds 
                 time.sleep(3)
-		rospy.loginfo("wait-..........")
+		rospy.loginfo("[CommandManager] wait-..........")
                	self.counter += 1
                 
 	    else:
@@ -242,7 +250,8 @@ class Track(smach.State):
 
     def execute(self, userdata):
         global rooms, NEW_ROOM, COLOR_ROOM
-
+	rospy.loginfo("***********************************")
+	rospy.loginfo("[CommandManager] I'm in TRACK state")
         goal = trackBallGoal()
         goal.color = COLOR_ROOM
 
@@ -296,6 +305,7 @@ def main():
             smach.StateMachine.add('NORMAL', Normal(), 
                                 transitions={'goToSleep':'SLEEP', 
                                                 'goToPlay':'PLAY',
+						'goToTrack' : 'TRACK',
                                                 'goToNormal':'NORMAL'})
             smach.StateMachine.add('SLEEP', Sleep(), 
                                 transitions={'goToSleep':'SLEEP', 
