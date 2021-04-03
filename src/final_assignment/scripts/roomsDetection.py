@@ -28,10 +28,10 @@ class roomDetector():
         # Subsriber to get the compressed images from the camera
         self.camera_sub = rospy.Subscriber("camera1/image_raw/compressed", CompressedImage, self.find_ball, queue_size=1)
         self.newRoomPub = rospy.Publisher('newRoom', String, queue_size=10)
-	self.rate = rospy.Rate(1)
+	    self.rate = rospy.Rate(1)
 
     # returns True when a ball is detected
-    def ball_detect(self, hsv_min, hsv_max, image_np):
+    def find_color(self, hsv_min, hsv_max, image_np):
         blurred = cv2.GaussianBlur(image_np, (11, 11), 0)
         hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
         mask = cv2.inRange(hsv, hsv_min, hsv_max)
@@ -66,7 +66,7 @@ class roomDetector():
         magentaUpper = (150, 255, 255)
 
         # black test
-	ball = self.ball_detect(blackLower, blackUpper, image_np)
+	ball = self.find_color(blackLower, blackUpper, image_np)
         if ball == True:
             rospy.loginfo("black ball detected ")
             if "black" not in self.COLORS_VISITED:
@@ -74,7 +74,7 @@ class roomDetector():
                 self.COLORS_VISITED.append("black")
                 self.newRoomPub.publish("black")
         # red test 
-	ball = self.ball_detect(redLower, redUpper, image_np)
+	ball = self.find_color(redLower, redUpper, image_np)
         if ball == True:
             rospy.loginfo("red ball detected")
             if "red" not in self.COLORS_VISITED:
@@ -82,7 +82,7 @@ class roomDetector():
                 self.COLORS_VISITED.append("red")
                 self.newRoomPub.publish("red")
         # yellow test
-	ball = self.ball_detect(yellowLower, yellowUpper, image_np)
+	ball = self.find_color(yellowLower, yellowUpper, image_np)
         if ball == True:
             rospy.loginfo("yellow ball detected")
             if "yellow" not in self.COLORS_VISITED:
@@ -90,7 +90,7 @@ class roomDetector():
                 self.COLORS_VISITED.append("yellow")
                 self.newRoomPub.publish("yellow")
         # green test
-	ball = self.ball_detect(greenLower, greenUpper, image_np)
+	ball = self.find_color(greenLower, greenUpper, image_np)
         if ball == True:
             rospy.loginfo("green ball detected")
             if "green" not in self.COLORS_VISITED:
@@ -98,7 +98,7 @@ class roomDetector():
                 self.COLORS_VISITED.append("green")
                 self.newRoomPub.publish("green")
         # blue test
-	ball = self.ball_detect(blueLower, blueUpper, image_np)
+	ball = self.find_color(blueLower, blueUpper, image_np)
         if ball == True:
             rospy.loginfo("blue ball detected")
             if "blue" not in self.COLORS_VISITED:
@@ -106,7 +106,7 @@ class roomDetector():
                 self.COLORS_VISITED.append("blue")
                 self.newRoomPub.publish("blue")
         # magenta test
-	ball = self.ball_detect(magentaLower, magentaUpper, image_np)
+	ball = self.find_color(magentaLower, magentaUpper, image_np)
         if ball == True:
             rospy.loginfo("magenta ball detected")
             if "magenta" not in self.COLORS_VISITED:
@@ -120,9 +120,10 @@ def main(args):
     try:
         rd = roomDetector()
         rospy.spin()
-    except KeyboardInterrupt:
-        print ("Shutting down ROS Image feature detector module")
+    except rospy.ROSInterruptException:
+        print ("Shutting down roomDetection module")
     cv2.destroyAllWindows()
 
 if __name__ == '__main__':
     main(sys.argv)
+
