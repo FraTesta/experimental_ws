@@ -52,7 +52,7 @@ pose_ = Pose()
 def clbk_odom(msg):
     global position_
     global pose_
-    global yaw_
+    # global yaw_
 
     # position
     position_ = msg.pose.pose.position
@@ -72,14 +72,16 @@ def clbk_odom(msg):
 
 
 class TrackAction(object): # forse ci va il goal
-    feedback = final_assignment.msg.trackBallFeedback()
-    result = final_assignment.msg.trackBallResult()
-    ## Publisher to move the robot 
+    
+     
     
     def __init__(self, name):
         self.actionName = name
         self.act_s = actionlib.SimpleActionServer('trackAction', final_assignment.msg.trackBallAction, self.track, auto_start=False)
         self.act_s.start()
+	self.feedback = final_assignment.msg.trackBallFeedback()
+    	self.result = final_assignment.msg.trackBallResult()
+	## Publisher to move the robot
         self.vel_pub = rospy.Publisher("cmd_vel",Twist, queue_size=1)
         # posso mettere qui volendo il sub scriber ad odom 
 	self.success = False
@@ -141,27 +143,29 @@ class TrackAction(object): # forse ci va il goal
 		# 400 is the center of the image 
 		vel.angular.z = -0.002*(center[0]-400)
 		 # 150 is the radius that we want see in the image, which represent the desired disatance from the object 
-		vel.linear.x = -0.01*(radius-150)
+		vel.linear.x = -0.007*(radius-150)
 		self.vel_pub.publish(vel)
 
                 if (radius>=148) and abs(center[0]-400)<5: #Condition for considering the ball as reached
-				rospy.loginfo("BallDetection : ball reached!!")
+				rospy.loginfo("[Track] ball reached!!")
                 		self.result.x = position_.x
                 		self.result.y = position_.y
-				self.act_s.set_succeeded(result)
-				success = True
+				self.success = True
 
         else:
-            rospy.loginfo("Ball not found")
+            rospy.loginfo("[Track] Ball not found")
 	    vel = Twist()
-	    if self.unfound_ball_counter <= 2:
-                 vel.angular.z = 1.5 
-	    elif self.unfound_ball_counter > 2:
+	    if self.unfound_ball_counter <= 3:
+		 rospy.loginfo("[Track] Turn Right")
+                 vel.angular.z = 1.5
+		 self.vel_pub.publish(vel) 
+	    elif self.unfound_ball_counter > 3:
+		 rospy.loginfo("[Track] Turn Left")
                  vel.angular.z = -1.5
-	    elif self.unfound_ball_counter == 5:
-		 rospy.loginfo("Robot is unable to find the ball ")
-		 self.act_s.set_preempted()
-                  
+		 self.vel_pub.publish(vel)
+	    elif self.unfound_ball_counter == 9:
+		 rospy.loginfo("[Track] Robot is unable to find the ball ")
+		 self.act_s.set_preempted()   
 	    self.unfound_ball_counter += 1
 	    
         
@@ -176,10 +180,14 @@ class TrackAction(object): # forse ci va il goal
             if self.act_s.is_preempt_requested():
                 rospy.loginfo('Goal was preempted')
                 self.act_s.set_preempted()
-                self.success = False
                 break
             else:
-                self.feedback = "Reaching the ball..."
+                self.feedback.state = "Reaching the ball..."
+		self.act_s.publish_feedback(self.feedback)
+	rospy.loginfo("Track action server closed")
+	self.act_s.set_succeeded(self.result)
+	# Unregister from the camera topic
+	camera_sub.unregister()
 	    
 		
 
