@@ -104,8 +104,15 @@ def move_base_go_to(x, y):
         rospy.logerr("Action server not available!")
         rospy.signal_shutdown("Action server not available!")
     else:
-        rospy.loginfo("[CommandManager] [Move Base] Action server closed. wait")
-	time.sleep(3)
+        rospy.loginfo("[CommandManager] [Move Base] Action server closed. wait...")
+	time.sleep(4)
+
+def generate_rand_pos():
+    while True:
+         tempX = random.randint(-5,5)
+         tempY = random.randint(-5,5)
+	 if not (tempX > 0 and tempY > 3):
+                return [tempX, tempY]
 
     
 
@@ -145,7 +152,9 @@ class Normal(smach.State):
 
                 # move in a random position using move_base
 	        rospy.loginfo("[CommandManager] generate a new random goal position")
-                move_base_go_to(random.randint(-5,5), random.randint(-5,5))
+                #move_base_go_to(random.randint(-5,5), random.randint(-5,5))
+                pos = generate_rand_pos()
+		move_base_go_to(pos[0], pos[1])
                 self.rate.sleep()
 		
                 self.counter += 1

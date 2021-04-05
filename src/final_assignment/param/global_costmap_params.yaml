@@ -10,5 +10,5 @@ global_costmap:
    origin_x: -15.0 # -20
    origin_y: -15.0 # -20
    inflation_layer:
-        inflation_radius: 2.0 # 1.0
+        inflation_radius: 3.0 # 1.0
         cost_scaling_factor: 20

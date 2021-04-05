@@ -12,9 +12,9 @@
       <param name="kernelSize" value="1"/> # The kernel in which to look for a correspondence
       <param name="lstep" value="0.05"/>
       <param name="astep" value="0.05"/>
-      <param name="iterations" value="5"/> # The number of iterations of the scanmatcher
+      <param name="iterations" value="8"/> # The number of iterations of the scanmatcher 5 (incrementarlo per avere match più accurati)
       <param name="lsigma" value="0.1"/> # The sigma of a beam used for likelihood computation    0.075
-      <param name="ogain" value="1.0"/> # Gain to be used while evaluating the likelihood, for smoothing the resampling effects 3
+      <param name="ogain" value="5.0"/> # Gain to be used while evaluating the likelihood, for smoothing the resampling effects 3
       <param name="lskip" value="0"/>
       <param name="srr" value="0.1"/>
       <param name="srt" value="0.2"/>
