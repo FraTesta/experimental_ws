@@ -287,6 +287,7 @@ class Track(smach.State):
             rospy.loginfo("[CommandManager] la posizione attuale e':")
             rospy.loginfo(result.x)
             rospy.loginfo(result.y)
+	    rooms.add_new_room(COLOR_ROOM, result.x, result.y)
 	    ###### add the new room to the list ######
             NEW_ROOM = False
             return "goToNormal"

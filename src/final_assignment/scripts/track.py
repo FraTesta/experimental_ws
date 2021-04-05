@@ -159,12 +159,13 @@ class TrackAction(object): # forse ci va il goal
 		 rospy.loginfo("[Track] Turn Right")
                  vel.angular.z = 1.5
 		 self.vel_pub.publish(vel) 
-	    elif self.unfound_ball_counter > 3:
+	    elif self.unfound_ball_counter < 9:
 		 rospy.loginfo("[Track] Turn Left")
                  vel.angular.z = -1.5
 		 self.vel_pub.publish(vel)
 	    elif self.unfound_ball_counter == 9:
 		 rospy.loginfo("[Track] Robot is unable to find the ball ")
+		 self.unfound_ball_counter = 0
 		 self.act_s.set_preempted()   
 	    self.unfound_ball_counter += 1
 	    
@@ -186,6 +187,7 @@ class TrackAction(object): # forse ci va il goal
 		self.act_s.publish_feedback(self.feedback)
 	rospy.loginfo("Track action server closed")
 	self.act_s.set_succeeded(self.result)
+	self.success = False
 	# Unregister from the camera topic
 	camera_sub.unregister()
 	    

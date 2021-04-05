@@ -41,6 +41,7 @@ class Rooms():
                 room['detected'] = True
                 room['x'] = x
                 room['y'] = y
+		print("[Rooms] Discovered and added correctly:", room['name'] )
 
     def go_to_position(self, x, y):
         goal = MoveBaseGoal()
