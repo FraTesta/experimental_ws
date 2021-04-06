@@ -155,6 +155,7 @@ class Normal(smach.State):
                 #move_base_go_to(random.randint(-5,5), random.randint(-5,5))
                 pos = generate_rand_pos()
 		move_base_go_to(pos[0], pos[1])
+		rospy.loginfo("[CommandManager] position:( %d,%d) reached !!!")
                 self.rate.sleep()
 		
                 self.counter += 1

@@ -87,6 +87,8 @@ class TrackAction(object): # forse ci va il goal
 	self.success = False
 	# To abort the mission if for a certain time it doesn't find the ball
 	self.unfound_ball_counter = 0
+	# abort mission since the robot is not able to detetct the ball again
+	self.abort = False
 
 
     def reach_ball(self, ros_image):
@@ -155,18 +157,18 @@ class TrackAction(object): # forse ci va il goal
         else:
             rospy.loginfo("[Track] Ball not found")
 	    vel = Twist()
-	    if self.unfound_ball_counter <= 3:
-		 rospy.loginfo("[Track] Turn Right")
+	    if self.unfound_ball_counter <= 6:
+		 rospy.loginfo("[Track] Turn Right to find the ball")
                  vel.angular.z = 1.5
 		 self.vel_pub.publish(vel) 
-	    elif self.unfound_ball_counter < 9:
-		 rospy.loginfo("[Track] Turn Left")
+	    elif self.unfound_ball_counter < 12:
+		 rospy.loginfo("[Track] Turn Left to find the ball")
                  vel.angular.z = -1.5
 		 self.vel_pub.publish(vel)
-	    elif self.unfound_ball_counter == 9:
+	    elif self.unfound_ball_counter == 12:
 		 rospy.loginfo("[Track] Robot is unable to find the ball ")
 		 self.unfound_ball_counter = 0
-		 self.act_s.set_preempted()   
+		 self.abort = True   
 	    self.unfound_ball_counter += 1
 	    
         
@@ -182,19 +184,23 @@ class TrackAction(object): # forse ci va il goal
                 rospy.loginfo('Goal was preempted')
                 self.act_s.set_preempted()
                 break
-            else:
+            elif self.abort == True:
+		break
+	    else:
                 self.feedback.state = "Reaching the ball..."
 		self.act_s.publish_feedback(self.feedback)
-	rospy.loginfo("Track action server closed")
-	self.act_s.set_succeeded(self.result)
-	self.success = False
 	# Unregister from the camera topic
 	camera_sub.unregister()
+	if not self.abort == True:
+	     self.act_s.set_succeeded(self.result)
+	     self.success = False
+	else:
+	     self.abort == False
+	     self.act_s.set_preempted()
+	rospy.loginfo("[Track] action server closed")
+	
 	    
 		
-
-
-
 
 def main():
     try:

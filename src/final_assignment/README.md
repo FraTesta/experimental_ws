@@ -43,6 +43,9 @@ E perchè aggiornava troppo spesso la mappa e con uno score threshold troppo bas
 
 Si può inoltre ridurre il numero di particles per velocizzare il tutto. 
 
+## Problems
+When it reaches two balls it start to track only the second one. We should implement a sort of buffer in the callback of the roomDetection but we also save the position of the first ball when it was detected, in order to go back to such position when the robot will reach the second one or vice versa 
+
 
 
  
