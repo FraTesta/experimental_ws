@@ -75,14 +75,14 @@ class roomDetector():
             rospy.loginfo("[roomsDetection] black ball detected ")
             if "black" not in self.COLORS_VISITED:               
                 self.COLORS_VISITED.append("black")
-		rospy.loginfo("New room detected!!!")
+		rospy.loginfo("[roomsDetection] New room detected!!!")
                 self.newRoomPub.publish("black")
         # red test 
 	self.ballDetected = self.find_color(redLower, redUpper, image_np)
         if self.ballDetected == True:
             rospy.loginfo("[roomsDetection] red ball detected")
             if "red" not in self.COLORS_VISITED:
-                rospy.loginfo("New room detected!!!")
+                rospy.loginfo("[roomsDetection] detected!!!")
                 self.COLORS_VISITED.append("red")
                 self.newRoomPub.publish("red")
         # yellow test

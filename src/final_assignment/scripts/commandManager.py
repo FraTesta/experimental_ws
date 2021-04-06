@@ -75,7 +75,7 @@ def UIcallback(data):
 
 def newRoomDetected(color):
     global NEW_ROOM, COLOR_ROOM, client
-    rospy.loginfo("[CommandManager] reach a new ball of color %s, start track it !", color.data)
+    rospy.loginfo("[CommandManager] reach a new ball of color %s", color.data)
     NEW_ROOM = True 
     COLOR_ROOM = color.data
     client.cancel_all_goals()
@@ -104,7 +104,11 @@ def move_base_go_to(x, y):
         rospy.logerr("Action server not available!")
         rospy.signal_shutdown("Action server not available!")
     else:
-        rospy.loginfo("[CommandManager] [Move Base] Action server closed. wait...")
+	name = rooms.get_name_position(x, y)
+	if not name:
+              rospy.loginfo("[CommandManager] Position (%d,%d) reached. wait...", x, y)
+	else:
+              rospy.loginfo("[CommandManager] %s reached. wait...", name) 
 	time.sleep(4)
 
 def generate_rand_pos():
@@ -155,7 +159,7 @@ class Normal(smach.State):
                 #move_base_go_to(random.randint(-5,5), random.randint(-5,5))
                 pos = generate_rand_pos()
 		move_base_go_to(pos[0], pos[1])
-		rospy.loginfo("[CommandManager] position:( %d,%d) reached !!!")
+		#rospy.loginfo("[CommandManager] position:( %d,%d) reached !!!", pos[0], pos[1])
                 self.rate.sleep()
 		
                 self.counter += 1
@@ -215,7 +219,7 @@ class Play(smach.State):
         position = rooms.get_room_position("Home")
         # go to Home position 
         move_base_go_to(position[0], position[1])	
-	rospy.loginfo("[CommandManager] Home Reached!!!!")
+	#rospy.loginfo("[CommandManager] Home Reached!!!!")
         
 
         while not rospy.is_shutdown():
@@ -244,12 +248,12 @@ class Play(smach.State):
                     # comebak to the person 
                     position = rooms.get_room_position("Home")
                     move_base_go_to(position[0], position[1])
-		    rospy.loginfo("[CommandManager] Home Reached!!!!")
+		    #rospy.loginfo("[CommandManager] Home Reached!!!!")
 		    NEW_TR = False
                 
 	        # wait a few seconds 
                 time.sleep(3)
-		rospy.loginfo("[CommandManager] wait-..........")
+		rospy.loginfo("[CommandManager] Await location-..........")
                	self.counter += 1
                 
 	    else:
@@ -283,12 +287,16 @@ class Track(smach.State):
             NEW_ROOM = False
             return "goToNormal"
         else:
-            rospy.loginfo("[CommandManager] New Room reached!")
+            
             result = trackClient.get_result()
-            rospy.loginfo("[CommandManager] la posizione attuale e':")
-            rospy.loginfo(result.x)
-            rospy.loginfo(result.y)
-	    rooms.add_new_room(COLOR_ROOM, result.x, result.y)
+	    if result.x != 0 and result.y != 0:
+	          rospy.loginfo("[CommandManager] New Room reached!")
+                  rospy.loginfo("[CommandManager] la posizione attuale e':")
+                  rospy.loginfo(result.x)
+                  rospy.loginfo(result.y)
+	          rooms.add_new_room(COLOR_ROOM, result.x, result.y)
+	    else:
+		 rospy.loginfo("[CommandManager] The robot is not able to find the previously detected ball")
 	    ###### add the new room to the list ######
             NEW_ROOM = False
             return "goToNormal"
