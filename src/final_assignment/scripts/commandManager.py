@@ -74,11 +74,13 @@ def UIcallback(data):
 
 
 def newRoomDetected(color):
-    global NEW_ROOM, COLOR_ROOM, client
-    rospy.loginfo("[CommandManager] reach a new ball of color %s", color.data)
-    NEW_ROOM = True 
-    COLOR_ROOM = color.data
-    client.cancel_all_goals()
+    global NEW_ROOM, COLOR_ROOM, client, rooms
+        
+    if not rooms.check_visted(color.data):
+	rospy.loginfo("[CommandManager] reach a new ball of color %s", color.data)
+	NEW_ROOM = True 
+	COLOR_ROOM = color.data
+    	client.cancel_all_goals()
 
 
 def move_base_go_to(x, y):
@@ -277,7 +279,7 @@ class Track(smach.State):
 
         trackClient = actionlib.SimpleActionClient('trackAction',trackBallAction)
         trackClient.wait_for_server()
-        rospy.loginfo("Track client creato")
+        rospy.loginfo("[CommandManager] Track client generated")
 
         trackClient.send_goal(goal)
         wait = trackClient.wait_for_result()

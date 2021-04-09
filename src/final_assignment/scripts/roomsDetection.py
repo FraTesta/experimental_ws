@@ -24,7 +24,9 @@ class roomDetector():
 	'''Initialize ros publisher, ros subscriber'''
         rospy.init_node('roomsDetection', anonymous=True)
 
-        self.COLORS_VISITED = []
+        #self.COLORS_VISITED = []
+	## Contains the previous color detected
+	self.prevColor = 'None'
         # Subsriber to get the compressed images from the camera
         self.camera_sub = rospy.Subscriber("camera1/image_raw/compressed", CompressedImage, self.find_ball, queue_size=1)
         self.newRoomPub = rospy.Publisher('newRoom', String, queue_size=10)
@@ -73,50 +75,50 @@ class roomDetector():
 	self.ballDetected = self.find_color(blackLower, blackUpper, image_np)
         if self.ballDetected == True:
             rospy.loginfo("[roomsDetection] black ball detected ")
-            if "black" not in self.COLORS_VISITED:               
-                self.COLORS_VISITED.append("black")
+            if "black" != self.prevColor:               
+                self.prevColor = "black"
 		rospy.loginfo("[roomsDetection] New room detected!!!")
                 self.newRoomPub.publish("black")
         # red test 
 	self.ballDetected = self.find_color(redLower, redUpper, image_np)
         if self.ballDetected == True:
             rospy.loginfo("[roomsDetection] red ball detected")
-            if "red" not in self.COLORS_VISITED:
+            if "red" != self.prevColor:
                 rospy.loginfo("[roomsDetection] detected!!!")
-                self.COLORS_VISITED.append("red")
+                self.prevColor = "red"
                 self.newRoomPub.publish("red")
         # yellow test
 	self.ballDetected = self.find_color(yellowLower, yellowUpper, image_np)
         if self.ballDetected == True:
             rospy.loginfo("[roomsDetection] yellow ball detected")
-            if "yellow" not in self.COLORS_VISITED:
+            if "yellow" != self.prevColor:
                 rospy.loginfo("New room detected!!!")
-                self.COLORS_VISITED.append("yellow")
+                self.prevColor = "yellow"
                 self.newRoomPub.publish("yellow")
         # green test
 	self.ballDetected = self.find_color(greenLower, greenUpper, image_np)
         if self.ballDetected == True:
             rospy.loginfo("[roomsDetection] green ball detected")
-            if "green" not in self.COLORS_VISITED:
+            if "green" != self.prevColor:
                 rospy.loginfo("New room detected!!!")
-                self.COLORS_VISITED.append("green")
+                self.prevColor = "green"
                 self.newRoomPub.publish("green")
         # blue test
 	self.ballDetected = self.find_color(blueLower, blueUpper, image_np)
         if self.ballDetected == True:
             rospy.loginfo("[roomsDetection] blue ball detected")
-            if "blue" not in self.COLORS_VISITED:
+            if "blue" != self.prevColor:
                 
-                self.COLORS_VISITED.append("blue")
+                self.prevColor = "blue"
 		rospy.loginfo("New room detected!!!")
                 self.newRoomPub.publish("blue")
         # magenta test
 	self.ballDetected = self.find_color(magentaLower, magentaUpper, image_np)
         if self.ballDetected == True:
             rospy.loginfo("[roomsDetection] magenta ball detected")
-            if "magenta" not in self.COLORS_VISITED:
+            if "magenta" != self.prevColor:
                 rospy.loginfo("New room detected!!!")
-                self.COLORS_VISITED.append("magenta")
+                self.prevColor = "magenta"
                 self.newRoomPub.publish("magenta")
 	#cv2.imshow('window', image_np)
 	#self.rate.sleep()

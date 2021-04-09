@@ -16,7 +16,7 @@
 	<arg name="use_rviz" default="false" />
 
 	<!-- node to notify new rooms -->
-	<node name="roomsDetection" pkg="final_assignment" type="roomsDetection.py" output="screen" /> 
+	<node name="roomsDetection" pkg="final_assignment" type="roomsDetection.py" /> 
 
 	<node name="commandManager" pkg="final_assignment" type="commandManager.py" output="screen" /> 
 	<!-- node to track a new detected rooms -->

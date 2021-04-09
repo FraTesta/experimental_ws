@@ -181,22 +181,28 @@ class TrackAction(object): # forse ci va il goal
         
         while not self.success:
             if self.act_s.is_preempt_requested():
-                rospy.loginfo('Goal was preempted')
+                rospy.loginfo('[Track] Goal was preempted')
                 self.act_s.set_preempted()
                 break
             elif self.abort == True:
+		rospy.loginfo('[Track] Mission aborted')
 		break
 	    else:
                 self.feedback.state = "Reaching the ball..."
 		self.act_s.publish_feedback(self.feedback)
 	# Unregister from the camera topic
 	camera_sub.unregister()
+	sub_odom.unregister()
 	if not self.abort == True:
-	     self.act_s.set_succeeded(self.result)
 	     self.success = False
+	     self.abort == False
+	     self.act_s.set_succeeded(self.result)
+	     
 	else:
 	     self.abort == False
+	     self.success = False
 	     self.act_s.set_preempted()
+	     
 	rospy.loginfo("[Track] action server closed")
 	
 	    
