@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import actionlib
 import rospy 
+import random
 
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 
@@ -29,15 +30,11 @@ class Rooms():
 		     return True
         return False
     ## Check if the room contained in msg is already visited, if so then the robot will move to that position 
-    def get_room_position(self, target_room):
-        
-        
+    def get_room_position(self, target_room):                
         for room in self.ROOMS:
             if target_room == room['name']:
                 if room['detected'] == True :
                     
-
-
                     return [room["x"], room["y"]]
         
         return False
@@ -56,6 +53,39 @@ class Rooms():
             if (x == room['x'] and y == room['y']):
                 return room['name']
 	return False
+
+    def generate_rand_pos(self):
+        while True:
+            tempX = random.randint(-5,5)
+            tempY = random.randint(-5,5)
+            if not (tempX > 0 and tempY > 3):
+                    return [tempX, tempY]
+
+    def mrange(self, a):
+        minA = a - 3
+        r = []
+        for i in range(0,7):
+            r.append(minA + i)
+        return r
+
+    def explore(self):
+        while True:
+            ok = True
+            pos = self.generate_rand_pos()
+            for room in self.ROOMS:
+                if room['detected'] == True:
+                    rx = self.mrange(room['x'])
+                    ry = self.mrange(room['y'])
+                    if (pos[0] in rx and pos[1] in ry):
+                        ok = False
+            if ok:
+                return pos 
+        
+
+        
+
+
+
 
 
 
