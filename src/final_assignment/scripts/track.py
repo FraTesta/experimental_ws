@@ -194,15 +194,13 @@ class TrackAction(object): # forse ci va il goal
 	camera_sub.unregister()
 	sub_odom.unregister()
 	if not self.abort == True:
-	     self.success = False
-	     self.abort == False
 	     self.act_s.set_succeeded(self.result)
 	     
 	else:
-	     self.abort == False
-	     self.success = False
+
 	     self.act_s.set_preempted()
-	     
+	self.abort = False
+	self.success = False
 	rospy.loginfo("[Track] action server closed")
 	
 	    

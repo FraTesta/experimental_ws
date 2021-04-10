@@ -68,7 +68,7 @@ def UIcallback(data):
     elif data.data.startswith("GoTo"):
         NEW_TR = True
         TARGET_ROOM = data.data
-        rospy.loginfo("[CommandManager] I recived the desired room whose color is: %s", TARGET_ROOM)
+        rospy.loginfo("[CommandManager] I recived the desired room whose name is: ", TARGET_ROOM)
     else:
 	rospy.logerr("[Syntax Error] the sent msg is wrong")
 
