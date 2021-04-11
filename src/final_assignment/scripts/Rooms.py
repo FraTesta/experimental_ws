@@ -46,13 +46,18 @@ class Rooms():
                 room['x'] = int(x)
                 room['y'] = int(y)
 		name = self.to_string(room['name'])
-		print("[Rooms] %s Discovered and added correctly: ", name )
+		print("[Rooms] Discovered and added correctly: " + name )
 
     def get_name_position(self, x, y):
         for room in self.ROOMS:
             if (x == room['x'] and y == room['y']):
                 return room['name']
 	return False
+
+    def get_color_room(self, name):
+	for room in self.ROOMS:
+	    if name == room['name']:
+		return room['color']
 
     def generate_rand_pos(self):
         while True:

@@ -187,12 +187,13 @@
     <axis xyz="0 0 1"/>
     <limit effort="10.0" lower="-3.14159265359" upper="3.14159265359" velocity="5.0"/>
   </joint>
+  <!--
   <gazebo reference="front_right_steer_link">
     <material>Gazebo/WoodFloor</material>
   </gazebo>
   <gazebo reference="front_right_wheel_link">
     <material>Gazebo/WoodFloor</material>
-  </gazebo>
+  </gazebo> -->
   <link name="front_left_steer_link">
     <inertial>
       <origin rpy="0 0 0" xyz="0 0 0.4"/>
@@ -220,12 +221,13 @@
     <axis xyz="0 0 1"/>
     <limit effort="10.0" lower="-3.14159265359" upper="3.14159265359" velocity="5.0"/>
   </joint>
+  <!--
   <gazebo reference="front_left_steer_link">
     <material>Gazebo/WoodFloor</material>
   </gazebo>
   <gazebo reference="front_left_wheel_link">
     <material>Gazebo/WoodFloor</material>
-  </gazebo>
+  </gazebo>-->
   <link name="rear_right_steer_link">
     <inertial>
       <origin rpy="0 0 0" xyz="0 0 0.4"/>
@@ -253,9 +255,10 @@
     <axis xyz="0 0 1"/>
     <limit effort="10.0" lower="-3.14159265359" upper="3.14159265359" velocity="5.0"/>
   </joint>
+  <!--
   <gazebo reference="rear_right_steer_link">
     <material>Gazebo/WoodFloor</material>
-  </gazebo>
+  </gazebo>-->
   <link name="rear_left_steer_link">
     <inertial>
       <origin rpy="0 0 0" xyz="0 0 0.4"/>
@@ -283,9 +286,10 @@
     <axis xyz="0 0 1"/>
     <limit effort="10.0" lower="-3.14159265359" upper="3.14159265359" velocity="5.0"/>
   </joint>
+  <!--
   <gazebo reference="rear_left_steer_link">
     <material>Gazebo/WoodFloor</material>
-  </gazebo>
+  </gazebo>  -->
   <!--
   <front_wheel name="rear_right" parent="base" radius="${wheel_radius}" thickness="${thickness}" 
       length="${length}" width="${width}" axel_offset="${axel_offset}" right_left="1" steer_height="${wheel_radius+steer_offset}">
@@ -885,12 +889,13 @@
     <parent link="armleft3_link"/>
   </joint>
   <!-- Colour -->
+<!--
   <gazebo reference="base_link">
     <material>Gazebo/WoodFloor</material>
   </gazebo>
   <gazebo reference="back_link">
     <material>Gazebo/WoodFloor</material>
-  </gazebo>
+  </gazebo>-->
   <gazebo reference="panelfront_link">
     <material>Gazebo/White</material>
   </gazebo>

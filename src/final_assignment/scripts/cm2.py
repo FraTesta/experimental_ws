@@ -113,14 +113,6 @@ def move_base_go_to(x, y):
               rospy.loginfo("[CommandManager] %s reached. wait...", name) 
 	time.sleep(4)
 
-def generate_rand_pos():
-    while True:
-         tempX = random.randint(-5,5)
-         tempY = random.randint(-5,5)
-	 if not (tempX > 0 and tempY > 3):
-                return [tempX, tempY]
-
-    
 
  
 
@@ -280,8 +272,7 @@ class Track(smach.State):
 
         trackClient = actionlib.SimpleActionClient('trackAction',trackBallAction)
         trackClient.wait_for_server()
-        rospy.loginfo("[CommandManager] Track client generated")
-
+	NEW_ROOM = False
         trackClient.send_goal(goal)
         wait = trackClient.wait_for_result()
         if not wait:
@@ -295,20 +286,19 @@ class Track(smach.State):
         # Since if the result is (0,0) means that no ball has been reached
 	    if result.x != 0 and result.y != 0:
 	          rospy.loginfo("[CommandManager] New Room reached!")
-                  rospy.loginfo("[CommandManager] la posizione attuale e':")
-                  rospy.loginfo(result.x)
-                  rospy.loginfo(result.y)
 	          rooms.add_new_room(COLOR_ROOM, result.x, result.y)
                   if FIND_MODE == True:
-                  	if COLOR_ROOM == NEW_TR:
+                  	if COLOR_ROOM == rooms.get_color_room(TARGET_ROOM):
 		      	    FIND_MODE = False
-                            'goToPlay'		      
+			    rospy.loginfo("Desired room discovered!!!")
+                            return 'goToPlay'		      
                   	else:
-                            'goToFind'
+			    rospy.loginfo("The room just found isn't the desired one")
+                            return 'goToFind'
 	    else:
 		 rospy.loginfo("[CommandManager] The robot is not able to find the previously detected ball")
 	    ###### add the new room to the list ######
-            NEW_ROOM = False
+            
             return "goToNormal"
 
 class Find(smach.State):

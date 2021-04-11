@@ -120,9 +120,9 @@ class roomDetector():
                 rospy.loginfo("New room detected!!!")
                 self.prevColor = "magenta"
                 self.newRoomPub.publish("magenta")
-	#cv2.imshow('window', image_np)
+	cv2.imshow('window', image_np)
 	#self.rate.sleep()
-	#cv2.waitKey(2)
+	cv2.waitKey(2)
 
 def main(args):
     
