@@ -12,7 +12,11 @@ roslaunch final_assignment robotModel.launch use_rviz:=true
 
 ## Track
 Aggiunto controllo per quando viene attivato l'action ma non vede più la palla, allora il robot si gira a destra e poi a sinistra per 9 iteraioni dopo di che 
-abortisce il goal 
+abortisce il goal.
+
+I have decided to keep the _roomsDetection_ and the _track_ scripts separate for the following reasons: 
+- mainly I wanted to make the track a server action in order to keep track of the status of the tracking and haveing the possibility to abort the mission if necessary. 
+-  
 
 ## Move base sattings
 
