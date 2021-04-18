@@ -11,16 +11,23 @@
 	<!-- Navigation algo: move base -->
 	<include file="$(find final_assignment)/launch/move_base.launch"></include>
 
-	<!-- node to notify new rooms -->
-	
-	 <node name="cmd_smach" pkg="final_assignment" type="cmd_smach.py" output="screen" /> 
-	  
-
+	<arg name="roomsDetection_info" default="false" />
+	<arg name="track_info" default="false" />	
 	<arg name="use_rviz" default="false" />
 
-  <group if="$(arg use_rviz)">
-       <node name="rviz" pkg="rviz" type="rviz" args="-d $(find final_assignment)/config/sim.rviz" />
-  </group>
+	<!-- node to notify new rooms -->
+	<node name="roomDetector" pkg="final_assignment" type="roomDetector.py" /> 
+
+	<node name="commandManager" pkg="final_assignment" type="cm2.py" output="screen" /> 
+	<!-- node to track a new detected rooms -->
+	<node name="track" pkg="final_assignment" type="track.py" output="screen" />
+ 
+
+
+
+  	<group if="$(arg use_rviz)">
+             <node name="rviz" pkg="rviz" type="rviz" args="-d $(find final_assignment)/config/sim.rviz" />
+  	</group>
 	
 
 
