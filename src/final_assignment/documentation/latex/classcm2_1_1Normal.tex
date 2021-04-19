@@ -1,0 +1,86 @@
+\hypertarget{classcm2_1_1Normal}{}\section{cm2.\+Normal Class Reference}
+\label{classcm2_1_1Normal}\index{cm2.\+Normal@{cm2.\+Normal}}
+
+
+Inheritance diagram for cm2.\+Normal\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=156pt]{classcm2_1_1Normal__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for cm2.\+Normal\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=156pt]{classcm2_1_1Normal__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classcm2_1_1Normal_a71a03bebb254240c81040d933e74c36b}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self)
+\item 
+def \hyperlink{classcm2_1_1Normal_a4a1a55b9944acbc6ab98718e5d24da2b}{execute} (self, userdata)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcm2_1_1Normal_a9a5e8cb0a56188898c1641699018750f}{rate}
+\item 
+\hyperlink{classcm2_1_1Normal_a1029f5a43370b2db5422edc5bc9b5cfa}{counter}
+\begin{DoxyCompactList}\small\item\em Counter variable to check the number of iteration of the N\+O\+R\+M\+AL state in order to move to S\+L\+E\+EP state after a certain number. \end{DoxyCompactList}\item 
+\hyperlink{classcm2_1_1Normal_a81756ffb8999d57e2ff5f401a0fb4553}{pos} = rooms.\+generate\+\_\+rand\+\_\+pos()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyVerb}This class defines the NORMAL state of the FSM. In particular It sends random position to the move_base action server.
+It checks whether a ball is detected in order to switch in the TRACK state and check if the user wants to switch in the PLAY state as well.
+Otherwise after some iterations it goes in SLEEP mode 
+\end{DoxyVerb}
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{cm2\+::\+Normal@{cm2\+::\+Normal}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!cm2\+::\+Normal@{cm2\+::\+Normal}}
+\subsubsection[{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+(self)}{__init__(self)}}]{\setlength{\rightskip}{0pt plus 5cm}def cm2.\+Normal.\+\_\+\+\_\+init\+\_\+\+\_\+ (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\hypertarget{classcm2_1_1Normal_a71a03bebb254240c81040d933e74c36b}{}\label{classcm2_1_1Normal_a71a03bebb254240c81040d933e74c36b}
+
+
+\subsection{Member Function Documentation}
+\index{cm2\+::\+Normal@{cm2\+::\+Normal}!execute@{execute}}
+\index{execute@{execute}!cm2\+::\+Normal@{cm2\+::\+Normal}}
+\subsubsection[{\texorpdfstring{execute(self, userdata)}{execute(self, userdata)}}]{\setlength{\rightskip}{0pt plus 5cm}def cm2.\+Normal.\+execute (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{userdata}
+\end{DoxyParamCaption}
+)}\hypertarget{classcm2_1_1Normal_a4a1a55b9944acbc6ab98718e5d24da2b}{}\label{classcm2_1_1Normal_a4a1a55b9944acbc6ab98718e5d24da2b}
+
+
+\subsection{Member Data Documentation}
+\index{cm2\+::\+Normal@{cm2\+::\+Normal}!counter@{counter}}
+\index{counter@{counter}!cm2\+::\+Normal@{cm2\+::\+Normal}}
+\subsubsection[{\texorpdfstring{counter}{counter}}]{\setlength{\rightskip}{0pt plus 5cm}cm2.\+Normal.\+counter\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcm2_1_1Normal_a1029f5a43370b2db5422edc5bc9b5cfa}{}\label{classcm2_1_1Normal_a1029f5a43370b2db5422edc5bc9b5cfa}
+
+
+Counter variable to check the number of iteration of the N\+O\+R\+M\+AL state in order to move to S\+L\+E\+EP state after a certain number. 
+
+\begin{DoxyVerb}Method inherited from the smach.State class \end{DoxyVerb}
+ \index{cm2\+::\+Normal@{cm2\+::\+Normal}!pos@{pos}}
+\index{pos@{pos}!cm2\+::\+Normal@{cm2\+::\+Normal}}
+\subsubsection[{\texorpdfstring{pos}{pos}}]{\setlength{\rightskip}{0pt plus 5cm}cm2.\+Normal.\+pos = rooms.\+generate\+\_\+rand\+\_\+pos()\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcm2_1_1Normal_a81756ffb8999d57e2ff5f401a0fb4553}{}\label{classcm2_1_1Normal_a81756ffb8999d57e2ff5f401a0fb4553}
+\index{cm2\+::\+Normal@{cm2\+::\+Normal}!rate@{rate}}
+\index{rate@{rate}!cm2\+::\+Normal@{cm2\+::\+Normal}}
+\subsubsection[{\texorpdfstring{rate}{rate}}]{\setlength{\rightskip}{0pt plus 5cm}cm2.\+Normal.\+rate\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcm2_1_1Normal_a9a5e8cb0a56188898c1641699018750f}{}\label{classcm2_1_1Normal_a9a5e8cb0a56188898c1641699018750f}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/experimental\+\_\+ws/src/final\+\_\+assignment/scripts/\hyperlink{cm2_8py}{cm2.\+py}\end{DoxyCompactItemize}

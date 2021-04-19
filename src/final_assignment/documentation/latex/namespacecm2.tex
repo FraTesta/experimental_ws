@@ -1,0 +1,174 @@
+\hypertarget{namespacecm2}{}\section{cm2 Namespace Reference}
+\label{namespacecm2}\index{cm2@{cm2}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classcm2_1_1Find}{Find}
+\item 
+class \hyperlink{classcm2_1_1Normal}{Normal}
+\item 
+class \hyperlink{classcm2_1_1Play}{Play}
+\item 
+class \hyperlink{classcm2_1_1Sleep}{Sleep}
+\item 
+class \hyperlink{classcm2_1_1Track}{Track}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespacecm2_a672f12144cc02c256e891ea5924ffffa}{U\+Icallback} (data)
+\begin{DoxyCompactList}\small\item\em Callback mathod of the U\+Isubscriber which handels the commands sent by the user. \end{DoxyCompactList}\item 
+def \hyperlink{namespacecm2_a4cf77024983dae698861eb6ff2580f39}{new\+Room\+Detected} (color)
+\begin{DoxyCompactList}\small\item\em Callback function of the new\+Room\+Sub subscriber which recives the color of the new detected room. \end{DoxyCompactList}\item 
+def \hyperlink{namespacecm2_a7249bf198e534c88f2def70c16789cc7}{move\+\_\+base\+\_\+go\+\_\+to} (x, y)
+\begin{DoxyCompactList}\small\item\em Method which prepares and send the goal to the move\+\_\+base action server. \end{DoxyCompactList}\item 
+def \hyperlink{namespacecm2_a4f33e17e50be167d83eb74879ab4cf76}{main} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{namespacecm2_a9d9c51a8b292c088a990a5b74f0fc572}{P\+L\+AY} = False
+\begin{DoxyCompactList}\small\item\em Flag which notify when the user types \textquotesingle{}play\textquotesingle{}. \end{DoxyCompactList}\item 
+string \hyperlink{namespacecm2_aa4c9405b40d178ce2b7f2f4e3a5eb359}{T\+A\+R\+G\+E\+T\+\_\+\+R\+O\+OM} = \char`\"{}None\char`\"{}
+\begin{DoxyCompactList}\small\item\em Contains the desired room entered by the user. \end{DoxyCompactList}\item 
+bool \hyperlink{namespacecm2_ab40a0f001925a7d51952f6d61c0f1bc1}{N\+E\+W\+\_\+\+TR} = False
+\begin{DoxyCompactList}\small\item\em Flag which notify when the command manager recives a new target room from the user. \end{DoxyCompactList}\item 
+bool \hyperlink{namespacecm2_afc7e28693040c02b9b903acdc4ef9676}{N\+E\+W\+\_\+\+R\+O\+OM} = False
+\begin{DoxyCompactList}\small\item\em Flag which notify that a new room was detected by the camera. \end{DoxyCompactList}\item 
+string \hyperlink{namespacecm2_ae260b3b72cff4373b17d7804c4445605}{C\+O\+L\+O\+R\+\_\+\+R\+O\+OM} = \char`\"{}None\char`\"{}
+\begin{DoxyCompactList}\small\item\em Contains the color of the detected ball (room) \end{DoxyCompactList}\item 
+bool \hyperlink{namespacecm2_a09c3979998f6574c8221fc68a7c1c528}{F\+I\+N\+D\+\_\+\+M\+O\+DE} = False
+\begin{DoxyCompactList}\small\item\em Flag indicating if the F\+I\+ND mode is active or not. \end{DoxyCompactList}\item 
+\hyperlink{namespacecm2_a28fc643331943609822bc8a7b964ba75}{client} = actionlib.\+Simple\+Action\+Client(\textquotesingle{}move\+\_\+base\textquotesingle{},Move\+Base\+Action)
+\begin{DoxyCompactList}\small\item\em Initialization of the move\+\_\+base client in order to assign target position to the move\+\_\+base action server. \end{DoxyCompactList}\item 
+\hyperlink{namespacecm2_a10595b8ceb75d6f270e09b318feec10a}{room\+D\+\_\+pub} = rospy.\+Publisher(\textquotesingle{}start\+RD\textquotesingle{}, Bool, queue\+\_\+size=10)
+\begin{DoxyCompactList}\small\item\em Publisher to the start\+RD topic which allows to enable/disable the room detector. \end{DoxyCompactList}\item 
+\hyperlink{namespacecm2_a9f3e1bcc3f1b75e9e4bd3a3784bd056d}{rooms} = \hyperlink{classRooms_1_1Rooms}{Rooms}()
+\begin{DoxyCompactList}\small\item\em Object of the class \hyperlink{namespaceRooms}{Rooms} necessary to store and manage the discovered rooms. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{cm2@{cm2}!main@{main}}
+\index{main@{main}!cm2@{cm2}}
+\subsubsection[{\texorpdfstring{main()}{main()}}]{\setlength{\rightskip}{0pt plus 5cm}def cm2.\+main (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacecm2_a4f33e17e50be167d83eb74879ab4cf76}{}\label{namespacecm2_a4f33e17e50be167d83eb74879ab4cf76}
+\index{cm2@{cm2}!move\+\_\+base\+\_\+go\+\_\+to@{move\+\_\+base\+\_\+go\+\_\+to}}
+\index{move\+\_\+base\+\_\+go\+\_\+to@{move\+\_\+base\+\_\+go\+\_\+to}!cm2@{cm2}}
+\subsubsection[{\texorpdfstring{move\+\_\+base\+\_\+go\+\_\+to(x, y)}{move_base_go_to(x, y)}}]{\setlength{\rightskip}{0pt plus 5cm}def cm2.\+move\+\_\+base\+\_\+go\+\_\+to (
+\begin{DoxyParamCaption}
+\item[{}]{x, }
+\item[{}]{y}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacecm2_a7249bf198e534c88f2def70c16789cc7}{}\label{namespacecm2_a7249bf198e534c88f2def70c16789cc7}
+
+
+Method which prepares and send the goal to the move\+\_\+base action server. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & X position of the desired goal \\
+\hline
+{\em y} & Y position of the desired goal \\
+\hline
+\end{DoxyParams}
+\index{cm2@{cm2}!new\+Room\+Detected@{new\+Room\+Detected}}
+\index{new\+Room\+Detected@{new\+Room\+Detected}!cm2@{cm2}}
+\subsubsection[{\texorpdfstring{new\+Room\+Detected(color)}{newRoomDetected(color)}}]{\setlength{\rightskip}{0pt plus 5cm}def cm2.\+new\+Room\+Detected (
+\begin{DoxyParamCaption}
+\item[{}]{color}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacecm2_a4cf77024983dae698861eb6ff2580f39}{}\label{namespacecm2_a4cf77024983dae698861eb6ff2580f39}
+
+
+Callback function of the new\+Room\+Sub subscriber which recives the color of the new detected room. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & is a string message containing the color of the room detected by the \hyperlink{namespaceroomDetector}{room\+Detector} R\+OS node \\
+\hline
+\end{DoxyParams}
+\index{cm2@{cm2}!U\+Icallback@{U\+Icallback}}
+\index{U\+Icallback@{U\+Icallback}!cm2@{cm2}}
+\subsubsection[{\texorpdfstring{U\+Icallback(data)}{UIcallback(data)}}]{\setlength{\rightskip}{0pt plus 5cm}def cm2.\+U\+Icallback (
+\begin{DoxyParamCaption}
+\item[{}]{data}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacecm2_a672f12144cc02c256e891ea5924ffffa}{}\label{namespacecm2_a672f12144cc02c256e891ea5924ffffa}
+
+
+Callback mathod of the U\+Isubscriber which handels the commands sent by the user. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & is a string message coming from the \hyperlink{namespaceUI}{UI} R\+OS node \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Variable Documentation}
+\index{cm2@{cm2}!client@{client}}
+\index{client@{client}!cm2@{cm2}}
+\subsubsection[{\texorpdfstring{client}{client}}]{\setlength{\rightskip}{0pt plus 5cm}cm2.\+client = actionlib.\+Simple\+Action\+Client(\textquotesingle{}move\+\_\+base\textquotesingle{},Move\+Base\+Action)}\hypertarget{namespacecm2_a28fc643331943609822bc8a7b964ba75}{}\label{namespacecm2_a28fc643331943609822bc8a7b964ba75}
+
+
+Initialization of the move\+\_\+base client in order to assign target position to the move\+\_\+base action server. 
+
+\index{cm2@{cm2}!C\+O\+L\+O\+R\+\_\+\+R\+O\+OM@{C\+O\+L\+O\+R\+\_\+\+R\+O\+OM}}
+\index{C\+O\+L\+O\+R\+\_\+\+R\+O\+OM@{C\+O\+L\+O\+R\+\_\+\+R\+O\+OM}!cm2@{cm2}}
+\subsubsection[{\texorpdfstring{C\+O\+L\+O\+R\+\_\+\+R\+O\+OM}{COLOR_ROOM}}]{\setlength{\rightskip}{0pt plus 5cm}string cm2.\+C\+O\+L\+O\+R\+\_\+\+R\+O\+OM = \char`\"{}None\char`\"{}}\hypertarget{namespacecm2_ae260b3b72cff4373b17d7804c4445605}{}\label{namespacecm2_ae260b3b72cff4373b17d7804c4445605}
+
+
+Contains the color of the detected ball (room) 
+
+\index{cm2@{cm2}!F\+I\+N\+D\+\_\+\+M\+O\+DE@{F\+I\+N\+D\+\_\+\+M\+O\+DE}}
+\index{F\+I\+N\+D\+\_\+\+M\+O\+DE@{F\+I\+N\+D\+\_\+\+M\+O\+DE}!cm2@{cm2}}
+\subsubsection[{\texorpdfstring{F\+I\+N\+D\+\_\+\+M\+O\+DE}{FIND_MODE}}]{\setlength{\rightskip}{0pt plus 5cm}bool cm2.\+F\+I\+N\+D\+\_\+\+M\+O\+DE = False}\hypertarget{namespacecm2_a09c3979998f6574c8221fc68a7c1c528}{}\label{namespacecm2_a09c3979998f6574c8221fc68a7c1c528}
+
+
+Flag indicating if the F\+I\+ND mode is active or not. 
+
+\index{cm2@{cm2}!N\+E\+W\+\_\+\+R\+O\+OM@{N\+E\+W\+\_\+\+R\+O\+OM}}
+\index{N\+E\+W\+\_\+\+R\+O\+OM@{N\+E\+W\+\_\+\+R\+O\+OM}!cm2@{cm2}}
+\subsubsection[{\texorpdfstring{N\+E\+W\+\_\+\+R\+O\+OM}{NEW_ROOM}}]{\setlength{\rightskip}{0pt plus 5cm}bool cm2.\+N\+E\+W\+\_\+\+R\+O\+OM = False}\hypertarget{namespacecm2_afc7e28693040c02b9b903acdc4ef9676}{}\label{namespacecm2_afc7e28693040c02b9b903acdc4ef9676}
+
+
+Flag which notify that a new room was detected by the camera. 
+
+\index{cm2@{cm2}!N\+E\+W\+\_\+\+TR@{N\+E\+W\+\_\+\+TR}}
+\index{N\+E\+W\+\_\+\+TR@{N\+E\+W\+\_\+\+TR}!cm2@{cm2}}
+\subsubsection[{\texorpdfstring{N\+E\+W\+\_\+\+TR}{NEW_TR}}]{\setlength{\rightskip}{0pt plus 5cm}bool cm2.\+N\+E\+W\+\_\+\+TR = False}\hypertarget{namespacecm2_ab40a0f001925a7d51952f6d61c0f1bc1}{}\label{namespacecm2_ab40a0f001925a7d51952f6d61c0f1bc1}
+
+
+Flag which notify when the command manager recives a new target room from the user. 
+
+\index{cm2@{cm2}!P\+L\+AY@{P\+L\+AY}}
+\index{P\+L\+AY@{P\+L\+AY}!cm2@{cm2}}
+\subsubsection[{\texorpdfstring{P\+L\+AY}{PLAY}}]{\setlength{\rightskip}{0pt plus 5cm}bool cm2.\+P\+L\+AY = False}\hypertarget{namespacecm2_a9d9c51a8b292c088a990a5b74f0fc572}{}\label{namespacecm2_a9d9c51a8b292c088a990a5b74f0fc572}
+
+
+Flag which notify when the user types \textquotesingle{}play\textquotesingle{}. 
+
+\index{cm2@{cm2}!room\+D\+\_\+pub@{room\+D\+\_\+pub}}
+\index{room\+D\+\_\+pub@{room\+D\+\_\+pub}!cm2@{cm2}}
+\subsubsection[{\texorpdfstring{room\+D\+\_\+pub}{roomD_pub}}]{\setlength{\rightskip}{0pt plus 5cm}cm2.\+room\+D\+\_\+pub = rospy.\+Publisher(\textquotesingle{}start\+RD\textquotesingle{}, Bool, queue\+\_\+size=10)}\hypertarget{namespacecm2_a10595b8ceb75d6f270e09b318feec10a}{}\label{namespacecm2_a10595b8ceb75d6f270e09b318feec10a}
+
+
+Publisher to the start\+RD topic which allows to enable/disable the room detector. 
+
+\index{cm2@{cm2}!rooms@{rooms}}
+\index{rooms@{rooms}!cm2@{cm2}}
+\subsubsection[{\texorpdfstring{rooms}{rooms}}]{\setlength{\rightskip}{0pt plus 5cm}cm2.\+rooms = {\bf Rooms}()}\hypertarget{namespacecm2_a9f3e1bcc3f1b75e9e4bd3a3784bd056d}{}\label{namespacecm2_a9f3e1bcc3f1b75e9e4bd3a3784bd056d}
+
+
+Object of the class \hyperlink{namespaceRooms}{Rooms} necessary to store and manage the discovered rooms. 
+
+\index{cm2@{cm2}!T\+A\+R\+G\+E\+T\+\_\+\+R\+O\+OM@{T\+A\+R\+G\+E\+T\+\_\+\+R\+O\+OM}}
+\index{T\+A\+R\+G\+E\+T\+\_\+\+R\+O\+OM@{T\+A\+R\+G\+E\+T\+\_\+\+R\+O\+OM}!cm2@{cm2}}
+\subsubsection[{\texorpdfstring{T\+A\+R\+G\+E\+T\+\_\+\+R\+O\+OM}{TARGET_ROOM}}]{\setlength{\rightskip}{0pt plus 5cm}string cm2.\+T\+A\+R\+G\+E\+T\+\_\+\+R\+O\+OM = \char`\"{}None\char`\"{}}\hypertarget{namespacecm2_aa4c9405b40d178ce2b7f2f4e3a5eb359}{}\label{namespacecm2_aa4c9405b40d178ce2b7f2f4e3a5eb359}
+
+
+Contains the desired room entered by the user. 
+

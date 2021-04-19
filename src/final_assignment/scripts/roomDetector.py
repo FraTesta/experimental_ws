@@ -46,7 +46,7 @@ class roomDetector():
         cnts = imutils.grab_contours(cnts)
 	 
 
-        if len(cnts) > 0:
+        if len(cnts) > 1.2:
             return True
 
 

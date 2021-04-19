@@ -1,0 +1,208 @@
+\hypertarget{classRooms_1_1Rooms}{}\section{Rooms.\+Rooms Class Reference}
+\label{classRooms_1_1Rooms}\index{Rooms.\+Rooms@{Rooms.\+Rooms}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classRooms_1_1Rooms_a33491cd5c0e240b173cc7b5b7c004614}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self)
+\item 
+def \hyperlink{classRooms_1_1Rooms_af4de8388233d61aa35d1567f7a1499c5}{to\+\_\+string} (self, room)
+\begin{DoxyCompactList}\small\item\em Convert a cell array returned by the R\+O\+O\+MS structure into a string. \end{DoxyCompactList}\item 
+def \hyperlink{classRooms_1_1Rooms_a103b874aa482a4bbc32b7e57e310b557}{check\+\_\+visted} (self, color)
+\begin{DoxyCompactList}\small\item\em Checks if a room of a given color is already visited. \end{DoxyCompactList}\item 
+def \hyperlink{classRooms_1_1Rooms_a0b0c05bef66a8c33523caa1013abe2e7}{get\+\_\+room\+\_\+position} (self, target\+\_\+room)
+\begin{DoxyCompactList}\small\item\em Check if a given room is already visited, if so it returns its position. \end{DoxyCompactList}\item 
+def \hyperlink{classRooms_1_1Rooms_a266a056a0e82793932d3dfbf0c492c29}{add\+\_\+new\+\_\+room} (self, color, x, y)
+\begin{DoxyCompactList}\small\item\em Adds a new room to the R\+O\+O\+MS structure. \end{DoxyCompactList}\item 
+def \hyperlink{classRooms_1_1Rooms_addc0dcc8b9628a35044e1ffbd67a1e0d}{get\+\_\+name\+\_\+position} (self, x, y)
+\begin{DoxyCompactList}\small\item\em Returns the name of a room located in a given position (if any) \end{DoxyCompactList}\item 
+def \hyperlink{classRooms_1_1Rooms_aaef9cac25b1cf6e0313868b7e704470e}{get\+\_\+color\+\_\+room} (self, name)
+\begin{DoxyCompactList}\small\item\em Returns the color of a room given its name. \end{DoxyCompactList}\item 
+def \hyperlink{classRooms_1_1Rooms_a3a531237af143d87bc70927a6ad84865}{generate\+\_\+rand\+\_\+pos} (self)
+\begin{DoxyCompactList}\small\item\em Generates a random position in terms of x and y. \end{DoxyCompactList}\item 
+def \hyperlink{classRooms_1_1Rooms_ae35a0aa8261fb4ff5c856d80e0f9cac0}{mrange} (self, a)
+\begin{DoxyCompactList}\small\item\em Returns a array which contains a neighborhood of a given number. \end{DoxyCompactList}\item 
+def \hyperlink{classRooms_1_1Rooms_a031a0e30ceaada375d7b3aacced35668}{explore} (self)
+\begin{DoxyCompactList}\small\item\em Returns a random position away from the rooms already visited. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classRooms_1_1Rooms_a45a955141e4dd142491b43124c07ab95}{R\+O\+O\+MS}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyVerb}Class provides a smart structure to store the discoverd rooms, and some methods to handle it\end{DoxyVerb}
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Rooms\+::\+Rooms@{Rooms\+::\+Rooms}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!Rooms\+::\+Rooms@{Rooms\+::\+Rooms}}
+\subsubsection[{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+(self)}{__init__(self)}}]{\setlength{\rightskip}{0pt plus 5cm}def Rooms.\+Rooms.\+\_\+\+\_\+init\+\_\+\+\_\+ (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\hypertarget{classRooms_1_1Rooms_a33491cd5c0e240b173cc7b5b7c004614}{}\label{classRooms_1_1Rooms_a33491cd5c0e240b173cc7b5b7c004614}
+
+
+\subsection{Member Function Documentation}
+\index{Rooms\+::\+Rooms@{Rooms\+::\+Rooms}!add\+\_\+new\+\_\+room@{add\+\_\+new\+\_\+room}}
+\index{add\+\_\+new\+\_\+room@{add\+\_\+new\+\_\+room}!Rooms\+::\+Rooms@{Rooms\+::\+Rooms}}
+\subsubsection[{\texorpdfstring{add\+\_\+new\+\_\+room(self, color, x, y)}{add_new_room(self, color, x, y)}}]{\setlength{\rightskip}{0pt plus 5cm}def Rooms.\+Rooms.\+add\+\_\+new\+\_\+room (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{color, }
+\item[{}]{x, }
+\item[{}]{y}
+\end{DoxyParamCaption}
+)}\hypertarget{classRooms_1_1Rooms_a266a056a0e82793932d3dfbf0c492c29}{}\label{classRooms_1_1Rooms_a266a056a0e82793932d3dfbf0c492c29}
+
+
+Adds a new room to the R\+O\+O\+MS structure. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & color of the discovered room \\
+\hline
+{\em x} & x position of the discovered room \\
+\hline
+{\em y} & y position of the discovered room \\
+\hline
+\end{DoxyParams}
+\index{Rooms\+::\+Rooms@{Rooms\+::\+Rooms}!check\+\_\+visted@{check\+\_\+visted}}
+\index{check\+\_\+visted@{check\+\_\+visted}!Rooms\+::\+Rooms@{Rooms\+::\+Rooms}}
+\subsubsection[{\texorpdfstring{check\+\_\+visted(self, color)}{check_visted(self, color)}}]{\setlength{\rightskip}{0pt plus 5cm}def Rooms.\+Rooms.\+check\+\_\+visted (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{color}
+\end{DoxyParamCaption}
+)}\hypertarget{classRooms_1_1Rooms_a103b874aa482a4bbc32b7e57e310b557}{}\label{classRooms_1_1Rooms_a103b874aa482a4bbc32b7e57e310b557}
+
+
+Checks if a room of a given color is already visited. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & color of the room to be checked \\
+\hline
+\end{DoxyParams}
+\index{Rooms\+::\+Rooms@{Rooms\+::\+Rooms}!explore@{explore}}
+\index{explore@{explore}!Rooms\+::\+Rooms@{Rooms\+::\+Rooms}}
+\subsubsection[{\texorpdfstring{explore(self)}{explore(self)}}]{\setlength{\rightskip}{0pt plus 5cm}def Rooms.\+Rooms.\+explore (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\hypertarget{classRooms_1_1Rooms_a031a0e30ceaada375d7b3aacced35668}{}\label{classRooms_1_1Rooms_a031a0e30ceaada375d7b3aacced35668}
+
+
+Returns a random position away from the rooms already visited. 
+
+\index{Rooms\+::\+Rooms@{Rooms\+::\+Rooms}!generate\+\_\+rand\+\_\+pos@{generate\+\_\+rand\+\_\+pos}}
+\index{generate\+\_\+rand\+\_\+pos@{generate\+\_\+rand\+\_\+pos}!Rooms\+::\+Rooms@{Rooms\+::\+Rooms}}
+\subsubsection[{\texorpdfstring{generate\+\_\+rand\+\_\+pos(self)}{generate_rand_pos(self)}}]{\setlength{\rightskip}{0pt plus 5cm}def Rooms.\+Rooms.\+generate\+\_\+rand\+\_\+pos (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\hypertarget{classRooms_1_1Rooms_a3a531237af143d87bc70927a6ad84865}{}\label{classRooms_1_1Rooms_a3a531237af143d87bc70927a6ad84865}
+
+
+Generates a random position in terms of x and y. 
+
+Usefull in the N\+O\+R\+M\+AL and F\+I\+ND states \index{Rooms\+::\+Rooms@{Rooms\+::\+Rooms}!get\+\_\+color\+\_\+room@{get\+\_\+color\+\_\+room}}
+\index{get\+\_\+color\+\_\+room@{get\+\_\+color\+\_\+room}!Rooms\+::\+Rooms@{Rooms\+::\+Rooms}}
+\subsubsection[{\texorpdfstring{get\+\_\+color\+\_\+room(self, name)}{get_color_room(self, name)}}]{\setlength{\rightskip}{0pt plus 5cm}def Rooms.\+Rooms.\+get\+\_\+color\+\_\+room (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{name}
+\end{DoxyParamCaption}
+)}\hypertarget{classRooms_1_1Rooms_aaef9cac25b1cf6e0313868b7e704470e}{}\label{classRooms_1_1Rooms_aaef9cac25b1cf6e0313868b7e704470e}
+
+
+Returns the color of a room given its name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & room name \\
+\hline
+\end{DoxyParams}
+\index{Rooms\+::\+Rooms@{Rooms\+::\+Rooms}!get\+\_\+name\+\_\+position@{get\+\_\+name\+\_\+position}}
+\index{get\+\_\+name\+\_\+position@{get\+\_\+name\+\_\+position}!Rooms\+::\+Rooms@{Rooms\+::\+Rooms}}
+\subsubsection[{\texorpdfstring{get\+\_\+name\+\_\+position(self, x, y)}{get_name_position(self, x, y)}}]{\setlength{\rightskip}{0pt plus 5cm}def Rooms.\+Rooms.\+get\+\_\+name\+\_\+position (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{x, }
+\item[{}]{y}
+\end{DoxyParamCaption}
+)}\hypertarget{classRooms_1_1Rooms_addc0dcc8b9628a35044e1ffbd67a1e0d}{}\label{classRooms_1_1Rooms_addc0dcc8b9628a35044e1ffbd67a1e0d}
+
+
+Returns the name of a room located in a given position (if any) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & x position of the room \\
+\hline
+{\em y} & y position of the room \\
+\hline
+\end{DoxyParams}
+\index{Rooms\+::\+Rooms@{Rooms\+::\+Rooms}!get\+\_\+room\+\_\+position@{get\+\_\+room\+\_\+position}}
+\index{get\+\_\+room\+\_\+position@{get\+\_\+room\+\_\+position}!Rooms\+::\+Rooms@{Rooms\+::\+Rooms}}
+\subsubsection[{\texorpdfstring{get\+\_\+room\+\_\+position(self, target\+\_\+room)}{get_room_position(self, target_room)}}]{\setlength{\rightskip}{0pt plus 5cm}def Rooms.\+Rooms.\+get\+\_\+room\+\_\+position (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{target\+\_\+room}
+\end{DoxyParamCaption}
+)}\hypertarget{classRooms_1_1Rooms_a0b0c05bef66a8c33523caa1013abe2e7}{}\label{classRooms_1_1Rooms_a0b0c05bef66a8c33523caa1013abe2e7}
+
+
+Check if a given room is already visited, if so it returns its position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target\+\_\+room} & name of the room \\
+\hline
+\end{DoxyParams}
+\index{Rooms\+::\+Rooms@{Rooms\+::\+Rooms}!mrange@{mrange}}
+\index{mrange@{mrange}!Rooms\+::\+Rooms@{Rooms\+::\+Rooms}}
+\subsubsection[{\texorpdfstring{mrange(self, a)}{mrange(self, a)}}]{\setlength{\rightskip}{0pt plus 5cm}def Rooms.\+Rooms.\+mrange (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{a}
+\end{DoxyParamCaption}
+)}\hypertarget{classRooms_1_1Rooms_ae35a0aa8261fb4ff5c856d80e0f9cac0}{}\label{classRooms_1_1Rooms_ae35a0aa8261fb4ff5c856d80e0f9cac0}
+
+
+Returns a array which contains a neighborhood of a given number. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em number} & that correspond to a coordinate of a point \\
+\hline
+\end{DoxyParams}
+\index{Rooms\+::\+Rooms@{Rooms\+::\+Rooms}!to\+\_\+string@{to\+\_\+string}}
+\index{to\+\_\+string@{to\+\_\+string}!Rooms\+::\+Rooms@{Rooms\+::\+Rooms}}
+\subsubsection[{\texorpdfstring{to\+\_\+string(self, room)}{to_string(self, room)}}]{\setlength{\rightskip}{0pt plus 5cm}def Rooms.\+Rooms.\+to\+\_\+string (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{room}
+\end{DoxyParamCaption}
+)}\hypertarget{classRooms_1_1Rooms_af4de8388233d61aa35d1567f7a1499c5}{}\label{classRooms_1_1Rooms_af4de8388233d61aa35d1567f7a1499c5}
+
+
+Convert a cell array returned by the R\+O\+O\+MS structure into a string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em room} & is a generic room cell of the R\+O\+O\+MS dictionary \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{Rooms\+::\+Rooms@{Rooms\+::\+Rooms}!R\+O\+O\+MS@{R\+O\+O\+MS}}
+\index{R\+O\+O\+MS@{R\+O\+O\+MS}!Rooms\+::\+Rooms@{Rooms\+::\+Rooms}}
+\subsubsection[{\texorpdfstring{R\+O\+O\+MS}{ROOMS}}]{\setlength{\rightskip}{0pt plus 5cm}Rooms.\+Rooms.\+R\+O\+O\+MS\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classRooms_1_1Rooms_a45a955141e4dd142491b43124c07ab95}{}\label{classRooms_1_1Rooms_a45a955141e4dd142491b43124c07ab95}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/experimental\+\_\+ws/src/final\+\_\+assignment/scripts/\hyperlink{Rooms_8py}{Rooms.\+py}\end{DoxyCompactItemize}

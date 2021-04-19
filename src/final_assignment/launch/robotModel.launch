@@ -26,7 +26,7 @@
 
 
   	<group if="$(arg use_rviz)">
-             <node name="rviz" pkg="rviz" type="rviz" args="-d $(find final_assignment)/config/sim.rviz" />
+             <node name="rviz" pkg="rviz" type="rviz" args="-d $(find final_assignment)/config/mySim.rviz" />
   	</group>
 	
 

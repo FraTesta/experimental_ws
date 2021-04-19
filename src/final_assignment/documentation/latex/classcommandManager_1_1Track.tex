@@ -1,0 +1,101 @@
+\hypertarget{classcommandManager_1_1Track}{}\section{command\+Manager.\+Track Class Reference}
+\label{classcommandManager_1_1Track}\index{command\+Manager.\+Track@{command\+Manager.\+Track}}
+
+
+Inheritance diagram for command\+Manager.\+Track\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=216pt]{classcommandManager_1_1Track__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for command\+Manager.\+Track\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=216pt]{classcommandManager_1_1Track__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classcommandManager_1_1Track_af204111942c1cc2b65ff7b68a74c2420}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self)
+\item 
+def \hyperlink{classcommandManager_1_1Track_a58dac1ae26362ef259735b950e35e237}{execute} (self, userdata)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcommandManager_1_1Track_aaf31135bbe355747fc8e8ebbfa9ea7c3}{goal} = track\+Ball\+Goal()
+\item 
+\hyperlink{classcommandManager_1_1Track_acaaf54b9a806780342efd702c43ca892}{color}
+\item 
+\hyperlink{classcommandManager_1_1Track_a4a57e4e548d9213c4623f5d528753b1f}{track\+Client} = actionlib.\+Simple\+Action\+Client(\textquotesingle{}track\+Action\textquotesingle{},track\+Ball\+Action)
+\item 
+bool \hyperlink{classcommandManager_1_1Track_afb7ce9aacf03e990b6ecca9c7641caeb}{N\+E\+W\+\_\+\+R\+O\+OM} = False
+\item 
+\hyperlink{classcommandManager_1_1Track_a8f86bbb5fd3d92749c09d5e876a1d1a6}{wait} = track\+Client.\+wait\+\_\+for\+\_\+result()
+\item 
+\hyperlink{classcommandManager_1_1Track_aa66fb1baab2433c729df0919ba0989a7}{result} = track\+Client.\+get\+\_\+result()
+\item 
+bool \hyperlink{classcommandManager_1_1Track_af7f0cd8d298db357c98855ffd93eff1b}{F\+I\+N\+D\+\_\+\+M\+O\+DE} = False
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyVerb}Class that defines the PLAY state. 
+ It move the robot in X Y location and then asks to go back to the user.\end{DoxyVerb}
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{command\+Manager\+::\+Track@{command\+Manager\+::\+Track}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!command\+Manager\+::\+Track@{command\+Manager\+::\+Track}}
+\subsubsection[{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+(self)}{__init__(self)}}]{\setlength{\rightskip}{0pt plus 5cm}def command\+Manager.\+Track.\+\_\+\+\_\+init\+\_\+\+\_\+ (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\hypertarget{classcommandManager_1_1Track_af204111942c1cc2b65ff7b68a74c2420}{}\label{classcommandManager_1_1Track_af204111942c1cc2b65ff7b68a74c2420}
+\begin{DoxyVerb}Class that defines the PLAY state. 
+ It move the robot in X Y location and then asks to go back to the user.\end{DoxyVerb}
+ 
+
+\subsection{Member Function Documentation}
+\index{command\+Manager\+::\+Track@{command\+Manager\+::\+Track}!execute@{execute}}
+\index{execute@{execute}!command\+Manager\+::\+Track@{command\+Manager\+::\+Track}}
+\subsubsection[{\texorpdfstring{execute(self, userdata)}{execute(self, userdata)}}]{\setlength{\rightskip}{0pt plus 5cm}def command\+Manager.\+Track.\+execute (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{userdata}
+\end{DoxyParamCaption}
+)}\hypertarget{classcommandManager_1_1Track_a58dac1ae26362ef259735b950e35e237}{}\label{classcommandManager_1_1Track_a58dac1ae26362ef259735b950e35e237}
+
+
+\subsection{Member Data Documentation}
+\index{command\+Manager\+::\+Track@{command\+Manager\+::\+Track}!color@{color}}
+\index{color@{color}!command\+Manager\+::\+Track@{command\+Manager\+::\+Track}}
+\subsubsection[{\texorpdfstring{color}{color}}]{\setlength{\rightskip}{0pt plus 5cm}command\+Manager.\+Track.\+color\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcommandManager_1_1Track_acaaf54b9a806780342efd702c43ca892}{}\label{classcommandManager_1_1Track_acaaf54b9a806780342efd702c43ca892}
+\index{command\+Manager\+::\+Track@{command\+Manager\+::\+Track}!F\+I\+N\+D\+\_\+\+M\+O\+DE@{F\+I\+N\+D\+\_\+\+M\+O\+DE}}
+\index{F\+I\+N\+D\+\_\+\+M\+O\+DE@{F\+I\+N\+D\+\_\+\+M\+O\+DE}!command\+Manager\+::\+Track@{command\+Manager\+::\+Track}}
+\subsubsection[{\texorpdfstring{F\+I\+N\+D\+\_\+\+M\+O\+DE}{FIND_MODE}}]{\setlength{\rightskip}{0pt plus 5cm}bool command\+Manager.\+Track.\+F\+I\+N\+D\+\_\+\+M\+O\+DE = False\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcommandManager_1_1Track_af7f0cd8d298db357c98855ffd93eff1b}{}\label{classcommandManager_1_1Track_af7f0cd8d298db357c98855ffd93eff1b}
+\index{command\+Manager\+::\+Track@{command\+Manager\+::\+Track}!goal@{goal}}
+\index{goal@{goal}!command\+Manager\+::\+Track@{command\+Manager\+::\+Track}}
+\subsubsection[{\texorpdfstring{goal}{goal}}]{\setlength{\rightskip}{0pt plus 5cm}command\+Manager.\+Track.\+goal = track\+Ball\+Goal()\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcommandManager_1_1Track_aaf31135bbe355747fc8e8ebbfa9ea7c3}{}\label{classcommandManager_1_1Track_aaf31135bbe355747fc8e8ebbfa9ea7c3}
+\index{command\+Manager\+::\+Track@{command\+Manager\+::\+Track}!N\+E\+W\+\_\+\+R\+O\+OM@{N\+E\+W\+\_\+\+R\+O\+OM}}
+\index{N\+E\+W\+\_\+\+R\+O\+OM@{N\+E\+W\+\_\+\+R\+O\+OM}!command\+Manager\+::\+Track@{command\+Manager\+::\+Track}}
+\subsubsection[{\texorpdfstring{N\+E\+W\+\_\+\+R\+O\+OM}{NEW_ROOM}}]{\setlength{\rightskip}{0pt plus 5cm}bool command\+Manager.\+Track.\+N\+E\+W\+\_\+\+R\+O\+OM = False\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcommandManager_1_1Track_afb7ce9aacf03e990b6ecca9c7641caeb}{}\label{classcommandManager_1_1Track_afb7ce9aacf03e990b6ecca9c7641caeb}
+\index{command\+Manager\+::\+Track@{command\+Manager\+::\+Track}!result@{result}}
+\index{result@{result}!command\+Manager\+::\+Track@{command\+Manager\+::\+Track}}
+\subsubsection[{\texorpdfstring{result}{result}}]{\setlength{\rightskip}{0pt plus 5cm}command\+Manager.\+Track.\+result = track\+Client.\+get\+\_\+result()\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcommandManager_1_1Track_aa66fb1baab2433c729df0919ba0989a7}{}\label{classcommandManager_1_1Track_aa66fb1baab2433c729df0919ba0989a7}
+\index{command\+Manager\+::\+Track@{command\+Manager\+::\+Track}!track\+Client@{track\+Client}}
+\index{track\+Client@{track\+Client}!command\+Manager\+::\+Track@{command\+Manager\+::\+Track}}
+\subsubsection[{\texorpdfstring{track\+Client}{trackClient}}]{\setlength{\rightskip}{0pt plus 5cm}command\+Manager.\+Track.\+track\+Client = actionlib.\+Simple\+Action\+Client(\textquotesingle{}track\+Action\textquotesingle{},track\+Ball\+Action)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcommandManager_1_1Track_a4a57e4e548d9213c4623f5d528753b1f}{}\label{classcommandManager_1_1Track_a4a57e4e548d9213c4623f5d528753b1f}
+\index{command\+Manager\+::\+Track@{command\+Manager\+::\+Track}!wait@{wait}}
+\index{wait@{wait}!command\+Manager\+::\+Track@{command\+Manager\+::\+Track}}
+\subsubsection[{\texorpdfstring{wait}{wait}}]{\setlength{\rightskip}{0pt plus 5cm}command\+Manager.\+Track.\+wait = track\+Client.\+wait\+\_\+for\+\_\+result()\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcommandManager_1_1Track_a8f86bbb5fd3d92749c09d5e876a1d1a6}{}\label{classcommandManager_1_1Track_a8f86bbb5fd3d92749c09d5e876a1d1a6}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/experimental\+\_\+ws/src/final\+\_\+assignment/scripts/\hyperlink{commandManager_8py}{command\+Manager.\+py}\end{DoxyCompactItemize}

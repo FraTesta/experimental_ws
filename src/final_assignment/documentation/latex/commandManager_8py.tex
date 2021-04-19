@@ -1,0 +1,77 @@
+\hypertarget{commandManager_8py}{}\section{/home/experimental\+\_\+ws/src/final\+\_\+assignment/scripts/command\+Manager.py File Reference}
+\label{commandManager_8py}\index{/home/experimental\+\_\+ws/src/final\+\_\+assignment/scripts/command\+Manager.\+py@{/home/experimental\+\_\+ws/src/final\+\_\+assignment/scripts/command\+Manager.\+py}}
+
+
+This script is a node which is the core of the entier project.  
+
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classcommandManager_1_1Normal}{command\+Manager.\+Normal}
+\item 
+class \hyperlink{classcommandManager_1_1Sleep}{command\+Manager.\+Sleep}
+\item 
+class \hyperlink{classcommandManager_1_1Play}{command\+Manager.\+Play}
+\item 
+class \hyperlink{classcommandManager_1_1Track}{command\+Manager.\+Track}
+\item 
+class \hyperlink{classcommandManager_1_1Find}{command\+Manager.\+Find}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespacecommandManager}{command\+Manager}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespacecommandManager_a2310383d56755f0a09a75b1a92130e21}{command\+Manager.\+U\+Icallback} (data)
+\item 
+def \hyperlink{namespacecommandManager_aa96fd2ed94c8c1168e09ced4015dcb1b}{command\+Manager.\+new\+Room\+Detected} (color)
+\item 
+def \hyperlink{namespacecommandManager_af8e54858c65310eb1e131529bf200516}{command\+Manager.\+move\+\_\+base\+\_\+go\+\_\+to} (x, y)
+\item 
+def \hyperlink{namespacecommandManager_ae8b570eb4bf393859bc74c9cb5fe125f}{command\+Manager.\+main} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{namespacecommandManager_aecd980edd677f32e8693cbd21fa2c6eb}{command\+Manager.\+P\+L\+AY} = False
+\begin{DoxyCompactList}\small\item\em Flag which notify when the user types \textquotesingle{}play\textquotesingle{}. \end{DoxyCompactList}\item 
+string \hyperlink{namespacecommandManager_ace76b1a89b584c851c50bc3ad66e1d69}{command\+Manager.\+T\+A\+R\+G\+E\+T\+\_\+\+R\+O\+OM} = \char`\"{}None\char`\"{}
+\begin{DoxyCompactList}\small\item\em Contains the desired room entered by the user. \end{DoxyCompactList}\item 
+bool \hyperlink{namespacecommandManager_a6356544112d78464670ffb9af59bed1d}{command\+Manager.\+N\+E\+W\+\_\+\+TR} = False
+\begin{DoxyCompactList}\small\item\em Flag which notify when the command manager recives a new target room. \end{DoxyCompactList}\item 
+bool \hyperlink{namespacecommandManager_a52e7163bf2cde17330107e6a2cf2f851}{command\+Manager.\+N\+E\+W\+\_\+\+R\+O\+OM} = False
+\begin{DoxyCompactList}\small\item\em new room detected \end{DoxyCompactList}\item 
+bool \hyperlink{namespacecommandManager_afb1c5b8d9e6c746c82f4abf3fffe02a5}{command\+Manager.\+R\+A\+N\+D\+OM} = True
+\begin{DoxyCompactList}\small\item\em Random position generation flag. \end{DoxyCompactList}\item 
+string \hyperlink{namespacecommandManager_ae945cfc4fe1632a6952debd7a67d9f3c}{command\+Manager.\+C\+O\+L\+O\+R\+\_\+\+R\+O\+OM} = \char`\"{}None\char`\"{}
+\begin{DoxyCompactList}\small\item\em color of the detected ball \end{DoxyCompactList}\item 
+bool \hyperlink{namespacecommandManager_ad0728881cc70cfd3f8f5251b7b9af646}{command\+Manager.\+F\+I\+N\+D\+\_\+\+M\+O\+DE} = False
+\begin{DoxyCompactList}\small\item\em Flag to comeback into \hyperlink{classcommandManager_1_1Find}{Find} state when it\textquotesingle{}s necessary. \end{DoxyCompactList}\item 
+\hyperlink{namespacecommandManager_ad81f5cdd9bf18b67989c77a2329b9e28}{command\+Manager.\+client} = actionlib.\+Simple\+Action\+Client(\textquotesingle{}move\+\_\+base\textquotesingle{},Move\+Base\+Action)
+\begin{DoxyCompactList}\small\item\em init the move\+\_\+base client \end{DoxyCompactList}\item 
+\hyperlink{namespacecommandManager_a868809e1f6a79e7b7ce5ea405e978d48}{command\+Manager.\+rooms} = Rooms()
+\begin{DoxyCompactList}\small\item\em init the rooms environment \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This script is a node which is the core of the entier project. 
+
+This node includes the subsription to State and Get\+Position publishers, And implement a finite state machine which manages the information coming from the two publisher and changes the state of the system in according to them.
+
+And implement a finite state machine with five states which are described in the R\+E\+A\+D\+ME file. It manages the messages comming from other nodes and R\+OS packeges. \begin{DoxySeeAlso}{See also}
+\hyperlink{namespaceroomDetector}{room\+Detector} 
+
+\hyperlink{namespaceUI}{UI} 
+
+\hyperlink{namespacetrack}{track}
+
+get\+Position.\+cpp 
+
+Navigation.\+cpp 
+
+State.\+cpp 
+\end{DoxySeeAlso}

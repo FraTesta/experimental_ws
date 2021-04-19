@@ -1,0 +1,219 @@
+\hypertarget{namespacetrack}{}\section{track Namespace Reference}
+\label{namespacetrack}\index{track@{track}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classtrack_1_1TrackAction}{Track\+Action}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespacetrack_ac547a00259cf9bddfb37b60063740e8d}{clbk\+\_\+odom} (msg)
+\begin{DoxyCompactList}\small\item\em Odom sub callback. \end{DoxyCompactList}\item 
+def \hyperlink{namespacetrack_a49b5b58ad2366084e3f134c4175ec6cd}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self, name)
+\item 
+def \hyperlink{namespacetrack_a474e47f2349d891970c4a7d004010f27}{reach\+\_\+ball} (self, ros\+\_\+image)
+\item 
+def \hyperlink{namespacetrack_a7224b28ef3155cf9597b97efe6411490}{track} (self, goal)
+\item 
+def \hyperlink{namespacetrack_a30188f067a9106a2f3e2ecedfd9cc52a}{main} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+tuple \hyperlink{namespacetrack_a4ee13246ec46c21cfdcfee1b16f7eec4}{black\+Lower} = (0, 0, 0)
+\item 
+tuple \hyperlink{namespacetrack_a7c7120c727a2836315550f0091cd7277}{black\+Upper} = (5,50,50)
+\item 
+tuple \hyperlink{namespacetrack_a760fae991a015aa4ee4c08fcaadeb576}{red\+Lower} = (0, 50, 50)
+\item 
+tuple \hyperlink{namespacetrack_a1549403b0cb47b249afba9cdeca7ec16}{red\+Upper} = (5, 255, 255)
+\item 
+tuple \hyperlink{namespacetrack_a29d421bd8aa932d14a9cbf7779bba62b}{yellow\+Lower} = (25, 50, 50)
+\item 
+tuple \hyperlink{namespacetrack_a2071c6a41ecce68b84c956b0c5f8219a}{yellow\+Upper} = (35, 255, 255)
+\item 
+tuple \hyperlink{namespacetrack_ae3b9cb19e6647fa48bae473c1b3152ea}{green\+Lower} = (50, 50, 50)
+\item 
+tuple \hyperlink{namespacetrack_a2a45da69392a010f85aa42de064d7c85}{green\+Upper} = (70, 255, 255)
+\item 
+tuple \hyperlink{namespacetrack_a222fd73291da99272b344d9089ce0fde}{blue\+Lower} = (100, 50, 50)
+\item 
+tuple \hyperlink{namespacetrack_ae6e375645538a7968d81c8ebe9ee5b7d}{blue\+Upper} = (130, 255, 255)
+\item 
+tuple \hyperlink{namespacetrack_a4778acbcac36117d4384a64aff1283bd}{magenta\+Lower} = (125, 50, 50)
+\item 
+tuple \hyperlink{namespacetrack_a159d6ddb51827712e530f1f1e59369c7}{magenta\+Upper} = (150, 255, 255)
+\item 
+\hyperlink{namespacetrack_a7299b48bcf1df87418078ead7079339d}{position\+\_\+} = Point()
+\item 
+\hyperlink{namespacetrack_a4fcc239004d2df0fe5a4ea23c9b0495f}{pose\+\_\+} = Pose()
+\item 
+\hyperlink{namespacetrack_a99bdf85519e387c8c0c7612a0b46dc56}{feedback}
+\item 
+\hyperlink{namespacetrack_a029891d5b553b75642e169dde1d3fa2f}{result}
+\item 
+\hyperlink{namespacetrack_a2f8cfd339cb658bb3d8f142eef1dbaeb}{vel\+\_\+pub}
+\begin{DoxyCompactList}\small\item\em Publisher to move the robot. \end{DoxyCompactList}\item 
+\hyperlink{namespacetrack_a5c72c6ba52347132ee923f404620079a}{Twist}
+\item 
+\hyperlink{namespacetrack_a5a1cccbe6088028aaf5793b2c3f6e94a}{queue\+\_\+size}
+\item 
+\hyperlink{namespacetrack_a368c0796cb0ee26a2f62cda3c828267f}{success}
+\item 
+\hyperlink{namespacetrack_a571b301da76cd6ce19cecf7aeb902f5f}{unfound\+\_\+ball\+\_\+counter}
+\item 
+\hyperlink{namespacetrack_a24e6d51863a39321aae96a7464685240}{abort}
+\item 
+\hyperlink{namespacetrack_af008e41d1a7c809d5ab05c44c21be95d}{sub\+\_\+odom} = rospy.\+Subscriber(\textquotesingle{}odom\textquotesingle{}, Odometry, \hyperlink{namespacetrack_ac547a00259cf9bddfb37b60063740e8d}{clbk\+\_\+odom})
+\item 
+\hyperlink{namespacetrack_ad5613e9a1ce2fa3764d6bed0c696592b}{state}
+\item 
+\hyperlink{namespacetrack_a01cd8e88d322162de1f8f859c21debf9}{action\+Name}
+\item 
+\hyperlink{namespacetrack_a9abe825f904267585ec9e11e68ef54e5}{act\+\_\+s}
+\item 
+\hyperlink{namespacetrack_aa2f40726487fc336af892381448898a5}{color}
+\begin{DoxyCompactList}\small\item\em direct conversion to C\+V2 \#\#\#\# \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{track@{track}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!track@{track}}
+\subsubsection[{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+(self, name)}{__init__(self, name)}}]{\setlength{\rightskip}{0pt plus 5cm}def track.\+\_\+\+\_\+init\+\_\+\+\_\+ (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{name}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacetrack_a49b5b58ad2366084e3f134c4175ec6cd}{}\label{namespacetrack_a49b5b58ad2366084e3f134c4175ec6cd}
+\index{track@{track}!clbk\+\_\+odom@{clbk\+\_\+odom}}
+\index{clbk\+\_\+odom@{clbk\+\_\+odom}!track@{track}}
+\subsubsection[{\texorpdfstring{clbk\+\_\+odom(msg)}{clbk_odom(msg)}}]{\setlength{\rightskip}{0pt plus 5cm}def track.\+clbk\+\_\+odom (
+\begin{DoxyParamCaption}
+\item[{}]{msg}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacetrack_ac547a00259cf9bddfb37b60063740e8d}{}\label{namespacetrack_ac547a00259cf9bddfb37b60063740e8d}
+
+
+Odom sub callback. 
+
+\index{track@{track}!main@{main}}
+\index{main@{main}!track@{track}}
+\subsubsection[{\texorpdfstring{main()}{main()}}]{\setlength{\rightskip}{0pt plus 5cm}def track.\+main (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacetrack_a30188f067a9106a2f3e2ecedfd9cc52a}{}\label{namespacetrack_a30188f067a9106a2f3e2ecedfd9cc52a}
+\index{track@{track}!reach\+\_\+ball@{reach\+\_\+ball}}
+\index{reach\+\_\+ball@{reach\+\_\+ball}!track@{track}}
+\subsubsection[{\texorpdfstring{reach\+\_\+ball(self, ros\+\_\+image)}{reach_ball(self, ros_image)}}]{\setlength{\rightskip}{0pt plus 5cm}def track.\+reach\+\_\+ball (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{ros\+\_\+image}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacetrack_a474e47f2349d891970c4a7d004010f27}{}\label{namespacetrack_a474e47f2349d891970c4a7d004010f27}
+\index{track@{track}!track@{track}}
+\index{track@{track}!track@{track}}
+\subsubsection[{\texorpdfstring{track(self, goal)}{track(self, goal)}}]{\setlength{\rightskip}{0pt plus 5cm}def track.\+track (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{goal}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacetrack_a7224b28ef3155cf9597b97efe6411490}{}\label{namespacetrack_a7224b28ef3155cf9597b97efe6411490}
+
+
+\subsection{Variable Documentation}
+\index{track@{track}!abort@{abort}}
+\index{abort@{abort}!track@{track}}
+\subsubsection[{\texorpdfstring{abort}{abort}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+abort}\hypertarget{namespacetrack_a24e6d51863a39321aae96a7464685240}{}\label{namespacetrack_a24e6d51863a39321aae96a7464685240}
+\index{track@{track}!act\+\_\+s@{act\+\_\+s}}
+\index{act\+\_\+s@{act\+\_\+s}!track@{track}}
+\subsubsection[{\texorpdfstring{act\+\_\+s}{act_s}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+act\+\_\+s}\hypertarget{namespacetrack_a9abe825f904267585ec9e11e68ef54e5}{}\label{namespacetrack_a9abe825f904267585ec9e11e68ef54e5}
+\index{track@{track}!action\+Name@{action\+Name}}
+\index{action\+Name@{action\+Name}!track@{track}}
+\subsubsection[{\texorpdfstring{action\+Name}{actionName}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+action\+Name}\hypertarget{namespacetrack_a01cd8e88d322162de1f8f859c21debf9}{}\label{namespacetrack_a01cd8e88d322162de1f8f859c21debf9}
+\index{track@{track}!black\+Lower@{black\+Lower}}
+\index{black\+Lower@{black\+Lower}!track@{track}}
+\subsubsection[{\texorpdfstring{black\+Lower}{blackLower}}]{\setlength{\rightskip}{0pt plus 5cm}tuple track.\+black\+Lower = (0, 0, 0)}\hypertarget{namespacetrack_a4ee13246ec46c21cfdcfee1b16f7eec4}{}\label{namespacetrack_a4ee13246ec46c21cfdcfee1b16f7eec4}
+\index{track@{track}!black\+Upper@{black\+Upper}}
+\index{black\+Upper@{black\+Upper}!track@{track}}
+\subsubsection[{\texorpdfstring{black\+Upper}{blackUpper}}]{\setlength{\rightskip}{0pt plus 5cm}tuple track.\+black\+Upper = (5,50,50)}\hypertarget{namespacetrack_a7c7120c727a2836315550f0091cd7277}{}\label{namespacetrack_a7c7120c727a2836315550f0091cd7277}
+\index{track@{track}!blue\+Lower@{blue\+Lower}}
+\index{blue\+Lower@{blue\+Lower}!track@{track}}
+\subsubsection[{\texorpdfstring{blue\+Lower}{blueLower}}]{\setlength{\rightskip}{0pt plus 5cm}tuple track.\+blue\+Lower = (100, 50, 50)}\hypertarget{namespacetrack_a222fd73291da99272b344d9089ce0fde}{}\label{namespacetrack_a222fd73291da99272b344d9089ce0fde}
+\index{track@{track}!blue\+Upper@{blue\+Upper}}
+\index{blue\+Upper@{blue\+Upper}!track@{track}}
+\subsubsection[{\texorpdfstring{blue\+Upper}{blueUpper}}]{\setlength{\rightskip}{0pt plus 5cm}tuple track.\+blue\+Upper = (130, 255, 255)}\hypertarget{namespacetrack_ae6e375645538a7968d81c8ebe9ee5b7d}{}\label{namespacetrack_ae6e375645538a7968d81c8ebe9ee5b7d}
+\index{track@{track}!color@{color}}
+\index{color@{color}!track@{track}}
+\subsubsection[{\texorpdfstring{color}{color}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+color}\hypertarget{namespacetrack_aa2f40726487fc336af892381448898a5}{}\label{namespacetrack_aa2f40726487fc336af892381448898a5}
+
+
+direct conversion to C\+V2 \#\#\#\# 
+
+
+\begin{DoxyParams}{Parameters}
+{\em image\+\_\+np} & is the image decompressed and converted in Opend\+Cv \\
+\hline
+\end{DoxyParams}
+\index{track@{track}!feedback@{feedback}}
+\index{feedback@{feedback}!track@{track}}
+\subsubsection[{\texorpdfstring{feedback}{feedback}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+feedback}\hypertarget{namespacetrack_a99bdf85519e387c8c0c7612a0b46dc56}{}\label{namespacetrack_a99bdf85519e387c8c0c7612a0b46dc56}
+\index{track@{track}!green\+Lower@{green\+Lower}}
+\index{green\+Lower@{green\+Lower}!track@{track}}
+\subsubsection[{\texorpdfstring{green\+Lower}{greenLower}}]{\setlength{\rightskip}{0pt plus 5cm}tuple track.\+green\+Lower = (50, 50, 50)}\hypertarget{namespacetrack_ae3b9cb19e6647fa48bae473c1b3152ea}{}\label{namespacetrack_ae3b9cb19e6647fa48bae473c1b3152ea}
+\index{track@{track}!green\+Upper@{green\+Upper}}
+\index{green\+Upper@{green\+Upper}!track@{track}}
+\subsubsection[{\texorpdfstring{green\+Upper}{greenUpper}}]{\setlength{\rightskip}{0pt plus 5cm}tuple track.\+green\+Upper = (70, 255, 255)}\hypertarget{namespacetrack_a2a45da69392a010f85aa42de064d7c85}{}\label{namespacetrack_a2a45da69392a010f85aa42de064d7c85}
+\index{track@{track}!magenta\+Lower@{magenta\+Lower}}
+\index{magenta\+Lower@{magenta\+Lower}!track@{track}}
+\subsubsection[{\texorpdfstring{magenta\+Lower}{magentaLower}}]{\setlength{\rightskip}{0pt plus 5cm}tuple track.\+magenta\+Lower = (125, 50, 50)}\hypertarget{namespacetrack_a4778acbcac36117d4384a64aff1283bd}{}\label{namespacetrack_a4778acbcac36117d4384a64aff1283bd}
+\index{track@{track}!magenta\+Upper@{magenta\+Upper}}
+\index{magenta\+Upper@{magenta\+Upper}!track@{track}}
+\subsubsection[{\texorpdfstring{magenta\+Upper}{magentaUpper}}]{\setlength{\rightskip}{0pt plus 5cm}tuple track.\+magenta\+Upper = (150, 255, 255)}\hypertarget{namespacetrack_a159d6ddb51827712e530f1f1e59369c7}{}\label{namespacetrack_a159d6ddb51827712e530f1f1e59369c7}
+\index{track@{track}!pose\+\_\+@{pose\+\_\+}}
+\index{pose\+\_\+@{pose\+\_\+}!track@{track}}
+\subsubsection[{\texorpdfstring{pose\+\_\+}{pose_}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+pose\+\_\+ = Pose()}\hypertarget{namespacetrack_a4fcc239004d2df0fe5a4ea23c9b0495f}{}\label{namespacetrack_a4fcc239004d2df0fe5a4ea23c9b0495f}
+\index{track@{track}!position\+\_\+@{position\+\_\+}}
+\index{position\+\_\+@{position\+\_\+}!track@{track}}
+\subsubsection[{\texorpdfstring{position\+\_\+}{position_}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+position\+\_\+ = Point()}\hypertarget{namespacetrack_a7299b48bcf1df87418078ead7079339d}{}\label{namespacetrack_a7299b48bcf1df87418078ead7079339d}
+\index{track@{track}!queue\+\_\+size@{queue\+\_\+size}}
+\index{queue\+\_\+size@{queue\+\_\+size}!track@{track}}
+\subsubsection[{\texorpdfstring{queue\+\_\+size}{queue_size}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+queue\+\_\+size}\hypertarget{namespacetrack_a5a1cccbe6088028aaf5793b2c3f6e94a}{}\label{namespacetrack_a5a1cccbe6088028aaf5793b2c3f6e94a}
+\index{track@{track}!red\+Lower@{red\+Lower}}
+\index{red\+Lower@{red\+Lower}!track@{track}}
+\subsubsection[{\texorpdfstring{red\+Lower}{redLower}}]{\setlength{\rightskip}{0pt plus 5cm}tuple track.\+red\+Lower = (0, 50, 50)}\hypertarget{namespacetrack_a760fae991a015aa4ee4c08fcaadeb576}{}\label{namespacetrack_a760fae991a015aa4ee4c08fcaadeb576}
+\index{track@{track}!red\+Upper@{red\+Upper}}
+\index{red\+Upper@{red\+Upper}!track@{track}}
+\subsubsection[{\texorpdfstring{red\+Upper}{redUpper}}]{\setlength{\rightskip}{0pt plus 5cm}tuple track.\+red\+Upper = (5, 255, 255)}\hypertarget{namespacetrack_a1549403b0cb47b249afba9cdeca7ec16}{}\label{namespacetrack_a1549403b0cb47b249afba9cdeca7ec16}
+\index{track@{track}!result@{result}}
+\index{result@{result}!track@{track}}
+\subsubsection[{\texorpdfstring{result}{result}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+result}\hypertarget{namespacetrack_a029891d5b553b75642e169dde1d3fa2f}{}\label{namespacetrack_a029891d5b553b75642e169dde1d3fa2f}
+\index{track@{track}!state@{state}}
+\index{state@{state}!track@{track}}
+\subsubsection[{\texorpdfstring{state}{state}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+state}\hypertarget{namespacetrack_ad5613e9a1ce2fa3764d6bed0c696592b}{}\label{namespacetrack_ad5613e9a1ce2fa3764d6bed0c696592b}
+\index{track@{track}!sub\+\_\+odom@{sub\+\_\+odom}}
+\index{sub\+\_\+odom@{sub\+\_\+odom}!track@{track}}
+\subsubsection[{\texorpdfstring{sub\+\_\+odom}{sub_odom}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+sub\+\_\+odom = rospy.\+Subscriber(\textquotesingle{}odom\textquotesingle{}, Odometry, {\bf clbk\+\_\+odom})}\hypertarget{namespacetrack_af008e41d1a7c809d5ab05c44c21be95d}{}\label{namespacetrack_af008e41d1a7c809d5ab05c44c21be95d}
+\index{track@{track}!success@{success}}
+\index{success@{success}!track@{track}}
+\subsubsection[{\texorpdfstring{success}{success}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+success}\hypertarget{namespacetrack_a368c0796cb0ee26a2f62cda3c828267f}{}\label{namespacetrack_a368c0796cb0ee26a2f62cda3c828267f}
+\index{track@{track}!Twist@{Twist}}
+\index{Twist@{Twist}!track@{track}}
+\subsubsection[{\texorpdfstring{Twist}{Twist}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+Twist}\hypertarget{namespacetrack_a5c72c6ba52347132ee923f404620079a}{}\label{namespacetrack_a5c72c6ba52347132ee923f404620079a}
+\index{track@{track}!unfound\+\_\+ball\+\_\+counter@{unfound\+\_\+ball\+\_\+counter}}
+\index{unfound\+\_\+ball\+\_\+counter@{unfound\+\_\+ball\+\_\+counter}!track@{track}}
+\subsubsection[{\texorpdfstring{unfound\+\_\+ball\+\_\+counter}{unfound_ball_counter}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+unfound\+\_\+ball\+\_\+counter}\hypertarget{namespacetrack_a571b301da76cd6ce19cecf7aeb902f5f}{}\label{namespacetrack_a571b301da76cd6ce19cecf7aeb902f5f}
+\index{track@{track}!vel\+\_\+pub@{vel\+\_\+pub}}
+\index{vel\+\_\+pub@{vel\+\_\+pub}!track@{track}}
+\subsubsection[{\texorpdfstring{vel\+\_\+pub}{vel_pub}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+vel\+\_\+pub}\hypertarget{namespacetrack_a2f8cfd339cb658bb3d8f142eef1dbaeb}{}\label{namespacetrack_a2f8cfd339cb658bb3d8f142eef1dbaeb}
+
+
+Publisher to move the robot. 
+
+\index{track@{track}!yellow\+Lower@{yellow\+Lower}}
+\index{yellow\+Lower@{yellow\+Lower}!track@{track}}
+\subsubsection[{\texorpdfstring{yellow\+Lower}{yellowLower}}]{\setlength{\rightskip}{0pt plus 5cm}tuple track.\+yellow\+Lower = (25, 50, 50)}\hypertarget{namespacetrack_a29d421bd8aa932d14a9cbf7779bba62b}{}\label{namespacetrack_a29d421bd8aa932d14a9cbf7779bba62b}
+\index{track@{track}!yellow\+Upper@{yellow\+Upper}}
+\index{yellow\+Upper@{yellow\+Upper}!track@{track}}
+\subsubsection[{\texorpdfstring{yellow\+Upper}{yellowUpper}}]{\setlength{\rightskip}{0pt plus 5cm}tuple track.\+yellow\+Upper = (35, 255, 255)}\hypertarget{namespacetrack_a2071c6a41ecce68b84c956b0c5f8219a}{}\label{namespacetrack_a2071c6a41ecce68b84c956b0c5f8219a}
