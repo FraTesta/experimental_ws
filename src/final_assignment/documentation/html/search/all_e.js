@@ -1,12 +1,12 @@
 var searchData=
 [
-  ['target_5froom',['TARGET_ROOM',['../classcm2_1_1Play.html#a04801b2166d02c4d58ad8a12ec71dafd',1,'cm2.Play.TARGET_ROOM()'],['../classcommandManager_1_1Play.html#a4279053c8c702e0fcbc425efcd2b207c',1,'commandManager.Play.TARGET_ROOM()'],['../namespacecm2.html#aa4c9405b40d178ce2b7f2f4e3a5eb359',1,'cm2.TARGET_ROOM()'],['../namespacecommandManager.html#ace76b1a89b584c851c50bc3ad66e1d69',1,'commandManager.TARGET_ROOM()']]],
-  ['to_5fstring',['to_string',['../classRooms_1_1Rooms.html#af4de8388233d61aa35d1567f7a1499c5',1,'Rooms::Rooms']]],
-  ['track',['Track',['../classcm2_1_1Track.html',1,'cm2']]],
-  ['track',['track',['../namespacetrack.html',1,'track'],['../namespacetrack.html#a7224b28ef3155cf9597b97efe6411490',1,'track.track()']]],
-  ['track',['Track',['../classcommandManager_1_1Track.html',1,'commandManager']]],
-  ['track_2epy',['track.py',['../track_8py.html',1,'']]],
-  ['trackaction',['TrackAction',['../classtrack_1_1TrackAction.html',1,'track']]],
-  ['trackclient',['trackClient',['../classcm2_1_1Track.html#a02f4b58b488d60b1f9accac373a28dd1',1,'cm2.Track.trackClient()'],['../classcommandManager_1_1Track.html#a4a57e4e548d9213c4623f5d528753b1f',1,'commandManager.Track.trackClient()']]],
-  ['twist',['Twist',['../namespacetrack.html#a5c72c6ba52347132ee923f404620079a',1,'track']]]
+  ['sleep',['Sleep',['../classcm2_1_1Sleep.html',1,'cm2']]],
+  ['sleep',['Sleep',['../classcommandManager_1_1Sleep.html',1,'commandManager']]],
+  ['startdetection',['startDetection',['../classroomDetector_1_1roomDetector.html#aa8a2aea1db8ce538d11ddb501fae2822',1,'roomDetector::roomDetector']]],
+  ['state',['state',['../classtrack_1_1TrackAction.html#a56031d0f135cf2d2f7c950325059f7bd',1,'track::TrackAction']]],
+  ['stop',['stop',['../classtimerProva_1_1lol.html#a9da630fa588637e3c936481e79245115',1,'timerProva::lol']]],
+  ['stopdetection',['stopDetection',['../classroomDetector_1_1roomDetector.html#a1b30655196cae01d824ddeab2bb7e0e3',1,'roomDetector::roomDetector']]],
+  ['string',['String',['../classroomDetector_1_1roomDetector.html#a14b6749ddaf264a41497904c0513ed9b',1,'roomDetector.roomDetector.String()'],['../classroomsDetection_1_1roomDetector.html#a2d4775447d05df098592bf322c457a03',1,'roomsDetection.roomDetector.String()']]],
+  ['sub_5fodom',['sub_odom',['../classtrack_1_1TrackAction.html#a4cbc03d130bcf2203bc68f37d02dc4c5',1,'track::TrackAction']]],
+  ['success',['success',['../classtrack_1_1TrackAction.html#a8c79189ba62cf316bffaa4c00b0320fe',1,'track::TrackAction']]]
 ];

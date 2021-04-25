@@ -1,5 +1,6 @@
 var hierarchy =
 [
+    [ "timerProva.lol", "classtimerProva_1_1lol.html", null ],
     [ "object", null, [
       [ "track.TrackAction", "classtrack_1_1TrackAction.html", null ]
     ] ],

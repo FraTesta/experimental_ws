@@ -1,10 +1,15 @@
 \hypertarget{roomDetector_8py}{}\section{/home/experimental\+\_\+ws/src/final\+\_\+assignment/scripts/room\+Detector.py File Reference}
 \label{roomDetector_8py}\index{/home/experimental\+\_\+ws/src/final\+\_\+assignment/scripts/room\+Detector.\+py@{/home/experimental\+\_\+ws/src/final\+\_\+assignment/scripts/room\+Detector.\+py}}
+
+
+This script implements the \hyperlink{namespaceroomDetector}{room\+Detector} class which basically is able to detect a ball and publish its color on the new\+Room topic.  
+
+
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 class \hyperlink{classroomDetector_1_1roomDetector}{room\+Detector.\+room\+Detector}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em This class implements a subscriber to the camera topic of the robot and applies several open\+CV mask in order to recognise the color of the ball, then it send the detected color to the \hyperlink{namespacecommandManager}{command\+Manager} node. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
@@ -14,6 +19,11 @@ class \hyperlink{classroomDetector_1_1roomDetector}{room\+Detector.\+room\+Detec
 \begin{DoxyCompactItemize}
 \item 
 def \hyperlink{namespaceroomDetector_a4fd40abc44c2744ddafc00230ac813ec}{room\+Detector.\+detection\+State} (state, rd)
-\item 
+\begin{DoxyCompactList}\small\item\em Callback function of the start\+RD subscriber which recive and handle the msg coming from the \hyperlink{namespacecommandManager}{command\+Manager} node. \end{DoxyCompactList}\item 
 def \hyperlink{namespaceroomDetector_ab6eaefd8e04507b7121192d3546aba49}{room\+Detector.\+main} (args)
 \end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This script implements the \hyperlink{namespaceroomDetector}{room\+Detector} class which basically is able to detect a ball and publish its color on the new\+Room topic. 
+

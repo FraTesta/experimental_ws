@@ -1,11 +1,19 @@
 var searchData=
 [
-  ['sleep',['Sleep',['../classcm2_1_1Sleep.html',1,'cm2']]],
-  ['sleep',['Sleep',['../classcommandManager_1_1Sleep.html',1,'commandManager']]],
-  ['startdetection',['startDetection',['../classroomDetector_1_1roomDetector.html#aa8a2aea1db8ce538d11ddb501fae2822',1,'roomDetector::roomDetector']]],
-  ['state',['state',['../namespacetrack.html#ad5613e9a1ce2fa3764d6bed0c696592b',1,'track']]],
-  ['stopdetection',['stopDetection',['../classroomDetector_1_1roomDetector.html#a1b30655196cae01d824ddeab2bb7e0e3',1,'roomDetector::roomDetector']]],
-  ['string',['String',['../classroomDetector_1_1roomDetector.html#a14b6749ddaf264a41497904c0513ed9b',1,'roomDetector.roomDetector.String()'],['../classroomsDetection_1_1roomDetector.html#a2d4775447d05df098592bf322c457a03',1,'roomsDetection.roomDetector.String()']]],
-  ['sub_5fodom',['sub_odom',['../namespacetrack.html#af008e41d1a7c809d5ab05c44c21be95d',1,'track']]],
-  ['success',['success',['../namespacetrack.html#a368c0796cb0ee26a2f62cda3c828267f',1,'track']]]
+  ['random',['RANDOM',['../namespacecommandManager.html#afb1c5b8d9e6c746c82f4abf3fffe02a5',1,'commandManager']]],
+  ['rate',['rate',['../classcm2_1_1Normal.html#a9a5e8cb0a56188898c1641699018750f',1,'cm2.Normal.rate()'],['../classcm2_1_1Sleep.html#a666ea7e9b7ab31265b77a6ce88bbdc06',1,'cm2.Sleep.rate()'],['../classcm2_1_1Play.html#a4f8427d5a6c4eaeaa0e171879dbf6b21',1,'cm2.Play.rate()'],['../classcm2_1_1Find.html#a7d73b556208fcf41081fb23ae0e1b262',1,'cm2.Find.rate()'],['../classcommandManager_1_1Normal.html#a32e84cf5ac08ffeb9cb1a21d4b484a32',1,'commandManager.Normal.rate()'],['../classcommandManager_1_1Sleep.html#ad1bca2bd2c57109d92089b82fafe23c1',1,'commandManager.Sleep.rate()'],['../classcommandManager_1_1Play.html#a34aba8df5dfec3560f194934b7e377ad',1,'commandManager.Play.rate()'],['../classcommandManager_1_1Find.html#a9c7870d56b1d25a57af7840fb2967f99',1,'commandManager.Find.rate()'],['../classroomDetector_1_1roomDetector.html#ad3dbc1e4c7a827af098c86101198a1f4',1,'roomDetector.roomDetector.rate()'],['../classroomsDetection_1_1roomDetector.html#af9b73918d2c339e530129e12ad73fae2',1,'roomsDetection.roomDetector.rate()']]],
+  ['reach_5fball',['reach_ball',['../classtrack_1_1TrackAction.html#a3b41ed0eb7a403459469c27dd63a2392',1,'track::TrackAction']]],
+  ['redlower',['redLower',['../namespacetrack.html#a760fae991a015aa4ee4c08fcaadeb576',1,'track']]],
+  ['redupper',['redUpper',['../namespacetrack.html#a1549403b0cb47b249afba9cdeca7ec16',1,'track']]],
+  ['result',['result',['../classcm2_1_1Track.html#a9b07cd54eb054fe55a7224acacd19e5d',1,'cm2.Track.result()'],['../classcommandManager_1_1Track.html#aa66fb1baab2433c729df0919ba0989a7',1,'commandManager.Track.result()'],['../classtrack_1_1TrackAction.html#ae62bfb3233b566df94fde636d8d26877',1,'track.TrackAction.result()']]],
+  ['roomd_5fpub',['roomD_pub',['../namespacecm2.html#a10595b8ceb75d6f270e09b318feec10a',1,'cm2']]],
+  ['roomdetector',['roomDetector',['../classroomsDetection_1_1roomDetector.html',1,'roomsDetection']]],
+  ['roomdetector',['roomDetector',['../namespaceroomDetector.html',1,'']]],
+  ['roomdetector',['roomDetector',['../classroomDetector_1_1roomDetector.html',1,'roomDetector']]],
+  ['roomdetector_2epy',['roomDetector.py',['../roomDetector_8py.html',1,'']]],
+  ['rooms',['Rooms',['../namespaceRooms.html',1,'Rooms'],['../classRooms_1_1Rooms.html#a45a955141e4dd142491b43124c07ab95',1,'Rooms.Rooms.ROOMS()'],['../namespacecm2.html#a9f3e1bcc3f1b75e9e4bd3a3784bd056d',1,'cm2.rooms()'],['../namespacecommandManager.html#a868809e1f6a79e7b7ce5ea405e978d48',1,'commandManager.rooms()']]],
+  ['rooms',['Rooms',['../classRooms_1_1Rooms.html',1,'Rooms']]],
+  ['rooms_2epy',['Rooms.py',['../Rooms_8py.html',1,'']]],
+  ['roomsdetection',['roomsDetection',['../namespaceroomsDetection.html',1,'']]],
+  ['roomsdetection_2epy',['roomsDetection.py',['../roomsDetection_8py.html',1,'']]]
 ];

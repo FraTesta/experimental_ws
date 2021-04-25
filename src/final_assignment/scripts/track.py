@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+## @file track.py
+#  This script is an acttion server which takes a color of a ball in proximity of the robot and start to track it. It may happen that the robot is no longer able to detect the ball, in this case the robot will rotate around itself (right and left) in order to find the ball again. If not the mission will be aborted
+ 
+
 # Python libs
 import sys
 import time
@@ -27,9 +31,7 @@ import actionlib
 import actionlib.msg
 import final_assignment.msg
 
-#import roomDetection
-
-# Colors
+# Colors Thresholds 
 blackLower = (0, 0, 0)
 blackUpper = (5,50,50)
 redLower = (0, 50, 50)
@@ -43,58 +45,47 @@ blueUpper = (130, 255, 255)
 magentaLower = (125, 50, 50)
 magentaUpper = (150, 255, 255)
 
-
+## Variable of type Point which stores the current odometry position of the robot
 position_ = Point()
+## Variable of type Pose which stores the current odometry position of the robot 
 pose_ = Pose()
 
 
-## Odom sub callback
+## Callback to the Odom topic which updates the global variables: position_ and pose_
 def clbk_odom(msg):
     global position_
     global pose_
-    # global yaw_
 
-    # position
     position_ = msg.pose.pose.position
     pose_ = msg.pose.pose
 
-    '''
-    # yaw
-    quaternion = (
-        msg.pose.pose.orientation.x,
-        msg.pose.pose.orientation.y,
-        msg.pose.pose.orientation.z,
-        msg.pose.pose.orientation.w)
-    euler = transformations.euler_from_quaternion(quaternion)
-    yaw_ = euler[2]'''
 
 
 
-
-class TrackAction(object): # forse ci va il goal
-    
-     
-    
+## Class that implements the action server for tracking the ball
+class TrackAction(object): 
+             
     def __init__(self, name):
+	## Name of the action server
         self.actionName = name
         self.act_s = actionlib.SimpleActionServer('trackAction', final_assignment.msg.trackBallAction, self.track, auto_start=False)
         self.act_s.start()
 	self.feedback = final_assignment.msg.trackBallFeedback()
     	self.result = final_assignment.msg.trackBallResult()
-	## Publisher to move the robot
-        self.vel_pub = rospy.Publisher("cmd_vel",Twist, queue_size=1)
-        # posso mettere qui volendo il sub scriber ad odom 
+
+        ## Flag that notifies that the robot has reached the ball correctly
 	self.success = False
-	# To abort the mission if for a certain time it doesn't find the ball
+	## Variables that counts how many times the robot was not able to detect the ball again. 
 	self.unfound_ball_counter = 0
-	# abort mission since the robot is not able to detetct the ball again
+	## Flag that notifies aborting mission since the robot was not able to detect the ball 
 	self.abort = False
 
 
+    ## Callback function of the camera subscriber which computes the velocities to apply to the robot untill it reaches the ball.
+    ## @param ros_image is the image decompressed and converted in OpendCv
     def reach_ball(self, ros_image):
         global position_, pose_
-        #### direct conversion to CV2 ####
-        ## @param image_np is the image decompressed and converted in OpendCv
+        #### direct conversion to CV2 ####        
         np_arr = np.fromstring(ros_image.data, np.uint8)
         image_np = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)  
 
@@ -157,27 +148,30 @@ class TrackAction(object): # forse ci va il goal
         else:
             rospy.loginfo("[Track] Ball not found")
 	    vel = Twist()
-	    if self.unfound_ball_counter <= 6:
+	    if self.unfound_ball_counter <= 10:
 		 rospy.loginfo("[Track] Turn Right to find the ball")
                  vel.angular.z = 1.5
 		 self.vel_pub.publish(vel) 
-	    elif self.unfound_ball_counter < 12:
+	    elif self.unfound_ball_counter < 20:
 		 rospy.loginfo("[Track] Turn Left to find the ball")
                  vel.angular.z = -1.5
 		 self.vel_pub.publish(vel)
-	    elif self.unfound_ball_counter == 12:
+	    elif self.unfound_ball_counter == 20:
 		 rospy.loginfo("[Track] Robot is unable to find the ball ")
 		 self.unfound_ball_counter = 0
 		 self.abort = True   
 	    self.unfound_ball_counter += 1
 	    
-        
+    ## Action server routine function 
+    # @param goal Contains the color of the ball that has been detected     
     def track(self, goal):
         self.color = goal.color
-        # crate the subscriber to camera1 in order to recive and handle the images
-        camera_sub = rospy.Subscriber("camera1/image_raw/compressed", CompressedImage, self.reach_ball, queue_size=1)
-	# Odom sub to get and save the robot position when it reachs the ball 
-        sub_odom = rospy.Subscriber('odom', Odometry, clbk_odom)  
+	## Odom subcriber to get and save the robot position and send them back to the commandManager 
+        sub_odom = rospy.Subscriber('odom', Odometry, clbk_odom)
+	## Publisher to the cmd_vel topic in order to move the robot
+        self.vel_pub = rospy.Publisher("cmd_vel",Twist, queue_size=1)
+        ## Subscriber to camera1 in order to recive and handle the images
+        camera_sub = rospy.Subscriber("camera1/image_raw/compressed", CompressedImage, self.reach_ball, queue_size=1)	 
         
         while not self.success:
             if self.act_s.is_preempt_requested():
@@ -190,9 +184,10 @@ class TrackAction(object): # forse ci va il goal
 	    else:
                 self.feedback.state = "Reaching the ball..."
 		self.act_s.publish_feedback(self.feedback)
-	# Unregister from the camera topic
+	# Unregister from the odom and camera topic
 	camera_sub.unregister()
 	sub_odom.unregister()
+	self.vel_pub.unregister()
 	if not self.abort == True:
 	     self.act_s.set_succeeded(self.result)
 	     
@@ -209,8 +204,6 @@ class TrackAction(object): # forse ci va il goal
 def main():
     try:
         rospy.init_node('Track')
-        
-	# forse perche e quello su cui si basa l action server 
 
         track = TrackAction('TrackAction')
 

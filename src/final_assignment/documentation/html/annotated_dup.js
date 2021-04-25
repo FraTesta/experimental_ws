@@ -5,5 +5,6 @@ var annotated_dup =
     [ "roomDetector", "namespaceroomDetector.html", "namespaceroomDetector" ],
     [ "Rooms", "namespaceRooms.html", "namespaceRooms" ],
     [ "roomsDetection", "namespaceroomsDetection.html", "namespaceroomsDetection" ],
+    [ "timerProva", "namespacetimerProva.html", "namespacetimerProva" ],
     [ "track", "namespacetrack.html", "namespacetrack" ]
 ];

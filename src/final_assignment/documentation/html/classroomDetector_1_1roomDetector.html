@@ -113,18 +113,25 @@ $(document).ready(function(){initNavTree('classroomDetector_1_1roomDetector.html
 <div class="title">roomDetector.roomDetector Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>This class implements a subscriber to the camera topic of the robot and applies several openCV mask in order to recognise the color of the ball, then it send the detected color to the <a class="el" href="namespacecommandManager.html">commandManager</a> node.  
+ <a href="classroomDetector_1_1roomDetector.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a1038f6f11c424041c0d9584b6f9c6833"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classroomDetector_1_1roomDetector.html#a1038f6f11c424041c0d9584b6f9c6833">__init__</a> (self)</td></tr>
 <tr class="separator:a1038f6f11c424041c0d9584b6f9c6833"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c27707debecd7e07f55f0e66f460b37"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classroomDetector_1_1roomDetector.html#a4c27707debecd7e07f55f0e66f460b37">find_color</a> (self, hsv_min, hsv_max, image_np)</td></tr>
+<tr class="memdesc:a4c27707debecd7e07f55f0e66f460b37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method returns True when a ball is detected.  <a href="#a4c27707debecd7e07f55f0e66f460b37">More...</a><br /></td></tr>
 <tr class="separator:a4c27707debecd7e07f55f0e66f460b37"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c045c0740ea0cee247c81d20a9d1c91"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classroomDetector_1_1roomDetector.html#a6c045c0740ea0cee247c81d20a9d1c91">find_ball</a> (self, ros_image)</td></tr>
+<tr class="memdesc:a6c045c0740ea0cee247c81d20a9d1c91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback method for the image camera subscriber, so it's called everytime a new image is available.  <a href="#a6c045c0740ea0cee247c81d20a9d1c91">More...</a><br /></td></tr>
 <tr class="separator:a6c045c0740ea0cee247c81d20a9d1c91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa8a2aea1db8ce538d11ddb501fae2822"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classroomDetector_1_1roomDetector.html#aa8a2aea1db8ce538d11ddb501fae2822">startDetection</a> (self)</td></tr>
+<tr class="memdesc:aa8a2aea1db8ce538d11ddb501fae2822"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the subscriber to the camera topic, thus the node starts to detect balls.  <a href="#aa8a2aea1db8ce538d11ddb501fae2822">More...</a><br /></td></tr>
 <tr class="separator:aa8a2aea1db8ce538d11ddb501fae2822"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b30655196cae01d824ddeab2bb7e0e3"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classroomDetector_1_1roomDetector.html#a1b30655196cae01d824ddeab2bb7e0e3">stopDetection</a> (self)</td></tr>
+<tr class="memdesc:a1b30655196cae01d824ddeab2bb7e0e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Intterrupt the subsciption to the camera topic.  <a href="#a1b30655196cae01d824ddeab2bb7e0e3">More...</a><br /></td></tr>
 <tr class="separator:a1b30655196cae01d824ddeab2bb7e0e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
@@ -132,9 +139,10 @@ Static Public Attributes</h2></td></tr>
 <tr class="memitem:ac3ba7d2b6d48205de38cd18b333237d6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classroomDetector_1_1roomDetector.html#ac3ba7d2b6d48205de38cd18b333237d6">anonymous</a></td></tr>
 <tr class="separator:ac3ba7d2b6d48205de38cd18b333237d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e899d16548ade375ed0b0dc6e1d9d98"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classroomDetector_1_1roomDetector.html#a1e899d16548ade375ed0b0dc6e1d9d98">prevColor</a></td></tr>
-<tr class="memdesc:a1e899d16548ade375ed0b0dc6e1d9d98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains the previous color detected.  <a href="#a1e899d16548ade375ed0b0dc6e1d9d98">More...</a><br /></td></tr>
+<tr class="memdesc:a1e899d16548ade375ed0b0dc6e1d9d98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains the previously detected color in order to avoid notifying the same room several times, when the robot starts to track it.  <a href="#a1e899d16548ade375ed0b0dc6e1d9d98">More...</a><br /></td></tr>
 <tr class="separator:a1e899d16548ade375ed0b0dc6e1d9d98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35a2705eee8284eaad169dd0830fc6de"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classroomDetector_1_1roomDetector.html#a35a2705eee8284eaad169dd0830fc6de">newRoomPub</a></td></tr>
+<tr class="memdesc:a35a2705eee8284eaad169dd0830fc6de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subsriber to get the compressed images from the robot camera.  <a href="#a35a2705eee8284eaad169dd0830fc6de">More...</a><br /></td></tr>
 <tr class="separator:a35a2705eee8284eaad169dd0830fc6de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a14b6749ddaf264a41497904c0513ed9b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classroomDetector_1_1roomDetector.html#a14b6749ddaf264a41497904c0513ed9b">String</a></td></tr>
 <tr class="separator:a14b6749ddaf264a41497904c0513ed9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -149,7 +157,9 @@ Static Public Attributes</h2></td></tr>
 <tr class="memitem:a86847f178ca59553c205557f2de199d8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classroomDetector_1_1roomDetector.html#a86847f178ca59553c205557f2de199d8">find_ball</a></td></tr>
 <tr class="separator:a86847f178ca59553c205557f2de199d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This class implements a subscriber to the camera topic of the robot and applies several openCV mask in order to recognise the color of the ball, then it send the detected color to the <a class="el" href="namespacecommandManager.html">commandManager</a> node. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a1038f6f11c424041c0d9584b6f9c6833"></a>
 <div class="memitem">
 <div class="memproto">
@@ -191,6 +201,14 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Callback method for the image camera subscriber, so it's called everytime a new image is available. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">image_np</td><td>is the image decompressed and converted in OpendCv </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="a4c27707debecd7e07f55f0e66f460b37"></a>
@@ -229,6 +247,16 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Method returns True when a ball is detected. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hsv_min</td><td>minimum threshold of the color to be detected expressed in hsv </td></tr>
+    <tr><td class="paramname">hsv_max</td><td>maximum threshold of the color to be detected expressed in hsv </td></tr>
+    <tr><td class="paramname">image_np</td><td>image stored in a numpy array </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="aa8a2aea1db8ce538d11ddb501fae2822"></a>
@@ -245,6 +273,8 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Start the subscriber to the camera topic, thus the node starts to detect balls. </p>
+
 </div>
 </div>
 <a class="anchor" id="a1b30655196cae01d824ddeab2bb7e0e3"></a>
@@ -260,6 +290,8 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Intterrupt the subsciption to the camera topic. </p>
 
 </div>
 </div>
@@ -362,6 +394,8 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Subsriber to get the compressed images from the robot camera. </p>
+
 </div>
 </div>
 <a class="anchor" id="a1e899d16548ade375ed0b0dc6e1d9d98"></a>
@@ -382,7 +416,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Contains the previous color detected. </p>
+<p>Contains the previously detected color in order to avoid notifying the same room several times, when the robot starts to track it. </p>
 
 </div>
 </div>

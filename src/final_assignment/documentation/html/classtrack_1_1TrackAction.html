@@ -105,10 +105,18 @@ $(document).ready(function(){initNavTree('classtrack_1_1TrackAction.html','');})
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="classtrack_1_1TrackAction-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">track.TrackAction Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Class that implements the action server for tracking the ball.  
+ <a href="classtrack_1_1TrackAction.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for track.TrackAction:</div>
 <div class="dyncontent">
@@ -119,6 +127,491 @@ Collaboration diagram for track.TrackAction:</div>
 <div class="dyncontent">
 <div class="center"><img src="classtrack_1_1TrackAction__coll__graph.png" border="0" usemap="#track_8TrackAction_coll__map" alt="Collaboration graph"/></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ad71d2ce7ecd91c384219ada7e8ed74e3"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#ad71d2ce7ecd91c384219ada7e8ed74e3">__init__</a> (self, name)</td></tr>
+<tr class="separator:ad71d2ce7ecd91c384219ada7e8ed74e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b41ed0eb7a403459469c27dd63a2392"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#a3b41ed0eb7a403459469c27dd63a2392">reach_ball</a> (self, ros_image)</td></tr>
+<tr class="memdesc:a3b41ed0eb7a403459469c27dd63a2392"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function of the camera subscriber which computes the velocities to apply to the robot untill it reaches the ball.  <a href="#a3b41ed0eb7a403459469c27dd63a2392">More...</a><br /></td></tr>
+<tr class="separator:a3b41ed0eb7a403459469c27dd63a2392"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d41a25e35227ab25323a95eeb9a4bb2"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#a1d41a25e35227ab25323a95eeb9a4bb2">track</a> (self, goal)</td></tr>
+<tr class="memdesc:a1d41a25e35227ab25323a95eeb9a4bb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Action server routine function.  <a href="#a1d41a25e35227ab25323a95eeb9a4bb2">More...</a><br /></td></tr>
+<tr class="separator:a1d41a25e35227ab25323a95eeb9a4bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:abba894c7d22403050003dc50f5d79bba"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#abba894c7d22403050003dc50f5d79bba">color</a></td></tr>
+<tr class="memdesc:abba894c7d22403050003dc50f5d79bba"><td class="mdescLeft">&#160;</td><td class="mdescRight">direct conversion to CV2 ####  <a href="#abba894c7d22403050003dc50f5d79bba">More...</a><br /></td></tr>
+<tr class="separator:abba894c7d22403050003dc50f5d79bba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:abb57579f14aa39d1cc0f4379382390a6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#abb57579f14aa39d1cc0f4379382390a6">actionName</a></td></tr>
+<tr class="memdesc:abb57579f14aa39d1cc0f4379382390a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name of the action server.  <a href="#abb57579f14aa39d1cc0f4379382390a6">More...</a><br /></td></tr>
+<tr class="separator:abb57579f14aa39d1cc0f4379382390a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1870a4393e99629a3835f563374152e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#ae1870a4393e99629a3835f563374152e">act_s</a></td></tr>
+<tr class="separator:ae1870a4393e99629a3835f563374152e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d89a5a6bf3daf63df4b690e4c9a84a8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#a3d89a5a6bf3daf63df4b690e4c9a84a8">track</a></td></tr>
+<tr class="separator:a3d89a5a6bf3daf63df4b690e4c9a84a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb30f796983b2999ad62d71535795668"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#aeb30f796983b2999ad62d71535795668">auto_start</a></td></tr>
+<tr class="separator:aeb30f796983b2999ad62d71535795668"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acce0064c9d83a91f00d92a854014cdf5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#acce0064c9d83a91f00d92a854014cdf5">feedback</a></td></tr>
+<tr class="separator:acce0064c9d83a91f00d92a854014cdf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae62bfb3233b566df94fde636d8d26877"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#ae62bfb3233b566df94fde636d8d26877">result</a></td></tr>
+<tr class="separator:ae62bfb3233b566df94fde636d8d26877"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c79189ba62cf316bffaa4c00b0320fe"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#a8c79189ba62cf316bffaa4c00b0320fe">success</a></td></tr>
+<tr class="memdesc:a8c79189ba62cf316bffaa4c00b0320fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag that notifies that the robot has reached the ball correctly.  <a href="#a8c79189ba62cf316bffaa4c00b0320fe">More...</a><br /></td></tr>
+<tr class="separator:a8c79189ba62cf316bffaa4c00b0320fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabc16f100d1f260d6712d8d74e055fda"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#aabc16f100d1f260d6712d8d74e055fda">unfound_ball_counter</a></td></tr>
+<tr class="memdesc:aabc16f100d1f260d6712d8d74e055fda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variables that counts how many times the robot was not able to detect the ball again.  <a href="#aabc16f100d1f260d6712d8d74e055fda">More...</a><br /></td></tr>
+<tr class="separator:aabc16f100d1f260d6712d8d74e055fda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fac0918d826dc6cbf110784c8fcda99"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#a4fac0918d826dc6cbf110784c8fcda99">abort</a></td></tr>
+<tr class="memdesc:a4fac0918d826dc6cbf110784c8fcda99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag that notifies aborting mission since the robot was not able to detect the ball.  <a href="#a4fac0918d826dc6cbf110784c8fcda99">More...</a><br /></td></tr>
+<tr class="separator:a4fac0918d826dc6cbf110784c8fcda99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cbc03d130bcf2203bc68f37d02dc4c5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#a4cbc03d130bcf2203bc68f37d02dc4c5">sub_odom</a> = rospy.Subscriber('odom', Odometry, <a class="el" href="namespacetrack.html#ac547a00259cf9bddfb37b60063740e8d">clbk_odom</a>)</td></tr>
+<tr class="memdesc:a4cbc03d130bcf2203bc68f37d02dc4c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Odom subcriber to get and save the robot position and send them back to the <a class="el" href="namespacecommandManager.html">commandManager</a>.  <a href="#a4cbc03d130bcf2203bc68f37d02dc4c5">More...</a><br /></td></tr>
+<tr class="separator:a4cbc03d130bcf2203bc68f37d02dc4c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6105c2cad0d325296213d7c03c4fb6e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#af6105c2cad0d325296213d7c03c4fb6e">vel_pub</a></td></tr>
+<tr class="memdesc:af6105c2cad0d325296213d7c03c4fb6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Publisher to the cmd_vel topic in order to move the robot.  <a href="#af6105c2cad0d325296213d7c03c4fb6e">More...</a><br /></td></tr>
+<tr class="separator:af6105c2cad0d325296213d7c03c4fb6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabd955eb5b74ee508ba27bf6db4129e2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#aabd955eb5b74ee508ba27bf6db4129e2">Twist</a></td></tr>
+<tr class="separator:aabd955eb5b74ee508ba27bf6db4129e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47112fa77bb24c45494449d781bd35c4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#a47112fa77bb24c45494449d781bd35c4">queue_size</a></td></tr>
+<tr class="separator:a47112fa77bb24c45494449d781bd35c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71b1a13ec7fb0ba79d6f34416b7d54e1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#a71b1a13ec7fb0ba79d6f34416b7d54e1">camera_sub</a> = rospy.Subscriber(&quot;camera1/image_raw/compressed&quot;, CompressedImage, self.reach_ball, <a class="el" href="classtrack_1_1TrackAction.html#a47112fa77bb24c45494449d781bd35c4">queue_size</a>=1)</td></tr>
+<tr class="memdesc:a71b1a13ec7fb0ba79d6f34416b7d54e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscriber to camera1 in order to recive and handle the images.  <a href="#a71b1a13ec7fb0ba79d6f34416b7d54e1">More...</a><br /></td></tr>
+<tr class="separator:a71b1a13ec7fb0ba79d6f34416b7d54e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56031d0f135cf2d2f7c950325059f7bd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#a56031d0f135cf2d2f7c950325059f7bd">state</a></td></tr>
+<tr class="separator:a56031d0f135cf2d2f7c950325059f7bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class that implements the action server for tracking the ball. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="ad71d2ce7ecd91c384219ada7e8ed74e3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def track.TrackAction.__init__ </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a3b41ed0eb7a403459469c27dd63a2392"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def track.TrackAction.reach_ball </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>ros_image</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Callback function of the camera subscriber which computes the velocities to apply to the robot untill it reaches the ball. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ros_image</td><td>is the image decompressed and converted in OpendCv </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a1d41a25e35227ab25323a95eeb9a4bb2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def track.TrackAction.track </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>goal</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Action server routine function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">goal</td><td>Contains the color of the ball that has been detected </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a4fac0918d826dc6cbf110784c8fcda99"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">track.TrackAction.abort</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Flag that notifies aborting mission since the robot was not able to detect the ball. </p>
+
+</div>
+</div>
+<a class="anchor" id="ae1870a4393e99629a3835f563374152e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">track.TrackAction.act_s</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="abb57579f14aa39d1cc0f4379382390a6"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">track.TrackAction.actionName</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Name of the action server. </p>
+
+</div>
+</div>
+<a class="anchor" id="aeb30f796983b2999ad62d71535795668"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">track.TrackAction.auto_start</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a71b1a13ec7fb0ba79d6f34416b7d54e1"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">track.TrackAction.camera_sub = rospy.Subscriber(&quot;camera1/image_raw/compressed&quot;, CompressedImage, self.reach_ball, <a class="el" href="classtrack_1_1TrackAction.html#a47112fa77bb24c45494449d781bd35c4">queue_size</a>=1)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Subscriber to camera1 in order to recive and handle the images. </p>
+
+</div>
+</div>
+<a class="anchor" id="abba894c7d22403050003dc50f5d79bba"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">track.TrackAction.color</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>direct conversion to CV2 #### </p>
+
+</div>
+</div>
+<a class="anchor" id="acce0064c9d83a91f00d92a854014cdf5"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">track.TrackAction.feedback</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a47112fa77bb24c45494449d781bd35c4"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">track.TrackAction.queue_size</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae62bfb3233b566df94fde636d8d26877"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">track.TrackAction.result</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a56031d0f135cf2d2f7c950325059f7bd"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">track.TrackAction.state</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4cbc03d130bcf2203bc68f37d02dc4c5"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">track.TrackAction.sub_odom = rospy.Subscriber('odom', Odometry, <a class="el" href="namespacetrack.html#ac547a00259cf9bddfb37b60063740e8d">clbk_odom</a>)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Odom subcriber to get and save the robot position and send them back to the <a class="el" href="namespacecommandManager.html">commandManager</a>. </p>
+
+</div>
+</div>
+<a class="anchor" id="a8c79189ba62cf316bffaa4c00b0320fe"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">track.TrackAction.success</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Flag that notifies that the robot has reached the ball correctly. </p>
+
+</div>
+</div>
+<a class="anchor" id="a3d89a5a6bf3daf63df4b690e4c9a84a8"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">track.TrackAction.track</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aabd955eb5b74ee508ba27bf6db4129e2"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">track.TrackAction.Twist</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aabc16f100d1f260d6712d8d74e055fda"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">track.TrackAction.unfound_ball_counter</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Variables that counts how many times the robot was not able to detect the ball again. </p>
+
+</div>
+</div>
+<a class="anchor" id="af6105c2cad0d325296213d7c03c4fb6e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">track.TrackAction.vel_pub</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Publisher to the cmd_vel topic in order to move the robot. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/experimental_ws/src/final_assignment/scripts/<a class="el" href="track_8py.html">track.py</a></li>
 </ul>

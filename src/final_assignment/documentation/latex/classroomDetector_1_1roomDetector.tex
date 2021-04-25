@@ -1,27 +1,32 @@
 \hypertarget{classroomDetector_1_1roomDetector}{}\section{room\+Detector.\+room\+Detector Class Reference}
 \label{classroomDetector_1_1roomDetector}\index{room\+Detector.\+room\+Detector@{room\+Detector.\+room\+Detector}}
+
+
+This class implements a subscriber to the camera topic of the robot and applies several open\+CV mask in order to recognise the color of the ball, then it send the detected color to the \hyperlink{namespacecommandManager}{command\+Manager} node.  
+
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 def \hyperlink{classroomDetector_1_1roomDetector_a1038f6f11c424041c0d9584b6f9c6833}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self)
 \item 
 def \hyperlink{classroomDetector_1_1roomDetector_a4c27707debecd7e07f55f0e66f460b37}{find\+\_\+color} (self, hsv\+\_\+min, hsv\+\_\+max, image\+\_\+np)
-\item 
+\begin{DoxyCompactList}\small\item\em Method returns True when a ball is detected. \end{DoxyCompactList}\item 
 def \hyperlink{classroomDetector_1_1roomDetector_a6c045c0740ea0cee247c81d20a9d1c91}{find\+\_\+ball} (self, ros\+\_\+image)
-\item 
+\begin{DoxyCompactList}\small\item\em Callback method for the image camera subscriber, so it\textquotesingle{}s called everytime a new image is available. \end{DoxyCompactList}\item 
 def \hyperlink{classroomDetector_1_1roomDetector_aa8a2aea1db8ce538d11ddb501fae2822}{start\+Detection} (self)
-\item 
+\begin{DoxyCompactList}\small\item\em Start the subscriber to the camera topic, thus the node starts to detect balls. \end{DoxyCompactList}\item 
 def \hyperlink{classroomDetector_1_1roomDetector_a1b30655196cae01d824ddeab2bb7e0e3}{stop\+Detection} (self)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Intterrupt the subsciption to the camera topic. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{classroomDetector_1_1roomDetector_ac3ba7d2b6d48205de38cd18b333237d6}{anonymous}
 \item 
 \hyperlink{classroomDetector_1_1roomDetector_a1e899d16548ade375ed0b0dc6e1d9d98}{prev\+Color}
-\begin{DoxyCompactList}\small\item\em Contains the previous color detected. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Contains the previously detected color in order to avoid notifying the same room several times, when the robot starts to track it. \end{DoxyCompactList}\item 
 \hyperlink{classroomDetector_1_1roomDetector_a35a2705eee8284eaad169dd0830fc6de}{new\+Room\+Pub}
-\item 
+\begin{DoxyCompactList}\small\item\em Subsriber to get the compressed images from the robot camera. \end{DoxyCompactList}\item 
 \hyperlink{classroomDetector_1_1roomDetector_a14b6749ddaf264a41497904c0513ed9b}{String}
 \item 
 \hyperlink{classroomDetector_1_1roomDetector_a86aaaea08936260cb6e591c10b0dfeae}{queue\+\_\+size}
@@ -34,6 +39,11 @@ def \hyperlink{classroomDetector_1_1roomDetector_a1b30655196cae01d824ddeab2bb7e0
 \item 
 \hyperlink{classroomDetector_1_1roomDetector_a86847f178ca59553c205557f2de199d8}{find\+\_\+ball}
 \end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class implements a subscriber to the camera topic of the robot and applies several open\+CV mask in order to recognise the color of the ball, then it send the detected color to the \hyperlink{namespacecommandManager}{command\+Manager} node. 
+
 
 
 \subsection{Constructor \& Destructor Documentation}
@@ -55,6 +65,15 @@ def \hyperlink{classroomDetector_1_1roomDetector_a1b30655196cae01d824ddeab2bb7e0
 \item[{}]{ros\+\_\+image}
 \end{DoxyParamCaption}
 )}\hypertarget{classroomDetector_1_1roomDetector_a6c045c0740ea0cee247c81d20a9d1c91}{}\label{classroomDetector_1_1roomDetector_a6c045c0740ea0cee247c81d20a9d1c91}
+
+
+Callback method for the image camera subscriber, so it\textquotesingle{}s called everytime a new image is available. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em image\+\_\+np} & is the image decompressed and converted in Opend\+Cv \\
+\hline
+\end{DoxyParams}
 \index{room\+Detector\+::room\+Detector@{room\+Detector\+::room\+Detector}!find\+\_\+color@{find\+\_\+color}}
 \index{find\+\_\+color@{find\+\_\+color}!room\+Detector\+::room\+Detector@{room\+Detector\+::room\+Detector}}
 \subsubsection[{\texorpdfstring{find\+\_\+color(self, hsv\+\_\+min, hsv\+\_\+max, image\+\_\+np)}{find_color(self, hsv_min, hsv_max, image_np)}}]{\setlength{\rightskip}{0pt plus 5cm}def room\+Detector.\+room\+Detector.\+find\+\_\+color (
@@ -65,6 +84,19 @@ def \hyperlink{classroomDetector_1_1roomDetector_a1b30655196cae01d824ddeab2bb7e0
 \item[{}]{image\+\_\+np}
 \end{DoxyParamCaption}
 )}\hypertarget{classroomDetector_1_1roomDetector_a4c27707debecd7e07f55f0e66f460b37}{}\label{classroomDetector_1_1roomDetector_a4c27707debecd7e07f55f0e66f460b37}
+
+
+Method returns True when a ball is detected. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hsv\+\_\+min} & minimum threshold of the color to be detected expressed in hsv \\
+\hline
+{\em hsv\+\_\+max} & maximum threshold of the color to be detected expressed in hsv \\
+\hline
+{\em image\+\_\+np} & image stored in a numpy array \\
+\hline
+\end{DoxyParams}
 \index{room\+Detector\+::room\+Detector@{room\+Detector\+::room\+Detector}!start\+Detection@{start\+Detection}}
 \index{start\+Detection@{start\+Detection}!room\+Detector\+::room\+Detector@{room\+Detector\+::room\+Detector}}
 \subsubsection[{\texorpdfstring{start\+Detection(self)}{startDetection(self)}}]{\setlength{\rightskip}{0pt plus 5cm}def room\+Detector.\+room\+Detector.\+start\+Detection (
@@ -72,6 +104,10 @@ def \hyperlink{classroomDetector_1_1roomDetector_a1b30655196cae01d824ddeab2bb7e0
 \item[{}]{self}
 \end{DoxyParamCaption}
 )}\hypertarget{classroomDetector_1_1roomDetector_aa8a2aea1db8ce538d11ddb501fae2822}{}\label{classroomDetector_1_1roomDetector_aa8a2aea1db8ce538d11ddb501fae2822}
+
+
+Start the subscriber to the camera topic, thus the node starts to detect balls. 
+
 \index{room\+Detector\+::room\+Detector@{room\+Detector\+::room\+Detector}!stop\+Detection@{stop\+Detection}}
 \index{stop\+Detection@{stop\+Detection}!room\+Detector\+::room\+Detector@{room\+Detector\+::room\+Detector}}
 \subsubsection[{\texorpdfstring{stop\+Detection(self)}{stopDetection(self)}}]{\setlength{\rightskip}{0pt plus 5cm}def room\+Detector.\+room\+Detector.\+stop\+Detection (
@@ -79,6 +115,10 @@ def \hyperlink{classroomDetector_1_1roomDetector_a1b30655196cae01d824ddeab2bb7e0
 \item[{}]{self}
 \end{DoxyParamCaption}
 )}\hypertarget{classroomDetector_1_1roomDetector_a1b30655196cae01d824ddeab2bb7e0e3}{}\label{classroomDetector_1_1roomDetector_a1b30655196cae01d824ddeab2bb7e0e3}
+
+
+Intterrupt the subsciption to the camera topic. 
+
 
 
 \subsection{Member Data Documentation}
@@ -98,12 +138,16 @@ def \hyperlink{classroomDetector_1_1roomDetector_a1b30655196cae01d824ddeab2bb7e0
 \index{room\+Detector\+::room\+Detector@{room\+Detector\+::room\+Detector}!new\+Room\+Pub@{new\+Room\+Pub}}
 \index{new\+Room\+Pub@{new\+Room\+Pub}!room\+Detector\+::room\+Detector@{room\+Detector\+::room\+Detector}}
 \subsubsection[{\texorpdfstring{new\+Room\+Pub}{newRoomPub}}]{\setlength{\rightskip}{0pt plus 5cm}room\+Detector.\+room\+Detector.\+new\+Room\+Pub\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classroomDetector_1_1roomDetector_a35a2705eee8284eaad169dd0830fc6de}{}\label{classroomDetector_1_1roomDetector_a35a2705eee8284eaad169dd0830fc6de}
+
+
+Subsriber to get the compressed images from the robot camera. 
+
 \index{room\+Detector\+::room\+Detector@{room\+Detector\+::room\+Detector}!prev\+Color@{prev\+Color}}
 \index{prev\+Color@{prev\+Color}!room\+Detector\+::room\+Detector@{room\+Detector\+::room\+Detector}}
 \subsubsection[{\texorpdfstring{prev\+Color}{prevColor}}]{\setlength{\rightskip}{0pt plus 5cm}room\+Detector.\+room\+Detector.\+prev\+Color\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classroomDetector_1_1roomDetector_a1e899d16548ade375ed0b0dc6e1d9d98}{}\label{classroomDetector_1_1roomDetector_a1e899d16548ade375ed0b0dc6e1d9d98}
 
 
-Contains the previous color detected. 
+Contains the previously detected color in order to avoid notifying the same room several times, when the robot starts to track it. 
 
 \index{room\+Detector\+::room\+Detector@{room\+Detector\+::room\+Detector}!queue\+\_\+size@{queue\+\_\+size}}
 \index{queue\+\_\+size@{queue\+\_\+size}!room\+Detector\+::room\+Detector@{room\+Detector\+::room\+Detector}}

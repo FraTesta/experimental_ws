@@ -353,6 +353,7 @@ def main():
     
     #global client
     try:
+	time.sleep(2)
         rospy.init_node('commandManager')
         # move_base client
         client.wait_for_server()

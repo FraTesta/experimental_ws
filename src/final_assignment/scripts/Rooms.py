@@ -87,7 +87,7 @@ class Rooms():
         while True:
             tempX = random.randint(-5,5)
             tempY = random.randint(-8,5)
-            if not (tempX > 3 and tempY > 3) or not(tempX < 0 and tempY < -5):
+            if not (3 > tempX > 0 and tempY > 0) and not(tempX < 0 and tempY < -5):
                     return [tempX, tempY]
 
     ## Returns a array which contains a neighborhood of a given number

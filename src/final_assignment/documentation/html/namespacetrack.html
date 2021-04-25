@@ -115,19 +115,14 @@ $(document).ready(function(){initNavTree('namespacetrack.html','');});
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html">TrackAction</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class that implements the action server for tracking the ball.  <a href="classtrack_1_1TrackAction.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ac547a00259cf9bddfb37b60063740e8d"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetrack.html#ac547a00259cf9bddfb37b60063740e8d">clbk_odom</a> (msg)</td></tr>
-<tr class="memdesc:ac547a00259cf9bddfb37b60063740e8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Odom sub callback.  <a href="#ac547a00259cf9bddfb37b60063740e8d">More...</a><br /></td></tr>
+<tr class="memdesc:ac547a00259cf9bddfb37b60063740e8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback to the Odom topic which updates the global variables: position_ and pose_.  <a href="#ac547a00259cf9bddfb37b60063740e8d">More...</a><br /></td></tr>
 <tr class="separator:ac547a00259cf9bddfb37b60063740e8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a49b5b58ad2366084e3f134c4175ec6cd"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetrack.html#a49b5b58ad2366084e3f134c4175ec6cd">__init__</a> (self, name)</td></tr>
-<tr class="separator:a49b5b58ad2366084e3f134c4175ec6cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a474e47f2349d891970c4a7d004010f27"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetrack.html#a474e47f2349d891970c4a7d004010f27">reach_ball</a> (self, ros_image)</td></tr>
-<tr class="separator:a474e47f2349d891970c4a7d004010f27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7224b28ef3155cf9597b97efe6411490"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetrack.html#a7224b28ef3155cf9597b97efe6411490">track</a> (self, goal)</td></tr>
-<tr class="separator:a7224b28ef3155cf9597b97efe6411490"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a30188f067a9106a2f3e2ecedfd9cc52a"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetrack.html#a30188f067a9106a2f3e2ecedfd9cc52a">main</a> ()</td></tr>
 <tr class="separator:a30188f067a9106a2f3e2ecedfd9cc52a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -158,65 +153,13 @@ Variables</h2></td></tr>
 <tr class="memitem:a159d6ddb51827712e530f1f1e59369c7"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetrack.html#a159d6ddb51827712e530f1f1e59369c7">magentaUpper</a> = (150, 255, 255)</td></tr>
 <tr class="separator:a159d6ddb51827712e530f1f1e59369c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7299b48bcf1df87418078ead7079339d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetrack.html#a7299b48bcf1df87418078ead7079339d">position_</a> = Point()</td></tr>
+<tr class="memdesc:a7299b48bcf1df87418078ead7079339d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variable of type Point which stores the current odometry position of the robot.  <a href="#a7299b48bcf1df87418078ead7079339d">More...</a><br /></td></tr>
 <tr class="separator:a7299b48bcf1df87418078ead7079339d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fcc239004d2df0fe5a4ea23c9b0495f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetrack.html#a4fcc239004d2df0fe5a4ea23c9b0495f">pose_</a> = Pose()</td></tr>
+<tr class="memdesc:a4fcc239004d2df0fe5a4ea23c9b0495f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variable of type Pose which stores the current odometry position of the robot.  <a href="#a4fcc239004d2df0fe5a4ea23c9b0495f">More...</a><br /></td></tr>
 <tr class="separator:a4fcc239004d2df0fe5a4ea23c9b0495f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99bdf85519e387c8c0c7612a0b46dc56"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetrack.html#a99bdf85519e387c8c0c7612a0b46dc56">feedback</a></td></tr>
-<tr class="separator:a99bdf85519e387c8c0c7612a0b46dc56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a029891d5b553b75642e169dde1d3fa2f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetrack.html#a029891d5b553b75642e169dde1d3fa2f">result</a></td></tr>
-<tr class="separator:a029891d5b553b75642e169dde1d3fa2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f8cfd339cb658bb3d8f142eef1dbaeb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetrack.html#a2f8cfd339cb658bb3d8f142eef1dbaeb">vel_pub</a></td></tr>
-<tr class="memdesc:a2f8cfd339cb658bb3d8f142eef1dbaeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Publisher to move the robot.  <a href="#a2f8cfd339cb658bb3d8f142eef1dbaeb">More...</a><br /></td></tr>
-<tr class="separator:a2f8cfd339cb658bb3d8f142eef1dbaeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c72c6ba52347132ee923f404620079a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetrack.html#a5c72c6ba52347132ee923f404620079a">Twist</a></td></tr>
-<tr class="separator:a5c72c6ba52347132ee923f404620079a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a1cccbe6088028aaf5793b2c3f6e94a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetrack.html#a5a1cccbe6088028aaf5793b2c3f6e94a">queue_size</a></td></tr>
-<tr class="separator:a5a1cccbe6088028aaf5793b2c3f6e94a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a368c0796cb0ee26a2f62cda3c828267f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetrack.html#a368c0796cb0ee26a2f62cda3c828267f">success</a></td></tr>
-<tr class="separator:a368c0796cb0ee26a2f62cda3c828267f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a571b301da76cd6ce19cecf7aeb902f5f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetrack.html#a571b301da76cd6ce19cecf7aeb902f5f">unfound_ball_counter</a></td></tr>
-<tr class="separator:a571b301da76cd6ce19cecf7aeb902f5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a24e6d51863a39321aae96a7464685240"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetrack.html#a24e6d51863a39321aae96a7464685240">abort</a></td></tr>
-<tr class="separator:a24e6d51863a39321aae96a7464685240"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af008e41d1a7c809d5ab05c44c21be95d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetrack.html#af008e41d1a7c809d5ab05c44c21be95d">sub_odom</a> = rospy.Subscriber('odom', Odometry, <a class="el" href="namespacetrack.html#ac547a00259cf9bddfb37b60063740e8d">clbk_odom</a>)</td></tr>
-<tr class="separator:af008e41d1a7c809d5ab05c44c21be95d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5613e9a1ce2fa3764d6bed0c696592b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetrack.html#ad5613e9a1ce2fa3764d6bed0c696592b">state</a></td></tr>
-<tr class="separator:ad5613e9a1ce2fa3764d6bed0c696592b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01cd8e88d322162de1f8f859c21debf9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetrack.html#a01cd8e88d322162de1f8f859c21debf9">actionName</a></td></tr>
-<tr class="separator:a01cd8e88d322162de1f8f859c21debf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9abe825f904267585ec9e11e68ef54e5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetrack.html#a9abe825f904267585ec9e11e68ef54e5">act_s</a></td></tr>
-<tr class="separator:a9abe825f904267585ec9e11e68ef54e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2f40726487fc336af892381448898a5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetrack.html#aa2f40726487fc336af892381448898a5">color</a></td></tr>
-<tr class="memdesc:aa2f40726487fc336af892381448898a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">direct conversion to CV2 ####  <a href="#aa2f40726487fc336af892381448898a5">More...</a><br /></td></tr>
-<tr class="separator:aa2f40726487fc336af892381448898a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a49b5b58ad2366084e3f134c4175ec6cd"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">def track.__init__ </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>self</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>name</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="ac547a00259cf9bddfb37b60063740e8d"></a>
 <div class="memitem">
 <div class="memproto">
@@ -231,7 +174,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Odom sub callback. </p>
+<p>Callback to the Odom topic which updates the global variables: position_ and pose_. </p>
 
 </div>
 </div>
@@ -250,95 +193,7 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a474e47f2349d891970c4a7d004010f27"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">def track.reach_ball </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>self</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>ros_image</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a7224b28ef3155cf9597b97efe6411490"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">def track.track </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>self</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>goal</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a class="anchor" id="a24e6d51863a39321aae96a7464685240"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">track.abort</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a9abe825f904267585ec9e11e68ef54e5"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">track.act_s</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a01cd8e88d322162de1f8f859c21debf9"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">track.actionName</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a4ee13246ec46c21cfdcfee1b16f7eec4"></a>
 <div class="memitem">
 <div class="memproto">
@@ -381,38 +236,6 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">tuple track.blueUpper = (130, 255, 255)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aa2f40726487fc336af892381448898a5"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">track.color</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>direct conversion to CV2 #### </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">image_np</td><td>is the image decompressed and converted in OpendCv </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="a99bdf85519e387c8c0c7612a0b46dc56"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">track.feedback</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -477,6 +300,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Variable of type Pose which stores the current odometry position of the robot. </p>
+
 </div>
 </div>
 <a class="anchor" id="a7299b48bcf1df87418078ead7079339d"></a>
@@ -489,17 +314,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a class="anchor" id="a5a1cccbe6088028aaf5793b2c3f6e94a"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">track.queue_size</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>Variable of type Point which stores the current odometry position of the robot. </p>
 
 </div>
 </div>
@@ -524,92 +339,6 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a029891d5b553b75642e169dde1d3fa2f"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">track.result</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ad5613e9a1ce2fa3764d6bed0c696592b"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">track.state</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af008e41d1a7c809d5ab05c44c21be95d"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">track.sub_odom = rospy.Subscriber('odom', Odometry, <a class="el" href="namespacetrack.html#ac547a00259cf9bddfb37b60063740e8d">clbk_odom</a>)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a368c0796cb0ee26a2f62cda3c828267f"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">track.success</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a5c72c6ba52347132ee923f404620079a"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">track.Twist</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a571b301da76cd6ce19cecf7aeb902f5f"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">track.unfound_ball_counter</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a2f8cfd339cb658bb3d8f142eef1dbaeb"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">track.vel_pub</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Publisher to move the robot. </p>
 
 </div>
 </div>

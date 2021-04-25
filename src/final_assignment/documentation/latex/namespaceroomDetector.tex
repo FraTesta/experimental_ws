@@ -4,12 +4,12 @@
 \begin{DoxyCompactItemize}
 \item 
 class \hyperlink{classroomDetector_1_1roomDetector}{room\+Detector}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em This class implements a subscriber to the camera topic of the robot and applies several open\+CV mask in order to recognise the color of the ball, then it send the detected color to the \hyperlink{namespacecommandManager}{command\+Manager} node. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 def \hyperlink{namespaceroomDetector_a4fd40abc44c2744ddafc00230ac813ec}{detection\+State} (state, rd)
-\item 
+\begin{DoxyCompactList}\small\item\em Callback function of the start\+RD subscriber which recive and handle the msg coming from the \hyperlink{namespacecommandManager}{command\+Manager} node. \end{DoxyCompactList}\item 
 def \hyperlink{namespaceroomDetector_ab6eaefd8e04507b7121192d3546aba49}{main} (args)
 \end{DoxyCompactItemize}
 
@@ -23,6 +23,10 @@ def \hyperlink{namespaceroomDetector_ab6eaefd8e04507b7121192d3546aba49}{main} (a
 \item[{}]{rd}
 \end{DoxyParamCaption}
 )}\hypertarget{namespaceroomDetector_a4fd40abc44c2744ddafc00230ac813ec}{}\label{namespaceroomDetector_a4fd40abc44c2744ddafc00230ac813ec}
+
+
+Callback function of the start\+RD subscriber which recive and handle the msg coming from the \hyperlink{namespacecommandManager}{command\+Manager} node. 
+
 \index{room\+Detector@{room\+Detector}!main@{main}}
 \index{main@{main}!room\+Detector@{room\+Detector}}
 \subsubsection[{\texorpdfstring{main(args)}{main(args)}}]{\setlength{\rightskip}{0pt plus 5cm}def room\+Detector.\+main (

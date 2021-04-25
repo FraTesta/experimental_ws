@@ -6,6 +6,7 @@ var namespaces =
     [ "roomDetector", "namespaceroomDetector.html", null ],
     [ "Rooms", "namespaceRooms.html", null ],
     [ "roomsDetection", "namespaceroomsDetection.html", null ],
+    [ "timerProva", "namespacetimerProva.html", null ],
     [ "track", "namespacetrack.html", null ],
     [ "UI", "namespaceUI.html", null ]
 ];

@@ -71,7 +71,7 @@ def UIcallback(data):
     elif data.data.startswith("GoTo"):
         NEW_TR = True
         TARGET_ROOM = data.data
-        rospy.loginfo("[CommandManager] I recived the desired room whose name is: %s", TARGET_ROOM)
+        rospy.loginfo("[CommandManager] I recived a new desired room")
     else:
 	rospy.logerr("[Syntax Error] the sent msg is wrong")
 
@@ -119,7 +119,7 @@ def move_base_go_to(x, y):
               rospy.loginfo("[CommandManager] Position (%d,%d) reached. wait...", x, y)
 	else:
               rospy.loginfo("[CommandManager] %s reached. wait...", name) 
-	time.sleep(4)
+	time.sleep(5)
 
 
  
@@ -143,14 +143,13 @@ class Normal(smach.State):
         global PLAY, client, NEW_ROOM, rooms, roomD_pub 
 	rospy.loginfo("***********************************")
 	rospy.loginfo("[CommandManager] I m in NORMAL state")
-	time.sleep(3)
 	#Start the roomDetector
 	roomD_pub.publish(True)
 
 	self.counter = 0
         
         while not rospy.is_shutdown():  
-
+	    time.sleep(2)
             if PLAY == True:
                 return 'goToPlay'
             elif self.counter == 4:
@@ -202,7 +201,7 @@ class Play(smach.State):
         smach.State.__init__(self, 
                              outcomes=['goToNormal','goToPlay','goToFind'])
 
-        self.rate = rospy.Rate(200)
+        self.rate = rospy.Rate(1)
 	## Variable to count the time pass
         self.counter = 0
 	    
@@ -211,7 +210,8 @@ class Play(smach.State):
 	rospy.loginfo("***********************************")
         rospy.logdebug("[CommandManager] I m in PLAY mode")
 	global PLAY, rooms 
-	time.sleep(3)
+	time.sleep(1)
+	PLAY = False
 
         # go to the person
         position = rooms.get_room_position("Home")
@@ -220,7 +220,7 @@ class Play(smach.State):
         while not rospy.is_shutdown():
 	    # we need to update them at each iteration 
 	    global TARGET_ROOM, NEW_TR
-	    PLAY = False
+	    
 
             if self.counter <= 5:
                 if NEW_TR == True:
@@ -275,13 +275,14 @@ class Track(smach.State):
         if not wait:
             rospy.logerr("Action server not available!")
             rospy.signal_shutdown("Action server not available!")
+	    if FIND_MODE == True:
+               return "goToFind"
             return "goToNormal"
         else:
             
             result = trackClient.get_result()
             # Since if the result is (0,0) means that no ball has been reached
 	    if result.x != 0 and result.y != 0:
-	          rospy.loginfo("[CommandManager] New Room reached!")
 		  # add the the room to the structure
 	          rooms.add_new_room(COLOR_ROOM, result.x, result.y)
 		  # check which is the next state
@@ -341,6 +342,7 @@ def main():
         ## Subscriber to the UIchatter topic
         UIsubscriber = rospy.Subscriber("UIchatter", String, UIcallback)
         ## Subscriber to the newRoom topic 
+	time.sleep(2)
         newRoomSub = rospy.Subscriber("newRoom", String, newRoomDetected)
         
         
