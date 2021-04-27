@@ -1,6 +1,8 @@
 var NAVTREE =
 [
-  [ "My Project", "index.html", [
+  [ "Final Assignment", "index.html", [
+    [ "Project Description", "index.html", null ],
+    [ "doc", "md_doc_pages_doc.html", null ],
     [ "Packages", null, [
       [ "Packages", "namespaces.html", "namespaces" ],
       [ "Package Functions", "namespacemembers.html", [

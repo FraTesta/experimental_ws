@@ -10,5 +10,6 @@ var dir_53e6fa9553ac22a5646d2a2b2d7b97a1 =
     [ "roomsDetection.py", "roomsDetection_8py.html", "roomsDetection_8py" ],
     [ "timerProva.py", "timerProva_8py.html", "timerProva_8py" ],
     [ "track.py", "track_8py.html", "track_8py" ],
+    [ "trackObj.py", "trackObj_8py.html", "trackObj_8py" ],
     [ "UI.py", "UI_8py.html", "UI_8py" ]
 ];

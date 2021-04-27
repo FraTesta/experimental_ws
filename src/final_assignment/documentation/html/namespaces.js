@@ -8,5 +8,6 @@ var namespaces =
     [ "roomsDetection", "namespaceroomsDetection.html", null ],
     [ "timerProva", "namespacetimerProva.html", null ],
     [ "track", "namespacetrack.html", null ],
+    [ "trackObj", "namespacetrackObj.html", null ],
     [ "UI", "namespaceUI.html", null ]
 ];

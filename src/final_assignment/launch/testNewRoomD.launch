@@ -20,7 +20,7 @@
 
 	<node name="commandManager" pkg="final_assignment" type="cm2.py" output="screen" /> 
 	<!-- node to track a new detected rooms -->
-	<node name="track" pkg="final_assignment" type="track.py" />
+	<node name="trackObj" pkg="final_assignment" type="trackObj.py" output="screen" />
  
 
 
