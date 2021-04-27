@@ -23,6 +23,17 @@ the software architecture implemented is shown below:
 
 ![SW architecture](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/documentation/doc_pages/rosgraph.png)
 
+### Description
+- __commandManager__ = is the core of the architecture as in the previous assignments. It takes input from the _UI_ node and the _roomsDetector_ . Based on the state in which it is, this node can make requests to:
+  -  the _move_base_ action server to reach a certain position.
+  -  the _track_ action server to reach a detected room (ball).
+- __roomDetector__ = is a very simple openCV algorithm that analyzes the camera images to detect the balls (rooms). Then it returns the color of the detected ball to the _commandManager_. After which it interrupts the subscription to the camera topic and goes in a sort of sleeping mode until the _commandManager_ awaken it again.
+- __track__ = is a server action that, given a _color_ , starts to track a ball of the same color. The algorithm of tracking it's very similar to the ball_track of the previous assignment. When the robot reaches the ball it will read its own position and send it back to the _commandManager_ so that it can store the position of the discovered room. I implemented a very simple obstacle_avoidance algorithm using the laser scan data since when the robot start to track a ball the move_base algorithm is shout down and its obstacle avoidance as well.
+- __UI__ = is a very simple user interface that allows the user to switch in the _PLAY_ mode and chose a desired room to reach.
+
+For more details reguarding the scripts, see the doxygen documentation. 
+
+
 
 
 ## __FSM Implementation__
@@ -37,7 +48,7 @@ The states are still implemented in the _commandManager.py_ script which now rec
 
 
 
-
+## Environment and Robot model 
 
 ## RUN
 
