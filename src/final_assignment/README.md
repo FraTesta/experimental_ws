@@ -1,5 +1,5 @@
-![Unige Logo](/documentation/doc_pages/unige_stemma.png)
-Format: ![Alt Text](url)
+![Unige Logo](https://raw.githubusercontent.com/FraTesta/experimental_ws/master/src/final_assignment/documentation/doc_pages/unige_stemma.png)
+
 # Final Assignment
 ## Introduction 
 This project represents the final assignment of the Experimental Robotics Laboratory corse. Therefore is an improvement of the assignment1 and and assignment2 that you can find in this git repository as well. 
