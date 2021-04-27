@@ -46,20 +46,6 @@ blueUpper = (130, 255, 255)
 magentaLower = (125, 50, 50)
 magentaUpper = (150, 255, 255)
 
-## Variable of type Point which stores the current odometry position of the robot
-position_ = Point()
-## Variable of type Pose which stores the current odometry position of the robot 
-pose_ = Pose()
-
-
-## Callback to the Odom topic which updates the global variables: position_ and pose_
-def clbk_odom(msg):
-    global position_
-    global pose_
-
-    position_ = msg.pose.pose.position
-    pose_ = msg.pose.pose
-
 
 
 
@@ -87,16 +73,25 @@ class TrackAction(object):
         self.unfound_ball_counter = 0
         ## Flag that notifies aborting mission since the robot was not able to detect the ball 
         self.abort = False
-
+        ## Radius of the detected ball designed by the openCV algorithm in the reach_ball function
         self.radius = 0
+        ## Publisher to the cmd_vel topic in order to move the robot
         self.vel_pub = 0
+        ## Current position of the robot 
+        self.position = Point()
+        ## Current pose of the robot
+        self.pose = Pose()
+        
+    ## Callback to the Odom topic which updates the global variables: position_ and pose_
+    def clbk_odom(self, msg):
+        self.position = msg.pose.pose.position
+        self.pose = msg.pose.pose
         
 
 
     ## Callback function of the camera subscriber which computes the velocities to apply to the robot untill it reaches the ball.
     ## @param ros_image is the image decompressed and converted in OpendCv
     def reach_ball(self, ros_image):
-        global position_, pose_
         #### direct conversion to CV2 ####        
         np_arr = np.fromstring(ros_image.data, np.uint8)
         image_np = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)  
@@ -153,8 +148,8 @@ class TrackAction(object):
 
                 if (self.radius>=148) and abs(center[0]-400)<5: #Condition for considering the ball as reached
 				rospy.loginfo("[Track] ball reached!!")
-                		self.result.x = position_.x
-                		self.result.y = position_.y
+                		self.result.x = self.position.x
+                		self.result.y = self.position.y
 				self.success = True
 
         else:
@@ -174,12 +169,9 @@ class TrackAction(object):
 		 self.abort = True   
 	    self.unfound_ball_counter += 1
 
-    def clbk_laser(self, msg):
-        """[summary] 
-            laser function
-        Args:
-            msg ([Laser]): [spara]
-        """
+    ## Callback function of the LaserScan topic which implements a basic obstacle avoidance algorithm
+    # @param msg LaserScan message to get the distances from the obstacles
+    def obstacle_avoidance(self, msg):
         vel = Twist()
         self.regions_ = {
                 'right':  min(min(msg.ranges[0:143]), 10),
@@ -188,11 +180,8 @@ class TrackAction(object):
                 'fleft':  min(min(msg.ranges[432:575]), 10),
                 'left':   min(min(msg.ranges[576:713]), 10),
             }
-        threshold = 0.1
-        threshold2 = 0.2
-        #rospy.loginfo["[Track] fornt is"]
-        #p = self.regions['front']
-        #rospy.loginfo[p]
+        threshold = 0.4
+        threshold2 = 0.65
         if self.regions['front'] > 0 and self.regions['front'] <= threshold and self.radius < 90:
             rospy.loginfo("[Track] obstacle detected ")
             if self.regions['fright'] > threshold2:
@@ -214,13 +203,13 @@ class TrackAction(object):
     def track(self, goal):
         self.color = goal.color
 	## Odom subcriber to get and save the robot position and send them back to the commandManager 
-        sub_odom = rospy.Subscriber('odom', Odometry, clbk_odom)
+        sub_odom = rospy.Subscriber('odom', Odometry, self.clbk_odom)
 	## Publisher to the cmd_vel topic in order to move the robot
         self.vel_pub = rospy.Publisher("cmd_vel",Twist, queue_size=1)
         ## Subscriber to camera1 in order to receive and handle the images
         camera_sub = rospy.Subscriber("camera1/image_raw/compressed", CompressedImage, self.reach_ball, queue_size=1)
 
-        sub_scan = rospy.Subscriber('/scan', LaserScan, self.clbk_laser)	 
+        sub_scan = rospy.Subscriber('/scan', LaserScan, self.obstacle_avoidance)	 
         
         while not self.success:
             if self.act_s.is_preempt_requested():

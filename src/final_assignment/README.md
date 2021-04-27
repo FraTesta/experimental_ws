@@ -1,4 +1,10 @@
+![Unige Logo](/documentation/doc_pages/unige_stemma.png)
+Format: ![Alt Text](url)
 # Final Assignment
+## Introduction 
+This project represents the final assignment of the Experimental Robotics Laboratory corse. Therefore is an improvement of the assignment1 and and assignment2 that you can find in this git repository as well. 
+
+
 ## RUN
 
 Launch the complete project
