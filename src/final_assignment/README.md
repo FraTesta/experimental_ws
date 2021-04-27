@@ -14,9 +14,18 @@ The user can now switch in the _PLAY_ mode typing the _play_ command. Then it ca
 If the entered room hasn't yet been visited the robot will switch in the _FIND_ state where it should find the desired room.
 
 ## __Software Architecture__
+For this project it was necessary to rely on already established and tested ROS packages, in particular as regards the navigation part (SLAM and autonomous navigation). 
+In particular I used the __gmapping__ algorithm to build the map of the environment and the __move base__ ROS package for the autonomous navigation part.
+
+I chosen those packages since are very simple and therefore not too heavy in terms of computational load. Moreover taking into account the semplicity of the environment a 3D SLAM wouldn't have been so useful.
+
+the software architecture implemented is shown below:
+
+![SW architecture](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/documentation/doc_pages/rosgraph.png)
 
 
-## __FSM Structure__
+
+## __FSM Implementation__
 The structure of the finite state machine is inevitably more complicated like shown in the figure. The FSM was still developed using the _smach_ API so you can still use its feature to study this new implementation.
 
 ![FSM](https://raw.githubusercontent.com/FraTesta/experimental_ws/master/src/final_assignment/documentation/doc_pages/FSM.png)
