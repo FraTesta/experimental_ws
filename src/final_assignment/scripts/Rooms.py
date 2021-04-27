@@ -24,7 +24,7 @@ class Rooms():
         {'name':"Closet",'color': "red", "x":0, "y":0, 'detected':False},
         {'name':"LeavingRoom",'color': "green", "x":0, "y":0, 'detected':False},
         {'name':"Kitchen",'color': "yellow", "x":0, "y":0, 'detected':False},
-        {'name':"BathRoom",'color': "orange", "x":0, "y":0, 'detected':False},
+        {'name':"BathRoom",'color': "magenta", "x":0, "y":0, 'detected':False},
         {'name':"BedRoom",'color':"black","x":0,"y":0, 'detected':False},
         {'name':"Home",'color':"","x": -5,"y":7, 'detected':True}
         ]

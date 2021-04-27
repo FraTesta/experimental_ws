@@ -23,6 +23,7 @@ the software architecture implemented is shown below:
 
 ![SW architecture](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/documentation/doc_pages/rosgraph.png)
 
+
 ### Description
 - __commandManager__ = is the core of the architecture as in the previous assignments. It takes input from the _UI_ node and the _roomsDetector_ . Based on the state in which it is, this node can make requests to:
   -  the _move_base_ action server to reach a certain position.
@@ -33,6 +34,7 @@ the software architecture implemented is shown below:
 
 For more details reguarding the scripts, see the doxygen documentation. 
 
+### Architecture Choices
 
 
 
