@@ -1,8 +1,27 @@
 ![Unige Logo](https://raw.githubusercontent.com/FraTesta/experimental_ws/master/src/final_assignment/documentation/doc_pages/unige_stemma.png)
 
-# Final Assignment
-## Introduction 
+# __Final Assignment__
+## __Introduction__ 
 This project represents the final assignment of the Experimental Robotics Laboratory corse. Therefore is an improvement of the assignment1 and and assignment2 that you can find in this git repository as well. 
+
+The aim of this assignment is to introduce some SLAM and autonomous navigation features. Infect the environment is now more complex and articulated, where colored balls represent the rooms of a hypothetical house, like shown in the fhe following figure.
+
+__figure__
+
+The _NORMAL_ and _SLEEP_ mode maintain the previous behavior with the difference that when the robot is in the _NORMAL_ state and detects a ball it will start ti track it and store its position.
+The user can now switch in the _PLAY_ mode typing the _play_ command. Then it can specify a desired room that the robot will reach. 
+
+If the entered room hasn't yet been visited the robot will switch in the _FIND_ state where it should find the desired room.
+
+## __FSM Structure__
+The structure of the finite state machine is inevitably more complicated like shown in the figure. The FSM was still developed using the _smach_ API so you can still use its feature to study this new implementation.
+
+__Figure__
+
+ I decided to design a further state called _TRACK_ which is
+
+
+
 
 
 ## RUN
