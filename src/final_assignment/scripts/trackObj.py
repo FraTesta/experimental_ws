@@ -180,9 +180,9 @@ class TrackAction(object):
                 'fleft':  min(min(msg.ranges[432:575]), 10),
                 'left':   min(min(msg.ranges[576:713]), 10),
             }
-        threshold = 0.4
-        threshold2 = 0.65
-        if self.regions['front'] > 0 and self.regions['front'] <= threshold and self.radius < 90:
+        threshold = 0.5
+        threshold2 = 0.75
+        if (self.regions['front'] > 0) and (self.regions['front'] <= threshold) and (self.radius < 110):
             rospy.loginfo("[Track] obstacle detected ")
             if self.regions['fright'] > threshold2:
                 rospy.loginfo("[Track] turn right")

@@ -8,14 +8,14 @@ The aim of this assignment is to introduce some SLAM and autonomous navigation f
 
 ![Map](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/documentation/doc_pages/map.png)
 
-The _NORMAL_ and _SLEEP_ mode maintain the previous behavior with the difference that when the robot is in the _NORMAL_ state and detects a ball it will start ti track it and store its position.
+The _NORMAL_ and _SLEEP_ mode maintain the previous behavior with the difference that when the robot is in the _NORMAL_ state and detects a ball, the robot will start to track it and store its own position.
 The user can now switch in the _PLAY_ mode typing the _play_ command. Then it can specify a desired room that the robot will reach. 
 
 If the entered room hasn't yet been visited the robot will switch in the _FIND_ state where it should find the desired room.
 
 ## __Software Architecture__
 For this project it was necessary to rely on already established and tested ROS packages, in particular as regards the navigation part (SLAM and autonomous navigation). 
-In particular I used the __gmapping__ algorithm to build the map of the environment and the __move base__ ROS package for the autonomous navigation part.
+I used the __gmapping__ algorithm to build the map of the environment and the __move base__ ROS package for the autonomous navigation part.
 
 I chosen those packages since are very simple and therefore not too heavy in terms of computational load. Moreover taking into account the semplicity of the environment a 3D SLAM wouldn't have been so useful.
 
@@ -29,12 +29,14 @@ the software architecture implemented is shown below:
   -  the _move_base_ action server to reach a certain position.
   -  the _track_ action server to reach a detected room (ball).
 - __roomDetector__ = is a very simple openCV algorithm that analyzes the camera images to detect the balls (rooms). Then it returns the color of the detected ball to the _commandManager_. After which it interrupts the subscription to the camera topic and goes in a sort of sleeping mode until the _commandManager_ awaken it again.
-- __track__ = is a server action that, given a _color_ , starts to track a ball of the same color. The algorithm of tracking it's very similar to the ball_track of the previous assignment. When the robot reaches the ball it will read its own position and send it back to the _commandManager_ so that it can store the position of the discovered room. I implemented a very simple obstacle_avoidance algorithm using the laser scan data since when the robot start to track a ball the move_base algorithm is shout down and its obstacle avoidance as well.
+- __track__ = is a action server that, given a _color_ , starts to track a ball of that color. The algorithm of tracking it's very similar to the ball_track of the previous assignment. When the robot reaches the ball it will read its own position and send it back to the _commandManager_ so that it can store the position of the discovered room. If for some reason the ball is no longer detected the robot will turn on itself in both directions in an attempt to see the ball again. If after some time it has not succeeded, it switches back to the appropriate state.
+Finally I implemented a very simple obstacle_avoidance algorithm using the laser scan data since when the robot start to track a ball the move_base algorithm is deactivated by the _commadManager_ and its obstacle avoidance as well.
 - __UI__ = is a very simple user interface that allows the user to switch in the _PLAY_ mode and chose a desired room to reach.
 
-For more details reguarding the scripts, see the doxygen documentation. 
+For more details regarding the scripts, see the doxygen documentation. 
 
-### Architecture Choices
+### **Architecture Choices**
+I preferred to keep separate the _roomDetector_ and the _track_ nodes, even if quite similar, in order to get an asynchronous node (_roomDetector_) which notifies new rooms directly to the _commandManager_ which handle that information according to its state and its priority. Moreover in this way I was able to implement the tracking phase as an action server and thus have access to all its features such as checking its status or aborting a mission. The computational load is not increased since the roomDetector node goes into a kind of sleep mode when the _track_ is active.
 
 
 
@@ -45,8 +47,12 @@ The structure of the finite state machine is inevitably more complicated like sh
 
 The states are still implemented in the _commandManager.py_ script which now receives input from the user interface (_UI.py_ script) and from the rooms detector node (_roomsDetector.py_ script) that change the robot states using their custom topics. 
 
-### TRACK
- I decided to design a further state called _TRACK_ which is
+| State | Description |
+| ---| ---|
+| NORMAL | Is the initial state and gives some random goals to the _move_base_. At each iteration checks if a new ball is detected (Switch in the _TRACK_ state) or if the user enter the 'play' keyword (switch inthe  _PLAY_ state). After some iteration it switches in the sleep state |
+| PLAY | the robot returns to the initial position (Home) and in the meantime checks if the user types a 'GoTo' command. If the entered room is in the roomStructure it will reach it. Otherwise switches in the _FIND_ state. |
+| TRACK | Starts when the _commandManager_ receives the color of a new detected ball. Thus it makes a request to the _track_ action server to track the ball. When the action server has finished this state it saves the returned location and associates it with the correct room. Then it returns to the appropriate state. For instance if the previous state was _FIND_ it checks if the detected ball is the desired one. If so switches to the _PLAY_ state otherwise switches back to the _FIND_ |
+| FIND | Starts to explore the environment using the _explore_ function of the room class. At each iteration it checks if a new ball is detected, if so it will switch momentarily in the _TRACK_ state. After some iterations it sitch back to the _PLAY_ state |
 
 
 
