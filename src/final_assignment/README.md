@@ -38,7 +38,16 @@ For more details regarding the scripts, see the doxygen documentation.
 ### **Architecture Choices**
 I preferred to keep separate the _roomDetector_ and the _track_ nodes, even if quite similar, in order to get an asynchronous node (_roomDetector_) which notifies new rooms directly to the _commandManager_ which handle that information according to its state and its priority. Moreover in this way I was able to implement the tracking phase as an action server and thus have access to all its features such as checking its status or aborting a mission. The computational load is not increased since the roomDetector node goes into a kind of sleep mode when the _track_ is active.
 
-### **Move Base and Gmapping settings** 
+### **Move Base and Gmapping settings**
+- The _gmapping_ parameters are contained in the gmapping.launch file. Basically I changed:
+  - The **maxUrange** parameter (increased 20) to increase the range of the laser in order to map deeper, since in the biggest room the robot doesn't detect any wall, this introduced a localization error. 
+  - The **lsigma** and **ogain** parameter for smoothing the resampling effects which was too hard.
+  - Increased the **particles** parameter to increase the ability of the robot to close the loop.
+- Regarding the _move_base_ settings:
+  - In the *base_local_planner_params.yaml* I increased the **max_vel_x**, **min_vel_x**, **acc_lim_x** and **acc_lim_theta** params to make the robot faster and more responsive. Finally I increased the **sim_time** in order to improve the local planning simulation because some times the chosen trajectory was not consistent with the environment and the global path trajectory. 
+  - In the *costmap_common_params.yaml* I increased the **obstacle_range** and the **robot_radius** in order to keep the robot away from walls, especially near corners or entrances.
+  - In the *global_costmap.yaml* I increased the **update_frequency** and **publish_frequency** to make the planner more reactive to changes and faster in correcting mapping errors. I increased also the _inflation_radius_ to make shore that the robots enter every room.
+  - Finally in the *local_cost_map.yaml* I increased tge **with** and **height** parameters to improve the local mapping and avoid strange trajectory.
 
 ## __FSM Implementation__
 The structure of the finite state machine is inevitably more complicated like shown in the figure. The FSM was still developed using the _smach_ API so you can still use its feature to study this new implementation.
@@ -58,7 +67,7 @@ The states are still implemented in the _commandManager.py_ script which now rec
 
 
 ## Environment and Robot model 
-The robot model used is the same of the previous assignment but I removed the neck joint in order to keep the head fixed and thus the camera. Moreover I added a laser sensor which is necessary for the *gmappin*g and *move_base* algorithms. 
+The robot model used is the same of the previous assignment but I removed the neck joint in order to keep the head fixed and thus the camera. Moreover I added a laser sensor which is necessary for the *gmapping* and *move_base* algorithms. 
 
 Regarding the knowledge representation I develop a class called _Rooms.py_ that provides a simple structure that associates each room with a color ball and its own position in the space in terms of x and y coordinates. Of course this class provides also methods to update the knowledge of such environment. For more information take a look to its doxygen documentation.
 
@@ -72,6 +81,19 @@ The final assignment package provides the following directory:
 - **urdf** = contains the models urdf files 
 - **world** = the world gazebo simulation 
 
+## **Installation**
+The packages used for the previous assignments are still needed.
+Download the *gmapping* and *move_base* packages, I suggest to install the following: 
+- **gmapping =**  https://github.com/CarmineD8/SLAM_packages.git
+- **move_base =** https://github.com/CarmineD8/planning.git
+Install also:
+sudo apt-get install 
+```
+ros-kinetic-openslam-gmapping
+sudo apt-get install ros-kinetic-navigation
+```
+
+
 ## RUN
 
 Launch the complete project
@@ -82,14 +104,7 @@ to launch also Rviz
 ```
 roslaunch final_assignment robotModel.launch use_rviz:=true
 ```
-
-## Track
-Aggiunto controllo per quando viene attivato l'action ma non vede più la palla, allora il robot si gira a destra e poi a sinistra per 9 iteraioni dopo di che 
-abortisce il goal.
-
-I have decided to keep the _roomsDetection_ and the _track_ scripts separate for the following reasons: 
-- mainly I wanted to make the track a server action in order to keep track of the status of the tracking and haveing the possibility to abort the mission if necessary. 
--  
+ 
 
 ## Move base sattings
 
