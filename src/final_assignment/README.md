@@ -38,7 +38,7 @@ For more details regarding the scripts, see the doxygen documentation.
 ### **Architecture Choices**
 I preferred to keep separate the _roomDetector_ and the _track_ nodes, even if quite similar, in order to get an asynchronous node (_roomDetector_) which notifies new rooms directly to the _commandManager_ which handle that information according to its state and its priority. Moreover in this way I was able to implement the tracking phase as an action server and thus have access to all its features such as checking its status or aborting a mission. The computational load is not increased since the roomDetector node goes into a kind of sleep mode when the _track_ is active.
 
-
+### **Move Base and Gmapping settings** 
 
 ## __FSM Implementation__
 The structure of the finite state machine is inevitably more complicated like shown in the figure. The FSM was still developed using the _smach_ API so you can still use its feature to study this new implementation.
@@ -51,12 +51,26 @@ The states are still implemented in the _commandManager.py_ script which now rec
 | ---| ---|
 | NORMAL | Is the initial state and gives some random goals to the _move_base_. At each iteration checks if a new ball is detected (Switch in the _TRACK_ state) or if the user enter the 'play' keyword (switch inthe  _PLAY_ state). After some iteration it switches in the sleep state |
 | PLAY | the robot returns to the initial position (Home) and in the meantime checks if the user types a 'GoTo' command. If the entered room is in the roomStructure it will reach it. Otherwise switches in the _FIND_ state. |
-| TRACK | Starts when the _commandManager_ receives the color of a new detected ball. Thus it makes a request to the _track_ action server to track the ball. When the action server has finished this state it saves the returned location and associates it with the correct room. Then it returns to the appropriate state. For instance if the previous state was _FIND_ it checks if the detected ball is the desired one. If so switches to the _PLAY_ state otherwise switches back to the _FIND_ |
-| FIND | Starts to explore the environment using the _explore_ function of the room class. At each iteration it checks if a new ball is detected, if so it will switch momentarily in the _TRACK_ state. After some iterations it sitch back to the _PLAY_ state |
+| TRACK | Starts when the _commandManager_ receives the color of a new detected ball. Thus it makes a request to the _track_ action server to track the ball. When the action server has finished this state it saves the returned location and associates it with the correct room. Then it returns to the appropriate state. For instance if the previous state was _FIND_ it checks if the detected ball is the desired one. If so switches to the _PLAY_ state otherwise switches back to the _FIND_. |
+| FIND | Starts to explore the environment using the _explore_ function of the room class. At each iteration it checks if a new ball is detected, if so it will switch momentarily in the _TRACK_ state. After some iterations it sitch back to the _PLAY_ state. |
+| SLEEP | The robot goes to the home position and stay there for some time after that switches back to the _NORMAL_ state.
 
 
 
 ## Environment and Robot model 
+The robot model used is the same of the previous assignment but I removed the neck joint in order to keep the head fixed and thus the camera. Moreover I added a laser sensor which is necessary for the *gmappin*g and *move_base* algorithms. 
+
+Regarding the knowledge representation I develop a class called _Rooms.py_ that provides a simple structure that associates each room with a color ball and its own position in the space in terms of x and y coordinates. Of course this class provides also methods to update the knowledge of such environment. For more information take a look to its doxygen documentation.
+
+## File List
+The final assignment package provides the following directory:
+- **action** = contains the definition of the _track_ action server
+- **config** = contains some setting for the RViz simulation 
+- **launch** = contains the some launch files that are better shown in the Running part.
+- **param** = contains some configuration file.yaml of the _move_base_ package
+- **scripts** = contains the code 
+- **urdf** = contains the models urdf files 
+- **world** = the world gazebo simulation 
 
 ## RUN
 
