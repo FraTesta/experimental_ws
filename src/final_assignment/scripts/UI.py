@@ -8,7 +8,7 @@ def UI():
     rospy.init_node('UI', anonymous=True)
     pub = rospy.Publisher('UIchatter', String, queue_size=10) 
     rate = rospy.Rate(10)
-    print("***************************\n Welcome !!!! \n\n The user can digit the keyword: \n - 'play' -> to switch in play mode \n - 'GoTo roomName' -> to reach that room or to start looking for it (if it hasn't yet been discovered) \n The rooms present are:\n Entrance(blue), Closet(red), LeavingRoom(green), Kitchen(yellow), BathRoom(orange), BedRoom(black)\n*****************************\n")
+    print("******************************\n Welcome !!!! \n\n The user can digit the keyword: \n - 'play' -> to switch in play mode \n - 'GoTo roomName' -> to reach that room or to start looking for it (if it hasn't yet been discovered) \n The rooms present are:\n Entrance(blue)\n Closet(red)\n LeavingRoom(green)\n Kitchen(yellow)\n BathRoom(Magenta)\n BedRoom(black)\n*******************************\n")
 
     while not rospy.is_shutdown():
 	msg = raw_input("User:")

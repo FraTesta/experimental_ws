@@ -25,6 +25,7 @@ import rospy
 from sensor_msgs.msg import CompressedImage
 from geometry_msgs.msg import Twist, Point, Pose
 from nav_msgs.msg import Odometry
+from sensor_msgs.msg import LaserScan
 
 # Action Server 
 import actionlib
@@ -45,20 +46,6 @@ blueUpper = (130, 255, 255)
 magentaLower = (125, 50, 50)
 magentaUpper = (150, 255, 255)
 
-## Variable of type Point which stores the current odometry position of the robot
-position_ = Point()
-## Variable of type Pose which stores the current odometry position of the robot 
-pose_ = Pose()
-
-
-## Callback to the Odom topic which updates the global variables: position_ and pose_
-def clbk_odom(msg):
-    global position_
-    global pose_
-
-    position_ = msg.pose.pose.position
-    pose_ = msg.pose.pose
-
 
 
 
@@ -72,19 +59,39 @@ class TrackAction(object):
         self.act_s.start()
 	self.feedback = final_assignment.msg.trackBallFeedback()
     	self.result = final_assignment.msg.trackBallResult()
+        self.regions = {
+                'right': 0,
+                'fright': 0,
+                'front': 0,
+                'fleft': 0,
+                'left': 0,
+            }
 
         ## Flag that notifies that the robot has reached the ball correctly
-	self.success = False
-	## Variables that counts how many times the robot was not able to detect the ball again. 
-	self.unfound_ball_counter = 0
-	## Flag that notifies aborting mission since the robot was not able to detect the ball 
-	self.abort = False
+        self.success = False
+        ## Variables that counts how many times the robot was not able to detect the ball again. 
+        self.unfound_ball_counter = 0
+        ## Flag that notifies aborting mission since the robot was not able to detect the ball 
+        self.abort = False
+        ## Radius of the detected ball designed by the openCV algorithm in the reach_ball function
+        self.radius = 0
+        ## Publisher to the cmd_vel topic in order to move the robot
+        self.vel_pub = 0
+        ## Current position of the robot 
+        self.position = Point()
+        ## Current pose of the robot
+        self.pose = Pose()
+        
+    ## Callback to the Odom topic which updates the global variables: position_ and pose_
+    def clbk_odom(self, msg):
+        self.position = msg.pose.pose.position
+        self.pose = msg.pose.pose
+        
 
 
     ## Callback function of the camera subscriber which computes the velocities to apply to the robot untill it reaches the ball.
     ## @param ros_image is the image decompressed and converted in OpendCv
     def reach_ball(self, ros_image):
-        global position_, pose_
         #### direct conversion to CV2 ####        
         np_arr = np.fromstring(ros_image.data, np.uint8)
         image_np = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)  
@@ -120,29 +127,29 @@ class TrackAction(object):
             # it to compute the minimum enclosing circle and
             # centroid
             c = max(cnts, key=cv2.contourArea)
-            ((x, y), radius) = cv2.minEnclosingCircle(c)
+            ((x, y), self.radius) = cv2.minEnclosingCircle(c)
             M = cv2.moments(c)
             center = (int(M["m10"] / M["m00"]), int(M["m01"] / M["m00"]))
 
             # only proceed if the radius meets a minimum size
-            if radius > 10:
+            if self.radius > 10:
                 # draw the circle and centroid on the frame,
                 # then update the list of tracked points
-                cv2.circle(image_np, (int(x), int(y)), int(radius), (0, 255, 255), 2)
+                cv2.circle(image_np, (int(x), int(y)), int(self.radius), (0, 255, 255), 2)
                 cv2.circle(image_np, center, 5, (0, 0, 255), -1)
 
                 # Setting the velocities to be applied to the robot
                 vel = Twist()
 		# 400 is the center of the image 
 		vel.angular.z = -0.002*(center[0]-400)
-		 # 150 is the radius that we want see in the image, which represent the desired disatance from the object 
-		vel.linear.x = -0.007*(radius-150)
+		 # 150 is the radius that we want see in the image, which represent the desired distance from the object 
+		vel.linear.x = -0.007*(self.radius-150)
 		self.vel_pub.publish(vel)
 
-                if (radius>=148) and abs(center[0]-400)<5: #Condition for considering the ball as reached
+                if (self.radius>=148) and abs(center[0]-400)<5: #Condition for considering the ball as reached
 				rospy.loginfo("[Track] ball reached!!")
-                		self.result.x = position_.x
-                		self.result.y = position_.y
+                		self.result.x = self.position.x
+                		self.result.y = self.position.y
 				self.success = True
 
         else:
@@ -150,28 +157,61 @@ class TrackAction(object):
 	    vel = Twist()
 	    if self.unfound_ball_counter <= 10:
 		 rospy.loginfo("[Track] Turn Right to find the ball")
-                 vel.angular.z = 1.5
+                 vel.angular.z = 0.5
 		 self.vel_pub.publish(vel) 
 	    elif self.unfound_ball_counter < 20:
 		 rospy.loginfo("[Track] Turn Left to find the ball")
-                 vel.angular.z = -1.5
+                 vel.angular.z = -0.5
 		 self.vel_pub.publish(vel)
 	    elif self.unfound_ball_counter == 20:
 		 rospy.loginfo("[Track] Robot is unable to find the ball ")
 		 self.unfound_ball_counter = 0
 		 self.abort = True   
 	    self.unfound_ball_counter += 1
+
+    ## Callback function of the LaserScan topic which implements a basic obstacle avoidance algorithm
+    # @param msg LaserScan message to get the distances from the obstacles
+    def obstacle_avoidance(self, msg):
+        vel = Twist()
+        self.regions = {
+                'right':  min(min(msg.ranges[0:143]), 10),
+                'fright': min(min(msg.ranges[144:287]), 10),
+                'front':  min(min(msg.ranges[288:431]), 10),
+                'fleft':  min(min(msg.ranges[432:575]), 10),
+                'left':   min(min(msg.ranges[576:713]), 10),
+            }
+        threshold = 0.6
+        threshold2 = 0.75
+        if (self.regions['front'] > 0) and (self.regions['front'] <= threshold) and (self.radius < 110):
+            rospy.loginfo("[Track] obstacle detected ")
+            if self.regions['fright'] > threshold2:
+                rospy.loginfo("[Track] turn right")
+                vel.angular.z = -0.3
+                #vel.linear.x = 0.2
+                self.vel_pub.publish(vel)
+            elif self.regions['fleft'] > threshold2:
+                rospy.loginfo("[Track] turn left")
+                vel.angular.z = 0.3
+                #vel.linear.x = 0.2
+                self.vel_pub.publish(vel)
+            else:
+                rospy.loginfo("[Track] aborted")
+                self.abort = True 
+                
+        
 	    
     ## Action server routine function 
     # @param goal Contains the color of the ball that has been detected     
     def track(self, goal):
         self.color = goal.color
 	## Odom subcriber to get and save the robot position and send them back to the commandManager 
-        sub_odom = rospy.Subscriber('odom', Odometry, clbk_odom)
+        sub_odom = rospy.Subscriber('odom', Odometry, self.clbk_odom)
 	## Publisher to the cmd_vel topic in order to move the robot
         self.vel_pub = rospy.Publisher("cmd_vel",Twist, queue_size=1)
-        ## Subscriber to camera1 in order to recive and handle the images
-        camera_sub = rospy.Subscriber("camera1/image_raw/compressed", CompressedImage, self.reach_ball, queue_size=1)	 
+        ## Subscriber to camera1 in order to receive and handle the images
+        camera_sub = rospy.Subscriber("camera1/image_raw/compressed", CompressedImage, self.reach_ball, queue_size=1)
+
+        sub_scan = rospy.Subscriber('/scan', LaserScan, self.obstacle_avoidance)	 
         
         while not self.success:
             if self.act_s.is_preempt_requested():
@@ -186,8 +226,10 @@ class TrackAction(object):
 		self.act_s.publish_feedback(self.feedback)
 	# Unregister from the odom and camera topic
 	camera_sub.unregister()
+	sub_scan.unregister()
 	sub_odom.unregister()
 	self.vel_pub.unregister()
+    	
 	if not self.abort == True:
 	     self.act_s.set_succeeded(self.result)
 	     

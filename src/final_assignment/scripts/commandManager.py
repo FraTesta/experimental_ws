@@ -32,19 +32,29 @@ import actionlib.msg
 from final_assignment.msg import trackBallGoal, trackBallAction
 
 # Flags and global variables 
+control_variables = {
+    ## Flag which notify when the user types 'play'
+    "PLAY" : False,
+    ## Contains the desired room entered by the user 
+    "TARGET_ROOM" : "None",
+    ## Contains the color of the detected ball (room) 
+    "NEW_ROOM_COLOR" : "None",
+    ## Flag indicating if the FIND mode is active or not 
+    "FIND_MODE" : False   
+}
 
 ## Flag which notify when the user types 'play'
-PLAY = False
+#PLAY = False
 ## Contains the desired room entered by the user 
-TARGET_ROOM = "None"
+#TARGET_ROOM = "None"
 ## Flag which notify when the command manager recives a new target room from the user
-NEW_TR = False
+#NEW_TR = False
 ## Flag which notify that a new room was detected by the camera
-NEW_ROOM = False
+#NEW_ROOM = False
 ## Contains the color of the detected ball (room) 
-COLOR_ROOM = "None"
+#NEW_ROOM_COLOR = "None"
 ## Flag indicating if the FIND mode is active or not 
-FIND_MODE = False
+#FIND_MODE = False
 ## Initialization of the move_base client in order to assign target position to the move_base action server
 client = actionlib.SimpleActionClient('move_base',MoveBaseAction)
 ## Publisher to the startRD topic which allows to enable/disable the room detector 
@@ -58,10 +68,10 @@ rooms = Rooms()
 ## Callback mathod of the UIsubscriber which handels the commands sent by the user
 # @param data is a string message coming from the UI ROS node
 def UIcallback(data):
-    global PLAY, TARGET_ROOM, NEW_TR, rooms , client, roomD_pub
+    global control_variables, rooms , client, roomD_pub
     if data.data == "play" or data.data == "Play":
         rospy.loginfo("[CommandManager] Recived a 'play' request!")
-	PLAY = True
+	control_variables["PLAY"] = True
         client.cancel_all_goals()
 	# stop detecting
 	roomD_pub.publish(False)
@@ -69,8 +79,7 @@ def UIcallback(data):
         
 
     elif data.data.startswith("GoTo"):
-        NEW_TR = True
-        TARGET_ROOM = data.data
+        control_variables["TARGET_ROOM"] = data.data
         rospy.loginfo("[CommandManager] I recived a new desired room")
     else:
 	rospy.logerr("[Syntax Error] the sent msg is wrong")
@@ -78,21 +87,21 @@ def UIcallback(data):
 ## Callback function of the newRoomSub subscriber which recives the color of the new detected room
 # @param color is  a string message containing the color of the room detected by the roomDetector ROS node
 def newRoomDetected(color):
-    global NEW_ROOM, COLOR_ROOM, client, rooms, roomD_pub
+    global  control_variables, client, rooms, roomD_pub
         
     if not rooms.check_visted(color.data):
 	rospy.loginfo("[CommandManager] reach a new ball of color %s", color.data)
-	NEW_ROOM = True
+	#NEW_ROOM = True
 	# stop detecting 
 	roomD_pub.publish(False)
-	COLOR_ROOM = color.data
+	control_variables["NEW_ROOM_COLOR"] = color.data
     	client.cancel_all_goals()
 
 ## Method which prepares and send the goal to the move_base action server 
 # @param x X position of the desired goal 
 # @param y Y position of the desired goal 
 def move_base_go_to(x, y):
-    global client, PLAY, NEW_ROOM 
+    global client, control_variables
     goal = MoveBaseGoal()
     goal.target_pose.header.frame_id = "map"
     goal.target_pose.header.stamp = rospy.Time.now()
@@ -113,7 +122,7 @@ def move_base_go_to(x, y):
         rospy.signal_shutdown("Action server not available!")
     else:
 	name = rooms.get_name_position(x, y)
-	if PLAY or NEW_ROOM:
+	if control_variables["PLAY"] or control_variables["NEW_ROOM_COLOR"] != "None":
 	      rospy.loginfo("[CommandManager] MoveBase mission aborted!!!")
 	elif not name:
               rospy.loginfo("[CommandManager] Position (%d,%d) reached. wait...", x, y)
@@ -131,7 +140,9 @@ class Normal(smach.State):
     '''
     def __init__(self):
         smach.State.__init__(self, 
-                             outcomes=['goToNormal','goToSleep','goToPlay','goToTrack'])
+                             outcomes=['goToNormal','goToSleep','goToPlay','goToTrack'],
+                             input_keys=['foo_counter_in'], # msg in input 
+                             output_keys=['foo_counter_out']) # msg in output)
 
 	# Loop at 200 Hz
         self.rate = rospy.Rate(1)  
@@ -140,21 +151,23 @@ class Normal(smach.State):
         
     def execute(self,userdata):
 	""" Method inherited from the smach.State class """
-        global PLAY, client, NEW_ROOM, rooms, roomD_pub 
+        global control_variables, client, rooms, roomD_pub 
 	rospy.loginfo("***********************************")
 	rospy.loginfo("[CommandManager] I m in NORMAL state")
 	#Start the roomDetector
 	roomD_pub.publish(True)
 
-	self.counter = 0
+	
         
         while not rospy.is_shutdown():  
 	    time.sleep(2)
-            if PLAY == True:
+            rospy.loginfo(self.counter)
+            if control_variables["PLAY"] == True:
                 return 'goToPlay'
-            elif self.counter == 4:
+            elif self.counter == 5:
+                self.counter = 0
                 return 'goToSleep' 
-            elif NEW_ROOM == True:
+            elif control_variables["NEW_ROOM_COLOR"] != "None":
                 return 'goToTrack'
 		
 	    else:
@@ -209,9 +222,9 @@ class Play(smach.State):
     def execute(self, userdata):
 	rospy.loginfo("***********************************")
         rospy.logdebug("[CommandManager] I m in PLAY mode")
-	global PLAY, rooms 
+	global control_variables, rooms 
 	time.sleep(1)
-	PLAY = False
+	control_variables["PLAY"] = False
 
         # go to the person
         position = rooms.get_room_position("Home")
@@ -219,15 +232,13 @@ class Play(smach.State):
 
         while not rospy.is_shutdown():
 	    # we need to update them at each iteration 
-	    global TARGET_ROOM, NEW_TR
-	    
 
             if self.counter <= 5:
-                if NEW_TR == True:
+                if control_variables["TARGET_ROOM"] != "None":
                                         
-                    if TARGET_ROOM.startswith("GoTo"):
-                        TARGET_ROOM = TARGET_ROOM.strip("GoTo ")
-                        position = rooms.get_room_position(TARGET_ROOM) 
+                    if control_variables["TARGET_ROOM"].startswith("GoTo"):
+                        control_variables["TARGET_ROOM"] = control_variables["TARGET_ROOM"].strip("GoTo ")
+                        position = rooms.get_room_position(control_variables["TARGET_ROOM"]) 
                         if not position:
                             rospy.loginfo("[CommandManager] That room has not yet been visited")
 			    return 'goToFind'  
@@ -241,7 +252,7 @@ class Play(smach.State):
                     # comebak to the person 
                     position = rooms.get_room_position("Home")
                     move_base_go_to(position[0], position[1])
-		    NEW_TR = False
+		    control_variables["TARGET_ROOM"] = "None"
                 
 	        # wait a few seconds 
                 time.sleep(3)
@@ -261,21 +272,20 @@ class Track(smach.State):
                              outcomes=['goToNormal','goToPlay','goToFind','goToTrack'])
 
     def execute(self, userdata):
-        global rooms, NEW_ROOM, COLOR_ROOM, NEW_TR, FIND_MODE
+        global rooms, control_variables
 	rospy.loginfo("***********************************")
 	rospy.loginfo("[CommandManager] I'm in TRACK state")
         goal = trackBallGoal()
-        goal.color = COLOR_ROOM
+        goal.color = control_variables["NEW_ROOM_COLOR"]
 
         trackClient = actionlib.SimpleActionClient('trackAction',trackBallAction)
         trackClient.wait_for_server()
-	NEW_ROOM = False
         trackClient.send_goal(goal)
         wait = trackClient.wait_for_result()
         if not wait:
             rospy.logerr("Action server not available!")
             rospy.signal_shutdown("Action server not available!")
-	    if FIND_MODE == True:
+	    if control_variables["FIND_MODE"] == True:
                return "goToFind"
             return "goToNormal"
         else:
@@ -283,17 +293,18 @@ class Track(smach.State):
             result = trackClient.get_result()
             # Since if the result is (0,0) means that no ball has been reached
 	    if result.x != 0 and result.y != 0:
-		  # add the the room to the structure
-	          rooms.add_new_room(COLOR_ROOM, result.x, result.y)
-		  # check which is the next state
-                  if FIND_MODE == True:
-                  	if COLOR_ROOM == rooms.get_color_room(TARGET_ROOM):
-		      	    FIND_MODE = False
-			    rospy.loginfo("Desired room discovered!!!")
-                            return 'goToPlay'		      
-                  	else:
-			    rospy.loginfo("The room just found isn't the desired one")
-                            return 'goToFind'
+	       # add the the room to the structure
+	       rooms.add_new_room(control_variables["NEW_ROOM_COLOR"], result.x, result.y)
+               control_variables["NEW_ROOM_COLOR"] = "None"
+	       # check which is the next state
+	       if control_variables["FIND_MODE"] == True:
+	  	  if control_variables["NEW_ROOM_COLOR"] == rooms.get_color_room(control_variables["TARGET_ROOM"]):
+	      	    control_variables["FIND_MODE"] = False
+		    rospy.loginfo("Desired room discovered!!!")
+	            return 'goToPlay'		      
+	  	  else:
+		    rospy.loginfo("The room just found isn't the desired one")
+	            return 'goToFind'
 	    else:
 		 rospy.loginfo("[CommandManager] The robot is not able to find the previously detected ball")
             
@@ -308,21 +319,21 @@ class Find(smach.State):
 	self.rate = rospy.Rate(1)  # Loop at 200 Hz
 
     def execute(self, userdata):
-        global rooms, NEW_ROOM, COLOR_ROOM, FIND_MODE
+        global rooms, control_variables
         rospy.loginfo("***********************************")
         rospy.loginfo("[CommandManager] I'm in FIND state")
-        FIND_MODE = True
+        control_variables["FIND_MODE"] = True
 	roomD_pub.publish(True)
         time.sleep(4)
-        self.counter = 0
         
         while not rospy.is_shutdown():  
 
             if self.counter == 4:
-		FIND_MODE = False
+		control_variables["FIND_MODE"] = False
 		roomD_pub.publish(False)
+                self.counter = 0
                 return 'goToPlay' 
-            elif NEW_ROOM == True:
+            elif control_variables["NEW_ROOM_COLOR"] != "None":
                 return 'goToTrack'
 		
 	    else:
@@ -357,7 +368,9 @@ def main():
                                 transitions={'goToSleep':'SLEEP', 
                                                 'goToPlay':'PLAY',
 						'goToTrack' : 'TRACK',
-                                                'goToNormal':'NORMAL'})
+                                                'goToNormal':'NORMAL'},
+                                remapping={'NORMAL_counter_in':'normal_counter', 
+                                          'NORMAL_counter_out':'normal_counter'})
             smach.StateMachine.add('SLEEP', Sleep(), 
                                 transitions={'goToSleep':'SLEEP', 
                                                 'goToNormal':'NORMAL'})

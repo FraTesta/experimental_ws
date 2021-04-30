@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
 	<!-- simulation -->
-	<include file="$(find final_assignment)/launch/simulation.launch"></include>
+	<include file="$(find final_assignment)/launch/simulation2.launch"></include>
 	<!-- SLAM algo: gmapping -->
 	<include file="$(find final_assignment)/launch/gmapping.launch"></include> 
 	    <arg name="des_x" default= "-5.0"/>
@@ -18,9 +18,9 @@
 	<!-- node to notify new rooms -->
 	<node name="roomDetector" pkg="final_assignment" type="roomDetector.py" /> 
 
-	<node name="commandManager" pkg="final_assignment" type="cm2.py" output="screen" /> 
+	<node name="commandManager" pkg="final_assignment" type="commandManager.py" output="screen" /> 
 	<!-- node to track a new detected rooms -->
-	<node name="trackObj" pkg="final_assignment" type="trackObj.py" output="screen" />
+	<node name="trackObj" pkg="final_assignment" type="track.py" output="screen" />
  
 
 

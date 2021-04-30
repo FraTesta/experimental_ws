@@ -163,10 +163,7 @@ class Normal(smach.State):
 	    time.sleep(2)
             rospy.loginfo(self.counter)
             if control_variables["PLAY"] == True:
-                return 'goToPlay'
-            elif self.counter == 5:
-                self.counter = 0
-                return 'goToSleep' 
+                return 'goToPlay' 
             elif control_variables["NEW_ROOM_COLOR"] != "None":
                 return 'goToTrack'
 		
@@ -324,14 +321,13 @@ class Find(smach.State):
         rospy.loginfo("[CommandManager] I'm in FIND state")
         control_variables["FIND_MODE"] = True
 	roomD_pub.publish(True)
-        time.sleep(4)
+        time.sleep(2)
         
         while not rospy.is_shutdown():  
 
             if self.counter == 4:
 		control_variables["FIND_MODE"] = False
 		roomD_pub.publish(False)
-                self.counter = 0
                 return 'goToPlay' 
             elif control_variables["NEW_ROOM_COLOR"] != "None":
                 return 'goToTrack'
