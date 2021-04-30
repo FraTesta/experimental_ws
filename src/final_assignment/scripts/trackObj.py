@@ -173,30 +173,32 @@ class TrackAction(object):
     # @param msg LaserScan message to get the distances from the obstacles
     def obstacle_avoidance(self, msg):
         vel = Twist()
-        self.regions_ = {
+        self.regions = {
                 'right':  min(min(msg.ranges[0:143]), 10),
                 'fright': min(min(msg.ranges[144:287]), 10),
                 'front':  min(min(msg.ranges[288:431]), 10),
                 'fleft':  min(min(msg.ranges[432:575]), 10),
                 'left':   min(min(msg.ranges[576:713]), 10),
             }
-        threshold = 0.5
+        threshold = 0.6
         threshold2 = 0.75
         if (self.regions['front'] > 0) and (self.regions['front'] <= threshold) and (self.radius < 110):
             rospy.loginfo("[Track] obstacle detected ")
             if self.regions['fright'] > threshold2:
                 rospy.loginfo("[Track] turn right")
                 vel.angular.z = -0.3
-                vel.linear.x = 0.2
+                #vel.linear.x = 0.2
                 self.vel_pub.publish(vel)
             elif self.regions['fleft'] > threshold2:
                 rospy.loginfo("[Track] turn left")
                 vel.angular.z = 0.3
-                vel.linear.x = 0.2
+                #vel.linear.x = 0.2
                 self.vel_pub.publish(vel)
             else:
                 rospy.loginfo("[Track] aborted")
                 self.abort = True 
+                
+        
 	    
     ## Action server routine function 
     # @param goal Contains the color of the ball that has been detected     

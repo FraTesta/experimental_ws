@@ -28,7 +28,7 @@ the software architecture implemented is shown below:
 - __commandManager__ = is the core of the architecture as in the previous assignments. It takes input from the _UI_ node and the _roomsDetector_ . Based on the state in which it is, this node can make requests to:
   -  the _move_base_ action server to reach a certain position.
   -  the _track_ action server to reach a detected room (ball).
-- __roomDetector__ = is a very simple openCV algorithm that analyzes the camera images to detect the balls (rooms). Then it returns the color of the detected ball to the _commandManager_. After which it interrupts the subscription to the camera topic and goes in a sort of sleeping mode until the _commandManager_ awaken it again.
+- __roomDetector__ = is a very simple openCV algorithm that analyzes the camera images to detect the balls (rooms). Then it sends the color of the detected ball to the _commandManager_. After which it interrupts the subscription to the camera topic and goes in a sort of sleeping mode until the _commandManager_ awaken it again.
 - __track__ = is a action server that, given a _color_ , starts to track a ball of that color. The algorithm of tracking it's very similar to the ball_track of the previous assignment. When the robot reaches the ball it will read its own position and send it back to the _commandManager_ so that it can store the position of the discovered room. If for some reason the ball is no longer detected the robot will turn on itself in both directions in an attempt to see the ball again. If after some time it has not succeeded, it switches back to the appropriate state.
 Finally I implemented a very simple obstacle_avoidance algorithm using the laser scan data since when the robot start to track a ball the move_base algorithm is deactivated by the _commadManager_ and its obstacle avoidance as well.
 - __UI__ = is a very simple user interface that allows the user to switch in the _PLAY_ mode and chose a desired room to reach.
@@ -39,11 +39,11 @@ For more details regarding the scripts, see the doxygen documentation.
 I preferred to keep separate the _roomDetector_ and the _track_ nodes, even if quite similar, in order to get an asynchronous node (_roomDetector_) which notifies new rooms directly to the _commandManager_ which handle that information according to its state and its priority. Moreover in this way I was able to implement the tracking phase as an action server and thus have access to all its features such as checking its status or aborting a mission. The computational load is not increased since the roomDetector node goes into a kind of sleep mode when the _track_ is active.
 
 ### **Move Base and Gmapping settings**
-- The _gmapping_ parameters are contained in the gmapping.launch file. Basically I changed:
+- The **_gmapping_** parameters are contained in the *gmapping.launch* file. Basically I changed:
   - The **maxUrange** parameter (increased 20) to increase the range of the laser in order to map deeper, since in the biggest room the robot doesn't detect any wall, this introduced a localization error. 
   - The **lsigma** and **ogain** parameter for smoothing the resampling effects which was too hard.
   - Increased the **particles** parameter to increase the ability of the robot to close the loop.
-- Regarding the _move_base_ settings:
+- Regarding the **_move_base_** settings:
   - In the *base_local_planner_params.yaml* I increased the **max_vel_x**, **min_vel_x**, **acc_lim_x** and **acc_lim_theta** params to make the robot faster and more responsive. Finally I increased the **sim_time** in order to improve the local planning simulation because some times the chosen trajectory was not consistent with the environment and the global path trajectory. 
   - In the *costmap_common_params.yaml* I increased the **obstacle_range** and the **robot_radius** in order to keep the robot away from walls, especially near corners or entrances.
   - In the *global_costmap.yaml* I increased the **update_frequency** and **publish_frequency** to make the planner more reactive to changes and faster in correcting mapping errors. I increased also the _inflation_radius_ to make shore that the robots enter every room.

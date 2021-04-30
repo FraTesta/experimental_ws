@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 
 ## @file commandManager.py
-#  This node includes the subsription to State and GetPosition publishers,
-#  And implement a finite state machine 
-#  which manages the information coming from the two publisher and changes the state of the system in according to them.
-# \see getPosition.cpp
-# \see Navigation.cpp
-# \see State.cpp
+#  This script is a node which is the core of the entier project.
+#  And implement a finite state machine with five states which are described in the README file.
+#  It manages the messages comming from other nodes and ROS packeges.
+# \see roomDetector
+# \see UI
+# \see track
  
 
 from __future__ import print_function
@@ -20,7 +20,7 @@ import random
 import sys
 
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
-from std_msgs.msg import String
+from std_msgs.msg import String, Bool
 from Rooms import Rooms
 
 import smach_msgs.msg 
@@ -37,58 +37,64 @@ from final_assignment.msg import trackBallGoal, trackBallAction
 PLAY = False
 ## Contains the desired room entered by the user 
 TARGET_ROOM = "None"
-## Flag which notify when the command manager recives a new target room
+## Flag which notify when the command manager recives a new target room from the user
 NEW_TR = False
-## new room detected 
+## Flag which notify that a new room was detected by the camera
 NEW_ROOM = False
-## Random position generation flag
-RANDOM = True 
-## color of the detected ball 
+## Contains the color of the detected ball (room) 
 COLOR_ROOM = "None"
-## Flag to comeback into Find state when it's necessary
+## Flag indicating if the FIND mode is active or not 
 FIND_MODE = False
-## init the move_base client 
+## Initialization of the move_base client in order to assign target position to the move_base action server
 client = actionlib.SimpleActionClient('move_base',MoveBaseAction)
-
-## init the rooms environment 
+## Publisher to the startRD topic which allows to enable/disable the room detector 
+roomD_pub = rospy.Publisher('startRD', Bool, queue_size=10)
+## Object of the class Rooms necessary to store and manage the discovered rooms 
 rooms = Rooms()
 
 
 
 
-
+## Callback mathod of the UIsubscriber which handels the commands sent by the user
+# @param data is a string message coming from the UI ROS node
 def UIcallback(data):
-    global PLAY, TARGET_ROOM, NEW_TR, rooms , client
+    global PLAY, TARGET_ROOM, NEW_TR, rooms , client, roomD_pub
     if data.data == "play" or data.data == "Play":
         rospy.loginfo("[CommandManager] Recived a 'play' request!")
+	PLAY = True
         client.cancel_all_goals()
+	# stop detecting
+	roomD_pub.publish(False)
 	time.sleep(3)
-        PLAY = True
+        
 
     elif data.data.startswith("GoTo"):
         NEW_TR = True
         TARGET_ROOM = data.data
-        rospy.loginfo("[CommandManager] I recived the desired room whose name is: %s", TARGET_ROOM)
+        rospy.loginfo("[CommandManager] I recived a new desired room")
     else:
 	rospy.logerr("[Syntax Error] the sent msg is wrong")
 
-
+## Callback function of the newRoomSub subscriber which recives the color of the new detected room
+# @param color is  a string message containing the color of the room detected by the roomDetector ROS node
 def newRoomDetected(color):
-    global NEW_ROOM, COLOR_ROOM, client, rooms
+    global NEW_ROOM, COLOR_ROOM, client, rooms, roomD_pub
         
-    if (not rooms.check_visted(color.data)) and (not PLAY):
+    if not rooms.check_visted(color.data):
 	rospy.loginfo("[CommandManager] reach a new ball of color %s", color.data)
-	NEW_ROOM = True 
+	NEW_ROOM = True
+	# stop detecting 
+	roomD_pub.publish(False)
 	COLOR_ROOM = color.data
     	client.cancel_all_goals()
 
-
+## Method which prepares and send the goal to the move_base action server 
+# @param x X position of the desired goal 
+# @param y Y position of the desired goal 
 def move_base_go_to(x, y):
-    global client
-    ## init move_base goal 
+    global client, PLAY, NEW_ROOM 
     goal = MoveBaseGoal()
-    ## set the goal as a random position 
-    goal.target_pose.header.frame_id = "odom"
+    goal.target_pose.header.frame_id = "map"
     goal.target_pose.header.stamp = rospy.Time.now()
     goal.target_pose.pose.position.x = x
     goal.target_pose.pose.position.y = y
@@ -107,37 +113,43 @@ def move_base_go_to(x, y):
         rospy.signal_shutdown("Action server not available!")
     else:
 	name = rooms.get_name_position(x, y)
-	if not name:
+	if PLAY or NEW_ROOM:
+	      rospy.loginfo("[CommandManager] MoveBase mission aborted!!!")
+	elif not name:
               rospy.loginfo("[CommandManager] Position (%d,%d) reached. wait...", x, y)
 	else:
               rospy.loginfo("[CommandManager] %s reached. wait...", name) 
-	time.sleep(4)
+	time.sleep(5)
 
 
  
 
 class Normal(smach.State):
-    '''This class defines the NORMAL state of the FSM. In particular It sends random position to the navigation_action server
-    and it checks whether a ball is detected in order to move to PLAY state.
-    Otherwise after some iterations it goes in SLEEP mode '''
+    '''This class defines the NORMAL state of the FSM. In particular It sends random position to the move_base action server.
+    It checks whether a ball is detected in order to switch in the TRACK state and check if the user wants to switch in the PLAY state as well.
+    Otherwise after some iterations it goes in SLEEP mode 
+    '''
     def __init__(self):
         smach.State.__init__(self, 
                              outcomes=['goToNormal','goToSleep','goToPlay','goToTrack'])
 
-
-        self.rate = rospy.Rate(1)  # Loop at 200 Hz
+	# Loop at 200 Hz
+        self.rate = rospy.Rate(1)  
 	## Counter variable to check the number of iteration of the NORMAL state in order to move to SLEEP state after a certain number 
         self.counter = 0
         
     def execute(self,userdata):
-        global PLAY, client, NEW_ROOM, rooms
+	""" Method inherited from the smach.State class """
+        global PLAY, client, NEW_ROOM, rooms, roomD_pub 
 	rospy.loginfo("***********************************")
 	rospy.loginfo("[CommandManager] I m in NORMAL state")
-	time.sleep(4)
+	#Start the roomDetector
+	roomD_pub.publish(True)
+
 	self.counter = 0
         
         while not rospy.is_shutdown():  
-
+	    time.sleep(2)
             if PLAY == True:
                 return 'goToPlay'
             elif self.counter == 4:
@@ -146,26 +158,21 @@ class Normal(smach.State):
                 return 'goToTrack'
 		
 	    else:
-	        #move_base_go_to(-2, 8)
 
                 # move in a random position using move_base
 	        rospy.loginfo("[CommandManager] generate a new random goal position")
-                #move_base_go_to(random.randint(-5,5), random.randint(-5,5))
                 pos = rooms.generate_rand_pos()
 		move_base_go_to(pos[0], pos[1])
-		#rospy.loginfo("[CommandManager] position:( %d,%d) reached !!!", pos[0], pos[1])
-                self.rate.sleep()
-		
+                self.rate.sleep()		
                 self.counter += 1
-            
-        return 'goToSleep' 
+             
         
     
 
 
 class Sleep(smach.State):
-    '''It defines the SLEEP state which sleeps for a random period of time.
-    Then it makes a request to the Navigation service to go to the home location.
+    '''It defines the SLEEP state where the robot sleeps for a random period of time.
+    Then it makes a request to the move_base action server to go to the home location.
     Finally it returns in the NORMAL state'''
     def __init__(self):
         smach.State.__init__(self, 
@@ -179,14 +186,11 @@ class Sleep(smach.State):
         rospy.loginfo("[CommandManager] I m in SLEEP mode")
         # comeback to home      
         position = rooms.get_room_position("Home")
-	move_base_go_to(position[0], position[1])
-     
+	move_base_go_to(position[0], position[1])     
 	rospy.loginfo("[CommandManager] Home reached")
         # sleep for a random time period
 	rospy.loginfo("[CommandManager] Sleeping...")
         time.sleep(random.randint(3,6))
-	
-
         return 'goToNormal'
 
 
@@ -197,7 +201,8 @@ class Play(smach.State):
         smach.State.__init__(self, 
                              outcomes=['goToNormal','goToPlay','goToFind'])
 
-        self.rate = rospy.Rate(200)
+        self.rate = rospy.Rate(1)
+	## Variable to count the time pass
         self.counter = 0
 	    
 
@@ -205,46 +210,37 @@ class Play(smach.State):
 	rospy.loginfo("***********************************")
         rospy.logdebug("[CommandManager] I m in PLAY mode")
 	global PLAY, rooms 
-
-        
+	time.sleep(1)
+	PLAY = False
 
         # go to the person
-        #userdata.rooms_in.go_to_room("Home")
         position = rooms.get_room_position("Home")
-        # go to Home position 
-        move_base_go_to(position[0], position[1])	
-	#rospy.loginfo("[CommandManager] Home Reached!!!!")
-        
+        move_base_go_to(position[0], position[1])	       
 
         while not rospy.is_shutdown():
 	    # we need to update them at each iteration 
 	    global TARGET_ROOM, NEW_TR
+	    
 
             if self.counter <= 5:
                 if NEW_TR == True:
                                         
                     if TARGET_ROOM.startswith("GoTo"):
                         TARGET_ROOM = TARGET_ROOM.strip("GoTo ")
-
-                        position = rooms.get_room_position(TARGET_ROOM)
-                        
+                        position = rooms.get_room_position(TARGET_ROOM) 
                         if not position:
                             rospy.loginfo("[CommandManager] That room has not yet been visited")
-			    PLAY = False
 			    return 'goToFind'  
                         else:
+			    rospy.loginfo("[CommandManager] Room already visited!")
                             move_base_go_to(position[0], position[1])                 
-
                     else:
-                        rospy.logerr("[Sintax Error] no GoTo command typed!")
-
-                    # wait a few seconds 
+                        rospy.logerr("[Sintax Error] no GoTo command typed!") 
                     time.sleep(1)
 		    rospy.loginfo("[CommandManager] Homecoming...")
                     # comebak to the person 
                     position = rooms.get_room_position("Home")
                     move_base_go_to(position[0], position[1])
-		    #rospy.loginfo("[CommandManager] Home Reached!!!!")
 		    NEW_TR = False
                 
 	        # wait a few seconds 
@@ -254,12 +250,12 @@ class Play(smach.State):
                 
 	    else:
 		self.counter = 0
-            	PLAY = False
             	return 'goToNormal'
 
 class Track(smach.State):
-    '''Class that defines the PLAY state. 
-     It move the robot in X Y location and then asks to go back to the user.'''
+    '''Class that defines the TRACK state. 
+     It send the detected color room to the track action server in order ot reach it. 
+     Then sotores the location of the room found '''
     def __init__(self):
         smach.State.__init__(self, 
                              outcomes=['goToNormal','goToPlay','goToFind','goToTrack'])
@@ -279,15 +275,17 @@ class Track(smach.State):
         if not wait:
             rospy.logerr("Action server not available!")
             rospy.signal_shutdown("Action server not available!")
-            NEW_ROOM = False
+	    if FIND_MODE == True:
+               return "goToFind"
             return "goToNormal"
         else:
             
             result = trackClient.get_result()
-        # Since if the result is (0,0) means that no ball has been reached
+            # Since if the result is (0,0) means that no ball has been reached
 	    if result.x != 0 and result.y != 0:
-	          rospy.loginfo("[CommandManager] New Room reached!")
+		  # add the the room to the structure
 	          rooms.add_new_room(COLOR_ROOM, result.x, result.y)
+		  # check which is the next state
                   if FIND_MODE == True:
                   	if COLOR_ROOM == rooms.get_color_room(TARGET_ROOM):
 		      	    FIND_MODE = False
@@ -298,13 +296,12 @@ class Track(smach.State):
                             return 'goToFind'
 	    else:
 		 rospy.loginfo("[CommandManager] The robot is not able to find the previously detected ball")
-	    ###### add the new room to the list ######
             
             return "goToNormal"
 
 class Find(smach.State):
-    '''Class that defines the PLAY state. 
-     It move the robot in X Y location and then asks to go back to the user.'''
+    '''Class that defines the FIND state. 
+     It move the robot using the explore function in order to find the esired room or a new one.'''
     def __init__(self):
         smach.State.__init__(self, 
                              outcomes=['goToPlay','goToTrack','goToFind'])
@@ -315,6 +312,7 @@ class Find(smach.State):
         rospy.loginfo("***********************************")
         rospy.loginfo("[CommandManager] I'm in FIND state")
         FIND_MODE = True
+	roomD_pub.publish(True)
         time.sleep(4)
         self.counter = 0
         
@@ -322,48 +320,33 @@ class Find(smach.State):
 
             if self.counter == 4:
 		FIND_MODE = False
+		roomD_pub.publish(False)
                 return 'goToPlay' 
             elif NEW_ROOM == True:
                 return 'goToTrack'
 		
 	    else:
-	        #move_base_go_to(-2, 8)
-
-                # move in a random position using move_base
 	        rospy.loginfo("[CommandManager] Exploring....")
-                #move_base_go_to(random.randint(-5,5), random.randint(-5,5))
                 pos = rooms.explore()
 		move_base_go_to(pos[0], pos[1])
-		        #rospy.loginfo("[CommandManager] position:( %d,%d) reached !!!", pos[0], pos[1])
                 self.rate.sleep()
-
                 self.counter += 1
-            
-         
-        
-            
-       
-
-
-
-	
-
         
 def main():
     
-    #global client
+    global client
     try:
-	time.sleep(2)
         rospy.init_node('commandManager')
-        # move_base client
+        # initialize the move_base client
         client.wait_for_server()
-        # Subscriber to the UIchatter topic
+        ## Subscriber to the UIchatter topic
         UIsubscriber = rospy.Subscriber("UIchatter", String, UIcallback)
-        # Subscriber to the newRoom topic 
+        ## Subscriber to the newRoom topic 
+	time.sleep(2)
         newRoomSub = rospy.Subscriber("newRoom", String, newRoomDetected)
         
         
-        # Create a SMACH state machine
+        ## Create a SMACH state machine
         sm = smach.StateMachine(outcomes=['init'])
     
 
