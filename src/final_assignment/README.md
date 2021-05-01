@@ -34,30 +34,34 @@ If the entered room hasn't yet been visited the robot will switch in the _FIND_ 
 For this project it was necessary to rely on already established and tested ROS packages, in particular as regards the navigation part (SLAM and autonomous navigation). 
 I used the __gmapping__ algorithm to build the map of the environment and the __move base__ ROS package for the autonomous navigation part.
 
-I chosen those packages since are very simple and therefore not too heavy in terms of computational load. Moreover taking into account the semplicity of the environment a 3D SLAM wouldn't have been so useful.
+I chosen those packages since are very simple and therefore not too heavy in terms of computational load. Moreover taking into account the simplicity of the environment a 3D SLAM wouldn't have been so useful.
 
 the software architecture implemented is shown below:
 
 ![SW architecture](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/documentation/doc_pages/rosgraph.png)
+
+Notice that the architecture is "dynamic" in a sense that some topics are dynamically registered and deleted in order to improve the speed and the safety of the code.
 
 
 ### Description
 - __commandManager__ = is the core of the architecture as in the previous assignments. It takes input from the _UI_ node and the _roomsDetector_ . Based on the state in which it is, this node can make requests to:
   -  the _move_base_ action server to reach a certain position.
   -  the _track_ action server to reach a detected room (ball).
-- __roomDetector__ = is a very simple openCV algorithm that analyzes the camera images to detect the balls (rooms). Then it sends the color of the detected ball to the _commandManager_. After which it interrupts the subscription to the camera topic and goes in a sort of sleeping mode until the _commandManager_ awaken it again.
-- __track__ = is a action server that, given a _color_ , starts to track a ball of that color. The algorithm of tracking it's very similar to the ball_track of the previous assignment. When the robot reaches the ball it will read its own position and send it back to the _commandManager_ so that it can store the position of the discovered room. If for some reason the ball is no longer detected the robot will turn on itself in both directions in an attempt to see the ball again. If after some time it has not succeeded, it switches back to the appropriate state.
-Finally I implemented a very simple obstacle_avoidance algorithm using the laser scan data since when the robot start to track a ball the move_base algorithm is deactivated by the _commadManager_ and its obstacle avoidance as well.
-- __UI__ = is a very simple user interface that allows the user to switch in the _PLAY_ mode and chose a desired room to reach.
+- __roomDetector__ = is a simple openCV algorithm that analyzes the camera images to detect the balls (rooms). Then it sends the color of the detected ball to the _commandManager_. After which it interrupts the subscription to the camera topic and goes in a sort of sleeping mode until the _commandManager_ awaken it again.
+- __track__ = is a action server that tracks a ball of a given color. The algorithm of tracking it's very similar to the _ball_track_ of the previous assignment. When the robot reaches the ball it will read its own position and send it back to the _commandManager_ so that it can store the position of the discovered room. If for some reason the ball is no longer detected the robot will turn on itself in both directions in an attempt to see the ball again. If after some time it has not succeeded, it switches back to the appropriate state.
+Finally I implemented a very simple **obstacle_avoidance** algorithm using the laser scan data because when the robot starts to track a ball the _move_base_ algorithm is deactivated by the _commadManager_ and its integrated obstacle avoidance as well.
+- __UI__ = is a very simple user interface that allows the user to switch in the _PLAY_ mode and choose a desired room to reach.
 
 For more details regarding the scripts, see the doxygen documentation. 
 
 ### **Architecture Choices**
-I preferred to keep separate the _roomDetector_ and the _track_ nodes, even if quite similar, in order to get an asynchronous node (_roomDetector_) which notifies new rooms directly to the _commandManager_ which handle that information according to its state and its priority. Moreover in this way I was able to implement the tracking phase as an action server and thus have access to all its features such as checking its status or aborting a mission. The computational load is not increased since the roomDetector node goes into a kind of sleep mode when the _track_ is active.
+I preferred to keep separate the _roomDetector_ and the _track_ nodes, even if quite similar, in order to get an asynchronous node (_roomDetector_) which notifies new rooms directly to the _commandManager_ which handle that information according to its state and its priority. Moreover in this way I was able to implement the tracking phase as an action server and thus having access to all its features such as checking its status or aborting a mission. The computational load is not increased since the roomDetector node goes into a kind of sleep mode when the _track_ is active.
+
+As already said the _move_base_ goal is aborted every time a ball is detected since the position of the ball and the previous _move_base_ goal position might be conflicting.
 
 ### **Move Base and Gmapping settings**
-- The **_gmapping_** parameters are contained in the *gmapping.launch* file. Basically I changed:
-  - The **maxUrange** parameter (increased 20) to increase the range of the laser in order to map deeper, since in the biggest room the robot doesn't detect any wall, this introduced a localization error. 
+- The **_gmapping_** parameters are contained in the [gmapping.launch](/launch/gmapping.launch) file. Basically I changed:
+  - The **maxUrange** parameter (increased 20) to increase the range of the laser in order to map deeper the environment, since in the biggest room the robot didn't detect any wall, this introduced a localization error. 
   - The **lsigma** and **ogain** parameter for smoothing the resampling effects which was too hard.
   - Increased the **particles** parameter to increase the ability of the robot to close the loop.
 - Regarding the **_move_base_** settings:
