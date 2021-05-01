@@ -317,6 +317,7 @@ class Find(smach.State):
         smach.State.__init__(self, 
                              outcomes=['goToPlay','goToTrack','goToFind'])
 	self.rate = rospy.Rate(1)  # Loop at 200 Hz
+    	self.counter = 0
 
     def execute(self, userdata):
         global rooms, control_variables

@@ -1,6 +1,23 @@
 ![Unige Logo](https://raw.githubusercontent.com/FraTesta/experimental_ws/master/src/final_assignment/documentation/doc_pages/unige_stemma.png)
 
 # __Final Assignment__
+## **Table Of Contents**
+- [__Final Assignment__](#final-assignment)
+  - [**Table Of Contents**](#table-of-contents)
+  - [__Introduction__](#introduction)
+  - [__Software Architecture__](#software-architecture)
+    - [Description](#description)
+    - [**Architecture Choices**](#architecture-choices)
+    - [**Move Base and Gmapping settings**](#move-base-and-gmapping-settings)
+  - [__FSM Description__](#fsm-description)
+  - [**Robot Model & Knowledge Rappresentation**](#robot-model--knowledge-rappresentation)
+  - [**Package and File List**](#package-and-file-list)
+  - [**Installation**](#installation)
+  - [**Run**](#run)
+  - [Move base sattings](#move-base-sattings)
+  - [Gmapping settings](#gmapping-settings)
+  - [Problems](#problems)
+
 ## __Introduction__ 
 This project represents the final assignment of the Experimental Robotics Laboratory corse. Therefore is an improvement of the assignment1 and and assignment2 that you can find in this git repository as well. 
 
@@ -49,7 +66,7 @@ I preferred to keep separate the _roomDetector_ and the _track_ nodes, even if q
   - In the *global_costmap.yaml* I increased the **update_frequency** and **publish_frequency** to make the planner more reactive to changes and faster in correcting mapping errors. I increased also the _inflation_radius_ to make shore that the robots enter every room.
   - Finally in the *local_cost_map.yaml* I increased tge **with** and **height** parameters to improve the local mapping and avoid strange trajectory.
 
-## __FSM Implementation__
+## __FSM Description__
 The structure of the finite state machine is inevitably more complicated like shown in the figure. The FSM was still developed using the _smach_ API so you can still use its feature to study this new implementation.
 
 ![FSM](https://raw.githubusercontent.com/FraTesta/experimental_ws/master/src/final_assignment/documentation/doc_pages/FSM.png)
@@ -66,12 +83,14 @@ The states are still implemented in the _commandManager.py_ script which now rec
 
 
 
-## Environment and Robot model 
-The robot model used is the same of the previous assignment but I removed the neck joint in order to keep the head fixed and thus the camera. Moreover I added a laser sensor which is necessary for the *gmapping* and *move_base* algorithms. 
+## **Robot Model & Knowledge Rappresentation** 
+The robot model used is the same of the previous assignment but I removed the neck joint in order to keep the head fixed and thus the camera as well. Moreover I added a laser sensor which is necessary for the *gmapping* and *move_base* algorithms. 
+
+![RoboModel](/documentation/doc_pages/robotModel.jpg)
 
 Regarding the knowledge representation I develop a class called _Rooms.py_ that provides a simple structure that associates each room with a color ball and its own position in the space in terms of x and y coordinates. Of course this class provides also methods to update the knowledge of such environment. For more information take a look to its doxygen documentation.
 
-## File List
+## **Package and File List**
 The final assignment package provides the following directory:
 - **action** = contains the definition of the _track_ action server
 - **config** = contains some setting for the RViz simulation 
@@ -94,7 +113,7 @@ sudo apt-get install ros-kinetic-navigation
 ```
 
 
-## RUN
+## **Run**
 
 Launch the complete project
 ```

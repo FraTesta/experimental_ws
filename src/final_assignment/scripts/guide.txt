@@ -1,4 +1,0 @@
-track = è l'action server che prende il colore di una palla detectata, la raggiunge e ritorna la posizione del robot al momento del raggiungimento. 
-roomsDetector = publisher che pubblica quando viene riconosciuta una nuova palla 
-
-provaAction = serve per fare una richiesta all'action server "robot_reach_room" del track code 

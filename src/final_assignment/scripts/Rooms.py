@@ -22,10 +22,10 @@ class Rooms():
         self.ROOMS = [ 
         {'name':"Entrance",'color': "blue", "x":0, "y":0, 'detected':False},
         {'name':"Closet",'color': "red", "x":0, "y":0, 'detected':False},
-        {'name':"LeavingRoom",'color': "green", "x":0, "y":0, 'detected':False},
+        {'name':"Leavingroom",'color': "green", "x":0, "y":0, 'detected':False},
         {'name':"Kitchen",'color': "yellow", "x":0, "y":0, 'detected':False},
-        {'name':"BathRoom",'color': "magenta", "x":0, "y":0, 'detected':False},
-        {'name':"BedRoom",'color':"black","x":0,"y":0, 'detected':False},
+        {'name':"Bathroom",'color': "magenta", "x":0, "y":0, 'detected':False},
+        {'name':"Bedroom",'color':"black","x":0,"y":0, 'detected':False},
         {'name':"Home",'color':"","x": -5,"y":7, 'detected':True}
         ]
 
