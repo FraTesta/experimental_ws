@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['lol',['lol',['../classtimerProva_1_1lol.html',1,'timerProva']]]
+  ['normal',['Normal',['../classcommandManager_1_1Normal.html',1,'commandManager']]],
+  ['normal',['Normal',['../classnoSleep_1_1Normal.html',1,'noSleep']]]
 ];

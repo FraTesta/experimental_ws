@@ -10,12 +10,7 @@ var commandManager_8py =
     [ "newRoomDetected", "commandManager_8py.html#aa96fd2ed94c8c1168e09ced4015dcb1b", null ],
     [ "UIcallback", "commandManager_8py.html#a2310383d56755f0a09a75b1a92130e21", null ],
     [ "client", "commandManager_8py.html#ad81f5cdd9bf18b67989c77a2329b9e28", null ],
-    [ "COLOR_ROOM", "commandManager_8py.html#ae945cfc4fe1632a6952debd7a67d9f3c", null ],
-    [ "FIND_MODE", "commandManager_8py.html#ad0728881cc70cfd3f8f5251b7b9af646", null ],
-    [ "NEW_ROOM", "commandManager_8py.html#a52e7163bf2cde17330107e6a2cf2f851", null ],
-    [ "NEW_TR", "commandManager_8py.html#a6356544112d78464670ffb9af59bed1d", null ],
-    [ "PLAY", "commandManager_8py.html#aecd980edd677f32e8693cbd21fa2c6eb", null ],
-    [ "RANDOM", "commandManager_8py.html#afb1c5b8d9e6c746c82f4abf3fffe02a5", null ],
-    [ "rooms", "commandManager_8py.html#a868809e1f6a79e7b7ce5ea405e978d48", null ],
-    [ "TARGET_ROOM", "commandManager_8py.html#ace76b1a89b584c851c50bc3ad66e1d69", null ]
+    [ "control_variables", "commandManager_8py.html#a3c82d03952562f9cf96be2e80ae059a3", null ],
+    [ "roomD_pub", "commandManager_8py.html#a5cf709943d61e92e0ce4c1652403ae8d", null ],
+    [ "rooms", "commandManager_8py.html#a868809e1f6a79e7b7ce5ea405e978d48", null ]
 ];

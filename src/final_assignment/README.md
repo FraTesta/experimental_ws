@@ -86,9 +86,9 @@ The states are still implemented in the _commandManager.py_ script which now rec
 ## **Robot Model & Knowledge Rappresentation** 
 The robot model used is the same of the previous assignment but I removed the neck joint in order to keep the head fixed and thus the camera as well. Moreover I added a laser sensor which is necessary for the *gmapping* and *move_base* algorithms. 
 
-![RoboModel](/documentation/doc_pages/robotModel.jpg)
+![RoboModel](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/documentation/doc_pages/robotModel.jpg)
 
-Regarding the knowledge representation I develop a class called _Rooms.py_ that provides a simple structure that associates each room with a color ball and its own position in the space in terms of x and y coordinates. Of course this class provides also methods to update the knowledge of such environment. For more information take a look to its doxygen documentation.
+Regarding the knowledge representation I develop a class called _Rooms.py_ that provides a simple structure that associates each room with a color ball and its own position in the space in terms of x and y coordinates. Of course this class provides also methods to update the knowledge of such environment. For more information take a look to its [doxygen documentation](file:///home/francescotesta/experimental_ws/src/final_assignment/documentation/html/classRooms_1_1Rooms.html) .
 
 ## **Package and File List**
 The final assignment package provides the following directory:

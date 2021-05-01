@@ -17,34 +17,24 @@ class \hyperlink{classcommandManager_1_1Track}{Track}
 \begin{DoxyCompactItemize}
 \item 
 def \hyperlink{namespacecommandManager_a2310383d56755f0a09a75b1a92130e21}{U\+Icallback} (data)
-\item 
+\begin{DoxyCompactList}\small\item\em Callback mathod of the U\+Isubscriber which handels the commands sent by the user. \end{DoxyCompactList}\item 
 def \hyperlink{namespacecommandManager_aa96fd2ed94c8c1168e09ced4015dcb1b}{new\+Room\+Detected} (color)
-\item 
+\begin{DoxyCompactList}\small\item\em Callback function of the new\+Room\+Sub subscriber which recives the color of the new detected room. \end{DoxyCompactList}\item 
 def \hyperlink{namespacecommandManager_af8e54858c65310eb1e131529bf200516}{move\+\_\+base\+\_\+go\+\_\+to} (x, y)
-\item 
+\begin{DoxyCompactList}\small\item\em Method which prepares and send the goal to the move\+\_\+base action server. \end{DoxyCompactList}\item 
 def \hyperlink{namespacecommandManager_ae8b570eb4bf393859bc74c9cb5fe125f}{main} ()
 \end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-bool \hyperlink{namespacecommandManager_aecd980edd677f32e8693cbd21fa2c6eb}{P\+L\+AY} = False
-\begin{DoxyCompactList}\small\item\em Flag which notify when the user types \textquotesingle{}play\textquotesingle{}. \end{DoxyCompactList}\item 
-string \hyperlink{namespacecommandManager_ace76b1a89b584c851c50bc3ad66e1d69}{T\+A\+R\+G\+E\+T\+\_\+\+R\+O\+OM} = \char`\"{}None\char`\"{}
-\begin{DoxyCompactList}\small\item\em Contains the desired room entered by the user. \end{DoxyCompactList}\item 
-bool \hyperlink{namespacecommandManager_a6356544112d78464670ffb9af59bed1d}{N\+E\+W\+\_\+\+TR} = False
-\begin{DoxyCompactList}\small\item\em Flag which notify when the command manager recives a new target room. \end{DoxyCompactList}\item 
-bool \hyperlink{namespacecommandManager_a52e7163bf2cde17330107e6a2cf2f851}{N\+E\+W\+\_\+\+R\+O\+OM} = False
-\begin{DoxyCompactList}\small\item\em new room detected \end{DoxyCompactList}\item 
-bool \hyperlink{namespacecommandManager_afb1c5b8d9e6c746c82f4abf3fffe02a5}{R\+A\+N\+D\+OM} = True
-\begin{DoxyCompactList}\small\item\em Random position generation flag. \end{DoxyCompactList}\item 
-string \hyperlink{namespacecommandManager_ae945cfc4fe1632a6952debd7a67d9f3c}{C\+O\+L\+O\+R\+\_\+\+R\+O\+OM} = \char`\"{}None\char`\"{}
-\begin{DoxyCompactList}\small\item\em color of the detected ball \end{DoxyCompactList}\item 
-bool \hyperlink{namespacecommandManager_ad0728881cc70cfd3f8f5251b7b9af646}{F\+I\+N\+D\+\_\+\+M\+O\+DE} = False
-\begin{DoxyCompactList}\small\item\em Flag to comeback into \hyperlink{classcommandManager_1_1Find}{Find} state when it\textquotesingle{}s necessary. \end{DoxyCompactList}\item 
+dictionary \hyperlink{namespacecommandManager_a3c82d03952562f9cf96be2e80ae059a3}{control\+\_\+variables}
+\item 
 \hyperlink{namespacecommandManager_ad81f5cdd9bf18b67989c77a2329b9e28}{client} = actionlib.\+Simple\+Action\+Client(\textquotesingle{}move\+\_\+base\textquotesingle{},Move\+Base\+Action)
-\begin{DoxyCompactList}\small\item\em init the move\+\_\+base client \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Flag which notify when the user types \textquotesingle{}play\textquotesingle{} P\+L\+AY = False Contains the desired room entered by the user T\+A\+R\+G\+E\+T\+\_\+\+R\+O\+OM = \char`\"{}\+None\char`\"{} Flag which notify when the command manager recives a new target room from the user N\+E\+W\+\_\+\+TR = False Flag which notify that a new room was detected by the camera N\+E\+W\+\_\+\+R\+O\+OM = False Contains the color of the detected ball (room) N\+E\+W\+\_\+\+R\+O\+O\+M\+\_\+\+C\+O\+L\+OR = \char`\"{}\+None\char`\"{} Flag indicating if the F\+I\+ND mode is active or not F\+I\+N\+D\+\_\+\+M\+O\+DE = False Initialization of the move\+\_\+base client in order to assign target position to the move\+\_\+base action server. \end{DoxyCompactList}\item 
+\hyperlink{namespacecommandManager_a5cf709943d61e92e0ce4c1652403ae8d}{room\+D\+\_\+pub} = rospy.\+Publisher(\textquotesingle{}start\+RD\textquotesingle{}, Bool, queue\+\_\+size=10)
+\begin{DoxyCompactList}\small\item\em Publisher to the start\+RD topic which allows to enable/disable the room detector. \end{DoxyCompactList}\item 
 \hyperlink{namespacecommandManager_a868809e1f6a79e7b7ce5ea405e978d48}{rooms} = \hyperlink{classRooms_1_1Rooms}{Rooms}()
-\begin{DoxyCompactList}\small\item\em init the rooms environment \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Object of the class \hyperlink{namespaceRooms}{Rooms} necessary to store and manage the discovered rooms. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
@@ -63,6 +53,17 @@ bool \hyperlink{namespacecommandManager_ad0728881cc70cfd3f8f5251b7b9af646}{F\+I\
 \item[{}]{y}
 \end{DoxyParamCaption}
 )}\hypertarget{namespacecommandManager_af8e54858c65310eb1e131529bf200516}{}\label{namespacecommandManager_af8e54858c65310eb1e131529bf200516}
+
+
+Method which prepares and send the goal to the move\+\_\+base action server. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & X position of the desired goal \\
+\hline
+{\em y} & Y position of the desired goal \\
+\hline
+\end{DoxyParams}
 \index{command\+Manager@{command\+Manager}!new\+Room\+Detected@{new\+Room\+Detected}}
 \index{new\+Room\+Detected@{new\+Room\+Detected}!command\+Manager@{command\+Manager}}
 \subsubsection[{\texorpdfstring{new\+Room\+Detected(color)}{newRoomDetected(color)}}]{\setlength{\rightskip}{0pt plus 5cm}def command\+Manager.\+new\+Room\+Detected (
@@ -70,6 +71,15 @@ bool \hyperlink{namespacecommandManager_ad0728881cc70cfd3f8f5251b7b9af646}{F\+I\
 \item[{}]{color}
 \end{DoxyParamCaption}
 )}\hypertarget{namespacecommandManager_aa96fd2ed94c8c1168e09ced4015dcb1b}{}\label{namespacecommandManager_aa96fd2ed94c8c1168e09ced4015dcb1b}
+
+
+Callback function of the new\+Room\+Sub subscriber which recives the color of the new detected room. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & is a string message containing the color of the room detected by the \hyperlink{namespaceroomDetector}{room\+Detector} R\+OS node \\
+\hline
+\end{DoxyParams}
 \index{command\+Manager@{command\+Manager}!U\+Icallback@{U\+Icallback}}
 \index{U\+Icallback@{U\+Icallback}!command\+Manager@{command\+Manager}}
 \subsubsection[{\texorpdfstring{U\+Icallback(data)}{UIcallback(data)}}]{\setlength{\rightskip}{0pt plus 5cm}def command\+Manager.\+U\+Icallback (
@@ -79,67 +89,50 @@ bool \hyperlink{namespacecommandManager_ad0728881cc70cfd3f8f5251b7b9af646}{F\+I\
 )}\hypertarget{namespacecommandManager_a2310383d56755f0a09a75b1a92130e21}{}\label{namespacecommandManager_a2310383d56755f0a09a75b1a92130e21}
 
 
+Callback mathod of the U\+Isubscriber which handels the commands sent by the user. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & is a string message coming from the \hyperlink{namespaceUI}{UI} R\+OS node \\
+\hline
+\end{DoxyParams}
+
+
 \subsection{Variable Documentation}
 \index{command\+Manager@{command\+Manager}!client@{client}}
 \index{client@{client}!command\+Manager@{command\+Manager}}
 \subsubsection[{\texorpdfstring{client}{client}}]{\setlength{\rightskip}{0pt plus 5cm}command\+Manager.\+client = actionlib.\+Simple\+Action\+Client(\textquotesingle{}move\+\_\+base\textquotesingle{},Move\+Base\+Action)}\hypertarget{namespacecommandManager_ad81f5cdd9bf18b67989c77a2329b9e28}{}\label{namespacecommandManager_ad81f5cdd9bf18b67989c77a2329b9e28}
 
 
-init the move\+\_\+base client 
+Flag which notify when the user types \textquotesingle{}play\textquotesingle{} P\+L\+AY = False Contains the desired room entered by the user T\+A\+R\+G\+E\+T\+\_\+\+R\+O\+OM = \char`\"{}\+None\char`\"{} Flag which notify when the command manager recives a new target room from the user N\+E\+W\+\_\+\+TR = False Flag which notify that a new room was detected by the camera N\+E\+W\+\_\+\+R\+O\+OM = False Contains the color of the detected ball (room) N\+E\+W\+\_\+\+R\+O\+O\+M\+\_\+\+C\+O\+L\+OR = \char`\"{}\+None\char`\"{} Flag indicating if the F\+I\+ND mode is active or not F\+I\+N\+D\+\_\+\+M\+O\+DE = False Initialization of the move\+\_\+base client in order to assign target position to the move\+\_\+base action server. 
 
-\index{command\+Manager@{command\+Manager}!C\+O\+L\+O\+R\+\_\+\+R\+O\+OM@{C\+O\+L\+O\+R\+\_\+\+R\+O\+OM}}
-\index{C\+O\+L\+O\+R\+\_\+\+R\+O\+OM@{C\+O\+L\+O\+R\+\_\+\+R\+O\+OM}!command\+Manager@{command\+Manager}}
-\subsubsection[{\texorpdfstring{C\+O\+L\+O\+R\+\_\+\+R\+O\+OM}{COLOR_ROOM}}]{\setlength{\rightskip}{0pt plus 5cm}string command\+Manager.\+C\+O\+L\+O\+R\+\_\+\+R\+O\+OM = \char`\"{}None\char`\"{}}\hypertarget{namespacecommandManager_ae945cfc4fe1632a6952debd7a67d9f3c}{}\label{namespacecommandManager_ae945cfc4fe1632a6952debd7a67d9f3c}
-
-
-color of the detected ball 
-
-\index{command\+Manager@{command\+Manager}!F\+I\+N\+D\+\_\+\+M\+O\+DE@{F\+I\+N\+D\+\_\+\+M\+O\+DE}}
-\index{F\+I\+N\+D\+\_\+\+M\+O\+DE@{F\+I\+N\+D\+\_\+\+M\+O\+DE}!command\+Manager@{command\+Manager}}
-\subsubsection[{\texorpdfstring{F\+I\+N\+D\+\_\+\+M\+O\+DE}{FIND_MODE}}]{\setlength{\rightskip}{0pt plus 5cm}bool command\+Manager.\+F\+I\+N\+D\+\_\+\+M\+O\+DE = False}\hypertarget{namespacecommandManager_ad0728881cc70cfd3f8f5251b7b9af646}{}\label{namespacecommandManager_ad0728881cc70cfd3f8f5251b7b9af646}
-
-
-Flag to comeback into \hyperlink{classcommandManager_1_1Find}{Find} state when it\textquotesingle{}s necessary. 
-
-\index{command\+Manager@{command\+Manager}!N\+E\+W\+\_\+\+R\+O\+OM@{N\+E\+W\+\_\+\+R\+O\+OM}}
-\index{N\+E\+W\+\_\+\+R\+O\+OM@{N\+E\+W\+\_\+\+R\+O\+OM}!command\+Manager@{command\+Manager}}
-\subsubsection[{\texorpdfstring{N\+E\+W\+\_\+\+R\+O\+OM}{NEW_ROOM}}]{\setlength{\rightskip}{0pt plus 5cm}bool command\+Manager.\+N\+E\+W\+\_\+\+R\+O\+OM = False}\hypertarget{namespacecommandManager_a52e7163bf2cde17330107e6a2cf2f851}{}\label{namespacecommandManager_a52e7163bf2cde17330107e6a2cf2f851}
-
-
-new room detected 
-
-\index{command\+Manager@{command\+Manager}!N\+E\+W\+\_\+\+TR@{N\+E\+W\+\_\+\+TR}}
-\index{N\+E\+W\+\_\+\+TR@{N\+E\+W\+\_\+\+TR}!command\+Manager@{command\+Manager}}
-\subsubsection[{\texorpdfstring{N\+E\+W\+\_\+\+TR}{NEW_TR}}]{\setlength{\rightskip}{0pt plus 5cm}bool command\+Manager.\+N\+E\+W\+\_\+\+TR = False}\hypertarget{namespacecommandManager_a6356544112d78464670ffb9af59bed1d}{}\label{namespacecommandManager_a6356544112d78464670ffb9af59bed1d}
+\index{command\+Manager@{command\+Manager}!control\+\_\+variables@{control\+\_\+variables}}
+\index{control\+\_\+variables@{control\+\_\+variables}!command\+Manager@{command\+Manager}}
+\subsubsection[{\texorpdfstring{control\+\_\+variables}{control_variables}}]{\setlength{\rightskip}{0pt plus 5cm}dictionary command\+Manager.\+control\+\_\+variables}\hypertarget{namespacecommandManager_a3c82d03952562f9cf96be2e80ae059a3}{}\label{namespacecommandManager_a3c82d03952562f9cf96be2e80ae059a3}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+1 = \{
+2     \textcolor{comment}{## Flag which notify when the user types 'play'}
+3     \textcolor{stringliteral}{"PLAY"} : \textcolor{keyword}{False},
+4     \textcolor{comment}{## Contains the desired room entered by the user }
+5     \textcolor{stringliteral}{"TARGET\_ROOM"} : \textcolor{stringliteral}{"None"},
+6     \textcolor{comment}{## Contains the color of the detected ball (room) }
+7     \textcolor{stringliteral}{"NEW\_ROOM\_COLOR"} : \textcolor{stringliteral}{"None"},
+8     \textcolor{comment}{## Flag indicating if the FIND mode is active or not }
+9     \textcolor{stringliteral}{"FIND\_MODE"} : \textcolor{keyword}{False}   
+10 \}
+\end{DoxyCode}
+\index{command\+Manager@{command\+Manager}!room\+D\+\_\+pub@{room\+D\+\_\+pub}}
+\index{room\+D\+\_\+pub@{room\+D\+\_\+pub}!command\+Manager@{command\+Manager}}
+\subsubsection[{\texorpdfstring{room\+D\+\_\+pub}{roomD_pub}}]{\setlength{\rightskip}{0pt plus 5cm}command\+Manager.\+room\+D\+\_\+pub = rospy.\+Publisher(\textquotesingle{}start\+RD\textquotesingle{}, Bool, queue\+\_\+size=10)}\hypertarget{namespacecommandManager_a5cf709943d61e92e0ce4c1652403ae8d}{}\label{namespacecommandManager_a5cf709943d61e92e0ce4c1652403ae8d}
 
 
-Flag which notify when the command manager recives a new target room. 
-
-\index{command\+Manager@{command\+Manager}!P\+L\+AY@{P\+L\+AY}}
-\index{P\+L\+AY@{P\+L\+AY}!command\+Manager@{command\+Manager}}
-\subsubsection[{\texorpdfstring{P\+L\+AY}{PLAY}}]{\setlength{\rightskip}{0pt plus 5cm}bool command\+Manager.\+P\+L\+AY = False}\hypertarget{namespacecommandManager_aecd980edd677f32e8693cbd21fa2c6eb}{}\label{namespacecommandManager_aecd980edd677f32e8693cbd21fa2c6eb}
-
-
-Flag which notify when the user types \textquotesingle{}play\textquotesingle{}. 
-
-\index{command\+Manager@{command\+Manager}!R\+A\+N\+D\+OM@{R\+A\+N\+D\+OM}}
-\index{R\+A\+N\+D\+OM@{R\+A\+N\+D\+OM}!command\+Manager@{command\+Manager}}
-\subsubsection[{\texorpdfstring{R\+A\+N\+D\+OM}{RANDOM}}]{\setlength{\rightskip}{0pt plus 5cm}bool command\+Manager.\+R\+A\+N\+D\+OM = True}\hypertarget{namespacecommandManager_afb1c5b8d9e6c746c82f4abf3fffe02a5}{}\label{namespacecommandManager_afb1c5b8d9e6c746c82f4abf3fffe02a5}
-
-
-Random position generation flag. 
+Publisher to the start\+RD topic which allows to enable/disable the room detector. 
 
 \index{command\+Manager@{command\+Manager}!rooms@{rooms}}
 \index{rooms@{rooms}!command\+Manager@{command\+Manager}}
 \subsubsection[{\texorpdfstring{rooms}{rooms}}]{\setlength{\rightskip}{0pt plus 5cm}command\+Manager.\+rooms = {\bf Rooms}()}\hypertarget{namespacecommandManager_a868809e1f6a79e7b7ce5ea405e978d48}{}\label{namespacecommandManager_a868809e1f6a79e7b7ce5ea405e978d48}
 
 
-init the rooms environment 
-
-\index{command\+Manager@{command\+Manager}!T\+A\+R\+G\+E\+T\+\_\+\+R\+O\+OM@{T\+A\+R\+G\+E\+T\+\_\+\+R\+O\+OM}}
-\index{T\+A\+R\+G\+E\+T\+\_\+\+R\+O\+OM@{T\+A\+R\+G\+E\+T\+\_\+\+R\+O\+OM}!command\+Manager@{command\+Manager}}
-\subsubsection[{\texorpdfstring{T\+A\+R\+G\+E\+T\+\_\+\+R\+O\+OM}{TARGET_ROOM}}]{\setlength{\rightskip}{0pt plus 5cm}string command\+Manager.\+T\+A\+R\+G\+E\+T\+\_\+\+R\+O\+OM = \char`\"{}None\char`\"{}}\hypertarget{namespacecommandManager_ace76b1a89b584c851c50bc3ad66e1d69}{}\label{namespacecommandManager_ace76b1a89b584c851c50bc3ad66e1d69}
-
-
-Contains the desired room entered by the user. 
+Object of the class \hyperlink{namespaceRooms}{Rooms} necessary to store and manage the discovered rooms. 
 

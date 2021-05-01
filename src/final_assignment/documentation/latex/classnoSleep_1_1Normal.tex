@@ -1,0 +1,88 @@
+\hypertarget{classnoSleep_1_1Normal}{}\section{no\+Sleep.\+Normal Class Reference}
+\label{classnoSleep_1_1Normal}\index{no\+Sleep.\+Normal@{no\+Sleep.\+Normal}}
+
+
+Inheritance diagram for no\+Sleep.\+Normal\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=166pt]{classnoSleep_1_1Normal__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for no\+Sleep.\+Normal\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=166pt]{classnoSleep_1_1Normal__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classnoSleep_1_1Normal_a408dace152fbaea3a755a27ded06b1a5}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self)
+\item 
+def \hyperlink{classnoSleep_1_1Normal_ad4ca86ae46f2a71c2e8fc58efeb6e152}{execute} (self, userdata)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classnoSleep_1_1Normal_ac888ccee4346d4596fc6d96d1659afa1}{rate}
+\item 
+\hyperlink{classnoSleep_1_1Normal_aa10f1e841df545b9ae37ccab18807937}{counter}
+\begin{DoxyCompactList}\small\item\em Counter variable to check the number of iteration of the N\+O\+R\+M\+AL state in order to move to S\+L\+E\+EP state after a certain number. \end{DoxyCompactList}\item 
+\hyperlink{classnoSleep_1_1Normal_acd333157173f8328e1e0f62d2e57e157}{pos} = rooms.\+generate\+\_\+rand\+\_\+pos()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyVerb}This class defines the NORMAL state of the FSM. In particular It sends random position to the move_base action server.
+It checks whether a ball is detected in order to switch in the TRACK state and check if the user wants to switch in the PLAY state as well.
+Otherwise after some iterations it goes in SLEEP mode 
+\end{DoxyVerb}
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{no\+Sleep\+::\+Normal@{no\+Sleep\+::\+Normal}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!no\+Sleep\+::\+Normal@{no\+Sleep\+::\+Normal}}
+\subsubsection[{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+(self)}{__init__(self)}}]{\setlength{\rightskip}{0pt plus 5cm}def no\+Sleep.\+Normal.\+\_\+\+\_\+init\+\_\+\+\_\+ (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\hypertarget{classnoSleep_1_1Normal_a408dace152fbaea3a755a27ded06b1a5}{}\label{classnoSleep_1_1Normal_a408dace152fbaea3a755a27ded06b1a5}
+
+
+\subsection{Member Function Documentation}
+\index{no\+Sleep\+::\+Normal@{no\+Sleep\+::\+Normal}!execute@{execute}}
+\index{execute@{execute}!no\+Sleep\+::\+Normal@{no\+Sleep\+::\+Normal}}
+\subsubsection[{\texorpdfstring{execute(self, userdata)}{execute(self, userdata)}}]{\setlength{\rightskip}{0pt plus 5cm}def no\+Sleep.\+Normal.\+execute (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{userdata}
+\end{DoxyParamCaption}
+)}\hypertarget{classnoSleep_1_1Normal_ad4ca86ae46f2a71c2e8fc58efeb6e152}{}\label{classnoSleep_1_1Normal_ad4ca86ae46f2a71c2e8fc58efeb6e152}
+
+
+\subsection{Member Data Documentation}
+\index{no\+Sleep\+::\+Normal@{no\+Sleep\+::\+Normal}!counter@{counter}}
+\index{counter@{counter}!no\+Sleep\+::\+Normal@{no\+Sleep\+::\+Normal}}
+\subsubsection[{\texorpdfstring{counter}{counter}}]{\setlength{\rightskip}{0pt plus 5cm}no\+Sleep.\+Normal.\+counter\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classnoSleep_1_1Normal_aa10f1e841df545b9ae37ccab18807937}{}\label{classnoSleep_1_1Normal_aa10f1e841df545b9ae37ccab18807937}
+
+
+Counter variable to check the number of iteration of the N\+O\+R\+M\+AL state in order to move to S\+L\+E\+EP state after a certain number. 
+
+\index{no\+Sleep\+::\+Normal@{no\+Sleep\+::\+Normal}!pos@{pos}}
+\index{pos@{pos}!no\+Sleep\+::\+Normal@{no\+Sleep\+::\+Normal}}
+\subsubsection[{\texorpdfstring{pos}{pos}}]{\setlength{\rightskip}{0pt plus 5cm}no\+Sleep.\+Normal.\+pos = rooms.\+generate\+\_\+rand\+\_\+pos()\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classnoSleep_1_1Normal_acd333157173f8328e1e0f62d2e57e157}{}\label{classnoSleep_1_1Normal_acd333157173f8328e1e0f62d2e57e157}
+\begin{DoxyVerb}Method inherited from the smach.State class \end{DoxyVerb}
+ \index{no\+Sleep\+::\+Normal@{no\+Sleep\+::\+Normal}!rate@{rate}}
+\index{rate@{rate}!no\+Sleep\+::\+Normal@{no\+Sleep\+::\+Normal}}
+\subsubsection[{\texorpdfstring{rate}{rate}}]{\setlength{\rightskip}{0pt plus 5cm}no\+Sleep.\+Normal.\+rate\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classnoSleep_1_1Normal_ac888ccee4346d4596fc6d96d1659afa1}{}\label{classnoSleep_1_1Normal_ac888ccee4346d4596fc6d96d1659afa1}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/francescotesta/experimental\+\_\+ws/src/final\+\_\+assignment/scripts/\hyperlink{noSleep_8py}{no\+Sleep.\+py}\end{DoxyCompactItemize}

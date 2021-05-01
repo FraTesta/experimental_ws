@@ -110,7 +110,6 @@ $(document).ready(function(){initNavTree('classcommandManager_1_1Normal.html',''
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="classcommandManager_1_1Normal-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -135,13 +134,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae95451bab37e817557988c7190bb33bd"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommandManager_1_1Normal.html#ae95451bab37e817557988c7190bb33bd">execute</a> (self, userdata)</td></tr>
 <tr class="separator:ae95451bab37e817557988c7190bb33bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a32e84cf5ac08ffeb9cb1a21d4b484a32"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommandManager_1_1Normal.html#a32e84cf5ac08ffeb9cb1a21d4b484a32">rate</a></td></tr>
-<tr class="separator:a32e84cf5ac08ffeb9cb1a21d4b484a32"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
+<tr class="memitem:a32e84cf5ac08ffeb9cb1a21d4b484a32"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommandManager_1_1Normal.html#a32e84cf5ac08ffeb9cb1a21d4b484a32">rate</a></td></tr>
+<tr class="separator:a32e84cf5ac08ffeb9cb1a21d4b484a32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ebc9e1cc3847edb576acedd01487023"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommandManager_1_1Normal.html#a5ebc9e1cc3847edb576acedd01487023">counter</a></td></tr>
 <tr class="memdesc:a5ebc9e1cc3847edb576acedd01487023"><td class="mdescLeft">&#160;</td><td class="mdescRight">Counter variable to check the number of iteration of the NORMAL state in order to move to SLEEP state after a certain number.  <a href="#a5ebc9e1cc3847edb576acedd01487023">More...</a><br /></td></tr>
 <tr class="separator:a5ebc9e1cc3847edb576acedd01487023"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -149,9 +145,10 @@ Static Public Attributes</h2></td></tr>
 <tr class="separator:a160432e70539a4ac4dd4a5bf733824a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><pre class="fragment">This class defines the NORMAL state of the FSM. In particular It sends random position to the navigation_action server
-and it checks whether a ball is detected in order to move to PLAY state.
-Otherwise after some iterations it goes in SLEEP mode </pre> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<div class="textblock"><pre class="fragment">This class defines the NORMAL state of the FSM. In particular It sends random position to the move_base action server.
+It checks whether a ball is detected in order to switch in the TRACK state and check if the user wants to switch in the PLAY state as well.
+Otherwise after some iterations it goes in SLEEP mode 
+</pre> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="abda69ab53b7d84c2c0c577dcf26f3823"></a>
 <div class="memitem">
 <div class="memproto">
@@ -215,7 +212,7 @@ Otherwise after some iterations it goes in SLEEP mode </pre> </div><h2 class="gr
 </div><div class="memdoc">
 
 <p>Counter variable to check the number of iteration of the NORMAL state in order to move to SLEEP state after a certain number. </p>
-
+<pre class="fragment">Method inherited from the smach.State class </pre> 
 </div>
 </div>
 <a class="anchor" id="a160432e70539a4ac4dd4a5bf733824a3"></a>
@@ -241,11 +238,19 @@ Otherwise after some iterations it goes in SLEEP mode </pre> </div><h2 class="gr
 <a class="anchor" id="a32e84cf5ac08ffeb9cb1a21d4b484a32"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">commandManager.Normal.rate</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>

@@ -1,12 +1,12 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node2" href="$classcm2_1_1Find.html" title="cm2.Find" alt="" coords="168,5,248,32"/>
-<area shape="rect" id="node3" href="$classcm2_1_1Normal.html" title="cm2.Normal" alt="" coords="157,56,259,83"/>
-<area shape="rect" id="node4" href="$classcm2_1_1Play.html" title="cm2.Play" alt="" coords="168,107,248,133"/>
-<area shape="rect" id="node5" href="$classcm2_1_1Sleep.html" title="cm2.Sleep" alt="" coords="163,157,253,184"/>
-<area shape="rect" id="node6" href="$classcm2_1_1Track.html" title="cm2.Track" alt="" coords="164,208,252,235"/>
-<area shape="rect" id="node7" href="$classcommandManager_1_1Find.html" title="commandManager.Find" alt="" coords="121,259,295,285"/>
-<area shape="rect" id="node8" href="$classcommandManager_1_1Normal.html" title="commandManager.Normal" alt="" coords="111,309,305,336"/>
-<area shape="rect" id="node9" href="$classcommandManager_1_1Play.html" title="commandManager.Play" alt="" coords="121,360,295,387"/>
-<area shape="rect" id="node10" href="$classcommandManager_1_1Sleep.html" title="commandManager.Sleep" alt="" coords="117,411,299,437"/>
-<area shape="rect" id="node11" href="$classcommandManager_1_1Track.html" title="commandManager.Track" alt="" coords="117,461,299,488"/>
+<area shape="rect" id="node2" href="$classcommandManager_1_1Find.html" title="commandManager.Find" alt="" coords="115,5,273,32"/>
+<area shape="rect" id="node3" href="$classcommandManager_1_1Normal.html" title="commandManager.Normal" alt="" coords="107,56,281,83"/>
+<area shape="rect" id="node4" href="$classcommandManager_1_1Play.html" title="commandManager.Play" alt="" coords="115,107,273,133"/>
+<area shape="rect" id="node5" href="$classcommandManager_1_1Sleep.html" title="commandManager.Sleep" alt="" coords="111,157,277,184"/>
+<area shape="rect" id="node6" href="$classcommandManager_1_1Track.html" title="commandManager.Track" alt="" coords="111,208,277,235"/>
+<area shape="rect" id="node7" href="$classnoSleep_1_1Find.html" title="noSleep.Find" alt="" coords="145,259,243,285"/>
+<area shape="rect" id="node8" href="$classnoSleep_1_1Normal.html" title="noSleep.Normal" alt="" coords="137,309,251,336"/>
+<area shape="rect" id="node9" href="$classnoSleep_1_1Play.html" title="noSleep.Play" alt="" coords="145,360,243,387"/>
+<area shape="rect" id="node10" href="$classnoSleep_1_1Sleep.html" title="noSleep.Sleep" alt="" coords="141,411,247,437"/>
+<area shape="rect" id="node11" href="$classnoSleep_1_1Track.html" title="noSleep.Track" alt="" coords="141,461,247,488"/>
 </map>

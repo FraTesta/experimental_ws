@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['to_5fstring',['to_string',['../classRooms_1_1Rooms.html#af4de8388233d61aa35d1567f7a1499c5',1,'Rooms::Rooms']]],
-  ['track',['track',['../classtrack_1_1TrackAction.html#a1d41a25e35227ab25323a95eeb9a4bb2',1,'track.TrackAction.track()'],['../classtrackObj_1_1TrackAction.html#a053f94b7ff081d5feab183c435e80013',1,'trackObj.TrackAction.track()']]]
+  ['startdetection',['startDetection',['../classroomDetector_1_1roomDetector.html#aa8a2aea1db8ce538d11ddb501fae2822',1,'roomDetector::roomDetector']]],
+  ['stopdetection',['stopDetection',['../classroomDetector_1_1roomDetector.html#a1b30655196cae01d824ddeab2bb7e0e3',1,'roomDetector::roomDetector']]]
 ];

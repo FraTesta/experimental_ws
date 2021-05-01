@@ -1,0 +1,42 @@
+\hypertarget{noSleep_8py}{}\section{/home/francescotesta/experimental\+\_\+ws/src/final\+\_\+assignment/scripts/no\+Sleep.py File Reference}
+\label{noSleep_8py}\index{/home/francescotesta/experimental\+\_\+ws/src/final\+\_\+assignment/scripts/no\+Sleep.\+py@{/home/francescotesta/experimental\+\_\+ws/src/final\+\_\+assignment/scripts/no\+Sleep.\+py}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classnoSleep_1_1Normal}{no\+Sleep.\+Normal}
+\item 
+class \hyperlink{classnoSleep_1_1Sleep}{no\+Sleep.\+Sleep}
+\item 
+class \hyperlink{classnoSleep_1_1Play}{no\+Sleep.\+Play}
+\item 
+class \hyperlink{classnoSleep_1_1Track}{no\+Sleep.\+Track}
+\item 
+class \hyperlink{classnoSleep_1_1Find}{no\+Sleep.\+Find}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespacenoSleep}{no\+Sleep}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespacenoSleep_a123223ff9a3dbafbd97e6d0f384396a2}{no\+Sleep.\+U\+Icallback} (data)
+\begin{DoxyCompactList}\small\item\em Callback mathod of the U\+Isubscriber which handels the commands sent by the user. \end{DoxyCompactList}\item 
+def \hyperlink{namespacenoSleep_afdab4949f2266a97c8e4f22565029431}{no\+Sleep.\+new\+Room\+Detected} (color)
+\begin{DoxyCompactList}\small\item\em Callback function of the new\+Room\+Sub subscriber which recives the color of the new detected room. \end{DoxyCompactList}\item 
+def \hyperlink{namespacenoSleep_a3f9d1f6206657669b0f1e0eb03e3faf8}{no\+Sleep.\+move\+\_\+base\+\_\+go\+\_\+to} (x, y)
+\begin{DoxyCompactList}\small\item\em Method which prepares and send the goal to the move\+\_\+base action server. \end{DoxyCompactList}\item 
+def \hyperlink{namespacenoSleep_a76829f5a5ea086115d4bbc161b5de95e}{no\+Sleep.\+main} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+dictionary \hyperlink{namespacenoSleep_adbe81123b7abf75f19b461e802380fc1}{no\+Sleep.\+control\+\_\+variables}
+\item 
+\hyperlink{namespacenoSleep_ac8d2a8a17fd9bdac144f7cf8e268271d}{no\+Sleep.\+client} = actionlib.\+Simple\+Action\+Client(\textquotesingle{}move\+\_\+base\textquotesingle{},Move\+Base\+Action)
+\begin{DoxyCompactList}\small\item\em Flag which notify when the user types \textquotesingle{}play\textquotesingle{} P\+L\+AY = False Contains the desired room entered by the user T\+A\+R\+G\+E\+T\+\_\+\+R\+O\+OM = \char`\"{}\+None\char`\"{} Flag which notify when the command manager recives a new target room from the user N\+E\+W\+\_\+\+TR = False Flag which notify that a new room was detected by the camera N\+E\+W\+\_\+\+R\+O\+OM = False Contains the color of the detected ball (room) N\+E\+W\+\_\+\+R\+O\+O\+M\+\_\+\+C\+O\+L\+OR = \char`\"{}\+None\char`\"{} Flag indicating if the F\+I\+ND mode is active or not F\+I\+N\+D\+\_\+\+M\+O\+DE = False Initialization of the move\+\_\+base client in order to assign target position to the move\+\_\+base action server. \end{DoxyCompactList}\item 
+\hyperlink{namespacenoSleep_a9556e14c4f96e9bd3a98d6313f1c971b}{no\+Sleep.\+room\+D\+\_\+pub} = rospy.\+Publisher(\textquotesingle{}start\+RD\textquotesingle{}, Bool, queue\+\_\+size=10)
+\begin{DoxyCompactList}\small\item\em Publisher to the start\+RD topic which allows to enable/disable the room detector. \end{DoxyCompactList}\item 
+\hyperlink{namespacenoSleep_a5d68f48fa901f367ed63cd1e4ac1aef9}{no\+Sleep.\+rooms} = Rooms()
+\begin{DoxyCompactList}\small\item\em Object of the class \hyperlink{namespaceRooms}{Rooms} necessary to store and manage the discovered rooms. \end{DoxyCompactList}\end{DoxyCompactItemize}

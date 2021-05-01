@@ -142,18 +142,15 @@ Static Public Attributes</h2></td></tr>
 <tr class="separator:acaaf54b9a806780342efd702c43ca892"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a57e4e548d9213c4623f5d528753b1f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommandManager_1_1Track.html#a4a57e4e548d9213c4623f5d528753b1f">trackClient</a> = actionlib.SimpleActionClient('trackAction',trackBallAction)</td></tr>
 <tr class="separator:a4a57e4e548d9213c4623f5d528753b1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afb7ce9aacf03e990b6ecca9c7641caeb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommandManager_1_1Track.html#afb7ce9aacf03e990b6ecca9c7641caeb">NEW_ROOM</a> = False</td></tr>
-<tr class="separator:afb7ce9aacf03e990b6ecca9c7641caeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f86bbb5fd3d92749c09d5e876a1d1a6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommandManager_1_1Track.html#a8f86bbb5fd3d92749c09d5e876a1d1a6">wait</a> = trackClient.wait_for_result()</td></tr>
 <tr class="separator:a8f86bbb5fd3d92749c09d5e876a1d1a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa66fb1baab2433c729df0919ba0989a7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommandManager_1_1Track.html#aa66fb1baab2433c729df0919ba0989a7">result</a> = trackClient.get_result()</td></tr>
 <tr class="separator:aa66fb1baab2433c729df0919ba0989a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7f0cd8d298db357c98855ffd93eff1b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommandManager_1_1Track.html#af7f0cd8d298db357c98855ffd93eff1b">FIND_MODE</a> = False</td></tr>
-<tr class="separator:af7f0cd8d298db357c98855ffd93eff1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><pre class="fragment">Class that defines the PLAY state. 
- It move the robot in X Y location and then asks to go back to the user.</pre> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<div class="textblock"><pre class="fragment">Class that defines the TRACK state. 
+ It send the detected color room to the track action server in order ot reach it. 
+ Then sotores the location of the room found </pre> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="af204111942c1cc2b65ff7b68a74c2420"></a>
 <div class="memitem">
 <div class="memproto">
@@ -167,8 +164,9 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Class that defines the PLAY state. 
- It move the robot in X Y location and then asks to go back to the user.</pre> 
+<pre class="fragment">Class that defines the TRACK state. 
+ It send the detected color room to the track action server in order ot reach it. 
+ Then sotores the location of the room found </pre> 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -219,26 +217,6 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="af7f0cd8d298db357c98855ffd93eff1b"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool commandManager.Track.FIND_MODE = False</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="aaf31135bbe355747fc8e8ebbfa9ea7c3"></a>
 <div class="memitem">
 <div class="memproto">
@@ -248,26 +226,6 @@ Static Public Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">commandManager.Track.goal = trackBallGoal()</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="afb7ce9aacf03e990b6ecca9c7641caeb"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool commandManager.Track.NEW_ROOM = False</td>
         </tr>
       </table>
   </td>

@@ -110,7 +110,6 @@ $(document).ready(function(){initNavTree('classcommandManager_1_1Find.html','');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="classcommandManager_1_1Find-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -135,19 +134,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aef4287ee7b2f43741e7dfd8d19b42878"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommandManager_1_1Find.html#aef4287ee7b2f43741e7dfd8d19b42878">execute</a> (self, userdata)</td></tr>
 <tr class="separator:aef4287ee7b2f43741e7dfd8d19b42878"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a75755e326232226bbd46786c7c889473"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommandManager_1_1Find.html#a75755e326232226bbd46786c7c889473">counter</a></td></tr>
-<tr class="separator:a75755e326232226bbd46786c7c889473"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:a9c7870d56b1d25a57af7840fb2967f99"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommandManager_1_1Find.html#a9c7870d56b1d25a57af7840fb2967f99">rate</a></td></tr>
 <tr class="separator:a9c7870d56b1d25a57af7840fb2967f99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75755e326232226bbd46786c7c889473"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommandManager_1_1Find.html#a75755e326232226bbd46786c7c889473">counter</a></td></tr>
+<tr class="separator:a75755e326232226bbd46786c7c889473"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbcdc5e51cf8ea6e4c3da44099d075af"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcommandManager_1_1Find.html#acbcdc5e51cf8ea6e4c3da44099d075af">pos</a> = rooms.explore()</td></tr>
+<tr class="separator:acbcdc5e51cf8ea6e4c3da44099d075af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><pre class="fragment">Class that defines the PLAY state. 
- It move the robot in X Y location and then asks to go back to the user.</pre> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<div class="textblock"><pre class="fragment">Class that defines the FIND state. 
+ It move the robot using the explore function in order to find the esired room or a new one.</pre> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ae547a564eeb683ea6d439cd8d0508779"></a>
 <div class="memitem">
 <div class="memproto">
@@ -195,11 +193,39 @@ Static Public Attributes</h2></td></tr>
 <a class="anchor" id="a75755e326232226bbd46786c7c889473"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">commandManager.Find.counter</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="acbcdc5e51cf8ea6e4c3da44099d075af"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">commandManager.Find.pos = rooms.explore()</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>

@@ -1,0 +1,95 @@
+\hypertarget{classnoSleep_1_1Track}{}\section{no\+Sleep.\+Track Class Reference}
+\label{classnoSleep_1_1Track}\index{no\+Sleep.\+Track@{no\+Sleep.\+Track}}
+
+
+Inheritance diagram for no\+Sleep.\+Track\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=160pt]{classnoSleep_1_1Track__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for no\+Sleep.\+Track\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=160pt]{classnoSleep_1_1Track__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classnoSleep_1_1Track_a9af26ff426231cb9c1bc6e5395cf6ec5}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self)
+\item 
+def \hyperlink{classnoSleep_1_1Track_aa6bbc699fd4253fec111652d41221990}{execute} (self, userdata)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classnoSleep_1_1Track_a858198e9049836b190bd6920cb40d482}{goal} = track\+Ball\+Goal()
+\item 
+\hyperlink{classnoSleep_1_1Track_a9656da60a353880af15789af38d37944}{color}
+\item 
+\hyperlink{classnoSleep_1_1Track_aa81312a09b71e383923eea00179b2330}{track\+Client} = actionlib.\+Simple\+Action\+Client(\textquotesingle{}track\+Action\textquotesingle{},track\+Ball\+Action)
+\item 
+\hyperlink{classnoSleep_1_1Track_ab87d8de18ccaf82e3d818c8c3241a220}{wait} = track\+Client.\+wait\+\_\+for\+\_\+result()
+\item 
+\hyperlink{classnoSleep_1_1Track_ab23617bf485f7d5bc2c03e0b6b17017f}{result} = track\+Client.\+get\+\_\+result()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyVerb}Class that defines the TRACK state. 
+ It send the detected color room to the track action server in order ot reach it. 
+ Then sotores the location of the room found \end{DoxyVerb}
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{no\+Sleep\+::\+Track@{no\+Sleep\+::\+Track}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!no\+Sleep\+::\+Track@{no\+Sleep\+::\+Track}}
+\subsubsection[{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+(self)}{__init__(self)}}]{\setlength{\rightskip}{0pt plus 5cm}def no\+Sleep.\+Track.\+\_\+\+\_\+init\+\_\+\+\_\+ (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\hypertarget{classnoSleep_1_1Track_a9af26ff426231cb9c1bc6e5395cf6ec5}{}\label{classnoSleep_1_1Track_a9af26ff426231cb9c1bc6e5395cf6ec5}
+\begin{DoxyVerb}Class that defines the TRACK state. 
+ It send the detected color room to the track action server in order ot reach it. 
+ Then sotores the location of the room found \end{DoxyVerb}
+ 
+
+\subsection{Member Function Documentation}
+\index{no\+Sleep\+::\+Track@{no\+Sleep\+::\+Track}!execute@{execute}}
+\index{execute@{execute}!no\+Sleep\+::\+Track@{no\+Sleep\+::\+Track}}
+\subsubsection[{\texorpdfstring{execute(self, userdata)}{execute(self, userdata)}}]{\setlength{\rightskip}{0pt plus 5cm}def no\+Sleep.\+Track.\+execute (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{userdata}
+\end{DoxyParamCaption}
+)}\hypertarget{classnoSleep_1_1Track_aa6bbc699fd4253fec111652d41221990}{}\label{classnoSleep_1_1Track_aa6bbc699fd4253fec111652d41221990}
+
+
+\subsection{Member Data Documentation}
+\index{no\+Sleep\+::\+Track@{no\+Sleep\+::\+Track}!color@{color}}
+\index{color@{color}!no\+Sleep\+::\+Track@{no\+Sleep\+::\+Track}}
+\subsubsection[{\texorpdfstring{color}{color}}]{\setlength{\rightskip}{0pt plus 5cm}no\+Sleep.\+Track.\+color\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classnoSleep_1_1Track_a9656da60a353880af15789af38d37944}{}\label{classnoSleep_1_1Track_a9656da60a353880af15789af38d37944}
+\index{no\+Sleep\+::\+Track@{no\+Sleep\+::\+Track}!goal@{goal}}
+\index{goal@{goal}!no\+Sleep\+::\+Track@{no\+Sleep\+::\+Track}}
+\subsubsection[{\texorpdfstring{goal}{goal}}]{\setlength{\rightskip}{0pt plus 5cm}no\+Sleep.\+Track.\+goal = track\+Ball\+Goal()\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classnoSleep_1_1Track_a858198e9049836b190bd6920cb40d482}{}\label{classnoSleep_1_1Track_a858198e9049836b190bd6920cb40d482}
+\index{no\+Sleep\+::\+Track@{no\+Sleep\+::\+Track}!result@{result}}
+\index{result@{result}!no\+Sleep\+::\+Track@{no\+Sleep\+::\+Track}}
+\subsubsection[{\texorpdfstring{result}{result}}]{\setlength{\rightskip}{0pt plus 5cm}no\+Sleep.\+Track.\+result = track\+Client.\+get\+\_\+result()\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classnoSleep_1_1Track_ab23617bf485f7d5bc2c03e0b6b17017f}{}\label{classnoSleep_1_1Track_ab23617bf485f7d5bc2c03e0b6b17017f}
+\index{no\+Sleep\+::\+Track@{no\+Sleep\+::\+Track}!track\+Client@{track\+Client}}
+\index{track\+Client@{track\+Client}!no\+Sleep\+::\+Track@{no\+Sleep\+::\+Track}}
+\subsubsection[{\texorpdfstring{track\+Client}{trackClient}}]{\setlength{\rightskip}{0pt plus 5cm}no\+Sleep.\+Track.\+track\+Client = actionlib.\+Simple\+Action\+Client(\textquotesingle{}track\+Action\textquotesingle{},track\+Ball\+Action)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classnoSleep_1_1Track_aa81312a09b71e383923eea00179b2330}{}\label{classnoSleep_1_1Track_aa81312a09b71e383923eea00179b2330}
+\index{no\+Sleep\+::\+Track@{no\+Sleep\+::\+Track}!wait@{wait}}
+\index{wait@{wait}!no\+Sleep\+::\+Track@{no\+Sleep\+::\+Track}}
+\subsubsection[{\texorpdfstring{wait}{wait}}]{\setlength{\rightskip}{0pt plus 5cm}no\+Sleep.\+Track.\+wait = track\+Client.\+wait\+\_\+for\+\_\+result()\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classnoSleep_1_1Track_ab87d8de18ccaf82e3d818c8c3241a220}{}\label{classnoSleep_1_1Track_ab87d8de18ccaf82e3d818c8c3241a220}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/francescotesta/experimental\+\_\+ws/src/final\+\_\+assignment/scripts/\hyperlink{noSleep_8py}{no\+Sleep.\+py}\end{DoxyCompactItemize}

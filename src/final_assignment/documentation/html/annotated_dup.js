@@ -1,11 +1,8 @@
 var annotated_dup =
 [
-    [ "cm2", "namespacecm2.html", "namespacecm2" ],
     [ "commandManager", "namespacecommandManager.html", "namespacecommandManager" ],
+    [ "noSleep", "namespacenoSleep.html", "namespacenoSleep" ],
     [ "roomDetector", "namespaceroomDetector.html", "namespaceroomDetector" ],
     [ "Rooms", "namespaceRooms.html", "namespaceRooms" ],
-    [ "roomsDetection", "namespaceroomsDetection.html", "namespaceroomsDetection" ],
-    [ "timerProva", "namespacetimerProva.html", "namespacetimerProva" ],
-    [ "track", "namespacetrack.html", "namespacetrack" ],
-    [ "trackObj", "namespacetrackObj.html", "namespacetrackObj" ]
+    [ "track", "namespacetrack.html", "namespacetrack" ]
 ];

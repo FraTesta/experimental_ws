@@ -1,7 +1,6 @@
 var track_8py =
 [
     [ "TrackAction", "classtrack_1_1TrackAction.html", "classtrack_1_1TrackAction" ],
-    [ "clbk_odom", "track_8py.html#ac547a00259cf9bddfb37b60063740e8d", null ],
     [ "main", "track_8py.html#a30188f067a9106a2f3e2ecedfd9cc52a", null ],
     [ "blackLower", "track_8py.html#a4ee13246ec46c21cfdcfee1b16f7eec4", null ],
     [ "blackUpper", "track_8py.html#a7c7120c727a2836315550f0091cd7277", null ],
@@ -11,8 +10,6 @@ var track_8py =
     [ "greenUpper", "track_8py.html#a2a45da69392a010f85aa42de064d7c85", null ],
     [ "magentaLower", "track_8py.html#a4778acbcac36117d4384a64aff1283bd", null ],
     [ "magentaUpper", "track_8py.html#a159d6ddb51827712e530f1f1e59369c7", null ],
-    [ "pose_", "track_8py.html#a4fcc239004d2df0fe5a4ea23c9b0495f", null ],
-    [ "position_", "track_8py.html#a7299b48bcf1df87418078ead7079339d", null ],
     [ "redLower", "track_8py.html#a760fae991a015aa4ee4c08fcaadeb576", null ],
     [ "redUpper", "track_8py.html#a1549403b0cb47b249afba9cdeca7ec16", null ],
     [ "yellowLower", "track_8py.html#a29d421bd8aa932d14a9cbf7779bba62b", null ],

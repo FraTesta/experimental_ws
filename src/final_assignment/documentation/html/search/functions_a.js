@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['startdetection',['startDetection',['../classroomDetector_1_1roomDetector.html#aa8a2aea1db8ce538d11ddb501fae2822',1,'roomDetector::roomDetector']]],
-  ['stopdetection',['stopDetection',['../classroomDetector_1_1roomDetector.html#a1b30655196cae01d824ddeab2bb7e0e3',1,'roomDetector::roomDetector']]]
+  ['reach_5fball',['reach_ball',['../classtrack_1_1TrackAction.html#a3b41ed0eb7a403459469c27dd63a2392',1,'track::TrackAction']]]
 ];

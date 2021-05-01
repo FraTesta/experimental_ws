@@ -28,8 +28,12 @@ Collaboration diagram for track.\+Track\+Action\+:\nopagebreak
 \item 
 def \hyperlink{classtrack_1_1TrackAction_ad71d2ce7ecd91c384219ada7e8ed74e3}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self, name)
 \item 
+def \hyperlink{classtrack_1_1TrackAction_a1f92640237725d8789986694c90bd98a}{clbk\+\_\+odom} (self, msg)
+\begin{DoxyCompactList}\small\item\em Callback to the Odom topic which updates the global variables\+: position\+\_\+ and pose\+\_\+. \end{DoxyCompactList}\item 
 def \hyperlink{classtrack_1_1TrackAction_a3b41ed0eb7a403459469c27dd63a2392}{reach\+\_\+ball} (self, ros\+\_\+image)
 \begin{DoxyCompactList}\small\item\em Callback function of the camera subscriber which computes the velocities to apply to the robot untill it reaches the ball. \end{DoxyCompactList}\item 
+def \hyperlink{classtrack_1_1TrackAction_ab20439d63451e7799ecf2a2ec1f8c860}{obstacle\+\_\+avoidance} (self, msg)
+\begin{DoxyCompactList}\small\item\em Callback function of the Laser\+Scan topic which implements a basic obstacle avoidance algorithm. \end{DoxyCompactList}\item 
 def \hyperlink{classtrack_1_1TrackAction_a1d41a25e35227ab25323a95eeb9a4bb2}{track} (self, goal)
 \begin{DoxyCompactList}\small\item\em Action server routine function. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
@@ -52,22 +56,32 @@ def \hyperlink{classtrack_1_1TrackAction_a1d41a25e35227ab25323a95eeb9a4bb2}{trac
 \item 
 \hyperlink{classtrack_1_1TrackAction_ae62bfb3233b566df94fde636d8d26877}{result}
 \item 
+\hyperlink{classtrack_1_1TrackAction_aca76f9e5333f65cf2da37f2b90d5f193}{regions}
+\item 
 \hyperlink{classtrack_1_1TrackAction_a8c79189ba62cf316bffaa4c00b0320fe}{success}
 \begin{DoxyCompactList}\small\item\em Flag that notifies that the robot has reached the ball correctly. \end{DoxyCompactList}\item 
 \hyperlink{classtrack_1_1TrackAction_aabc16f100d1f260d6712d8d74e055fda}{unfound\+\_\+ball\+\_\+counter}
 \begin{DoxyCompactList}\small\item\em Variables that counts how many times the robot was not able to detect the ball again. \end{DoxyCompactList}\item 
 \hyperlink{classtrack_1_1TrackAction_a4fac0918d826dc6cbf110784c8fcda99}{abort}
 \begin{DoxyCompactList}\small\item\em Flag that notifies aborting mission since the robot was not able to detect the ball. \end{DoxyCompactList}\item 
-\hyperlink{classtrack_1_1TrackAction_a4cbc03d130bcf2203bc68f37d02dc4c5}{sub\+\_\+odom} = rospy.\+Subscriber(\textquotesingle{}odom\textquotesingle{}, Odometry, \hyperlink{namespacetrack_ac547a00259cf9bddfb37b60063740e8d}{clbk\+\_\+odom})
-\begin{DoxyCompactList}\small\item\em Odom subcriber to get and save the robot position and send them back to the \hyperlink{namespacecommandManager}{command\+Manager}. \end{DoxyCompactList}\item 
+\hyperlink{classtrack_1_1TrackAction_a0773416696b3fd6ed1dff306eb26c84a}{radius}
+\begin{DoxyCompactList}\small\item\em Radius of the detected ball designed by the open\+CV algorithm in the reach\+\_\+ball function. \end{DoxyCompactList}\item 
 \hyperlink{classtrack_1_1TrackAction_af6105c2cad0d325296213d7c03c4fb6e}{vel\+\_\+pub}
 \begin{DoxyCompactList}\small\item\em Publisher to the cmd\+\_\+vel topic in order to move the robot. \end{DoxyCompactList}\item 
+\hyperlink{classtrack_1_1TrackAction_af8f5740ee3298f2c093006fe1314a268}{position}
+\begin{DoxyCompactList}\small\item\em Current position of the robot. \end{DoxyCompactList}\item 
+\hyperlink{classtrack_1_1TrackAction_a25be61bbb562612dc1e1c5e7c448fa4c}{pose}
+\begin{DoxyCompactList}\small\item\em Current pose of the robot. \end{DoxyCompactList}\item 
+\hyperlink{classtrack_1_1TrackAction_a4cbc03d130bcf2203bc68f37d02dc4c5}{sub\+\_\+odom} = rospy.\+Subscriber(\textquotesingle{}odom\textquotesingle{}, Odometry, self.\+clbk\+\_\+odom)
+\begin{DoxyCompactList}\small\item\em Odom subcriber to get and save the robot position and send them back to the \hyperlink{namespacecommandManager}{command\+Manager}. \end{DoxyCompactList}\item 
 \hyperlink{classtrack_1_1TrackAction_aabd955eb5b74ee508ba27bf6db4129e2}{Twist}
 \item 
 \hyperlink{classtrack_1_1TrackAction_a47112fa77bb24c45494449d781bd35c4}{queue\+\_\+size}
 \item 
 \hyperlink{classtrack_1_1TrackAction_a71b1a13ec7fb0ba79d6f34416b7d54e1}{camera\+\_\+sub} = rospy.\+Subscriber(\char`\"{}camera1/image\+\_\+raw/compressed\char`\"{}, Compressed\+Image, self.\+reach\+\_\+ball, \hyperlink{classtrack_1_1TrackAction_a47112fa77bb24c45494449d781bd35c4}{queue\+\_\+size}=1)
-\begin{DoxyCompactList}\small\item\em Subscriber to camera1 in order to recive and handle the images. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Subscriber to camera1 in order to receive and handle the images. \end{DoxyCompactList}\item 
+\hyperlink{classtrack_1_1TrackAction_ae2e92f43c8c834aba95d6c87241553e6}{sub\+\_\+scan} = rospy.\+Subscriber(\textquotesingle{}/scan\textquotesingle{}, Laser\+Scan, self.\+obstacle\+\_\+avoidance)
+\item 
 \hyperlink{classtrack_1_1TrackAction_a56031d0f135cf2d2f7c950325059f7bd}{state}
 \end{DoxyCompactItemize}
 
@@ -87,6 +101,35 @@ Class that implements the action server for tracking the ball.
 
 
 \subsection{Member Function Documentation}
+\index{track\+::\+Track\+Action@{track\+::\+Track\+Action}!clbk\+\_\+odom@{clbk\+\_\+odom}}
+\index{clbk\+\_\+odom@{clbk\+\_\+odom}!track\+::\+Track\+Action@{track\+::\+Track\+Action}}
+\subsubsection[{\texorpdfstring{clbk\+\_\+odom(self, msg)}{clbk_odom(self, msg)}}]{\setlength{\rightskip}{0pt plus 5cm}def track.\+Track\+Action.\+clbk\+\_\+odom (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{msg}
+\end{DoxyParamCaption}
+)}\hypertarget{classtrack_1_1TrackAction_a1f92640237725d8789986694c90bd98a}{}\label{classtrack_1_1TrackAction_a1f92640237725d8789986694c90bd98a}
+
+
+Callback to the Odom topic which updates the global variables\+: position\+\_\+ and pose\+\_\+. 
+
+\index{track\+::\+Track\+Action@{track\+::\+Track\+Action}!obstacle\+\_\+avoidance@{obstacle\+\_\+avoidance}}
+\index{obstacle\+\_\+avoidance@{obstacle\+\_\+avoidance}!track\+::\+Track\+Action@{track\+::\+Track\+Action}}
+\subsubsection[{\texorpdfstring{obstacle\+\_\+avoidance(self, msg)}{obstacle_avoidance(self, msg)}}]{\setlength{\rightskip}{0pt plus 5cm}def track.\+Track\+Action.\+obstacle\+\_\+avoidance (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{msg}
+\end{DoxyParamCaption}
+)}\hypertarget{classtrack_1_1TrackAction_ab20439d63451e7799ecf2a2ec1f8c860}{}\label{classtrack_1_1TrackAction_ab20439d63451e7799ecf2a2ec1f8c860}
+
+
+Callback function of the Laser\+Scan topic which implements a basic obstacle avoidance algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Laser\+Scan message to get the distances from the obstacles \\
+\hline
+\end{DoxyParams}
 \index{track\+::\+Track\+Action@{track\+::\+Track\+Action}!reach\+\_\+ball@{reach\+\_\+ball}}
 \index{reach\+\_\+ball@{reach\+\_\+ball}!track\+::\+Track\+Action@{track\+::\+Track\+Action}}
 \subsubsection[{\texorpdfstring{reach\+\_\+ball(self, ros\+\_\+image)}{reach_ball(self, ros_image)}}]{\setlength{\rightskip}{0pt plus 5cm}def track.\+Track\+Action.\+reach\+\_\+ball (
@@ -149,7 +192,7 @@ Name of the action server.
 \subsubsection[{\texorpdfstring{camera\+\_\+sub}{camera_sub}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+Track\+Action.\+camera\+\_\+sub = rospy.\+Subscriber(\char`\"{}camera1/image\+\_\+raw/compressed\char`\"{}, Compressed\+Image, self.\+reach\+\_\+ball, {\bf queue\+\_\+size}=1)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classtrack_1_1TrackAction_a71b1a13ec7fb0ba79d6f34416b7d54e1}{}\label{classtrack_1_1TrackAction_a71b1a13ec7fb0ba79d6f34416b7d54e1}
 
 
-Subscriber to camera1 in order to recive and handle the images. 
+Subscriber to camera1 in order to receive and handle the images. 
 
 \index{track\+::\+Track\+Action@{track\+::\+Track\+Action}!color@{color}}
 \index{color@{color}!track\+::\+Track\+Action@{track\+::\+Track\+Action}}
@@ -161,9 +204,33 @@ direct conversion to C\+V2 \#\#\#\#
 \index{track\+::\+Track\+Action@{track\+::\+Track\+Action}!feedback@{feedback}}
 \index{feedback@{feedback}!track\+::\+Track\+Action@{track\+::\+Track\+Action}}
 \subsubsection[{\texorpdfstring{feedback}{feedback}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+Track\+Action.\+feedback\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classtrack_1_1TrackAction_acce0064c9d83a91f00d92a854014cdf5}{}\label{classtrack_1_1TrackAction_acce0064c9d83a91f00d92a854014cdf5}
+\index{track\+::\+Track\+Action@{track\+::\+Track\+Action}!pose@{pose}}
+\index{pose@{pose}!track\+::\+Track\+Action@{track\+::\+Track\+Action}}
+\subsubsection[{\texorpdfstring{pose}{pose}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+Track\+Action.\+pose\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classtrack_1_1TrackAction_a25be61bbb562612dc1e1c5e7c448fa4c}{}\label{classtrack_1_1TrackAction_a25be61bbb562612dc1e1c5e7c448fa4c}
+
+
+Current pose of the robot. 
+
+\index{track\+::\+Track\+Action@{track\+::\+Track\+Action}!position@{position}}
+\index{position@{position}!track\+::\+Track\+Action@{track\+::\+Track\+Action}}
+\subsubsection[{\texorpdfstring{position}{position}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+Track\+Action.\+position\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classtrack_1_1TrackAction_af8f5740ee3298f2c093006fe1314a268}{}\label{classtrack_1_1TrackAction_af8f5740ee3298f2c093006fe1314a268}
+
+
+Current position of the robot. 
+
 \index{track\+::\+Track\+Action@{track\+::\+Track\+Action}!queue\+\_\+size@{queue\+\_\+size}}
 \index{queue\+\_\+size@{queue\+\_\+size}!track\+::\+Track\+Action@{track\+::\+Track\+Action}}
 \subsubsection[{\texorpdfstring{queue\+\_\+size}{queue_size}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+Track\+Action.\+queue\+\_\+size\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classtrack_1_1TrackAction_a47112fa77bb24c45494449d781bd35c4}{}\label{classtrack_1_1TrackAction_a47112fa77bb24c45494449d781bd35c4}
+\index{track\+::\+Track\+Action@{track\+::\+Track\+Action}!radius@{radius}}
+\index{radius@{radius}!track\+::\+Track\+Action@{track\+::\+Track\+Action}}
+\subsubsection[{\texorpdfstring{radius}{radius}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+Track\+Action.\+radius\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classtrack_1_1TrackAction_a0773416696b3fd6ed1dff306eb26c84a}{}\label{classtrack_1_1TrackAction_a0773416696b3fd6ed1dff306eb26c84a}
+
+
+Radius of the detected ball designed by the open\+CV algorithm in the reach\+\_\+ball function. 
+
+\index{track\+::\+Track\+Action@{track\+::\+Track\+Action}!regions@{regions}}
+\index{regions@{regions}!track\+::\+Track\+Action@{track\+::\+Track\+Action}}
+\subsubsection[{\texorpdfstring{regions}{regions}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+Track\+Action.\+regions\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classtrack_1_1TrackAction_aca76f9e5333f65cf2da37f2b90d5f193}{}\label{classtrack_1_1TrackAction_aca76f9e5333f65cf2da37f2b90d5f193}
 \index{track\+::\+Track\+Action@{track\+::\+Track\+Action}!result@{result}}
 \index{result@{result}!track\+::\+Track\+Action@{track\+::\+Track\+Action}}
 \subsubsection[{\texorpdfstring{result}{result}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+Track\+Action.\+result\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classtrack_1_1TrackAction_ae62bfb3233b566df94fde636d8d26877}{}\label{classtrack_1_1TrackAction_ae62bfb3233b566df94fde636d8d26877}
@@ -172,11 +239,14 @@ direct conversion to C\+V2 \#\#\#\#
 \subsubsection[{\texorpdfstring{state}{state}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+Track\+Action.\+state\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classtrack_1_1TrackAction_a56031d0f135cf2d2f7c950325059f7bd}{}\label{classtrack_1_1TrackAction_a56031d0f135cf2d2f7c950325059f7bd}
 \index{track\+::\+Track\+Action@{track\+::\+Track\+Action}!sub\+\_\+odom@{sub\+\_\+odom}}
 \index{sub\+\_\+odom@{sub\+\_\+odom}!track\+::\+Track\+Action@{track\+::\+Track\+Action}}
-\subsubsection[{\texorpdfstring{sub\+\_\+odom}{sub_odom}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+Track\+Action.\+sub\+\_\+odom = rospy.\+Subscriber(\textquotesingle{}odom\textquotesingle{}, Odometry, {\bf clbk\+\_\+odom})\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classtrack_1_1TrackAction_a4cbc03d130bcf2203bc68f37d02dc4c5}{}\label{classtrack_1_1TrackAction_a4cbc03d130bcf2203bc68f37d02dc4c5}
+\subsubsection[{\texorpdfstring{sub\+\_\+odom}{sub_odom}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+Track\+Action.\+sub\+\_\+odom = rospy.\+Subscriber(\textquotesingle{}odom\textquotesingle{}, Odometry, self.\+clbk\+\_\+odom)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classtrack_1_1TrackAction_a4cbc03d130bcf2203bc68f37d02dc4c5}{}\label{classtrack_1_1TrackAction_a4cbc03d130bcf2203bc68f37d02dc4c5}
 
 
 Odom subcriber to get and save the robot position and send them back to the \hyperlink{namespacecommandManager}{command\+Manager}. 
 
+\index{track\+::\+Track\+Action@{track\+::\+Track\+Action}!sub\+\_\+scan@{sub\+\_\+scan}}
+\index{sub\+\_\+scan@{sub\+\_\+scan}!track\+::\+Track\+Action@{track\+::\+Track\+Action}}
+\subsubsection[{\texorpdfstring{sub\+\_\+scan}{sub_scan}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+Track\+Action.\+sub\+\_\+scan = rospy.\+Subscriber(\textquotesingle{}/scan\textquotesingle{}, Laser\+Scan, self.\+obstacle\+\_\+avoidance)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classtrack_1_1TrackAction_ae2e92f43c8c834aba95d6c87241553e6}{}\label{classtrack_1_1TrackAction_ae2e92f43c8c834aba95d6c87241553e6}
 \index{track\+::\+Track\+Action@{track\+::\+Track\+Action}!success@{success}}
 \index{success@{success}!track\+::\+Track\+Action@{track\+::\+Track\+Action}}
 \subsubsection[{\texorpdfstring{success}{success}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+Track\+Action.\+success\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classtrack_1_1TrackAction_a8c79189ba62cf316bffaa4c00b0320fe}{}\label{classtrack_1_1TrackAction_a8c79189ba62cf316bffaa4c00b0320fe}

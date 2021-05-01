@@ -135,9 +135,15 @@ Collaboration diagram for track.TrackAction:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ad71d2ce7ecd91c384219ada7e8ed74e3"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#ad71d2ce7ecd91c384219ada7e8ed74e3">__init__</a> (self, name)</td></tr>
 <tr class="separator:ad71d2ce7ecd91c384219ada7e8ed74e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f92640237725d8789986694c90bd98a"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#a1f92640237725d8789986694c90bd98a">clbk_odom</a> (self, msg)</td></tr>
+<tr class="memdesc:a1f92640237725d8789986694c90bd98a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback to the Odom topic which updates the global variables: position_ and pose_.  <a href="#a1f92640237725d8789986694c90bd98a">More...</a><br /></td></tr>
+<tr class="separator:a1f92640237725d8789986694c90bd98a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b41ed0eb7a403459469c27dd63a2392"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#a3b41ed0eb7a403459469c27dd63a2392">reach_ball</a> (self, ros_image)</td></tr>
 <tr class="memdesc:a3b41ed0eb7a403459469c27dd63a2392"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function of the camera subscriber which computes the velocities to apply to the robot untill it reaches the ball.  <a href="#a3b41ed0eb7a403459469c27dd63a2392">More...</a><br /></td></tr>
 <tr class="separator:a3b41ed0eb7a403459469c27dd63a2392"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab20439d63451e7799ecf2a2ec1f8c860"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#ab20439d63451e7799ecf2a2ec1f8c860">obstacle_avoidance</a> (self, msg)</td></tr>
+<tr class="memdesc:ab20439d63451e7799ecf2a2ec1f8c860"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function of the LaserScan topic which implements a basic obstacle avoidance algorithm.  <a href="#ab20439d63451e7799ecf2a2ec1f8c860">More...</a><br /></td></tr>
+<tr class="separator:ab20439d63451e7799ecf2a2ec1f8c860"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d41a25e35227ab25323a95eeb9a4bb2"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#a1d41a25e35227ab25323a95eeb9a4bb2">track</a> (self, goal)</td></tr>
 <tr class="memdesc:a1d41a25e35227ab25323a95eeb9a4bb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Action server routine function.  <a href="#a1d41a25e35227ab25323a95eeb9a4bb2">More...</a><br /></td></tr>
 <tr class="separator:a1d41a25e35227ab25323a95eeb9a4bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -163,6 +169,8 @@ Static Public Attributes</h2></td></tr>
 <tr class="separator:acce0064c9d83a91f00d92a854014cdf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae62bfb3233b566df94fde636d8d26877"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#ae62bfb3233b566df94fde636d8d26877">result</a></td></tr>
 <tr class="separator:ae62bfb3233b566df94fde636d8d26877"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca76f9e5333f65cf2da37f2b90d5f193"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#aca76f9e5333f65cf2da37f2b90d5f193">regions</a></td></tr>
+<tr class="separator:aca76f9e5333f65cf2da37f2b90d5f193"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c79189ba62cf316bffaa4c00b0320fe"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#a8c79189ba62cf316bffaa4c00b0320fe">success</a></td></tr>
 <tr class="memdesc:a8c79189ba62cf316bffaa4c00b0320fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag that notifies that the robot has reached the ball correctly.  <a href="#a8c79189ba62cf316bffaa4c00b0320fe">More...</a><br /></td></tr>
 <tr class="separator:a8c79189ba62cf316bffaa4c00b0320fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -172,19 +180,30 @@ Static Public Attributes</h2></td></tr>
 <tr class="memitem:a4fac0918d826dc6cbf110784c8fcda99"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#a4fac0918d826dc6cbf110784c8fcda99">abort</a></td></tr>
 <tr class="memdesc:a4fac0918d826dc6cbf110784c8fcda99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag that notifies aborting mission since the robot was not able to detect the ball.  <a href="#a4fac0918d826dc6cbf110784c8fcda99">More...</a><br /></td></tr>
 <tr class="separator:a4fac0918d826dc6cbf110784c8fcda99"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4cbc03d130bcf2203bc68f37d02dc4c5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#a4cbc03d130bcf2203bc68f37d02dc4c5">sub_odom</a> = rospy.Subscriber('odom', Odometry, <a class="el" href="namespacetrack.html#ac547a00259cf9bddfb37b60063740e8d">clbk_odom</a>)</td></tr>
-<tr class="memdesc:a4cbc03d130bcf2203bc68f37d02dc4c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Odom subcriber to get and save the robot position and send them back to the <a class="el" href="namespacecommandManager.html">commandManager</a>.  <a href="#a4cbc03d130bcf2203bc68f37d02dc4c5">More...</a><br /></td></tr>
-<tr class="separator:a4cbc03d130bcf2203bc68f37d02dc4c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0773416696b3fd6ed1dff306eb26c84a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#a0773416696b3fd6ed1dff306eb26c84a">radius</a></td></tr>
+<tr class="memdesc:a0773416696b3fd6ed1dff306eb26c84a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Radius of the detected ball designed by the openCV algorithm in the reach_ball function.  <a href="#a0773416696b3fd6ed1dff306eb26c84a">More...</a><br /></td></tr>
+<tr class="separator:a0773416696b3fd6ed1dff306eb26c84a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6105c2cad0d325296213d7c03c4fb6e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#af6105c2cad0d325296213d7c03c4fb6e">vel_pub</a></td></tr>
 <tr class="memdesc:af6105c2cad0d325296213d7c03c4fb6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Publisher to the cmd_vel topic in order to move the robot.  <a href="#af6105c2cad0d325296213d7c03c4fb6e">More...</a><br /></td></tr>
 <tr class="separator:af6105c2cad0d325296213d7c03c4fb6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8f5740ee3298f2c093006fe1314a268"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#af8f5740ee3298f2c093006fe1314a268">position</a></td></tr>
+<tr class="memdesc:af8f5740ee3298f2c093006fe1314a268"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current position of the robot.  <a href="#af8f5740ee3298f2c093006fe1314a268">More...</a><br /></td></tr>
+<tr class="separator:af8f5740ee3298f2c093006fe1314a268"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25be61bbb562612dc1e1c5e7c448fa4c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#a25be61bbb562612dc1e1c5e7c448fa4c">pose</a></td></tr>
+<tr class="memdesc:a25be61bbb562612dc1e1c5e7c448fa4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current pose of the robot.  <a href="#a25be61bbb562612dc1e1c5e7c448fa4c">More...</a><br /></td></tr>
+<tr class="separator:a25be61bbb562612dc1e1c5e7c448fa4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cbc03d130bcf2203bc68f37d02dc4c5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#a4cbc03d130bcf2203bc68f37d02dc4c5">sub_odom</a> = rospy.Subscriber('odom', Odometry, self.clbk_odom)</td></tr>
+<tr class="memdesc:a4cbc03d130bcf2203bc68f37d02dc4c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Odom subcriber to get and save the robot position and send them back to the <a class="el" href="namespacecommandManager.html">commandManager</a>.  <a href="#a4cbc03d130bcf2203bc68f37d02dc4c5">More...</a><br /></td></tr>
+<tr class="separator:a4cbc03d130bcf2203bc68f37d02dc4c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aabd955eb5b74ee508ba27bf6db4129e2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#aabd955eb5b74ee508ba27bf6db4129e2">Twist</a></td></tr>
 <tr class="separator:aabd955eb5b74ee508ba27bf6db4129e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47112fa77bb24c45494449d781bd35c4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#a47112fa77bb24c45494449d781bd35c4">queue_size</a></td></tr>
 <tr class="separator:a47112fa77bb24c45494449d781bd35c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71b1a13ec7fb0ba79d6f34416b7d54e1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#a71b1a13ec7fb0ba79d6f34416b7d54e1">camera_sub</a> = rospy.Subscriber(&quot;camera1/image_raw/compressed&quot;, CompressedImage, self.reach_ball, <a class="el" href="classtrack_1_1TrackAction.html#a47112fa77bb24c45494449d781bd35c4">queue_size</a>=1)</td></tr>
-<tr class="memdesc:a71b1a13ec7fb0ba79d6f34416b7d54e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscriber to camera1 in order to recive and handle the images.  <a href="#a71b1a13ec7fb0ba79d6f34416b7d54e1">More...</a><br /></td></tr>
+<tr class="memdesc:a71b1a13ec7fb0ba79d6f34416b7d54e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscriber to camera1 in order to receive and handle the images.  <a href="#a71b1a13ec7fb0ba79d6f34416b7d54e1">More...</a><br /></td></tr>
 <tr class="separator:a71b1a13ec7fb0ba79d6f34416b7d54e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2e92f43c8c834aba95d6c87241553e6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#ae2e92f43c8c834aba95d6c87241553e6">sub_scan</a> = rospy.Subscriber('/scan', LaserScan, self.obstacle_avoidance)</td></tr>
+<tr class="separator:ae2e92f43c8c834aba95d6c87241553e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a56031d0f135cf2d2f7c950325059f7bd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#a56031d0f135cf2d2f7c950325059f7bd">state</a></td></tr>
 <tr class="separator:a56031d0f135cf2d2f7c950325059f7bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -218,6 +237,68 @@ Static Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a1f92640237725d8789986694c90bd98a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def track.TrackAction.clbk_odom </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>msg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Callback to the Odom topic which updates the global variables: position_ and pose_. </p>
+
+</div>
+</div>
+<a class="anchor" id="ab20439d63451e7799ecf2a2ec1f8c860"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def track.TrackAction.obstacle_avoidance </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>msg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Callback function of the LaserScan topic which implements a basic obstacle avoidance algorithm. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msg</td><td>LaserScan message to get the distances from the obstacles </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="a3b41ed0eb7a403459469c27dd63a2392"></a>
 <div class="memitem">
 <div class="memproto">
@@ -389,7 +470,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Subscriber to camera1 in order to recive and handle the images. </p>
+<p>Subscriber to camera1 in order to receive and handle the images. </p>
 
 </div>
 </div>
@@ -427,6 +508,50 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a25be61bbb562612dc1e1c5e7c448fa4c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">track.TrackAction.pose</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Current pose of the robot. </p>
+
+</div>
+</div>
+<a class="anchor" id="af8f5740ee3298f2c093006fe1314a268"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">track.TrackAction.position</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Current position of the robot. </p>
+
+</div>
+</div>
 <a class="anchor" id="a47112fa77bb24c45494449d781bd35c4"></a>
 <div class="memitem">
 <div class="memproto">
@@ -436,6 +561,48 @@ Static Public Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">track.TrackAction.queue_size</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0773416696b3fd6ed1dff306eb26c84a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">track.TrackAction.radius</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Radius of the detected ball designed by the openCV algorithm in the reach_ball function. </p>
+
+</div>
+</div>
+<a class="anchor" id="aca76f9e5333f65cf2da37f2b90d5f193"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">track.TrackAction.regions</td>
         </tr>
       </table>
   </td>
@@ -495,7 +662,7 @@ Static Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">track.TrackAction.sub_odom = rospy.Subscriber('odom', Odometry, <a class="el" href="namespacetrack.html#ac547a00259cf9bddfb37b60063740e8d">clbk_odom</a>)</td>
+          <td class="memname">track.TrackAction.sub_odom = rospy.Subscriber('odom', Odometry, self.clbk_odom)</td>
         </tr>
       </table>
   </td>
@@ -506,6 +673,26 @@ Static Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Odom subcriber to get and save the robot position and send them back to the <a class="el" href="namespacecommandManager.html">commandManager</a>. </p>
+
+</div>
+</div>
+<a class="anchor" id="ae2e92f43c8c834aba95d6c87241553e6"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">track.TrackAction.sub_scan = rospy.Subscriber('/scan', LaserScan, self.obstacle_avoidance)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>

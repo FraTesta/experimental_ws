@@ -25,13 +25,10 @@ def \hyperlink{classcommandManager_1_1Normal_abda69ab53b7d84c2c0c577dcf26f3823}{
 \item 
 def \hyperlink{classcommandManager_1_1Normal_ae95451bab37e817557988c7190bb33bd}{execute} (self, userdata)
 \end{DoxyCompactItemize}
-\subsection*{Public Attributes}
+\subsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{classcommandManager_1_1Normal_a32e84cf5ac08ffeb9cb1a21d4b484a32}{rate}
-\end{DoxyCompactItemize}
-\subsection*{Static Public Attributes}
-\begin{DoxyCompactItemize}
 \item 
 \hyperlink{classcommandManager_1_1Normal_a5ebc9e1cc3847edb576acedd01487023}{counter}
 \begin{DoxyCompactList}\small\item\em Counter variable to check the number of iteration of the N\+O\+R\+M\+AL state in order to move to S\+L\+E\+EP state after a certain number. \end{DoxyCompactList}\item 
@@ -40,9 +37,10 @@ def \hyperlink{classcommandManager_1_1Normal_ae95451bab37e817557988c7190bb33bd}{
 
 
 \subsection{Detailed Description}
-\begin{DoxyVerb}This class defines the NORMAL state of the FSM. In particular It sends random position to the navigation_action server
-and it checks whether a ball is detected in order to move to PLAY state.
-Otherwise after some iterations it goes in SLEEP mode \end{DoxyVerb}
+\begin{DoxyVerb}This class defines the NORMAL state of the FSM. In particular It sends random position to the move_base action server.
+It checks whether a ball is detected in order to switch in the TRACK state and check if the user wants to switch in the PLAY state as well.
+Otherwise after some iterations it goes in SLEEP mode 
+\end{DoxyVerb}
  
 
 \subsection{Constructor \& Destructor Documentation}
@@ -74,12 +72,13 @@ Otherwise after some iterations it goes in SLEEP mode \end{DoxyVerb}
 
 Counter variable to check the number of iteration of the N\+O\+R\+M\+AL state in order to move to S\+L\+E\+EP state after a certain number. 
 
-\index{command\+Manager\+::\+Normal@{command\+Manager\+::\+Normal}!pos@{pos}}
+\begin{DoxyVerb}Method inherited from the smach.State class \end{DoxyVerb}
+ \index{command\+Manager\+::\+Normal@{command\+Manager\+::\+Normal}!pos@{pos}}
 \index{pos@{pos}!command\+Manager\+::\+Normal@{command\+Manager\+::\+Normal}}
 \subsubsection[{\texorpdfstring{pos}{pos}}]{\setlength{\rightskip}{0pt plus 5cm}command\+Manager.\+Normal.\+pos = rooms.\+generate\+\_\+rand\+\_\+pos()\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcommandManager_1_1Normal_a160432e70539a4ac4dd4a5bf733824a3}{}\label{classcommandManager_1_1Normal_a160432e70539a4ac4dd4a5bf733824a3}
 \index{command\+Manager\+::\+Normal@{command\+Manager\+::\+Normal}!rate@{rate}}
 \index{rate@{rate}!command\+Manager\+::\+Normal@{command\+Manager\+::\+Normal}}
-\subsubsection[{\texorpdfstring{rate}{rate}}]{\setlength{\rightskip}{0pt plus 5cm}command\+Manager.\+Normal.\+rate}\hypertarget{classcommandManager_1_1Normal_a32e84cf5ac08ffeb9cb1a21d4b484a32}{}\label{classcommandManager_1_1Normal_a32e84cf5ac08ffeb9cb1a21d4b484a32}
+\subsubsection[{\texorpdfstring{rate}{rate}}]{\setlength{\rightskip}{0pt plus 5cm}command\+Manager.\+Normal.\+rate\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcommandManager_1_1Normal_a32e84cf5ac08ffeb9cb1a21d4b484a32}{}\label{classcommandManager_1_1Normal_a32e84cf5ac08ffeb9cb1a21d4b484a32}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
