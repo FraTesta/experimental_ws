@@ -52,7 +52,7 @@ Notice that the architecture is "dynamic" in a sense that some topics are dynami
 Finally I implemented a very simple **obstacle_avoidance** algorithm using the laser scan data because when the robot starts to track a ball the _move_base_ algorithm is deactivated by the _commadManager_ and its integrated obstacle avoidance as well.
 - __UI__ = is a very simple user interface that allows the user to switch in the _PLAY_ mode and choose a desired room to reach.
 
-For more details regarding the scripts, see the doxygen documentation. 
+For more details regarding the scripts, see the [doxygen documentation](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/launch/gmapping.launch). 
 
 ### **Architecture Choices**
 I preferred to keep separate the _roomDetector_ and the _track_ nodes, even if quite similar, in order to get an asynchronous node (_roomDetector_) which notifies new rooms directly to the _commandManager_ which handle that information according to its state and its priority. Moreover in this way I was able to implement the tracking phase as an action server and thus having access to all its features such as checking its status or aborting a mission. The computational load is not increased since the roomDetector node goes into a kind of sleep mode when the _track_ is active.
