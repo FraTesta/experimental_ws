@@ -20,22 +20,22 @@
   - [**System's Limitation**](#systems-limitations)
 
 ## __Introduction__ 
-This project represents the final assignment of the Experimental Robotics Laboratory corse. Therefore is an improvement of the assignment1 and and assignment2 that you can find in this git repository as well. 
+This project represents the final assignment of the Experimental Robotics Laboratory corse. Therefore is an improvement of the assignment1 and assignment2 that you can find in this git repository as well. 
 
-The aim of this assignment is to introduce some SLAM and autonomous navigation features. Infect the environment is now more complex and articulated, where colored balls represent the rooms of a hypothetical house, like shown in the fhe following figure.
+The aim of this assignment is to introduce some SLAM and autonomous navigation features. Infect the environment is now more complex and articulated, with colored balls representing the rooms of a hypothetical house, like shown in the following figure.
 
 ![Map](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/documentation/doc_pages/map.png)
 
-The _NORMAL_ and _SLEEP_ mode maintain the previous behavior with the difference that when the robot is in the _NORMAL_ state and detects a ball, the robot will start to track it and store its own position.
-The user can now switch in the _PLAY_ mode typing the _play_ command. Then it can specify a desired room that the robot will reach. 
+The _NORMAL_ and _SLEEP_ mode maintain the previous behavior with the difference that when the robot is in the _NORMAL_ state and detects a ball, the robot will start to track it and store its own position after reaching it.
+The user can now switch in the _PLAY_ mode typing the _play_ keyword. Then it can specify a desired room that the robot will reach (i.e. GoTo Bedroom). 
 
 If the entered room hasn't yet been visited the robot will switch in the _FIND_ state where it should find the desired room.
 
 ## __Software Architecture__
 For this project it was necessary to rely on already established and tested ROS packages, in particular as regards the navigation part (SLAM and autonomous navigation). 
-I used the __gmapping__ algorithm to build the map of the environment and the __move base__ ROS package for the autonomous navigation part.
+The __gmapping__ algorithm was used to create the map of the environment and the __move base__ ROS package for the autonomous navigation part.
 
-I chosen those packages since are very simple and therefore not too heavy in terms of computational load. Moreover taking into account the simplicity of the environment a 3D SLAM wouldn't have been so useful.
+Those packages are very simple and therefore not too heavy in terms of computational load. Moreover taking into account the simplicity of the environment a 3D SLAM wouldn't have been so useful.
 
 the software architecture implemented is shown below:
 
@@ -48,23 +48,22 @@ Notice that the architecture is "dynamic" in a sense that some topics are dynami
 - [commandManager](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/scripts/commandManager.py) = is the core of the architecture as in the previous assignments. It takes input from the _UI_ node and the _roomsDetector_ . Based on the state in which it is, this node can make requests to:
   -  the _move_base_ action server to reach a certain position.
   -  the _track_ action server to reach a detected room (ball).
-- [roomDetector](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/scripts/roomDetector.py) = is a simple openCV algorithm that analyzes the camera images to detect the balls (rooms). Then it sends the color of the detected ball to the _commandManager_. After which it interrupts the subscription to the camera topic and goes in a sort of sleeping mode until the _commandManager_ awaken it again.
+- [roomDetector](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/scripts/roomDetector.py) = is a simple openCV algorithm that analyzes the camera images to detect the balls (rooms). After that this node sends the color of the detected ball to the _commandManager_. Finally it interrupts the subscription to the camera topic and goes in a sort of sleeping mode until the _commandManager_ awaken it again.
 - [track](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/scripts/track.py) = is a action server that tracks a ball of a given color. The algorithm of tracking it's very similar to the _ball_track_ of the previous assignment. When the robot reaches the ball it will read its own position and send it back to the _commandManager_ so that it can store the position of the discovered room. If for some reason the ball is no longer detected the robot will turn on itself in both directions in an attempt to see the ball again. If after some time it has not succeeded, it switches back to the appropriate state.
-Finally I implemented a very simple **obstacle_avoidance** algorithm using the laser scan data because when the robot starts to track a ball the _move_base_ algorithm is deactivated by the _commadManager_ and its integrated obstacle avoidance as well.
+Finally I implemented a very simple **obstacle_avoidance** algorithm using the laser scan data since when the robot starts to track a ball the _move_base_ algorithm is deactivated by the _commadManager_ and its integrated obstacle avoidance as well.
 - [UI](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/scripts/UI.py) = is a very simple user interface that allows the user to switch in the _PLAY_ mode and choose a desired room to reach.
-
+Notice that the _move_base_ goal is aborted every time a ball is detected or the play command is typed.
 For more details regarding the scripts, see the doxygen documentation. 
 
 ### **Architecture Choices**
 I preferred to keep separate the _roomDetector_ and the _track_ nodes, even if quite similar, in order to get an asynchronous node (_roomDetector_) which notifies new rooms directly to the _commandManager_ which handle that information according to its state and its priority. Moreover in this way I was able to implement the tracking phase as an action server and thus having access to all its features such as checking its status or aborting a mission. The computational load is not increased since the roomDetector node goes into a kind of sleep mode when the _track_ is active.
-
-As already said the _move_base_ goal is aborted every time a ball is detected since the position of the ball and the previous _move_base_ goal position might be conflicting.
+ 
 
 ### **ROS msgs**
 The messages used for the custom topics are all belong to the _std_msgs_ library. In particular :
 | Topic | Msg|
 | ---- | ----- |
-| **UIchatter** | uses a *String* message to send the user command input to the *commandManager*. |
+| **UIchatter** | uses a *String* message to send the user command input to the *commandManager* (*play* and *GoTo*). |
 | **startRD** | which stands for start roomDetector, it's just a Bool message which enable/disable the ball detection.|
 | **newRoom** | uses a String msgs to send the color of the detected room to the *commandManager*.|
 
@@ -80,7 +79,7 @@ float64 y
 # Feedback
 string state
 ```
-Therefore it gets a color and returns the room position in terms of x and y coordinates.
+Basically it gets a color and returns the room position in terms of x and y coordinates.
 ## **System's Features** 
 ### **Move Base and Gmapping settings**
 - The **_gmapping_** parameters are contained in the [gmapping.launch](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/launch/gmapping.launch) file. Basically I changed:
@@ -102,8 +101,8 @@ The states are still implemented in the [commandManager.py](https://github.com/F
 
 | State | Description |
 | ---| ---|
-| NORMAL | Is the initial state and gives some random goals to the _move_base_. At each iteration checks if a new ball is detected (Switch in the _TRACK_ state) or if the user enter the 'play' keyword (switch inthe  _PLAY_ state). After some iteration it switches in the sleep state |
-| PLAY | the robot returns to the initial position (Home) and in the meantime checks if the user types a 'GoTo' command. If the entered room is in the roomStructure it will reach it. Otherwise switches in the _FIND_ state. |
+| NORMAL | Is the initial state and gives some random goals to the _move_base_. At each iteration checks if a new ball is detected (Switch in the _TRACK_ state) or if the user typed the 'play' keyword (switch in the  _PLAY_ state). After some iteration it switches in the *SLEEP* state. |
+| PLAY | the robot returns to the initial position (Home) and in the meantime checks if the user types a 'GoTo' command. If the entered room is in the roomStructure it will reach it and returns home. Otherwise switches in the _FIND_ state. |
 | TRACK | Starts when the _commandManager_ receives the color of a new detected ball. Thus it makes a request to the _track_ action server to track the ball. When the action server has finished this state it saves the returned location and associates it with the correct room. Then it returns to the appropriate state. For instance if the previous state was _FIND_ it checks if the detected ball is the desired one. If so switches to the _PLAY_ state otherwise switches back to the _FIND_. |
 | FIND | Starts to explore the environment using the [explore](#explore) function of the [Rooms](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/scripts/Rooms.py) class. At each iteration it checks if a new ball is detected, if so it will switch momentarily in the _TRACK_ state. After some iterations it switch back to the _PLAY_ state. |
 | SLEEP | The robot goes to the home position and stay there for some time after that switches back to the _NORMAL_ state.
@@ -113,12 +112,12 @@ The robot model used is the same of the previous assignment but I removed the ne
 
 ![RoboModel](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/documentation/doc_pages/robotModel.jpg)
 
-You can see the robot simulation and the environment:
+You can see the robot simulation and the environment using:
 ```
 roslaunch final_assignment simulation.launch
 ```
 
-Regarding the knowledge representation I develop a class called _Rooms.py_ that provides a simple structure that associates each room with a color ball and its own position in the space in terms of x and y coordinates. Of course this class provides also methods to update the knowledge of such environment and more. For more information take a look to its [doxygen documentation](file:///home/francescotesta/experimental_ws/src/final_assignment/documentation/html/classRooms_1_1Rooms.html) .
+Regarding the knowledge representation I develop a class called _Rooms.py_ that provides a simple structure that associates each room with a color ball and their respecting location in the space in terms of x and y coordinates. Of course this class provides also methods to update the knowledge of the environment, get information... For more information take a look to its [doxygen documentation](file:///home/francescotesta/experimental_ws/src/final_assignment/documentation/html/classRooms_1_1Rooms.html) .
 
 ### **Explore**
 The explore function of the class [Rooms](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/scripts/Rooms.py) has nothing to do with the _explore-lite_ package. It is a function that generates random goal positions considering the already visited room locations that are stored in the Rooms dictionary. Basically it draws a virtual area of 3x3 meters (the areas can be editable) around any stored room location and discards any goals generated within them. This solution improves its effectiveness as rooms are discovered. However it has the drawback that works pretty fine in this particular environment where the balls are sufficiently distant, it may not be so good in other contexts.
@@ -130,7 +129,7 @@ The final assignment package provides the following directory:
 - **launch** = contains the some launch files that are better shown in the [Run](#run) section.
 - **param** = contains some configuration file.yaml of the _move_base_ package (see [Move Base and Gmapping settings](#move-base-and-gmapping-settings))
 - **scripts** = contains the code (see [SW architecture](#software-architecture)) 
-- **urdf** = contains the models urdf files 
+- **urdf** = contains the urdf models files 
 - **world** = the world gazebo simulation 
 
 ## **Installation**
@@ -139,21 +138,20 @@ Download the *gmapping* and *move_base* packages, I suggest to install the follo
 - **gmapping =**  https://github.com/CarmineD8/SLAM_packages.git
 - **move_base =** https://github.com/CarmineD8/planning.git
 Install also:
-sudo apt-get install 
 ```
-ros-kinetic-openslam-gmapping
+sudo apt-get install ros-kinetic-openslam-gmapping
 sudo apt-get install ros-kinetic-navigation
 ```
 Then build the workspace.
 
 ## **Run**
-First of all as always source the workspace. I provide different launch file.
+First of all as always source the workspace. I provide different launch files.
 
 Launch the project (with the User Interface)
 ```
 roslaunch final_assignment start.launch ui:=true
 ```
-(You can also run rviz using the parameter _rviz:=true_). You should see two terminal windows: One for the User Interface 
+(You can also run rviz using the parameter _rviz:=true_). Now you should see two terminal windows: One for the User Interface 
 ```
 ******************************
  Welcome !!!! 
@@ -172,7 +170,7 @@ roslaunch final_assignment start.launch ui:=true
 
 User:
 ```
-That explains you the user interface and allows you to interact with the robot simulation. While the second windows shows some information about the robot and its behaviors
+That allows you to interact with the robot simulation. While the second windows shows some information about the robot and its behaviors.
 ```
 [INFO] [1619879582.422315, 429.745000]: State machine starting in initial state 'NORMAL' with userdata: 
 	[]
@@ -189,7 +187,7 @@ Finally you can run the project without the _SLEEP_ mode:
 ```
 roslaunch final_assignment noSleep.launch
 ```
-You can check the track phase and its obstacle avoidance algorithm by running:
+You can check the track phase and its obstacle avoidance algorithm by running this test version:
 ```
 roslaunch final_assignment testTrackObsAv.launch
 ```
@@ -201,8 +199,8 @@ Another possible limitation is the _explore_ function that in some cases require
 
 ## **Possible technical improvements** 
 
-1. Develop a more sophisticated way for the Knowledge representation, maybe designing an Ontology with some editors and API like Protegè.
-2. Improve the Explore algorithm maybe storing the last visited position as a room in order to get a new position close to the previous one.  
+1. Develop a more sophisticated Knowledge representation, maybe designing an Ontology with an editors or API like Protegè.
+2. Improve the Explore algorithm maybe storing the last visited position as a room in order to get a new position far from the previous one.  
 
 ## **Contacts**
 Francesco Testa
