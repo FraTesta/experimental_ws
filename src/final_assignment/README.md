@@ -202,7 +202,7 @@ Another possible limitation is the _explore_ function that in some cases require
 ## **Possible technical improvements** 
 
 1. Develop a more sophisticated way for the Knowledge representation, maybe designing an Ontology with some editors and API like Protegè.
-2. Improve the Explore algorithm maybe storing the last visited position as a room in order to get a new position close to the previous one.  
+2. Improve the Explore algorithm maybe storing the last visited position as a room in order to get a new position far from the previous one.  
 
 ## **Contacts**
 Francesco Testa
