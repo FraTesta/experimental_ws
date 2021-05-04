@@ -16,7 +16,8 @@
   - [**Package and File List**](#package-and-file-list)
   - [**Installation**](#installation)
   - [**Run**](#run)
-  - 
+  - [**System's Features**](#systems-features)
+  - [**System's Limitation**](#systems-limitations)
 
 ## __Introduction__ 
 This project represents the final assignment of the Experimental Robotics Laboratory corse. Therefore is an improvement of the assignment1 and and assignment2 that you can find in this git repository as well. 
@@ -60,8 +61,26 @@ I preferred to keep separate the _roomDetector_ and the _track_ nodes, even if q
 As already said the _move_base_ goal is aborted every time a ball is detected since the position of the ball and the previous _move_base_ goal position might be conflicting.
 
 ### **ROS msgs**
+The messages used for the custom topics are all belong to the _std_msgs_ library. In particular :
+| Topic | Msg|
+| ---- | ----- |
+| **UIchatter** | uses a *String* message to send the user command input to the *commandManager*. |
+| **startRD** | which stands for start roomDetector, it's just a Bool message which enable/disable the ball detection.|
+| **newRoom** | uses a String msgs to send the color of the detected room to the *commandManager*.|
 
-
+While the action server is defined as follows:
+```
+# Goal
+string color
+---
+# Result
+float64 x
+float64 y
+---
+# Feedback
+string state
+```
+Therefore it gets a color and returns the room position in terms of x and y coordinates.
 ## **System's Features** 
 ### **Move Base and Gmapping settings**
 - The **_gmapping_** parameters are contained in the [gmapping.launch](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/launch/gmapping.launch) file. Basically I changed:
@@ -108,9 +127,9 @@ The explore function of the class [Rooms](https://github.com/FraTesta/experiment
 The final assignment package provides the following directory:
 - **action** = contains the definition of the _track_ action server
 - **config** = contains some setting for the RViz simulation 
-- **launch** = contains the some launch files that are better shown in the Running part.
-- **param** = contains some configuration file.yaml of the _move_base_ package
-- **scripts** = contains the code 
+- **launch** = contains the some launch files that are better shown in the [Run](#run) section.
+- **param** = contains some configuration file.yaml of the _move_base_ package (see [Move Base and Gmapping settings](#move-base-and-gmapping-settings))
+- **scripts** = contains the code (see [SW architecture](#software-architecture)) 
 - **urdf** = contains the models urdf files 
 - **world** = the world gazebo simulation 
 
@@ -125,7 +144,7 @@ sudo apt-get install
 ros-kinetic-openslam-gmapping
 sudo apt-get install ros-kinetic-navigation
 ```
-
+Then build the workspace.
 
 ## **Run**
 First of all as always source the workspace. I provide different launch file.
@@ -134,7 +153,7 @@ Launch the project (with the User Interface)
 ```
 roslaunch final_assignment start.launch ui:=true
 ```
-(You can also run rviz using the parameter _rviz:=true_). You should see two terminal windows, one for the User Interface 
+(You can also run rviz using the parameter _rviz:=true_). You should see two terminal windows: One for the User Interface 
 ```
 ******************************
  Welcome !!!! 
@@ -153,7 +172,7 @@ roslaunch final_assignment start.launch ui:=true
 
 User:
 ```
-That explains you the user interface and allows you to communicate interact with the robot simulation. While the second windows shows some information about the robot and its behaviors
+That explains you the user interface and allows you to interact with the robot simulation. While the second windows shows some information about the robot and its behaviors
 ```
 [INFO] [1619879582.422315, 429.745000]: State machine starting in initial state 'NORMAL' with userdata: 
 	[]
@@ -165,21 +184,30 @@ That explains you the user interface and allows you to communicate interact with
 [INFO] [1619879585.642455, 431.083000]: [CommandManager] reach a new ball of color blue
 
 ```
-Notice that you can enter a desired room (using the _GoTo_ command) at any time, but it will be executed only in the _PLAY_ state (so after typing the _play_ command)
-
-## **System's Limitations**
-### Test
-the system has been running for a long time. Unfortunately the most effective way to test the complete project effectiveness is to run it for a long time and stress it with continuous and particular requests. Of course during the developing was tested also its single features. For instance you can check the track phase and its obstacle avoidance algorithm by running:
+Notice that you can enter a desired room (using the _GoTo_ command) at any time, but it will be executed only in the _PLAY_ state (so after typing the _play_ command).
+Finally you can run the project without the _SLEEP_ mode:
+```
+roslaunch final_assignment noSleep.launch
+```
+You can check the track phase and its obstacle avoidance algorithm by running:
 ```
 roslaunch final_assignment testTrackObsAv.launch
 ```
 
+## **System's Limitations**
+The system was tested for a long period having in general good behaviors. However some times in the first terminal might appear an error message saying that the robot is not able to find a global path. It's a problem related to the *move_base* package settings. I was not able to solve it, however it's very rare that happens and most of the time the system automatically solves such problem by finding again the path or detecting a new ball. If for this reason the robot is blocked, it is sufficient for the user to type "play" to switch to the PLAY mode. 
 
-### Problems
-Sometime it detects the readball when it 's colsed to Home. Therefore is nomore able to track the real red ball. 
+Another possible limitation is the _explore_ function that in some cases requires a few attempts to find a certain ball in the begging phase as already explained in the [Explore description](#explore). 
 
-When it reaches two balls it start to track only the second one. We should implement a sort of buffer in the callback of the roomDetection but we should also save the position of the first ball when it was detected, in order to go back to such position when the robot will reach the second one or vice versa 
+## **Possible technical improvements** 
 
+1. Develop a more sophisticated way for the Knowledge representation, maybe designing an Ontology with some editors and API like Protegè.
+2. Improve the Explore algorithm maybe storing the last visited position as a room in order to get a new position close to the previous one.  
+
+## **Contacts**
+Francesco Testa
+
+francesco.testa.ge@gmail.com
 
 
 
