@@ -56,10 +56,10 @@ Notice that the _move_base_ goal is aborted every time a ball is detected or the
 For more details regarding the scripts, see the doxygen documentation. 
 
 ### **Architecture Choices**
-I preferred to keep separate the _roomDetector_ and the _track_ nodes, even if quite similar, in order to get an asynchronous node (_roomDetector_) which notifies new rooms directly to the _commandManager_ which handle that information according to its state and its priority. Moreover in this way I was able to implement the tracking phase as an action server and thus having access to all its features such as checking its status or aborting a mission. The computational load is not increased since the roomDetector node goes into a kind of sleep mode when the _track_ is active.
+It's preferred to keep separate the _roomDetector_ and the _track_ nodes, even if quite similar, in order to get an asynchronous node (_roomDetector_) which notifies new rooms directly to the _commandManager_ which handle that information according to its state and its priority. Moreover this choice guaranties to implement the tracking phase as an action server and thus having access to all its features such as checking its status or aborting a mission. However the computational load is not increased since the roomDetector node goes into a kind of sleep mode when the _track_ is active. In this status the node doesn't perform any kind of image processing. This choice is due to the fact that the images processing of the _track_ and _roomDetector_ nodes are of course the most heavy computational load processes. 
  
 
-### **ROS msgs**
+### **ROS Messages and Actions**
 The messages used for the custom topics are all belong to the _std_msgs_ library. In particular :
 | Topic | Msg|
 | ---- | ----- |
@@ -117,10 +117,22 @@ You can see the robot simulation and the environment using:
 roslaunch final_assignment simulation.launch
 ```
 
-Regarding the knowledge representation I develop a class called _Rooms.py_ that provides a simple structure that associates each room with a color ball and their respecting location in the space in terms of x and y coordinates. Of course this class provides also methods to update the knowledge of the environment, get information... For more information take a look to its [doxygen documentation](file:///home/francescotesta/experimental_ws/src/final_assignment/documentation/html/classRooms_1_1Rooms.html) .
+Regarding the knowledge representation I develop a class called _Rooms.py_ that provides a simple structure that associates each room with a color ball and their respecting location in the space in terms of x and y coordinates as shown below:
+ ```
+ self.ROOMS = [ 
+        {'name':"Entrance",'color': "blue", "x":0, "y":0, 'detected':False},
+        {'name':"Closet",'color': "red", "x":0, "y":0, 'detected':False},
+        {'name':"Leavingroom",'color': "green", "x":0, "y":0, 'detected':False},
+        {'name':"Kitchen",'color': "yellow", "x":0, "y":0, 'detected':False},
+        {'name':"Bathroom",'color': "magenta", "x":0, "y":0, 'detected':False},
+        {'name':"Bedroom",'color':"black","x":0,"y":0, 'detected':False},
+        {'name':"Home",'color':"","x": -5,"y":7, 'detected':True}
+        ]
+```
+Of course this class provides also methods to update the knowledge of the environment, get information... For more information take a look to its [doxygen documentation](file:///home/francescotesta/experimental_ws/src/final_assignment/documentation/html/classRooms_1_1Rooms.html) .
 
 ### **Explore**
-The explore function of the class [Rooms](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/scripts/Rooms.py) has nothing to do with the _explore-lite_ package. It is a function that generates random goal positions considering the already visited room locations that are stored in the Rooms dictionary. Basically it draws a virtual area of 3x3 meters (the areas can be editable) around any stored room location and discards any goals generated within them. This solution improves its effectiveness as rooms are discovered. However it has the drawback that works pretty fine in this particular environment where the balls are sufficiently distant, it may not be so good in other contexts.
+The explore function of the class [Rooms](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/scripts/Rooms.py) has nothing to do with the _explore-lite_ package. It is a function that generates random goal positions considering the already visited room locations that are stored in the Rooms dictionary. Basically it draws a virtual area of 3x3 meters (the area dimension can be editable) around any stored room location and discards any goals generated within them. This solution improves its effectiveness as rooms are discovered. However it has the drawback that works pretty fine in this particular environment where the balls are sufficiently distant, it may not be so good in other contexts.
 
 ## **Package and File List**
 The final assignment package provides the following directory:
@@ -145,13 +157,15 @@ sudo apt-get install ros-kinetic-navigation
 Then build the workspace.
 
 ## **Run**
-First of all as always source the workspace. I provide different launch files.
+First of all as always source the workspace. I provide different launch files and parameters such as:
+- **ui** = if set to true it will launch the UI node to interact with the project.
+- **rviz** = open the Rviz simulation (_rviz:=true_).
 
 Launch the project (with the User Interface)
 ```
 roslaunch final_assignment start.launch ui:=true
 ```
-(You can also run rviz using the parameter _rviz:=true_). Now you should see two terminal windows: One for the User Interface 
+Now you should see two terminal windows: One for the User Interface 
 ```
 ******************************
  Welcome !!!! 
@@ -193,9 +207,9 @@ roslaunch final_assignment testTrackObsAv.launch
 ```
 
 ## **System's Limitations**
-The system was tested for a long period having in general good behaviors. However some times in the first terminal might appear an error message saying that the robot is not able to find a global path. It's a problem related to the *move_base* package settings. I was not able to solve it, however it's very rare that happens and most of the time the system automatically solves such problem by finding again the path or detecting a new ball. If for this reason the robot is blocked, it is sufficient for the user to type "play" to switch to the PLAY mode. 
+The system was tested for a long period having in general good behaviors. However some times in the first terminal might appear an error message saying that the robot is not able to find a global path. It's a problem related to the *move_base* package settings. I was not able to solve it, however it's very rare that happens and most of the time the system automatically solves such problem by finding again the path or detecting a new ball. If for this reason the stopped, it is sufficient for the user to type "play" to abort the current mission. 
 
-Another possible limitation is the _explore_ function that in some cases requires a few attempts to find a certain ball in the begging phase as already explained in the [Explore description](#explore). 
+Another possible limitation is the _explore_ function that in some cases requires a few attempts to find a certain ball in the begging phase and it might not work so good with other environments as already explained in the [Explore description](#explore). 
 
 ## **Possible technical improvements** 
 
@@ -203,6 +217,8 @@ Another possible limitation is the _explore_ function that in some cases require
 1. Develop a more sophisticated Knowledge representation, maybe designing an Ontology with an editors or API like Protegè.
 
 2. Improve the Explore algorithm maybe storing the last visited position as a room in order to get a new position far from the previous one.  
+3. A better _move_base_/_gmapping_ parameters could be found since currently are set in order to avoid robot collisions or blocking problems. But with other settings it could do fewer maneuvers and smoother trajectory.
+4. Improve the obstacle avoidance algorithm of the _track_ node. Since actually the robot is only able to avoid obstacle that are in front of it. 
 
 ## **Contacts**
 Francesco Testa
