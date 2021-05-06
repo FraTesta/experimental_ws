@@ -326,12 +326,12 @@ class Find(smach.State):
 
 	    if control_variables["NEW_ROOM_COLOR"] != "None":
                 return 'goToTrack'
-            elif self.counter == 4:
-		rospy.loginfo("[CommandManager] Max number of FIND mode iterations")
-		control_variables["FIND_MODE"] = False
-		roomD_pub.publish(False)
-                self.counter = 0
-                return 'goToPlay' 		
+            #elif self.counter == 4:
+		#rospy.loginfo("[CommandManager] Max number of FIND mode iterations")
+		#control_variables["FIND_MODE"] = False
+		#roomD_pub.publish(False)
+                #self.counter = 0
+                #return 'goToPlay' 		
 	    else:
 	        rospy.loginfo("[CommandManager] Exploring....")
                 pos = rooms.explore()
@@ -339,8 +339,7 @@ class Find(smach.State):
                 self.rate.sleep()
                 self.counter += 1
         
-def main():
-    
+def main():   
     global client
     try:
         rospy.init_node('commandManager')

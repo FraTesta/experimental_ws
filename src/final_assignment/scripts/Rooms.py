@@ -97,23 +97,23 @@ class Rooms():
 
 
 
-    ## Returns a array which contains a neighborhood of a given number.
+    ## Returns a array which contains a neighborhood of a given number. For instance if a = 1 and l = 2 it'll return [-1, 0, 1, 2, 3]
     # @param a number that correspond to a coordinate of a point.
-    # @param l is half of the neighborhood that will be generated.
+    # @param l is half of the neighborhood that will be generated. 
     def mrange(self, a, l):
         minA = a - l
         r = []
-        for i in range(0,7):
+        for i in range(0,l*2+1):
             r.append(minA + i)
         return r
     
     ## Generates a random position in terms of x and y. Usefull in the NORMAL and FIND states
     def generate_rand_pos(self):
         while True:
-            tempX = random.randint(-5,5)
+            tempX = random.randint(-6,6)
             tempY = random.randint(-8,5)
-            # generate a position which is far from the previous one
-            if not tempX in self.mrange(self.previousPosX, 2) and not tempY in self.mrange(self.previousPosY, 2):  
+            # generate a position which is different from the previous one
+            if tempX != self.previousPosX and tempY != self.previousPosY:  
                 # consider the offlimit zone of the environment to simplify the navigation
                 if not (3 > tempX > 0 and tempY > 0) and not(tempX < 0 and tempY < -5):
 		    self.previousPosX = tempX
@@ -126,10 +126,13 @@ class Rooms():
         while True:
             ok = True
             pos = self.generate_rand_pos()
+            print(pos)
             # check the position is far from the already visited location
             for vis in self.visitedLocation:
-                if (pos[0] in self.mrange(vis[0],2)) and (pos[1] in self.mrange(vis[1],2)):
+                if (pos[0] in self.mrange(vis[0],1)) and (pos[1] in self.mrange(vis[1],1)):
+                    print("[ROOM] Close to a prevoius location ", vis)                    
                     ok = False
+                    break
             if ok:
                 # check if such position is close or not a already visited room 
                 for room in self.ROOMS:
@@ -137,7 +140,9 @@ class Rooms():
                         rx = self.mrange(room['x'], 2)
                         ry = self.mrange(room['y'], 2)
                         if (pos[0] in rx and pos[1] in ry):
+                            print("[ROOM] close to a room")
                             ok = False
+                            break
             if ok:
                 self.visitedLocation.append(pos)
                 return pos 

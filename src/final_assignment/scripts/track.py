@@ -157,7 +157,7 @@ class TrackAction(object):
         # apply the velocities
 		self.vel_pub.publish(vel)
         #Condition for considering the ball as reached
-                if (self.radius>=148) and abs(center[0]-400)<5: 
+                if (self.radius>=143) and abs(center[0]-400)<5: 
 				rospy.loginfo("[Track] ball reached!!")
                 # set the returning values as the last robot location perceived
                 		self.result.x = self.position.x
@@ -168,15 +168,15 @@ class TrackAction(object):
             # Routine to find tha ball again
             rospy.loginfo("[Track] Ball not found")
 	    vel = Twist()
-	    if self.unfound_ball_counter <= 10:
+	    if self.unfound_ball_counter <= 6:
 		 rospy.loginfo("[Track] Turn Right to find the ball")
                  vel.angular.z = 0.5
 		 self.vel_pub.publish(vel) 
-	    elif self.unfound_ball_counter < 20:
+	    elif self.unfound_ball_counter < 12:
 		 rospy.loginfo("[Track] Turn Left to find the ball")
                  vel.angular.z = -0.5
 		 self.vel_pub.publish(vel)
-	    elif self.unfound_ball_counter == 20:
+	    elif self.unfound_ball_counter == 12:
 		 rospy.loginfo("[Track] Robot is unable to find the ball ")
 		 self.unfound_ball_counter = 0
 		 self.abort = True   
@@ -195,16 +195,16 @@ class TrackAction(object):
                 'left':   min(min(msg.ranges[576:713]), 10),
             }
         threshold = 0.6
-        threshold2 = 0.75
+        threshold2 = 0.85
         if (self.regions['front'] > 0) and (self.regions['front'] <= threshold) and (self.radius < 110):
             rospy.loginfo("[Track] obstacle detected ")
             if self.regions['fright'] > threshold2:
                 rospy.loginfo("[Track] turn right")
-                vel.angular.z = -0.3
+                vel.angular.z = -0.5
                 self.vel_pub.publish(vel)
             elif self.regions['fleft'] > threshold2:
                 rospy.loginfo("[Track] turn left")
-                vel.angular.z = 0.3
+                vel.angular.z = 0.5
                 self.vel_pub.publish(vel)
             else:
                 rospy.loginfo("[Track] aborted")
