@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 ## @file track.py
-#  This script is an acttion server which takes a color of a ball in proximity of the robot and start to track it. It may happen that the robot is no longer able to detect the ball, in this case the robot will rotate around itself (right and left) in order to find the ball again. If not the mission will be aborted
+#  This script implements an action server which is able to track a ball of a given color.  
  
 
 # Python libs
@@ -49,7 +49,12 @@ magentaUpper = (150, 255, 255)
 
 
 
-## Class that implements the action server for tracking the ball
+## Class that implements the action server for tracking the ball. 
+# It takes a color of a ball in proximity of the robot and start to track it.
+# Periodically the robot store its own position (through a subscriber to the /odom topic)in a variable in order to return its location when a ball will be reached.
+# It may happen that the robot is no longer able to detect the ball, in this case the robot will rotate around itself (right and left) in order to find the ball again. 
+# If not the mission will be aborted.
+# Finally it's also able to avoid simple obstacle in front, front-right and front-left directions with respect to the robot
 class TrackAction(object): 
              
     def __init__(self, name):
@@ -59,6 +64,7 @@ class TrackAction(object):
         self.act_s.start()
 	self.feedback = final_assignment.msg.trackBallFeedback()
     	self.result = final_assignment.msg.trackBallResult()
+        ## Dictionary which defines the laser data perceived in the following 5 directions 
         self.regions = {
                 'right': 0,
                 'fright': 0,
@@ -69,34 +75,37 @@ class TrackAction(object):
 
         ## Flag that notifies that the robot has reached the ball correctly
         self.success = False
-        ## Variables that counts how many times the robot was not able to detect the ball again. 
+        ## Variables that counts how many times the robot was not able to detect the ball again.
+        # After which it abort the mission and close the action server. 
         self.unfound_ball_counter = 0
-        ## Flag that notifies aborting mission since the robot was not able to detect the ball 
+        ## Flag that notifies aborting mission, since the robot is not able to detect the ball or if there is no way to avoid an obstacle
         self.abort = False
         ## Radius of the detected ball designed by the openCV algorithm in the reach_ball function
         self.radius = 0
-        ## Publisher to the cmd_vel topic in order to move the robot
+        ## Publisher to the /cmd_vel topic in order to move the robot towards tha balls
         self.vel_pub = 0
-        ## Current position of the robot 
+        ## Variable that store the current position of the robot 
         self.position = Point()
         ## Current pose of the robot
         self.pose = Pose()
         
-    ## Callback to the Odom topic which updates the global variables: position_ and pose_
+    ## Callback to the /odom topic which updates the global variables: position and pose of the robot
     def clbk_odom(self, msg):
         self.position = msg.pose.pose.position
         self.pose = msg.pose.pose
         
 
 
-    ## Callback function of the camera subscriber which computes the velocities to apply to the robot untill it reaches the ball.
+    ## Callback function of the camera subscriber which computes the velocities to apply to the robot until it reaches the target ball.
     ## @param ros_image is the image decompressed and converted in OpendCv
     def reach_ball(self, ros_image):
         #### direct conversion to CV2 ####        
         np_arr = np.fromstring(ros_image.data, np.uint8)
         image_np = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)  
 
+        # Bluring the image to reduce noise
         blurred = cv2.GaussianBlur(image_np, (11, 11), 0)
+        ## Conversion into HSV format to easily finding contours
         hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
 
         # Apply the proper color mask
@@ -116,6 +125,7 @@ class TrackAction(object):
         mask = cv2.erode(mask, None, iterations=2)
         mask = cv2.dilate(mask, None, iterations=2)
 
+        # find the countours
         cnts = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         cnts = imutils.grab_contours(cnts)
 
@@ -140,19 +150,22 @@ class TrackAction(object):
 
                 # Setting the velocities to be applied to the robot
                 vel = Twist()
-		# 400 is the center of the image 
+		# 400 is the center of the camera image, therefore it's used to compute the correction along z
 		vel.angular.z = -0.002*(center[0]-400)
 		 # 150 is the radius that we want see in the image, which represent the desired distance from the object 
 		vel.linear.x = -0.007*(self.radius-150)
+        # apply the velocities
 		self.vel_pub.publish(vel)
-
-                if (self.radius>=148) and abs(center[0]-400)<5: #Condition for considering the ball as reached
+        #Condition for considering the ball as reached
+                if (self.radius>=148) and abs(center[0]-400)<5: 
 				rospy.loginfo("[Track] ball reached!!")
+                # set the returning values as the last robot location perceived
                 		self.result.x = self.position.x
                 		self.result.y = self.position.y
 				self.success = True
 
         else:
+            # Routine to find tha ball again
             rospy.loginfo("[Track] Ball not found")
 	    vel = Twist()
 	    if self.unfound_ball_counter <= 10:
@@ -169,7 +182,8 @@ class TrackAction(object):
 		 self.abort = True   
 	    self.unfound_ball_counter += 1
 
-    ## Callback function of the LaserScan topic which implements a basic obstacle avoidance algorithm
+    ## Callback function of the LaserScan topic which implements a basic obstacle avoidance algorithm.
+    # Basically it just evaluate the distance to an obstacle considering only 3 direction (front, front-left, front-right), then chooses a proper correation to applay.
     # @param msg LaserScan message to get the distances from the obstacles
     def obstacle_avoidance(self, msg):
         vel = Twist()
@@ -187,12 +201,10 @@ class TrackAction(object):
             if self.regions['fright'] > threshold2:
                 rospy.loginfo("[Track] turn right")
                 vel.angular.z = -0.3
-                #vel.linear.x = 0.2
                 self.vel_pub.publish(vel)
             elif self.regions['fleft'] > threshold2:
                 rospy.loginfo("[Track] turn left")
                 vel.angular.z = 0.3
-                #vel.linear.x = 0.2
                 self.vel_pub.publish(vel)
             else:
                 rospy.loginfo("[Track] aborted")
@@ -210,7 +222,7 @@ class TrackAction(object):
         self.vel_pub = rospy.Publisher("cmd_vel",Twist, queue_size=1)
         ## Subscriber to camera1 in order to receive and handle the images
         camera_sub = rospy.Subscriber("camera1/image_raw/compressed", CompressedImage, self.reach_ball, queue_size=1)
-
+        ## Subscriber to the laser scan to perceive obstacle distances
         sub_scan = rospy.Subscriber('/scan', LaserScan, self.obstacle_avoidance)	 
         
         while not self.success:
@@ -224,17 +236,17 @@ class TrackAction(object):
 	    else:
                 self.feedback.state = "Reaching the ball..."
 		self.act_s.publish_feedback(self.feedback)
-	# Unregister from the odom and camera topic
+	# Unregister from any topic since the action server is going to be closed
 	camera_sub.unregister()
 	sub_scan.unregister()
 	sub_odom.unregister()
 	self.vel_pub.unregister()
     	
 	if not self.abort == True:
-	     self.act_s.set_succeeded(self.result)
-	     
+        # If the mission was not aborted returns the result
+	     self.act_s.set_succeeded(self.result)	     
 	else:
-
+        # Otherwise preampt the action server 
 	     self.act_s.set_preempted()
 	self.abort = False
 	self.success = False

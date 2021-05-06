@@ -1,16 +1,21 @@
 \hypertarget{classRooms_1_1Rooms}{}\section{Rooms.\+Rooms Class Reference}
 \label{classRooms_1_1Rooms}\index{Rooms.\+Rooms@{Rooms.\+Rooms}}
+
+
+This class represent the Knowledge representation of the project.  
+
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 def \hyperlink{classRooms_1_1Rooms_a33491cd5c0e240b173cc7b5b7c004614}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self)
 \item 
 def \hyperlink{classRooms_1_1Rooms_af4de8388233d61aa35d1567f7a1499c5}{to\+\_\+string} (self, room)
-\begin{DoxyCompactList}\small\item\em Convert a cell array returned by the R\+O\+O\+MS structure into a string. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Convert a cell array passed into a string. \end{DoxyCompactList}\item 
 def \hyperlink{classRooms_1_1Rooms_a103b874aa482a4bbc32b7e57e310b557}{check\+\_\+visted} (self, color)
 \begin{DoxyCompactList}\small\item\em Checks if a room of a given color is already visited. \end{DoxyCompactList}\item 
 def \hyperlink{classRooms_1_1Rooms_a0b0c05bef66a8c33523caa1013abe2e7}{get\+\_\+room\+\_\+position} (self, target\+\_\+room)
-\begin{DoxyCompactList}\small\item\em Check if a given room is already visited, if so it returns its position. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Check if a given room name is already visited, if so it returns its position. \end{DoxyCompactList}\item 
 def \hyperlink{classRooms_1_1Rooms_a266a056a0e82793932d3dfbf0c492c29}{add\+\_\+new\+\_\+room} (self, color, x, y)
 \begin{DoxyCompactList}\small\item\em Adds a new room to the R\+O\+O\+MS structure. \end{DoxyCompactList}\item 
 def \hyperlink{classRooms_1_1Rooms_addc0dcc8b9628a35044e1ffbd67a1e0d}{get\+\_\+name\+\_\+position} (self, x, y)
@@ -19,10 +24,10 @@ def \hyperlink{classRooms_1_1Rooms_aaef9cac25b1cf6e0313868b7e704470e}{get\+\_\+c
 \begin{DoxyCompactList}\small\item\em Returns the color of a room given its name. \end{DoxyCompactList}\item 
 def \hyperlink{classRooms_1_1Rooms_a3a531237af143d87bc70927a6ad84865}{generate\+\_\+rand\+\_\+pos} (self)
 \begin{DoxyCompactList}\small\item\em Generates a random position in terms of x and y. \end{DoxyCompactList}\item 
-def \hyperlink{classRooms_1_1Rooms_ae35a0aa8261fb4ff5c856d80e0f9cac0}{mrange} (self, a)
+def \hyperlink{classRooms_1_1Rooms_a8f7070d91a261e3d6b6f9be2ce78b96c}{mrange} (self, a, l)
 \begin{DoxyCompactList}\small\item\em Returns a array which contains a neighborhood of a given number. \end{DoxyCompactList}\item 
 def \hyperlink{classRooms_1_1Rooms_a031a0e30ceaada375d7b3aacced35668}{explore} (self)
-\begin{DoxyCompactList}\small\item\em Returns a random position away from the rooms already visited. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Explore function that returns a random position away from the rooms already visited. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -31,8 +36,9 @@ def \hyperlink{classRooms_1_1Rooms_a031a0e30ceaada375d7b3aacced35668}{explore} (
 
 
 \subsection{Detailed Description}
-\begin{DoxyVerb}Class provides a smart structure to store the discoverd rooms, and some methods to handle it\end{DoxyVerb}
- 
+This class represent the Knowledge representation of the project. 
+
+It provides a structure (self.\+R\+O\+O\+MS) that associate each room with a color ball, a location (in terms of x and y) and if it\textquotesingle{}s already detected or not. It also provides some methods to handle such structure data and exploits it to generate random positions useful for the \hyperlink{namespacecommandManager}{command\+Manager}. Finally it contains the implementation of the exploration algorithm used in the Find state of the \hyperlink{namespacecommandManager}{command\+Manager}. 
 
 \subsection{Constructor \& Destructor Documentation}
 \index{Rooms\+::\+Rooms@{Rooms\+::\+Rooms}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
@@ -94,9 +100,9 @@ Checks if a room of a given color is already visited.
 )}\hypertarget{classRooms_1_1Rooms_a031a0e30ceaada375d7b3aacced35668}{}\label{classRooms_1_1Rooms_a031a0e30ceaada375d7b3aacced35668}
 
 
-Returns a random position away from the rooms already visited. 
+Explore function that returns a random position away from the rooms already visited. 
 
-\index{Rooms\+::\+Rooms@{Rooms\+::\+Rooms}!generate\+\_\+rand\+\_\+pos@{generate\+\_\+rand\+\_\+pos}}
+Basically it generate a random position and check if it belongs in the neighborhood of each detected room. \index{Rooms\+::\+Rooms@{Rooms\+::\+Rooms}!generate\+\_\+rand\+\_\+pos@{generate\+\_\+rand\+\_\+pos}}
 \index{generate\+\_\+rand\+\_\+pos@{generate\+\_\+rand\+\_\+pos}!Rooms\+::\+Rooms@{Rooms\+::\+Rooms}}
 \subsubsection[{\texorpdfstring{generate\+\_\+rand\+\_\+pos(self)}{generate_rand_pos(self)}}]{\setlength{\rightskip}{0pt plus 5cm}def Rooms.\+Rooms.\+generate\+\_\+rand\+\_\+pos (
 \begin{DoxyParamCaption}
@@ -154,28 +160,31 @@ Returns the name of a room located in a given position (if any)
 )}\hypertarget{classRooms_1_1Rooms_a0b0c05bef66a8c33523caa1013abe2e7}{}\label{classRooms_1_1Rooms_a0b0c05bef66a8c33523caa1013abe2e7}
 
 
-Check if a given room is already visited, if so it returns its position. 
+Check if a given room name is already visited, if so it returns its position. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em target\+\_\+room} & name of the room \\
+{\em target\+\_\+room} & name of the desired room \\
 \hline
 \end{DoxyParams}
 \index{Rooms\+::\+Rooms@{Rooms\+::\+Rooms}!mrange@{mrange}}
 \index{mrange@{mrange}!Rooms\+::\+Rooms@{Rooms\+::\+Rooms}}
-\subsubsection[{\texorpdfstring{mrange(self, a)}{mrange(self, a)}}]{\setlength{\rightskip}{0pt plus 5cm}def Rooms.\+Rooms.\+mrange (
+\subsubsection[{\texorpdfstring{mrange(self, a, l)}{mrange(self, a, l)}}]{\setlength{\rightskip}{0pt plus 5cm}def Rooms.\+Rooms.\+mrange (
 \begin{DoxyParamCaption}
 \item[{}]{self, }
-\item[{}]{a}
+\item[{}]{a, }
+\item[{}]{l}
 \end{DoxyParamCaption}
-)}\hypertarget{classRooms_1_1Rooms_ae35a0aa8261fb4ff5c856d80e0f9cac0}{}\label{classRooms_1_1Rooms_ae35a0aa8261fb4ff5c856d80e0f9cac0}
+)}\hypertarget{classRooms_1_1Rooms_a8f7070d91a261e3d6b6f9be2ce78b96c}{}\label{classRooms_1_1Rooms_a8f7070d91a261e3d6b6f9be2ce78b96c}
 
 
 Returns a array which contains a neighborhood of a given number. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em number} & that correspond to a coordinate of a point \\
+{\em a} & number that correspond to a coordinate of a point. \\
+\hline
+{\em l} & is half of the neighborhood that will be generated. \\
 \hline
 \end{DoxyParams}
 \index{Rooms\+::\+Rooms@{Rooms\+::\+Rooms}!to\+\_\+string@{to\+\_\+string}}
@@ -188,7 +197,7 @@ Returns a array which contains a neighborhood of a given number.
 )}\hypertarget{classRooms_1_1Rooms_af4de8388233d61aa35d1567f7a1499c5}{}\label{classRooms_1_1Rooms_af4de8388233d61aa35d1567f7a1499c5}
 
 
-Convert a cell array returned by the R\+O\+O\+MS structure into a string. 
+Convert a cell array passed into a string. 
 
 
 \begin{DoxyParams}{Parameters}

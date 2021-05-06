@@ -145,15 +145,16 @@ Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a3c82d03952562f9cf96be2e80ae059a3"><td class="memItemLeft" align="right" valign="top">dictionary&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecommandManager.html#a3c82d03952562f9cf96be2e80ae059a3">control_variables</a></td></tr>
+<tr class="memdesc:a3c82d03952562f9cf96be2e80ae059a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dictionary which contains flags and global variables.  <a href="#a3c82d03952562f9cf96be2e80ae059a3">More...</a><br /></td></tr>
 <tr class="separator:a3c82d03952562f9cf96be2e80ae059a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad81f5cdd9bf18b67989c77a2329b9e28"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecommandManager.html#ad81f5cdd9bf18b67989c77a2329b9e28">client</a> = actionlib.SimpleActionClient('move_base',MoveBaseAction)</td></tr>
-<tr class="memdesc:ad81f5cdd9bf18b67989c77a2329b9e28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag which notify when the user types 'play' PLAY = False Contains the desired room entered by the user TARGET_ROOM = "None" Flag which notify when the command manager recives a new target room from the user NEW_TR = False Flag which notify that a new room was detected by the camera NEW_ROOM = False Contains the color of the detected ball (room) NEW_ROOM_COLOR = "None" Flag indicating if the FIND mode is active or not FIND_MODE = False Initialization of the move_base client in order to assign target position to the move_base action server.  <a href="#ad81f5cdd9bf18b67989c77a2329b9e28">More...</a><br /></td></tr>
+<tr class="memdesc:ad81f5cdd9bf18b67989c77a2329b9e28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialization of the move_base client in order to assign target position to the move_base action server.  <a href="#ad81f5cdd9bf18b67989c77a2329b9e28">More...</a><br /></td></tr>
 <tr class="separator:ad81f5cdd9bf18b67989c77a2329b9e28"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5cf709943d61e92e0ce4c1652403ae8d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecommandManager.html#a5cf709943d61e92e0ce4c1652403ae8d">roomD_pub</a> = rospy.Publisher('startRD', Bool, queue_size=10)</td></tr>
 <tr class="memdesc:a5cf709943d61e92e0ce4c1652403ae8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Publisher to the startRD topic which allows to enable/disable the room detector.  <a href="#a5cf709943d61e92e0ce4c1652403ae8d">More...</a><br /></td></tr>
 <tr class="separator:a5cf709943d61e92e0ce4c1652403ae8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a868809e1f6a79e7b7ce5ea405e978d48"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecommandManager.html#a868809e1f6a79e7b7ce5ea405e978d48">rooms</a> = <a class="el" href="classRooms_1_1Rooms.html">Rooms</a>()</td></tr>
-<tr class="memdesc:a868809e1f6a79e7b7ce5ea405e978d48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Object of the class <a class="el" href="namespaceRooms.html">Rooms</a> necessary to store and manage the discovered rooms.  <a href="#a868809e1f6a79e7b7ce5ea405e978d48">More...</a><br /></td></tr>
+<tr class="memdesc:a868809e1f6a79e7b7ce5ea405e978d48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Object of the class <a class="el" href="namespaceRooms.html">Rooms</a> necessary for the knowledge representation of the environment.  <a href="#a868809e1f6a79e7b7ce5ea405e978d48">More...</a><br /></td></tr>
 <tr class="separator:a868809e1f6a79e7b7ce5ea405e978d48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -266,7 +267,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Flag which notify when the user types 'play' PLAY = False Contains the desired room entered by the user TARGET_ROOM = "None" Flag which notify when the command manager recives a new target room from the user NEW_TR = False Flag which notify that a new room was detected by the camera NEW_ROOM = False Contains the color of the detected ball (room) NEW_ROOM_COLOR = "None" Flag indicating if the FIND mode is active or not FIND_MODE = False Initialization of the move_base client in order to assign target position to the move_base action server. </p>
+<p>Initialization of the move_base client in order to assign target position to the move_base action server. </p>
 
 </div>
 </div>
@@ -279,7 +280,9 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno"><a class="line" href="namespacecommandManager.html">    1</a></span>&#160;= {</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;    <span class="comment">## Flag which notify when the user types &#39;play&#39;</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;    <span class="stringliteral">&quot;PLAY&quot;</span> : <span class="keyword">False</span>,</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    <span class="comment">## Contains the desired room entered by the user </span></div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    <span class="stringliteral">&quot;TARGET_ROOM&quot;</span> : <span class="stringliteral">&quot;None&quot;</span>,</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    <span class="comment">## Contains the color of the detected ball (room) </span></div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    <span class="stringliteral">&quot;NEW_ROOM_COLOR&quot;</span> : <span class="stringliteral">&quot;None&quot;</span>,</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="comment">## Flag indicating if the FIND mode is active or not </span></div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="stringliteral">&quot;FIND_MODE&quot;</span> : <span class="keyword">False</span>   </div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;}</div></div><!-- fragment -->
+<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno"><a class="line" href="namespacecommandManager.html">    1</a></span>&#160;= {</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;    <span class="comment">## Flag which notify when the user types &#39;play&#39;</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;    <span class="stringliteral">&quot;PLAY&quot;</span> : <span class="keyword">False</span>,</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    <span class="comment">## Contains the name of the desired room entered by the user </span></div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    <span class="stringliteral">&quot;TARGET_ROOM&quot;</span> : <span class="stringliteral">&quot;None&quot;</span>,</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    <span class="comment">## Contains the color of the detected ball (room) </span></div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    <span class="stringliteral">&quot;NEW_ROOM_COLOR&quot;</span> : <span class="stringliteral">&quot;None&quot;</span>,</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="comment">## Flag indicating if the FIND mode is active or not </span></div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="stringliteral">&quot;FIND_MODE&quot;</span> : <span class="keyword">False</span>   </div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;}</div></div><!-- fragment -->
+<p>Dictionary which contains flags and global variables. </p>
+
 </div>
 </div>
 <a class="anchor" id="a5cf709943d61e92e0ce4c1652403ae8d"></a>
@@ -306,7 +309,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Object of the class <a class="el" href="namespaceRooms.html">Rooms</a> necessary to store and manage the discovered rooms. </p>
+<p>Object of the class <a class="el" href="namespaceRooms.html">Rooms</a> necessary for the knowledge representation of the environment. </p>
 
 </div>
 </div>

@@ -136,10 +136,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad71d2ce7ecd91c384219ada7e8ed74e3"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#ad71d2ce7ecd91c384219ada7e8ed74e3">__init__</a> (self, name)</td></tr>
 <tr class="separator:ad71d2ce7ecd91c384219ada7e8ed74e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f92640237725d8789986694c90bd98a"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#a1f92640237725d8789986694c90bd98a">clbk_odom</a> (self, msg)</td></tr>
-<tr class="memdesc:a1f92640237725d8789986694c90bd98a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback to the Odom topic which updates the global variables: position_ and pose_.  <a href="#a1f92640237725d8789986694c90bd98a">More...</a><br /></td></tr>
+<tr class="memdesc:a1f92640237725d8789986694c90bd98a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback to the /odom topic which updates the global variables: position and pose of the robot.  <a href="#a1f92640237725d8789986694c90bd98a">More...</a><br /></td></tr>
 <tr class="separator:a1f92640237725d8789986694c90bd98a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b41ed0eb7a403459469c27dd63a2392"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#a3b41ed0eb7a403459469c27dd63a2392">reach_ball</a> (self, ros_image)</td></tr>
-<tr class="memdesc:a3b41ed0eb7a403459469c27dd63a2392"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function of the camera subscriber which computes the velocities to apply to the robot untill it reaches the ball.  <a href="#a3b41ed0eb7a403459469c27dd63a2392">More...</a><br /></td></tr>
+<tr class="memdesc:a3b41ed0eb7a403459469c27dd63a2392"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function of the camera subscriber which computes the velocities to apply to the robot until it reaches the target ball.  <a href="#a3b41ed0eb7a403459469c27dd63a2392">More...</a><br /></td></tr>
 <tr class="separator:a3b41ed0eb7a403459469c27dd63a2392"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab20439d63451e7799ecf2a2ec1f8c860"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#ab20439d63451e7799ecf2a2ec1f8c860">obstacle_avoidance</a> (self, msg)</td></tr>
 <tr class="memdesc:ab20439d63451e7799ecf2a2ec1f8c860"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function of the LaserScan topic which implements a basic obstacle avoidance algorithm.  <a href="#ab20439d63451e7799ecf2a2ec1f8c860">More...</a><br /></td></tr>
@@ -170,6 +170,7 @@ Static Public Attributes</h2></td></tr>
 <tr class="memitem:ae62bfb3233b566df94fde636d8d26877"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#ae62bfb3233b566df94fde636d8d26877">result</a></td></tr>
 <tr class="separator:ae62bfb3233b566df94fde636d8d26877"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca76f9e5333f65cf2da37f2b90d5f193"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#aca76f9e5333f65cf2da37f2b90d5f193">regions</a></td></tr>
+<tr class="memdesc:aca76f9e5333f65cf2da37f2b90d5f193"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dictionary which defines the laser data perceived in the following 5 directions.  <a href="#aca76f9e5333f65cf2da37f2b90d5f193">More...</a><br /></td></tr>
 <tr class="separator:aca76f9e5333f65cf2da37f2b90d5f193"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c79189ba62cf316bffaa4c00b0320fe"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#a8c79189ba62cf316bffaa4c00b0320fe">success</a></td></tr>
 <tr class="memdesc:a8c79189ba62cf316bffaa4c00b0320fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag that notifies that the robot has reached the ball correctly.  <a href="#a8c79189ba62cf316bffaa4c00b0320fe">More...</a><br /></td></tr>
@@ -178,16 +179,16 @@ Static Public Attributes</h2></td></tr>
 <tr class="memdesc:aabc16f100d1f260d6712d8d74e055fda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variables that counts how many times the robot was not able to detect the ball again.  <a href="#aabc16f100d1f260d6712d8d74e055fda">More...</a><br /></td></tr>
 <tr class="separator:aabc16f100d1f260d6712d8d74e055fda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fac0918d826dc6cbf110784c8fcda99"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#a4fac0918d826dc6cbf110784c8fcda99">abort</a></td></tr>
-<tr class="memdesc:a4fac0918d826dc6cbf110784c8fcda99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag that notifies aborting mission since the robot was not able to detect the ball.  <a href="#a4fac0918d826dc6cbf110784c8fcda99">More...</a><br /></td></tr>
+<tr class="memdesc:a4fac0918d826dc6cbf110784c8fcda99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag that notifies aborting mission, since the robot is not able to detect the ball or if there is no way to avoid an obstacle.  <a href="#a4fac0918d826dc6cbf110784c8fcda99">More...</a><br /></td></tr>
 <tr class="separator:a4fac0918d826dc6cbf110784c8fcda99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0773416696b3fd6ed1dff306eb26c84a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#a0773416696b3fd6ed1dff306eb26c84a">radius</a></td></tr>
 <tr class="memdesc:a0773416696b3fd6ed1dff306eb26c84a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Radius of the detected ball designed by the openCV algorithm in the reach_ball function.  <a href="#a0773416696b3fd6ed1dff306eb26c84a">More...</a><br /></td></tr>
 <tr class="separator:a0773416696b3fd6ed1dff306eb26c84a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6105c2cad0d325296213d7c03c4fb6e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#af6105c2cad0d325296213d7c03c4fb6e">vel_pub</a></td></tr>
-<tr class="memdesc:af6105c2cad0d325296213d7c03c4fb6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Publisher to the cmd_vel topic in order to move the robot.  <a href="#af6105c2cad0d325296213d7c03c4fb6e">More...</a><br /></td></tr>
+<tr class="memdesc:af6105c2cad0d325296213d7c03c4fb6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Publisher to the /cmd_vel topic in order to move the robot towards tha balls.  <a href="#af6105c2cad0d325296213d7c03c4fb6e">More...</a><br /></td></tr>
 <tr class="separator:af6105c2cad0d325296213d7c03c4fb6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8f5740ee3298f2c093006fe1314a268"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#af8f5740ee3298f2c093006fe1314a268">position</a></td></tr>
-<tr class="memdesc:af8f5740ee3298f2c093006fe1314a268"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current position of the robot.  <a href="#af8f5740ee3298f2c093006fe1314a268">More...</a><br /></td></tr>
+<tr class="memdesc:af8f5740ee3298f2c093006fe1314a268"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variable that store the current position of the robot.  <a href="#af8f5740ee3298f2c093006fe1314a268">More...</a><br /></td></tr>
 <tr class="separator:af8f5740ee3298f2c093006fe1314a268"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25be61bbb562612dc1e1c5e7c448fa4c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#a25be61bbb562612dc1e1c5e7c448fa4c">pose</a></td></tr>
 <tr class="memdesc:a25be61bbb562612dc1e1c5e7c448fa4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current pose of the robot.  <a href="#a25be61bbb562612dc1e1c5e7c448fa4c">More...</a><br /></td></tr>
@@ -203,12 +204,14 @@ Static Public Attributes</h2></td></tr>
 <tr class="memdesc:a71b1a13ec7fb0ba79d6f34416b7d54e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscriber to camera1 in order to receive and handle the images.  <a href="#a71b1a13ec7fb0ba79d6f34416b7d54e1">More...</a><br /></td></tr>
 <tr class="separator:a71b1a13ec7fb0ba79d6f34416b7d54e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2e92f43c8c834aba95d6c87241553e6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#ae2e92f43c8c834aba95d6c87241553e6">sub_scan</a> = rospy.Subscriber('/scan', LaserScan, self.obstacle_avoidance)</td></tr>
+<tr class="memdesc:ae2e92f43c8c834aba95d6c87241553e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscriber to the laser scan to perceive obstacle distances.  <a href="#ae2e92f43c8c834aba95d6c87241553e6">More...</a><br /></td></tr>
 <tr class="separator:ae2e92f43c8c834aba95d6c87241553e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a56031d0f135cf2d2f7c950325059f7bd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtrack_1_1TrackAction.html#a56031d0f135cf2d2f7c950325059f7bd">state</a></td></tr>
 <tr class="separator:a56031d0f135cf2d2f7c950325059f7bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class that implements the action server for tracking the ball. </p>
+<p>It takes a color of a ball in proximity of the robot and start to track it. Periodically the robot store its own position (through a subscriber to the /odom topic)in a variable in order to return its location when a ball will be reached. It may happen that the robot is no longer able to detect the ball, in this case the robot will rotate around itself (right and left) in order to find the ball again. If not the mission will be aborted. Finally it's also able to avoid simple obstacle in front, front-right and front-left directions with respect to the robot </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ad71d2ce7ecd91c384219ada7e8ed74e3"></a>
 <div class="memitem">
@@ -261,7 +264,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Callback to the Odom topic which updates the global variables: position_ and pose_. </p>
+<p>Callback to the /odom topic which updates the global variables: position and pose of the robot. </p>
 
 </div>
 </div>
@@ -290,7 +293,7 @@ Static Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Callback function of the LaserScan topic which implements a basic obstacle avoidance algorithm. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Basically it just evaluate the distance to an obstacle considering only 3 direction (front, front-left, front-right), then chooses a proper correation to applay. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">msg</td><td>LaserScan message to get the distances from the obstacles </td></tr>
   </table>
@@ -323,7 +326,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Callback function of the camera subscriber which computes the velocities to apply to the robot untill it reaches the ball. </p>
+<p>Callback function of the camera subscriber which computes the velocities to apply to the robot until it reaches the target ball. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ros_image</td><td>is the image decompressed and converted in OpendCv </td></tr>
@@ -386,7 +389,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Flag that notifies aborting mission since the robot was not able to detect the ball. </p>
+<p>Flag that notifies aborting mission, since the robot is not able to detect the ball or if there is no way to avoid an obstacle. </p>
 
 </div>
 </div>
@@ -485,6 +488,7 @@ Static Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>direct conversion to CV2 #### </p>
+<p>Conversion into HSV format to easily finding contours </p>
 
 </div>
 </div>
@@ -548,7 +552,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Current position of the robot. </p>
+<p>Variable that store the current position of the robot. </p>
 
 </div>
 </div>
@@ -611,6 +615,8 @@ Static Public Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Dictionary which defines the laser data perceived in the following 5 directions. </p>
 
 </div>
 </div>
@@ -693,6 +699,8 @@ Static Public Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Subscriber to the laser scan to perceive obstacle distances. </p>
 
 </div>
 </div>
@@ -777,6 +785,7 @@ Static Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Variables that counts how many times the robot was not able to detect the ball again. </p>
+<p>After which it abort the mission and close the action server. </p>
 
 </div>
 </div>
@@ -798,6 +807,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Publisher to the /cmd_vel topic in order to move the robot towards tha balls. </p>
 <p>Publisher to the cmd_vel topic in order to move the robot. </p>
 
 </div>

@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 
 ## @file commandManager.py
-#  This script is a node which is the core of the entier project.
-#  And implement a finite state machine with five states which are described in the README file.
-#  It manages the messages comming from other nodes and ROS packeges.
+#  This script is a copy of the commandManager node but without the Sleep state in order to simplify the debugging phase. 
 # \see roomDetector
 # \see UI
 # \see track

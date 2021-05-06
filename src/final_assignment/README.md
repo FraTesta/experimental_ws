@@ -18,6 +18,8 @@
   - [**Run**](#run)
   - [**System's Features**](#systems-features)
   - [**System's Limitation**](#systems-limitations)
+  - [**Possible Technical Improvements**](#possible-technical-improvements)
+  - [**Contacts**](#contacts)
 
 ## __Introduction__ 
 This project represents the final assignment of the Experimental Robotics Laboratory corse. Therefore is an improvement of the assignment1 and assignment2 that you can find in this git repository as well. 
@@ -50,7 +52,7 @@ Notice that the architecture is "dynamic" in a sense that some topics are dynami
   -  the _track_ action server to reach a detected room (ball).
 - [roomDetector](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/scripts/roomDetector.py) = is a simple openCV algorithm that analyzes the camera images to detect the balls (rooms). After that this node sends the color of the detected ball to the _commandManager_. Finally it interrupts the subscription to the camera topic and goes in a sort of sleeping mode until the _commandManager_ awaken it again.
 - [track](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/scripts/track.py) = is a action server that tracks a ball of a given color. The algorithm of tracking it's very similar to the _ball_track_ of the previous assignment. When the robot reaches the ball it will read its own position and send it back to the _commandManager_ so that it can store the position of the discovered room. If for some reason the ball is no longer detected the robot will turn on itself in both directions in an attempt to see the ball again. If after some time it has not succeeded, it switches back to the appropriate state.
-Finally I implemented a very simple **obstacle_avoidance** algorithm using the laser scan data since when the robot starts to track a ball the _move_base_ algorithm is deactivated by the _commadManager_ and its integrated obstacle avoidance as well.
+Finally, it was implemented a very simple **obstacle_avoidance** algorithm using the laser scan data. It was necessary since when the robot starts to track a ball the _move_base_ algorithm is deactivated by the _commadManager_ and its integrated obstacle avoidance as well.
 - [UI](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/scripts/UI.py) = is a very simple user interface that allows the user to switch in the _PLAY_ mode and choose a desired room to reach.
 Notice that the _move_base_ goal is aborted every time a ball is detected or the play command is typed.
 For more details regarding the scripts, see the doxygen documentation. 
@@ -132,7 +134,9 @@ Regarding the knowledge representation I develop a class called _Rooms.py_ that 
 Of course this class provides also methods to update the knowledge of the environment, get information... For more information take a look to its [doxygen documentation](file:///home/francescotesta/experimental_ws/src/final_assignment/documentation/html/classRooms_1_1Rooms.html) .
 
 ### **Explore**
-The explore function of the class [Rooms](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/scripts/Rooms.py) has nothing to do with the _explore-lite_ package. It is a function that generates random goal positions considering the already visited room locations that are stored in the Rooms dictionary. Basically it draws a virtual area of 3x3 meters (the area dimension can be editable) around any stored room location and discards any goals generated within them. This solution improves its effectiveness as rooms are discovered. However it has the drawback that works pretty fine in this particular environment where the balls are sufficiently distant, it may not be so good in other contexts.
+The explore function of the class [Rooms](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/scripts/Rooms.py) has nothing to do with the _explore-lite_ package. It is a function that generates random goal positions considering the already visited room locations that are stored in the Rooms dictionary. Basically, it draws a virtual area of 2x2 meters (the area dimension can be editable) around any stored room location and discards every goal generated within them. Then it applies the same concept to every location previously visited, during the Find mode, that were stored in a list. This is to avoid revisiting the same places over and over.
+
+This solution improves its effectiveness as rooms are discovered. However it has the drawback that works pretty fine in this particular environment where the balls are sufficiently distant, it may not be so good in other contexts.
 
 ## **Package and File List**
 The final assignment package provides the following directory:
@@ -145,8 +149,10 @@ The final assignment package provides the following directory:
 - **world** = the world gazebo simulation 
 
 ## **Installation**
+This project might have some problems if it runs on a docker machine, thus a virtual machine or a clean version of Ubuntu 16.04 is preferred. 
+
 The packages used for the previous assignments are still needed.
-Download the *gmapping* and *move_base* packages, I suggest to install the following: 
+Download the *gmapping* and *move_base* packages, I suggest to clone the following repository which were used in the project: 
 - **gmapping =**  https://github.com/CarmineD8/SLAM_packages.git
 - **move_base =** https://github.com/CarmineD8/planning.git
 Install also:
@@ -165,7 +171,8 @@ Launch the project (with the User Interface)
 ```
 roslaunch final_assignment start.launch ui:=true
 ```
-Now you should see two terminal windows: One for the User Interface 
+Now you should see two terminal windows: 
+One for the User Interface 
 ```
 ******************************
  Welcome !!!! 
@@ -184,7 +191,9 @@ Now you should see two terminal windows: One for the User Interface
 
 User:
 ```
-That allows you to interact with the robot simulation. While the second windows shows some information about the robot and its behaviors.
+That allows you to interact with the robot simulation. Notice that you can also type 'list' to get a list of the already visited rooms.
+
+ While the second window shows some information about the robot and its behaviors.
 ```
 [INFO] [1619879582.422315, 429.745000]: State machine starting in initial state 'NORMAL' with userdata: 
 	[]
@@ -197,7 +206,7 @@ That allows you to interact with the robot simulation. While the second windows 
 
 ```
 Notice that you can enter a desired room (using the _GoTo_ command) at any time, but it will be executed only in the _PLAY_ state (so after typing the _play_ command).
-Finally you can run the project without the _SLEEP_ mode:
+Finally you can run the project without the _SLEEP_ mode which pretty useful for debugging:
 ```
 roslaunch final_assignment noSleep.launch
 ```
@@ -207,16 +216,18 @@ roslaunch final_assignment testTrackObsAv.launch
 ```
 
 ## **System's Limitations**
-The system was tested for a long period having in general good behaviors. However some times in the first terminal might appear an error message saying that the robot is not able to find a global path. It's a problem related to the *move_base* package settings. I was not able to solve it, however it's very rare that happens and most of the time the system automatically solves such problem by finding again the path or detecting a new ball. If for this reason the stopped, it is sufficient for the user to type "play" to abort the current mission. 
+**a)**  The system was tested for a long period having in general good behaviors. However some times in the first terminal might appear an error message saying that the robot is not able to find a global path. It's a problem related to the *move_base* package settings. I was not able to solve it, however it's very rare that happens and most of the time the system automatically solves such problem by finding again the path or detecting a new ball. If for this reason the robot stops, it is sufficient for the user to type "play" to abort the current mission. 
 
-Another possible limitation is the _explore_ function that in some cases requires a few attempts to find a certain ball in the begging phase and it might not work so good with other environments as already explained in the [Explore description](#explore). 
+**b)**  Another possible limitation is the _explore_ function that in some cases requires a few attempts to find a certain ball in the begging phase and it might not work so good with other environments as already explained in the [Explore description](#explore). 
+
+**c)**  Finally the obstacle avoidance algorithm doesn't work properly in every context. Infect sometime it may choose a wrong direction to approach an obstacle. Moreover it could happen that the robot collides with an obstacle with the wheels since the algorithm doesn't taking into account the obstacle on the left and right ranges (but only front, front-right, front-left).
 
 ## **Possible technical improvements** 
 
 
 1. Develop a more sophisticated Knowledge representation, maybe designing an Ontology with an editors or API like Protegè.
+2. Improve the explore function maybe integrating it with some other exploration algorithm like Bug2 or explore-lite. 
 
-2. Improve the Explore algorithm maybe storing the last visited position as a room in order to get a new position far from the previous one.  
 3. A better _move_base_/_gmapping_ parameters could be found since currently are set in order to avoid robot collisions or blocking problems. But with other settings it could do fewer maneuvers and smoother trajectory.
 4. Improve the obstacle avoidance algorithm of the _track_ node. Since actually the robot is only able to avoid obstacle that are in front of it. 
 

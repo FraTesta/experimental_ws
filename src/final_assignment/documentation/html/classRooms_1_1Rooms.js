@@ -8,6 +8,6 @@ var classRooms_1_1Rooms =
     [ "get_color_room", "classRooms_1_1Rooms.html#aaef9cac25b1cf6e0313868b7e704470e", null ],
     [ "get_name_position", "classRooms_1_1Rooms.html#addc0dcc8b9628a35044e1ffbd67a1e0d", null ],
     [ "get_room_position", "classRooms_1_1Rooms.html#a0b0c05bef66a8c33523caa1013abe2e7", null ],
-    [ "mrange", "classRooms_1_1Rooms.html#ae35a0aa8261fb4ff5c856d80e0f9cac0", null ],
+    [ "mrange", "classRooms_1_1Rooms.html#a8f7070d91a261e3d6b6f9be2ce78b96c", null ],
     [ "to_string", "classRooms_1_1Rooms.html#af4de8388233d61aa35d1567f7a1499c5", null ]
 ];

@@ -29,9 +29,9 @@ Collaboration diagram for track.\+Track\+Action\+:\nopagebreak
 def \hyperlink{classtrack_1_1TrackAction_ad71d2ce7ecd91c384219ada7e8ed74e3}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self, name)
 \item 
 def \hyperlink{classtrack_1_1TrackAction_a1f92640237725d8789986694c90bd98a}{clbk\+\_\+odom} (self, msg)
-\begin{DoxyCompactList}\small\item\em Callback to the Odom topic which updates the global variables\+: position\+\_\+ and pose\+\_\+. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Callback to the /odom topic which updates the global variables\+: position and pose of the robot. \end{DoxyCompactList}\item 
 def \hyperlink{classtrack_1_1TrackAction_a3b41ed0eb7a403459469c27dd63a2392}{reach\+\_\+ball} (self, ros\+\_\+image)
-\begin{DoxyCompactList}\small\item\em Callback function of the camera subscriber which computes the velocities to apply to the robot untill it reaches the ball. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Callback function of the camera subscriber which computes the velocities to apply to the robot until it reaches the target ball. \end{DoxyCompactList}\item 
 def \hyperlink{classtrack_1_1TrackAction_ab20439d63451e7799ecf2a2ec1f8c860}{obstacle\+\_\+avoidance} (self, msg)
 \begin{DoxyCompactList}\small\item\em Callback function of the Laser\+Scan topic which implements a basic obstacle avoidance algorithm. \end{DoxyCompactList}\item 
 def \hyperlink{classtrack_1_1TrackAction_a1d41a25e35227ab25323a95eeb9a4bb2}{track} (self, goal)
@@ -57,19 +57,19 @@ def \hyperlink{classtrack_1_1TrackAction_a1d41a25e35227ab25323a95eeb9a4bb2}{trac
 \hyperlink{classtrack_1_1TrackAction_ae62bfb3233b566df94fde636d8d26877}{result}
 \item 
 \hyperlink{classtrack_1_1TrackAction_aca76f9e5333f65cf2da37f2b90d5f193}{regions}
-\item 
+\begin{DoxyCompactList}\small\item\em Dictionary which defines the laser data perceived in the following 5 directions. \end{DoxyCompactList}\item 
 \hyperlink{classtrack_1_1TrackAction_a8c79189ba62cf316bffaa4c00b0320fe}{success}
 \begin{DoxyCompactList}\small\item\em Flag that notifies that the robot has reached the ball correctly. \end{DoxyCompactList}\item 
 \hyperlink{classtrack_1_1TrackAction_aabc16f100d1f260d6712d8d74e055fda}{unfound\+\_\+ball\+\_\+counter}
 \begin{DoxyCompactList}\small\item\em Variables that counts how many times the robot was not able to detect the ball again. \end{DoxyCompactList}\item 
 \hyperlink{classtrack_1_1TrackAction_a4fac0918d826dc6cbf110784c8fcda99}{abort}
-\begin{DoxyCompactList}\small\item\em Flag that notifies aborting mission since the robot was not able to detect the ball. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Flag that notifies aborting mission, since the robot is not able to detect the ball or if there is no way to avoid an obstacle. \end{DoxyCompactList}\item 
 \hyperlink{classtrack_1_1TrackAction_a0773416696b3fd6ed1dff306eb26c84a}{radius}
 \begin{DoxyCompactList}\small\item\em Radius of the detected ball designed by the open\+CV algorithm in the reach\+\_\+ball function. \end{DoxyCompactList}\item 
 \hyperlink{classtrack_1_1TrackAction_af6105c2cad0d325296213d7c03c4fb6e}{vel\+\_\+pub}
-\begin{DoxyCompactList}\small\item\em Publisher to the cmd\+\_\+vel topic in order to move the robot. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Publisher to the /cmd\+\_\+vel topic in order to move the robot towards tha balls. \end{DoxyCompactList}\item 
 \hyperlink{classtrack_1_1TrackAction_af8f5740ee3298f2c093006fe1314a268}{position}
-\begin{DoxyCompactList}\small\item\em Current position of the robot. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Variable that store the current position of the robot. \end{DoxyCompactList}\item 
 \hyperlink{classtrack_1_1TrackAction_a25be61bbb562612dc1e1c5e7c448fa4c}{pose}
 \begin{DoxyCompactList}\small\item\em Current pose of the robot. \end{DoxyCompactList}\item 
 \hyperlink{classtrack_1_1TrackAction_a4cbc03d130bcf2203bc68f37d02dc4c5}{sub\+\_\+odom} = rospy.\+Subscriber(\textquotesingle{}odom\textquotesingle{}, Odometry, self.\+clbk\+\_\+odom)
@@ -81,13 +81,15 @@ def \hyperlink{classtrack_1_1TrackAction_a1d41a25e35227ab25323a95eeb9a4bb2}{trac
 \hyperlink{classtrack_1_1TrackAction_a71b1a13ec7fb0ba79d6f34416b7d54e1}{camera\+\_\+sub} = rospy.\+Subscriber(\char`\"{}camera1/image\+\_\+raw/compressed\char`\"{}, Compressed\+Image, self.\+reach\+\_\+ball, \hyperlink{classtrack_1_1TrackAction_a47112fa77bb24c45494449d781bd35c4}{queue\+\_\+size}=1)
 \begin{DoxyCompactList}\small\item\em Subscriber to camera1 in order to receive and handle the images. \end{DoxyCompactList}\item 
 \hyperlink{classtrack_1_1TrackAction_ae2e92f43c8c834aba95d6c87241553e6}{sub\+\_\+scan} = rospy.\+Subscriber(\textquotesingle{}/scan\textquotesingle{}, Laser\+Scan, self.\+obstacle\+\_\+avoidance)
-\item 
+\begin{DoxyCompactList}\small\item\em Subscriber to the laser scan to perceive obstacle distances. \end{DoxyCompactList}\item 
 \hyperlink{classtrack_1_1TrackAction_a56031d0f135cf2d2f7c950325059f7bd}{state}
 \end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 Class that implements the action server for tracking the ball. 
+
+It takes a color of a ball in proximity of the robot and start to track it. Periodically the robot store its own position (through a subscriber to the /odom topic)in a variable in order to return its location when a ball will be reached. It may happen that the robot is no longer able to detect the ball, in this case the robot will rotate around itself (right and left) in order to find the ball again. If not the mission will be aborted. Finally it\textquotesingle{}s also able to avoid simple obstacle in front, front-\/right and front-\/left directions with respect to the robot 
 
 \subsection{Constructor \& Destructor Documentation}
 \index{track\+::\+Track\+Action@{track\+::\+Track\+Action}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
@@ -111,7 +113,7 @@ Class that implements the action server for tracking the ball.
 )}\hypertarget{classtrack_1_1TrackAction_a1f92640237725d8789986694c90bd98a}{}\label{classtrack_1_1TrackAction_a1f92640237725d8789986694c90bd98a}
 
 
-Callback to the Odom topic which updates the global variables\+: position\+\_\+ and pose\+\_\+. 
+Callback to the /odom topic which updates the global variables\+: position and pose of the robot. 
 
 \index{track\+::\+Track\+Action@{track\+::\+Track\+Action}!obstacle\+\_\+avoidance@{obstacle\+\_\+avoidance}}
 \index{obstacle\+\_\+avoidance@{obstacle\+\_\+avoidance}!track\+::\+Track\+Action@{track\+::\+Track\+Action}}
@@ -125,7 +127,7 @@ Callback to the Odom topic which updates the global variables\+: position\+\_\+ 
 
 Callback function of the Laser\+Scan topic which implements a basic obstacle avoidance algorithm. 
 
-
+Basically it just evaluate the distance to an obstacle considering only 3 direction (front, front-\/left, front-\/right), then chooses a proper correation to applay. 
 \begin{DoxyParams}{Parameters}
 {\em msg} & Laser\+Scan message to get the distances from the obstacles \\
 \hline
@@ -140,7 +142,7 @@ Callback function of the Laser\+Scan topic which implements a basic obstacle avo
 )}\hypertarget{classtrack_1_1TrackAction_a3b41ed0eb7a403459469c27dd63a2392}{}\label{classtrack_1_1TrackAction_a3b41ed0eb7a403459469c27dd63a2392}
 
 
-Callback function of the camera subscriber which computes the velocities to apply to the robot untill it reaches the ball. 
+Callback function of the camera subscriber which computes the velocities to apply to the robot until it reaches the target ball. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -172,7 +174,7 @@ Action server routine function.
 \subsubsection[{\texorpdfstring{abort}{abort}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+Track\+Action.\+abort\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classtrack_1_1TrackAction_a4fac0918d826dc6cbf110784c8fcda99}{}\label{classtrack_1_1TrackAction_a4fac0918d826dc6cbf110784c8fcda99}
 
 
-Flag that notifies aborting mission since the robot was not able to detect the ball. 
+Flag that notifies aborting mission, since the robot is not able to detect the ball or if there is no way to avoid an obstacle. 
 
 \index{track\+::\+Track\+Action@{track\+::\+Track\+Action}!act\+\_\+s@{act\+\_\+s}}
 \index{act\+\_\+s@{act\+\_\+s}!track\+::\+Track\+Action@{track\+::\+Track\+Action}}
@@ -201,7 +203,7 @@ Subscriber to camera1 in order to receive and handle the images.
 
 direct conversion to C\+V2 \#\#\#\# 
 
-\index{track\+::\+Track\+Action@{track\+::\+Track\+Action}!feedback@{feedback}}
+Conversion into H\+SV format to easily finding contours \index{track\+::\+Track\+Action@{track\+::\+Track\+Action}!feedback@{feedback}}
 \index{feedback@{feedback}!track\+::\+Track\+Action@{track\+::\+Track\+Action}}
 \subsubsection[{\texorpdfstring{feedback}{feedback}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+Track\+Action.\+feedback\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classtrack_1_1TrackAction_acce0064c9d83a91f00d92a854014cdf5}{}\label{classtrack_1_1TrackAction_acce0064c9d83a91f00d92a854014cdf5}
 \index{track\+::\+Track\+Action@{track\+::\+Track\+Action}!pose@{pose}}
@@ -216,7 +218,7 @@ Current pose of the robot.
 \subsubsection[{\texorpdfstring{position}{position}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+Track\+Action.\+position\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classtrack_1_1TrackAction_af8f5740ee3298f2c093006fe1314a268}{}\label{classtrack_1_1TrackAction_af8f5740ee3298f2c093006fe1314a268}
 
 
-Current position of the robot. 
+Variable that store the current position of the robot. 
 
 \index{track\+::\+Track\+Action@{track\+::\+Track\+Action}!queue\+\_\+size@{queue\+\_\+size}}
 \index{queue\+\_\+size@{queue\+\_\+size}!track\+::\+Track\+Action@{track\+::\+Track\+Action}}
@@ -231,6 +233,10 @@ Radius of the detected ball designed by the open\+CV algorithm in the reach\+\_\
 \index{track\+::\+Track\+Action@{track\+::\+Track\+Action}!regions@{regions}}
 \index{regions@{regions}!track\+::\+Track\+Action@{track\+::\+Track\+Action}}
 \subsubsection[{\texorpdfstring{regions}{regions}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+Track\+Action.\+regions\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classtrack_1_1TrackAction_aca76f9e5333f65cf2da37f2b90d5f193}{}\label{classtrack_1_1TrackAction_aca76f9e5333f65cf2da37f2b90d5f193}
+
+
+Dictionary which defines the laser data perceived in the following 5 directions. 
+
 \index{track\+::\+Track\+Action@{track\+::\+Track\+Action}!result@{result}}
 \index{result@{result}!track\+::\+Track\+Action@{track\+::\+Track\+Action}}
 \subsubsection[{\texorpdfstring{result}{result}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+Track\+Action.\+result\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classtrack_1_1TrackAction_ae62bfb3233b566df94fde636d8d26877}{}\label{classtrack_1_1TrackAction_ae62bfb3233b566df94fde636d8d26877}
@@ -247,6 +253,10 @@ Odom subcriber to get and save the robot position and send them back to the \hyp
 \index{track\+::\+Track\+Action@{track\+::\+Track\+Action}!sub\+\_\+scan@{sub\+\_\+scan}}
 \index{sub\+\_\+scan@{sub\+\_\+scan}!track\+::\+Track\+Action@{track\+::\+Track\+Action}}
 \subsubsection[{\texorpdfstring{sub\+\_\+scan}{sub_scan}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+Track\+Action.\+sub\+\_\+scan = rospy.\+Subscriber(\textquotesingle{}/scan\textquotesingle{}, Laser\+Scan, self.\+obstacle\+\_\+avoidance)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classtrack_1_1TrackAction_ae2e92f43c8c834aba95d6c87241553e6}{}\label{classtrack_1_1TrackAction_ae2e92f43c8c834aba95d6c87241553e6}
+
+
+Subscriber to the laser scan to perceive obstacle distances. 
+
 \index{track\+::\+Track\+Action@{track\+::\+Track\+Action}!success@{success}}
 \index{success@{success}!track\+::\+Track\+Action@{track\+::\+Track\+Action}}
 \subsubsection[{\texorpdfstring{success}{success}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+Track\+Action.\+success\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classtrack_1_1TrackAction_a8c79189ba62cf316bffaa4c00b0320fe}{}\label{classtrack_1_1TrackAction_a8c79189ba62cf316bffaa4c00b0320fe}
@@ -267,14 +277,14 @@ Flag that notifies that the robot has reached the ball correctly.
 
 Variables that counts how many times the robot was not able to detect the ball again. 
 
-\index{track\+::\+Track\+Action@{track\+::\+Track\+Action}!vel\+\_\+pub@{vel\+\_\+pub}}
+After which it abort the mission and close the action server. \index{track\+::\+Track\+Action@{track\+::\+Track\+Action}!vel\+\_\+pub@{vel\+\_\+pub}}
 \index{vel\+\_\+pub@{vel\+\_\+pub}!track\+::\+Track\+Action@{track\+::\+Track\+Action}}
 \subsubsection[{\texorpdfstring{vel\+\_\+pub}{vel_pub}}]{\setlength{\rightskip}{0pt plus 5cm}track.\+Track\+Action.\+vel\+\_\+pub\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classtrack_1_1TrackAction_af6105c2cad0d325296213d7c03c4fb6e}{}\label{classtrack_1_1TrackAction_af6105c2cad0d325296213d7c03c4fb6e}
 
 
+Publisher to the /cmd\+\_\+vel topic in order to move the robot towards tha balls. 
+
 Publisher to the cmd\+\_\+vel topic in order to move the robot. 
-
-
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
