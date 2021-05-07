@@ -22,7 +22,8 @@ from sensor_msgs.msg import CompressedImage
 from std_msgs.msg import Bool, String
 
 
-##  This class implements a subscriber to the camera topic of the robot and applies several openCV mask in order to recognise the color of the ball, then it send the detected color to the commandManager node.   
+##  This class implements a subscriber to the camera topic of the robot and applies several openCV mask in order to recognize the color of the ball, then it send the detected color to the commandManager node. 
+# This node has also a subscriber to a commandManager topic which can disable its CV algorithm to avoid wasting computational power.    
 class roomDetector():
    
     def __init__(self):
@@ -31,7 +32,7 @@ class roomDetector():
 
 	## Contains the previously detected color in order to avoid notifying the same room several times, when the robot starts to track it. 
 	self.prevColor = 'None'
-        ## Subsriber to get the compressed images from the robot camera        
+        ## Publisher to the /newRoom topic which comunicate the color of a detected ball to the commandManager as a simple String message       
         self.newRoomPub = rospy.Publisher('newRoom', String, queue_size=10)
 	self.rate = rospy.Rate(1)
 	self.ballDetected = False
@@ -52,7 +53,7 @@ class roomDetector():
 
         if len(cnts) > 0.5:
             return True
-    ## Callback method for the image camera subscriber, so it's called everytime a new image is available 
+    ## Callback method for the image camera subscriber, so it's called everytime a new image is available. Basically, it applay several masks to the received image in order to find the colors of the balls. 
     # @param image_np is the image decompressed and converted in OpendCv
     def find_ball(self, ros_image):
         np_arr = np.fromstring(ros_image.data, np.uint8)
@@ -126,18 +127,17 @@ class roomDetector():
 	#self.rate.sleep()
 	#cv2.waitKey(2)
 
-    ## Start the subscriber to the camera topic, thus the node starts to detect balls
+    ## Start the subscription to the camera topic, thus the node starts to detect balls
     def startDetection(self):
 	self.camera_sub = rospy.Subscriber("camera1/image_raw/compressed", CompressedImage, self.find_ball, queue_size=1)
 	rospy.loginfo("camera started")
 
-    ## Intterrupt the subsciption to the camera topic
+    ## Interrupt the subscription to the camera topic, to preserve computational power
     def stopDetection(self):
 	self.camera_sub.unregister()
 
-## Callback function of the startRD subscriber which recive and handle the msg coming from the commandManager node 
+## Callback function of the startRD subscriber which recives and handle the msg coming from the commandManager node 
 def detectionState(state, rd):
-    #rd = args[0]
     if state.data:
         rd.startDetection()
 	rospy.loginfo("[roomDetector] start detecting ")
@@ -150,9 +150,8 @@ def detectionState(state, rd):
 def main(args):
     
     try:
-        rd = roomDetector()
-	
-        ## Subscriber to the startRD topic connected to the commandManager node. In this way the commandaManager can enable/disable the room detection
+        rd = roomDetector()	
+        ## Subscriber to the startRD topic connected to the commandManager node. In this way the commandaManager can enable/disable the room detection algorithm to preserve computational power.
 	cmdSub = rospy.Subscriber("startRD", Bool, detectionState,rd)
 
         rospy.spin()

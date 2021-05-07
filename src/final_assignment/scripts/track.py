@@ -168,15 +168,15 @@ class TrackAction(object):
             # Routine to find tha ball again
             rospy.loginfo("[Track] Ball not found")
 	    vel = Twist()
-	    if self.unfound_ball_counter <= 6:
+	    if self.unfound_ball_counter <= 8:
 		 rospy.loginfo("[Track] Turn Right to find the ball")
                  vel.angular.z = 0.5
 		 self.vel_pub.publish(vel) 
-	    elif self.unfound_ball_counter < 12:
+	    elif self.unfound_ball_counter < 17:
 		 rospy.loginfo("[Track] Turn Left to find the ball")
                  vel.angular.z = -0.5
 		 self.vel_pub.publish(vel)
-	    elif self.unfound_ball_counter == 12:
+	    elif self.unfound_ball_counter == 17:
 		 rospy.loginfo("[Track] Robot is unable to find the ball ")
 		 self.unfound_ball_counter = 0
 		 self.abort = True   

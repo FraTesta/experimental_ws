@@ -119,6 +119,11 @@ class Rooms():
 		    self.previousPosX = tempX
 		    self.previousPosY = tempY
                     return [tempX, tempY]
+                
+    ## Cancel the last location added to the visitedLocation list. Necessary when the robot abort a goal position when it sees a new ball  
+    def cancel_last_visited_location(self):
+        self.visitedLocation.pop()
+        
 
     ## Explore function that returns a random position away from the rooms already visited. Basically it generate a random position and check if it belongs 
     # in the neighborhood of each detected room. 
@@ -126,11 +131,10 @@ class Rooms():
         while True:
             ok = True
             pos = self.generate_rand_pos()
-            print(pos)
             # check the position is far from the already visited location
             for vis in self.visitedLocation:
                 if (pos[0] in self.mrange(vis[0],1)) and (pos[1] in self.mrange(vis[1],1)):
-                    print("[ROOM] Close to a prevoius location ", vis)                    
+                    #print("[ROOM] Close to a prevoius location ", vis)                    
                     ok = False
                     break
             if ok:
@@ -140,7 +144,7 @@ class Rooms():
                         rx = self.mrange(room['x'], 2)
                         ry = self.mrange(room['y'], 2)
                         if (pos[0] in rx and pos[1] in ry):
-                            print("[ROOM] close to a room")
+                            #print("[ROOM] close to a room")
                             ok = False
                             break
             if ok:

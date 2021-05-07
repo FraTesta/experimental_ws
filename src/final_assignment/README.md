@@ -180,6 +180,7 @@ One for the User Interface
  The user can digit the keyword: 
  - 'play' -> to switch in play mode 
  - 'GoTo roomName' -> to reach that room or to start looking for it (if it hasn't yet been discovered) 
+ - 'list' -> to get the list of the rooms already visited 
  The rooms present are:
  Entrance(blue)
  Closet(red)
@@ -188,8 +189,6 @@ One for the User Interface
  Bathroom(Magenta)
  Bedroom(black)
 *******************************
-
-User:
 ```
 That allows you to interact with the robot simulation. Notice that you can also type 'list' to get a list of the already visited rooms.
 
