@@ -11,21 +11,25 @@
 	<!-- Navigation algo: move base -->
 	<include file="$(find final_assignment)/launch/move_base.launch"></include>
 
-	<arg name="roomsDetection_info" default="false" />
-	<arg name="track_info" default="false" />	
-	<arg name="use_rviz" default="false" />
+	<arg name="ui" default="false" />	
+	<arg name="rviz" default="false" />
+	<arg name="node_start_delay" default="6"/>  
 
-	<!-- node to notify new rooms -->
-	<node name="roomDetector" pkg="final_assignment" type="roomDetector.py" /> 
-
-	<node name="commandManager" pkg="final_assignment" type="commandManager.py" output="screen" /> 
-	<!-- node to track a new detected rooms -->
-	<node name="trackObj" pkg="final_assignment" type="track.py" output="screen" />
  
 
+	<!-- node to notify new rooms -->
+	<node name="roomsDetector" pkg="final_assignment" type="roomDetector.py" output="screen"/> 
+
+	<node name="commandManager" pkg="final_assignment" type="commandManager.py" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@'; gnome-terminal --command " />
+	<!-- node to track a new detected rooms -->
+	<node name="track" pkg="final_assignment" type="track.py" output="screen" />
+ 
+    <group if="$(arg ui)">
+			<node name="UI" pkg="final_assignment" type="UI.py"  launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@'; gnome-terminal --command " />
+	</group>
 
 
-  	<group if="$(arg use_rviz)">
+  	<group if="$(arg rviz)">
              <node name="rviz" pkg="rviz" type="rviz" args="-d $(find final_assignment)/config/mySim.rviz" />
   	</group>
 	

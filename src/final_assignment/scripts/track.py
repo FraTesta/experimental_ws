@@ -156,7 +156,8 @@ class TrackAction(object):
 		vel.linear.x = -0.007*(self.radius-150)
         # apply the velocities
 		self.vel_pub.publish(vel)
-        #Condition for considering the ball as reached
+        	rospy.loginfo("[TRACK] tracking...")
+        	#Condition for considering the ball as reached
                 if (self.radius>=143) and abs(center[0]-400)<5: 
 				rospy.loginfo("[Track] ball reached!!")
                 # set the returning values as the last robot location perceived
@@ -195,7 +196,7 @@ class TrackAction(object):
                 'left':   min(min(msg.ranges[576:713]), 10),
             }
         threshold = 0.6
-        threshold2 = 0.85
+        threshold2 = 0.90
         if (self.regions['front'] > 0) and (self.regions['front'] <= threshold) and (self.radius < 110):
             rospy.loginfo("[Track] obstacle detected ")
             if self.regions['fright'] > threshold2:
@@ -207,7 +208,33 @@ class TrackAction(object):
                 vel.angular.z = 0.5
                 self.vel_pub.publish(vel)
             else:
-                rospy.loginfo("[Track] aborted")
+                rospy.loginfo("[Track] aborted no way from front")
+                self.abort = True 
+        elif (self.regions['fright'] > 0) and (self.regions['fright'] <= threshold) and (self.radius < 110):
+            rospy.loginfo("[Track] obstacle detected fright ")
+            if self.regions['front'] > threshold2:
+                rospy.loginfo("[Track] turn to front from right")
+                vel.angular.z = 0.5
+                self.vel_pub.publish(vel)
+            elif self.regions['fleft'] > threshold2:
+                rospy.loginfo("[Track] turn left from fright")
+                vel.angular.z = 0.6
+                self.vel_pub.publish(vel)
+            else:
+                rospy.loginfo("[Track] aborted no way from fright")
+                self.abort = True 
+        elif (self.regions['fleft'] > 0) and (self.regions['fleft'] <= threshold) and (self.radius < 110):
+            rospy.loginfo("[Track] obstacle detected fleft ")
+            if self.regions['front'] > threshold2:
+                rospy.loginfo("[Track] turn to front from left")
+                vel.angular.z = -0.5
+                self.vel_pub.publish(vel)
+            elif self.regions['fright'] > threshold2:
+                rospy.loginfo("[Track] turn right from fleft")
+                vel.angular.z = -0.6
+                self.vel_pub.publish(vel)
+            else:
+                rospy.loginfo("[Track] aborted aborted no way from fleft")
                 self.abort = True 
                 
         
@@ -215,6 +242,7 @@ class TrackAction(object):
     ## Action server routine function 
     # @param goal Contains the color of the ball that has been detected     
     def track(self, goal):
+        rospy.loginfo("[TRACK] Track action activated")
         self.color = goal.color
 	## Odom subcriber to get and save the robot position and send them back to the commandManager 
         sub_odom = rospy.Subscriber('odom', Odometry, self.clbk_odom)
@@ -232,6 +260,9 @@ class TrackAction(object):
                 break
             elif self.abort == True:
 		rospy.loginfo('[Track] Mission aborted')
+        	vel = Twist()
+        	vel.linear.x = 0
+        	self.vel_pub.publish(vel)
 		break
 	    else:
                 self.feedback.state = "Reaching the ball..."

@@ -59,6 +59,7 @@
         args="-urdf -model human1 -param human_description1 -x -6 -y 8.5 -z 0.34 -R 0 -P 0 -Y -0.75"/>
 
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
-	args="-urdf -model robot1 -param robot_description -x 0.5 -y -2 -z 0.05 -R 0 -P 0 -Y 1.5708"/> 
+	args="-urdf -model robot1 -param robot_description -x 3 -y -8 -z 0.05 -R 0 -P 0 -Y 1.5708"/> 
+<!-- -x 0.5 -y -2 -z 0.05 -R 0 -P 0 -Y 1.5708 --> 
 
 </launch>

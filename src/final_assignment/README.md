@@ -51,8 +51,11 @@ Notice that the architecture is "dynamic" in a sense that some topics are dynami
   -  the _move_base_ action server to reach a certain position.
   -  the _track_ action server to reach a detected room (ball).
 - [roomDetector](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/scripts/roomDetector.py) = is a simple openCV algorithm that analyzes the camera images to detect the balls (rooms). After that this node sends the color of the detected ball to the _commandManager_. Finally it interrupts the subscription to the camera topic and goes in a sort of sleeping mode until the _commandManager_ awaken it again.
-- [track](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/scripts/track.py) = is a action server that tracks a ball of a given color. The algorithm of tracking it's very similar to the _ball_track_ of the previous assignment. When the robot reaches the ball it will read its own position and send it back to the _commandManager_ so that it can store the position of the discovered room. If for some reason the ball is no longer detected the robot will turn on itself in both directions in an attempt to see the ball again. If after some time it has not succeeded, it switches back to the appropriate state.
-Finally, it was implemented a very simple **obstacle_avoidance** algorithm using the laser scan data. It was necessary since when the robot starts to track a ball the _move_base_ algorithm is deactivated by the _commadManager_ and its integrated obstacle avoidance as well.
+- [track](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/scripts/track.py) = is a action server that tracks a ball of a given color. The algorithm of tracking it's very similar to the _ball_track_ of the previous assignment. When the robot reaches the ball it will read its own position and send it back to the _commandManager_ so that it can store the position of the discovered room. 
+  
+  If for some reason the ball is no longer detected,then the robot will turn on itself in both directions in an attempt to see the ball again. If after some time it has not succeeded, it switches back to the appropriate state.
+
+  Finally, it was implemented a very simple **obstacle_avoidance** algorithm using the laser scan data. It was necessary since when the robot starts to track a ball the _move_base_ algorithm is deactivated by the _commadManager_ and its integrated obstacle avoidance as well. Basically, this algorithm evaluates the obstacle positions and apply an angular velocity directly to the robot differential motors in order to avoid them. If there are no free spaces to reach the ball, the mission is aborted and the robot returns to the _NORMAL_ state.    
 - [UI](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/scripts/UI.py) = is a very simple user interface that allows the user to switch in the _PLAY_ mode and choose a desired room to reach.
 Notice that the _move_base_ goal is aborted every time a ball is detected or the play command is typed.
 For more details regarding the scripts, see the doxygen documentation. 
@@ -134,7 +137,7 @@ Regarding the knowledge representation I develop a class called _Rooms.py_ that 
 Of course this class provides also methods to update the knowledge of the environment, get information... For more information take a look to its [doxygen documentation](file:///home/francescotesta/experimental_ws/src/final_assignment/documentation/html/classRooms_1_1Rooms.html) .
 
 ### **Explore**
-The explore function of the class [Rooms](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/scripts/Rooms.py) has nothing to do with the _explore-lite_ package. It is a function that generates random goal positions considering the already visited room locations that are stored in the Rooms dictionary. Basically, it draws a virtual area of 2x2 meters (the area dimension can be editable) around any stored room location and discards every goal generated within them. Then it applies the same concept to every location previously visited, during the Find mode, that were stored in a list. This is to avoid revisiting the same places over and over.
+The explore function of the class [Rooms](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/scripts/Rooms.py) has nothing to do with the _explore-lite_ package. It is a function that generates random goal positions considering the already visited room locations that are stored in the Rooms dictionary. Basically, it draws a virtual area of 2x2 meters (the area dimension can be editable) around any stored room location and discards every goal generated within them. Moreover it applies the same concept to every location previously visited, during the Find mode, that were stored in a list. This is to avoid revisiting the same places over and over.
 
 This solution improves its effectiveness as rooms are discovered. However it has the drawback that works pretty fine in this particular environment where the balls are sufficiently distant, it may not be so good in other contexts.
 
@@ -209,10 +212,11 @@ Finally you can run the project without the _SLEEP_ mode which pretty useful for
 ```
 roslaunch final_assignment noSleep.launch
 ```
-You can check the track phase and its obstacle avoidance algorithm by running this test version:
+You can test the track phase and its obstacle avoidance algorithm by running this test version:
 ```
 roslaunch final_assignment testTrackObsAv.launch
 ```
+You can check the corrections applied from the first terminal.
 
 ## **System's Limitations**
 **a)**  The system was tested for a long period having in general good behaviors. However some times in the first terminal might appear an error message saying that the robot is not able to find a global path. It's a problem related to the *move_base* package settings. I was not able to solve it, however it's very rare that happens and most of the time the system automatically solves such problem by finding again the path or detecting a new ball. If for this reason the robot stops, it is sufficient for the user to type "play" to abort the current mission. 
