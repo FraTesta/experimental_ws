@@ -16,7 +16,7 @@ TrajectoryPlannerROS:
   xy_goal_tolerance: 0.65   # 0.3
 
 # Forward Simulation Parameters
-  sim_time: 3.0   # 2.0
+  sim_time: 3.2   # 2.0
   vx_samples: 10   # 10
   vtheta_samples: 35  # 40
 
