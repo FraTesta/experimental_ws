@@ -175,8 +175,7 @@ class Normal(smach.State):
 
 
 class Sleep(smach.State):
-    '''It defines the SLEEP state where the robot sleeps for a random period of time.
-    Then it makes a request to the move_base action server to go to the home location.
+    '''It defines the SLEEP state where the robot go back to home and sleeps for a random period of time.
     Finally it returns in the NORMAL state'''
     def __init__(self):
         smach.State.__init__(self, 
@@ -200,7 +199,8 @@ class Sleep(smach.State):
 
 class Play(smach.State):
     '''Class that defines the PLAY state. 
-     It move the robot in X Y location and then asks to go back to the user.'''
+     It move the robot go back to the home location and waits a new the desired location by the user. If such location is already discovered, the robot will reach it, 
+     otherwise switch in the FIND state. '''
     def __init__(self):
         smach.State.__init__(self, 
                              outcomes=['goToNormal','goToPlay','goToFind'])
@@ -256,8 +256,8 @@ class Play(smach.State):
 
 class Track(smach.State):
     '''Class that defines the TRACK state. 
-     It send the detected color room to the track action server in order ot reach it. 
-     Then sotores the location of the room found '''
+     It send the detected color room to the track action server in order to reach it. 
+     Then sotores the location of the room found, Finally it returns in the proper state. '''
     def __init__(self):
         smach.State.__init__(self, 
                              outcomes=['goToNormal','goToPlay','goToFind','goToTrack'])
@@ -307,7 +307,7 @@ class Track(smach.State):
 
 class Find(smach.State):
     '''Class that defines the FIND state. 
-     It move the robot using the explore function in order to find the esired room or a new one.'''
+     It move the robot using the explore function provided by the Rooms class in order to find the desired room or a new one.'''
     def __init__(self):
         smach.State.__init__(self, 
                              outcomes=['goToPlay','goToTrack','goToFind'])

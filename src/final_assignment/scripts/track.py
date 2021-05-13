@@ -184,7 +184,7 @@ class TrackAction(object):
 	    self.unfound_ball_counter += 1
 
     ## Callback function of the LaserScan topic which implements a basic obstacle avoidance algorithm.
-    # Basically it just evaluate the distance to an obstacle considering only 3 direction (front, front-left, front-right), then chooses a proper correation to applay.
+    # Basically it just evaluate the distance to an obstacle considering 3 direction (front, front-left, front-right), then chooses a proper correation to applay.
     # @param msg LaserScan message to get the distances from the obstacles
     def obstacle_avoidance(self, msg):
         vel = Twist()

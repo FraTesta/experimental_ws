@@ -97,7 +97,8 @@ class Rooms():
 
 
 
-    ## Returns a array which contains a neighborhood of a given number. For instance if a = 1 and l = 2 it'll return [-1, 0, 1, 2, 3]
+    ## Returns a array which contains a neighborhood of a given number. For instance if a = 1 and l = 2 it'll return [-1, 0, 1, 2, 3]. 
+    # This method guaranties, that given a point (x,y), to return a 2lX2l area around the point.
     # @param a number that correspond to a coordinate of a point.
     # @param l is half of the neighborhood that will be generated. 
     def mrange(self, a, l):
@@ -125,8 +126,9 @@ class Rooms():
         self.visitedLocation.pop()
         
 
-    ## Explore function that returns a random position away from the rooms already visited. Basically it generate a random position and check if it belongs 
-    # in the neighborhood of each detected room. 
+    ## Explore function that returns a random position away from the rooms already visited and the position reached during the FIND mode. 
+    # Basically it generate a random position and check if it belongs 
+    # in the neighborhood of each detected room (or position), if so it will reach such location. See the README for more details. 
     def explore(self):
         while True:
             ok = True

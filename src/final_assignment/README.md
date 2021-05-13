@@ -93,9 +93,9 @@ Basically it gets a color and returns the room position in terms of x and y coor
   - Increased the **particles** parameter to increase the ability of the robot to close the loop.
 - Regarding the **_move_base_** settings:
   - In the [base_local_planner_params.yaml](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/param/base_local_planner_params.yaml) I increased the **max_vel_x**, **min_vel_x**, **acc_lim_x** and **acc_lim_theta** params to make the robot faster and more responsive. Finally I increased the **sim_time** in order to improve the local planning simulation because some times the chosen trajectory was not consistent with the environment and the global path trajectory. 
-  - In the [costmap_common_params.yaml](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/param/costmap_common_params.yaml) I reduced the **obstacle_range** in order to avoid an error described in the [System's limitations](#systems-limitations) and increased the **robot_radius** in order to keep the robot away from walls, especially near corners or entrances.
-  - In the [global_costmap_params.yaml](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/param/global_costmap_params.yaml) I increased the **update_frequency** and **publish_frequency** to make the planner more reactive to changes and faster in correcting mapping errors. I increased also the _inflation_radius_ to make shore that the robots enter every room.
-  - Finally in the [local_cost_map.yaml](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/param/localcostmap_params.yaml) I increased tge **with** and **height** parameters to improve the local mapping and avoid strange trajectory.
+  - In the [costmap_common_params.yaml](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/param/costmap_common_params.yaml) I reduced the **obstacle_range** in order to avoid the error described in the [System's limitations](#systems-limitations) (point __a__ ) and increased the **robot_radius** in order to keep the robot away from walls, especially near corners or entrances.
+  - In the [global_costmap_params.yaml](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/param/global_costmap_params.yaml) I increased the **update_frequency** and **publish_frequency** to make the planner more reactive to changes and faster in correcting mapping errors. I tuned also the **inflation_radius** to make shore that the robots enter every room but far from the walls and increased the **cost_scaling_factor** to ensure steeper curves near tight corners.
+  - Finally in the [local_cost_map.yaml](https://github.com/FraTesta/experimental_ws/blob/master/src/final_assignment/param/localcostmap_params.yaml) I increased the **with** and **height** parameters to improve the local mapping and avoid strange trajectory.
 
 ### __FSM Description__
 The structure of the finite state machine is inevitably more complicated like shown in the figure. The FSM was still developed using the _smach_ API so you can still use its feature to study this new implementation.
@@ -219,20 +219,21 @@ roslaunch final_assignment testTrackObsAv.launch
 You can check the corrections applied from the first terminal.
 
 ## **System's Limitations**
-**a)**  The system was tested for a long period having in general good behaviors. However some times in the first terminal might appear an error message saying that the robot is not able to find a global path. It's a problem related to the *move_base* package settings. This problem occurs when the current move_base goal is placed in a not free space area of the costmap. However it's very rare that happens and most of the time the system automatically solves such problem by reaching the goal or detecting a new ball. If for this reason the robot stops, it is sufficient for the user to type "play" to abort the current mission and start a new one. 
+**a)**  The system was tested for a long period having in general good behaviors. However some times in the first terminal (used to launch the project) might appear an error message saying that the robot is not able to find a global path. It's a problem related to the *move_base* package which occurs when the current move_base goal is placed in a not free space area of the costmap, for instance if the goal was on a wall. However it's quite rare that happens and most of the time the system automatically solves such problem by reaching the goal or detecting a new ball. If for this reason the robot stops, just type "play" to abort the current mission and start a new one. 
 
 **b)**  Another possible limitation is the _explore_ function that in some cases requires a few attempts to find a certain ball in the begging phase and it might not work so good with other environments as already explained in the [Explore description](#explore). 
 
-**c)**  Finally the obstacle avoidance algorithm doesn't work properly in every context. Infect sometime it may choose a wrong direction to approach an obstacle. Moreover it could happen that the robot collides with an obstacle with the wheels since the algorithm doesn't taking into account the obstacle on the left and right ranges (but only front, front-right, front-left).
+**c)**  Finally the obstacle avoidance algorithm of the _track_ node doesn't work properly in every context. Infect sometime it may choose a wrong direction to approach an obstacle (for instance if it sees a wall). Moreover it could happen that the robot collides with an obstacle with its own wheels since the algorithm doesn't taking into account the obstacle on the left and right robot sides ranges (but only front, front-right, front-left).
 
 ## **Possible technical improvements** 
 
 
-1. Develop a more sophisticated Knowledge representation, maybe designing an Ontology with an editors or API like Protegè.
-2. Improve the explore function maybe integrating it with some other exploration algorithm like Bug2 or explore-lite. 
+1. Develop a more sophisticated Knowledge representation, maybe designing an Ontology with an editors or an API like Protegè.
+2. Improve the _explore_ function maybe integrating it with some other exploration algorithm like _Bug2_ or _explore-lite_ to improve the find algorithm in the first phase, when the map is still to be explored. 
 
-3. A better _move_base_/_gmapping_ parameters could be found since currently are set in order to avoid robot collisions or blocking problems. But with other settings it could do fewer maneuvers and smoother trajectory.
-4. Improve the obstacle avoidance algorithm of the _track_ node. Since actually the robot is only able to avoid obstacle that are in front of it. 
+3. Develop a way to handle the situations in which the goal is out of the free spaces of the costmap thus solving the _"no global path"_ error.
+ 
+5. Improve the obstacle avoidance algorithm of the _track_ node.
 
 ## **Contacts**
 Francesco Testa
